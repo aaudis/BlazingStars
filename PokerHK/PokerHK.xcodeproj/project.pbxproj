@@ -1,0 +1,679 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 45;
+	objects = {
+
+/* Begin PBXAggregateTarget section */
+		0EA808711020E77E004F84D0 /* BlazingStars */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 0EA808781020E782004F84D0 /* Build configuration list for PBXAggregateTarget "BlazingStars" */;
+			buildPhases = (
+				0EA808701020E77E004F84D0 /* ShellScript */,
+			);
+			dependencies = (
+				0EA8087A1020E78C004F84D0 /* PBXTargetDependency */,
+			);
+			name = BlazingStars;
+			productName = Distribution;
+		};
+/* End PBXAggregateTarget section */
+
+/* Begin PBXBuildFile section */
+		0E2A1AA10FCFB91200471032 /* AppController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E2A1AA00FCFB91200471032 /* AppController.m */; };
+		0E2A1AA60FCFB9AD00471032 /* Menulet.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E2A1AA50FCFB9AD00471032 /* Menulet.m */; };
+		0E2A1AAA0FCFBC4400471032 /* pokerhk.icns in Resources */ = {isa = PBXBuildFile; fileRef = 0E2A1AA90FCFBC4400471032 /* pokerhk.icns */; };
+		0E2A1AE60FCFC71A00471032 /* icon-menulet.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E2A1AE50FCFC71A00471032 /* icon-menulet.png */; };
+		0E2A1B4A0FCFCF1100471032 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 0E2A1B490FCFCF1100471032 /* Credits.rtf */; };
+		0E2A1BD90FD0614B00471032 /* DBPrefsWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E2A1BD80FD0614B00471032 /* DBPrefsWindowController.m */; };
+		0E2A1BDC0FD061E300471032 /* PrefsWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E2A1BDB0FD061E300471032 /* PrefsWindowController.m */; };
+		0E2A1BE00FD063EA00471032 /* Preferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E2A1BDE0FD063EA00471032 /* Preferences.xib */; };
+		0E2A1BE30FD0670400471032 /* Advanced.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E2A1BE10FD0670400471032 /* Advanced.png */; };
+		0E2A1BE40FD0670400471032 /* Basic Keys.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E2A1BE20FD0670400471032 /* Basic Keys.png */; };
+		0E2D92D00FEEBA64002836CA /* Slick.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0E2D92CF0FEEBA63002836CA /* Slick.plist */; };
+		0E46F1281044726E00EC807B /* convert in Resources */ = {isa = PBXBuildFile; fileRef = 0E46F1271044726E00EC807B /* convert */; };
+		0E5526AA0FDCBB150071ACC6 /* Hyper-Simple.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0E5526A80FDCBB150071ACC6 /* Hyper-Simple.plist */; };
+		0E5526AB0FDCBB150071ACC6 /* Black.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0E5526A90FDCBB150071ACC6 /* Black.plist */; };
+		0E5528230FDCD9BA0071ACC6 /* keyMap.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0E5528220FDCD9BA0071ACC6 /* keyMap.plist */; };
+		0E5DD4320FDA25CC000670D2 /* Pot Bets.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E5DD4310FDA25CC000670D2 /* Pot Bets.png */; };
+		0E5DD4640FDA4595000670D2 /* Open:Close.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E5DD4630FDA4595000670D2 /* Open:Close.png */; };
+		0E85D1C10FDE43EE00E8E225 /* HKWindowManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E85D1C00FDE43EE00E8E225 /* HKWindowManager.m */; };
+		0EA4FC0E0FE174CC00CEE1BE /* CTGradient.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EA4FC020FE174CC00CEE1BE /* CTGradient.m */; };
+		0EA4FC0F0FE174CC00CEE1BE /* SRCommon.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EA4FC050FE174CC00CEE1BE /* SRCommon.m */; };
+		0EA4FC100FE174CC00CEE1BE /* SRKeyCodeTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EA4FC070FE174CC00CEE1BE /* SRKeyCodeTransformer.m */; };
+		0EA4FC110FE174CC00CEE1BE /* SRRecorderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EA4FC090FE174CC00CEE1BE /* SRRecorderCell.m */; };
+		0EA4FC120FE174CC00CEE1BE /* SRRecorderControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EA4FC0B0FE174CC00CEE1BE /* SRRecorderControl.m */; };
+		0EA4FC130FE174CC00CEE1BE /* SRValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EA4FC0D0FE174CC00CEE1BE /* SRValidator.m */; };
+		0EA807CE1020D5A9004F84D0 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EA807CD1020D5A9004F84D0 /* Sparkle.framework */; };
+		0EA807DA1020D5E5004F84D0 /* Sparkle.framework in Copy Sparkle */ = {isa = PBXBuildFile; fileRef = 0EA807CD1020D5A9004F84D0 /* Sparkle.framework */; };
+		0EA807E81020D92C004F84D0 /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 0EA807E71020D92C004F84D0 /* dsa_pub.pem */; };
+		0EB20C9B10028679008A5D14 /* BlazingStars Help in Resources */ = {isa = PBXBuildFile; fileRef = 0EB20C9710028679008A5D14 /* BlazingStars Help */; };
+		0EB8C2AF10433AC60023522F /* readme.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 0EB8C2AE10433AC60023522F /* readme.rtf */; };
+		0EC67AFC0FD0AB73000A33AA /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EC67AFB0FD0AB73000A33AA /* Carbon.framework */; };
+		0EC6840F0FD3984D000A33AA /* HKDispatchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EC6840E0FD3984D000A33AA /* HKDispatchController.m */; };
+		0EE7BD980FE7718500F1429A /* HKScreenScraper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EE7BD970FE7718500F1429A /* HKScreenScraper.m */; };
+		0EE7BDCE0FE7736500F1429A /* tesseract in Resources */ = {isa = PBXBuildFile; fileRef = 0EE7BDC40FE7736500F1429A /* tesseract */; };
+		0EE7BDEE0FE7748F00F1429A /* tessdata in Resources */ = {isa = PBXBuildFile; fileRef = 0EE7BDE40FE7748F00F1429A /* tessdata */; };
+		0EE7BE0E0FE775BA00F1429A /* NSImage+MGCropExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EE7BE090FE775BA00F1429A /* NSImage+MGCropExtensions.m */; };
+		0EE7BE0F0FE775BA00F1429A /* TFTesseractWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EE7BE0B0FE775BA00F1429A /* TFTesseractWrapper.m */; };
+		0EE7BE100FE775BA00F1429A /* OpenGLScreenReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EE7BE0D0FE775BA00F1429A /* OpenGLScreenReader.m */; };
+		0EE7BE1D0FE7765000F1429A /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EE7BE1C0FE7765000F1429A /* OpenGL.framework */; };
+		0EF91D700FDB805F00FB01E7 /* HKThemeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EF91D6F0FDB805F00FB01E7 /* HKThemeController.m */; };
+		0EF91D800FDB81DE00FB01E7 /* Setup.png in Resources */ = {isa = PBXBuildFile; fileRef = 0EF91D7F0FDB81DE00FB01E7 /* Setup.png */; };
+		1DDD58160DA1D0A300B32029 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DDD58140DA1D0A300B32029 /* MainMenu.xib */; };
+		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
+		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
+		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		0EA808791020E78C004F84D0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8D1107260486CEB800E47090;
+			remoteInfo = PokerHK;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		0EA807D91020D5D5004F84D0 /* Copy Sparkle */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				0EA807DA1020D5E5004F84D0 /* Sparkle.framework in Copy Sparkle */,
+			);
+			name = "Copy Sparkle";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		089C165DFE840E0CC02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		0E2A1A9F0FCFB91200471032 /* AppController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppController.h; sourceTree = "<group>"; };
+		0E2A1AA00FCFB91200471032 /* AppController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppController.m; sourceTree = "<group>"; };
+		0E2A1AA40FCFB9AD00471032 /* Menulet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Menulet.h; sourceTree = "<group>"; };
+		0E2A1AA50FCFB9AD00471032 /* Menulet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Menulet.m; sourceTree = "<group>"; };
+		0E2A1AA90FCFBC4400471032 /* pokerhk.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = pokerhk.icns; sourceTree = "<group>"; };
+		0E2A1AE50FCFC71A00471032 /* icon-menulet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-menulet.png"; sourceTree = "<group>"; };
+		0E2A1B490FCFCF1100471032 /* Credits.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Credits.rtf; sourceTree = "<group>"; };
+		0E2A1BD70FD0614B00471032 /* DBPrefsWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBPrefsWindowController.h; sourceTree = "<group>"; };
+		0E2A1BD80FD0614B00471032 /* DBPrefsWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBPrefsWindowController.m; sourceTree = "<group>"; };
+		0E2A1BDA0FD061E300471032 /* PrefsWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefsWindowController.h; sourceTree = "<group>"; };
+		0E2A1BDB0FD061E300471032 /* PrefsWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrefsWindowController.m; sourceTree = "<group>"; };
+		0E2A1BDF0FD063EA00471032 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/Preferences.xib; sourceTree = "<group>"; };
+		0E2A1BE10FD0670400471032 /* Advanced.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Advanced.png; sourceTree = "<group>"; };
+		0E2A1BE20FD0670400471032 /* Basic Keys.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Basic Keys.png"; sourceTree = "<group>"; };
+		0E2D92CF0FEEBA63002836CA /* Slick.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Slick.plist; sourceTree = "<group>"; };
+		0E2D945A0FEED7CA002836CA /* HKDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKDefines.h; sourceTree = "<group>"; };
+		0E46F1271044726E00EC807B /* convert */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = convert; sourceTree = "<group>"; };
+		0E5526A80FDCBB150071ACC6 /* Hyper-Simple.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Hyper-Simple.plist"; sourceTree = "<group>"; };
+		0E5526A90FDCBB150071ACC6 /* Black.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Black.plist; sourceTree = "<group>"; };
+		0E5528220FDCD9BA0071ACC6 /* keyMap.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = keyMap.plist; sourceTree = "<group>"; };
+		0E5DD4310FDA25CC000670D2 /* Pot Bets.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Pot Bets.png"; sourceTree = "<group>"; };
+		0E5DD4630FDA4595000670D2 /* Open:Close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Open:Close.png"; sourceTree = "<group>"; };
+		0E85D1BF0FDE43EE00E8E225 /* HKWindowManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKWindowManager.h; sourceTree = "<group>"; };
+		0E85D1C00FDE43EE00E8E225 /* HKWindowManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKWindowManager.m; sourceTree = "<group>"; };
+		0EA4FC010FE174CC00CEE1BE /* CTGradient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTGradient.h; sourceTree = "<group>"; };
+		0EA4FC020FE174CC00CEE1BE /* CTGradient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTGradient.m; sourceTree = "<group>"; };
+		0EA4FC030FE174CC00CEE1BE /* ShortcutRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShortcutRecorder.h; sourceTree = "<group>"; };
+		0EA4FC040FE174CC00CEE1BE /* SRCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRCommon.h; sourceTree = "<group>"; };
+		0EA4FC050FE174CC00CEE1BE /* SRCommon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRCommon.m; sourceTree = "<group>"; };
+		0EA4FC060FE174CC00CEE1BE /* SRKeyCodeTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRKeyCodeTransformer.h; sourceTree = "<group>"; };
+		0EA4FC070FE174CC00CEE1BE /* SRKeyCodeTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRKeyCodeTransformer.m; sourceTree = "<group>"; };
+		0EA4FC080FE174CC00CEE1BE /* SRRecorderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRRecorderCell.h; sourceTree = "<group>"; };
+		0EA4FC090FE174CC00CEE1BE /* SRRecorderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRRecorderCell.m; sourceTree = "<group>"; };
+		0EA4FC0A0FE174CC00CEE1BE /* SRRecorderControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRRecorderControl.h; sourceTree = "<group>"; };
+		0EA4FC0B0FE174CC00CEE1BE /* SRRecorderControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRRecorderControl.m; sourceTree = "<group>"; };
+		0EA4FC0C0FE174CC00CEE1BE /* SRValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRValidator.h; sourceTree = "<group>"; };
+		0EA4FC0D0FE174CC00CEE1BE /* SRValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRValidator.m; sourceTree = "<group>"; };
+		0EA807CD1020D5A9004F84D0 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
+		0EA807E71020D92C004F84D0 /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dsa_pub.pem; sourceTree = "<group>"; };
+		0EB20C9810028679008A5D14 /* English */ = {isa = PBXFileReference; lastKnownFileType = folder; name = English; path = "English.lproj/BlazingStars Help"; sourceTree = "<group>"; };
+		0EB8C2AE10433AC60023522F /* readme.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = readme.rtf; sourceTree = "<group>"; };
+		0EC67AFB0FD0AB73000A33AA /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
+		0EC6840D0FD3984D000A33AA /* HKDispatchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKDispatchController.h; sourceTree = "<group>"; };
+		0EC6840E0FD3984D000A33AA /* HKDispatchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKDispatchController.m; sourceTree = "<group>"; };
+		0EE7BD960FE7718500F1429A /* HKScreenScraper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKScreenScraper.h; sourceTree = "<group>"; };
+		0EE7BD970FE7718500F1429A /* HKScreenScraper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKScreenScraper.m; sourceTree = "<group>"; };
+		0EE7BDC40FE7736500F1429A /* tesseract */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = tesseract; sourceTree = "<group>"; };
+		0EE7BDE40FE7748F00F1429A /* tessdata */ = {isa = PBXFileReference; lastKnownFileType = folder; path = tessdata; sourceTree = "<group>"; };
+		0EE7BE080FE775BA00F1429A /* NSImage+MGCropExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSImage+MGCropExtensions.h"; sourceTree = "<group>"; };
+		0EE7BE090FE775BA00F1429A /* NSImage+MGCropExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSImage+MGCropExtensions.m"; sourceTree = "<group>"; };
+		0EE7BE0A0FE775BA00F1429A /* TFTesseractWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFTesseractWrapper.h; sourceTree = "<group>"; };
+		0EE7BE0B0FE775BA00F1429A /* TFTesseractWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFTesseractWrapper.m; sourceTree = "<group>"; };
+		0EE7BE0C0FE775BA00F1429A /* OpenGLScreenReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenGLScreenReader.h; sourceTree = "<group>"; };
+		0EE7BE0D0FE775BA00F1429A /* OpenGLScreenReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenGLScreenReader.m; sourceTree = "<group>"; };
+		0EE7BE1C0FE7765000F1429A /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
+		0EF91D6E0FDB805F00FB01E7 /* HKThemeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKThemeController.h; sourceTree = "<group>"; };
+		0EF91D6F0FDB805F00FB01E7 /* HKThemeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKThemeController.m; sourceTree = "<group>"; };
+		0EF91D7F0FDB81DE00FB01E7 /* Setup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Setup.png; sourceTree = "<group>"; };
+		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
+		13E42FB307B3F0F600E4EEF1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
+		1DDD58150DA1D0A300B32029 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
+		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		32CA4F630368D1EE00C91783 /* PokerHK_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PokerHK_Prefix.pch; sourceTree = "<group>"; };
+		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8D1107320486CEB800E47090 /* BlazingStars.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BlazingStars.app; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8D11072E0486CEB800E47090 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
+				0EC67AFC0FD0AB73000A33AA /* Carbon.framework in Frameworks */,
+				0EE7BE1D0FE7765000F1429A /* OpenGL.framework in Frameworks */,
+				0EA807CE1020D5A9004F84D0 /* Sparkle.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		080E96DDFE201D6D7F000001 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				0EE7BDEF0FE7759A00F1429A /* PotGrab */,
+				0E2A1CBF0FD07D8700471032 /* Prefs */,
+				0EA4FC000FE174CC00CEE1BE /* ShortcutRecorder */,
+				0E2A1A9F0FCFB91200471032 /* AppController.h */,
+				0E2A1AA00FCFB91200471032 /* AppController.m */,
+				0E2A1AA40FCFB9AD00471032 /* Menulet.h */,
+				0E2A1AA50FCFB9AD00471032 /* Menulet.m */,
+				0EC6840D0FD3984D000A33AA /* HKDispatchController.h */,
+				0EC6840E0FD3984D000A33AA /* HKDispatchController.m */,
+				0EF91D6E0FDB805F00FB01E7 /* HKThemeController.h */,
+				0EF91D6F0FDB805F00FB01E7 /* HKThemeController.m */,
+				0E85D1BF0FDE43EE00E8E225 /* HKWindowManager.h */,
+				0E85D1C00FDE43EE00E8E225 /* HKWindowManager.m */,
+				0EE7BD960FE7718500F1429A /* HKScreenScraper.h */,
+				0EE7BD970FE7718500F1429A /* HKScreenScraper.m */,
+				0E2D945A0FEED7CA002836CA /* HKDefines.h */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		0E2A1CBF0FD07D8700471032 /* Prefs */ = {
+			isa = PBXGroup;
+			children = (
+				0E2A1BD70FD0614B00471032 /* DBPrefsWindowController.h */,
+				0E2A1BD80FD0614B00471032 /* DBPrefsWindowController.m */,
+				0E2A1BDA0FD061E300471032 /* PrefsWindowController.h */,
+				0E2A1BDB0FD061E300471032 /* PrefsWindowController.m */,
+			);
+			name = Prefs;
+			sourceTree = "<group>";
+		};
+		0E5528D40FDCE2B80071ACC6 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				0EF91D7F0FDB81DE00FB01E7 /* Setup.png */,
+				0E5DD4630FDA4595000670D2 /* Open:Close.png */,
+				0E5DD4310FDA25CC000670D2 /* Pot Bets.png */,
+				0E2A1BE10FD0670400471032 /* Advanced.png */,
+				0E2A1BE20FD0670400471032 /* Basic Keys.png */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
+		0E5528E10FDCE2D50071ACC6 /* Themes */ = {
+			isa = PBXGroup;
+			children = (
+				0E2D92CF0FEEBA63002836CA /* Slick.plist */,
+				0E5526A80FDCBB150071ACC6 /* Hyper-Simple.plist */,
+				0E5526A90FDCBB150071ACC6 /* Black.plist */,
+			);
+			name = Themes;
+			sourceTree = "<group>";
+		};
+		0E5528E20FDCE2E80071ACC6 /* Icons */ = {
+			isa = PBXGroup;
+			children = (
+				0E2A1AE50FCFC71A00471032 /* icon-menulet.png */,
+				0E2A1AA90FCFBC4400471032 /* pokerhk.icns */,
+			);
+			name = Icons;
+			sourceTree = "<group>";
+		};
+		0EA4FC000FE174CC00CEE1BE /* ShortcutRecorder */ = {
+			isa = PBXGroup;
+			children = (
+				0EA4FC010FE174CC00CEE1BE /* CTGradient.h */,
+				0EA4FC020FE174CC00CEE1BE /* CTGradient.m */,
+				0EA4FC030FE174CC00CEE1BE /* ShortcutRecorder.h */,
+				0EA4FC040FE174CC00CEE1BE /* SRCommon.h */,
+				0EA4FC050FE174CC00CEE1BE /* SRCommon.m */,
+				0EA4FC060FE174CC00CEE1BE /* SRKeyCodeTransformer.h */,
+				0EA4FC070FE174CC00CEE1BE /* SRKeyCodeTransformer.m */,
+				0EA4FC080FE174CC00CEE1BE /* SRRecorderCell.h */,
+				0EA4FC090FE174CC00CEE1BE /* SRRecorderCell.m */,
+				0EA4FC0A0FE174CC00CEE1BE /* SRRecorderControl.h */,
+				0EA4FC0B0FE174CC00CEE1BE /* SRRecorderControl.m */,
+				0EA4FC0C0FE174CC00CEE1BE /* SRValidator.h */,
+				0EA4FC0D0FE174CC00CEE1BE /* SRValidator.m */,
+			);
+			name = ShortcutRecorder;
+			sourceTree = "<group>";
+		};
+		0EE7BDEF0FE7759A00F1429A /* PotGrab */ = {
+			isa = PBXGroup;
+			children = (
+				0EE7BE080FE775BA00F1429A /* NSImage+MGCropExtensions.h */,
+				0EE7BE090FE775BA00F1429A /* NSImage+MGCropExtensions.m */,
+				0EE7BE0A0FE775BA00F1429A /* TFTesseractWrapper.h */,
+				0EE7BE0B0FE775BA00F1429A /* TFTesseractWrapper.m */,
+				0EE7BE0C0FE775BA00F1429A /* OpenGLScreenReader.h */,
+				0EE7BE0D0FE775BA00F1429A /* OpenGLScreenReader.m */,
+			);
+			name = PotGrab;
+			sourceTree = "<group>";
+		};
+		1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0EA807CD1020D5A9004F84D0 /* Sparkle.framework */,
+				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
+			);
+			name = "Linked Frameworks";
+			sourceTree = "<group>";
+		};
+		1058C7A2FEA54F0111CA2CBB /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				29B97324FDCFA39411CA2CEA /* AppKit.framework */,
+				13E42FB307B3F0F600E4EEF1 /* CoreData.framework */,
+				29B97325FDCFA39411CA2CEA /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		19C28FACFE9D520D11CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8D1107320486CEB800E47090 /* BlazingStars.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		29B97314FDCFA39411CA2CEA /* PokerHK */ = {
+			isa = PBXGroup;
+			children = (
+				080E96DDFE201D6D7F000001 /* Classes */,
+				29B97315FDCFA39411CA2CEA /* Other Sources */,
+				29B97317FDCFA39411CA2CEA /* Resources */,
+				29B97323FDCFA39411CA2CEA /* Frameworks */,
+				19C28FACFE9D520D11CA2CBB /* Products */,
+			);
+			name = PokerHK;
+			sourceTree = "<group>";
+		};
+		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
+			isa = PBXGroup;
+			children = (
+				32CA4F630368D1EE00C91783 /* PokerHK_Prefix.pch */,
+				29B97316FDCFA39411CA2CEA /* main.m */,
+			);
+			name = "Other Sources";
+			sourceTree = "<group>";
+		};
+		29B97317FDCFA39411CA2CEA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				0EB8C2AE10433AC60023522F /* readme.rtf */,
+				0EA807E71020D92C004F84D0 /* dsa_pub.pem */,
+				0EB20C9710028679008A5D14 /* BlazingStars Help */,
+				0EE7BDE40FE7748F00F1429A /* tessdata */,
+				0EE7BDC40FE7736500F1429A /* tesseract */,
+				0E46F1271044726E00EC807B /* convert */,
+				0E5528E20FDCE2E80071ACC6 /* Icons */,
+				0E5528E10FDCE2D50071ACC6 /* Themes */,
+				0E5528D40FDCE2B80071ACC6 /* Images */,
+				0E2A1BDE0FD063EA00471032 /* Preferences.xib */,
+				0E2A1B490FCFCF1100471032 /* Credits.rtf */,
+				8D1107310486CEB800E47090 /* Info.plist */,
+				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
+				1DDD58140DA1D0A300B32029 /* MainMenu.xib */,
+				0E5528220FDCD9BA0071ACC6 /* keyMap.plist */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0EE7BE1C0FE7765000F1429A /* OpenGL.framework */,
+				0EC67AFB0FD0AB73000A33AA /* Carbon.framework */,
+				1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */,
+				1058C7A2FEA54F0111CA2CBB /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8D1107260486CEB800E47090 /* PokerHK */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "PokerHK" */;
+			buildPhases = (
+				0EB20CC3100291B2008A5D14 /* Index Help */,
+				0EA807A51020D3B9004F84D0 /* ShellScript */,
+				0EA807D91020D5D5004F84D0 /* Copy Sparkle */,
+				8D1107290486CEB800E47090 /* Resources */,
+				8D11072C0486CEB800E47090 /* Sources */,
+				8D11072E0486CEB800E47090 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PokerHK;
+			productInstallPath = "$(HOME)/Applications";
+			productName = PokerHK;
+			productReference = 8D1107320486CEB800E47090 /* BlazingStars.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		29B97313FDCFA39411CA2CEA /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "PokerHK" */;
+			compatibilityVersion = "Xcode 3.1";
+			hasScannedForEncodings = 1;
+			mainGroup = 29B97314FDCFA39411CA2CEA /* PokerHK */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8D1107260486CEB800E47090 /* PokerHK */,
+				0EA808711020E77E004F84D0 /* BlazingStars */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8D1107290486CEB800E47090 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
+				1DDD58160DA1D0A300B32029 /* MainMenu.xib in Resources */,
+				0E2A1AAA0FCFBC4400471032 /* pokerhk.icns in Resources */,
+				0E2A1AE60FCFC71A00471032 /* icon-menulet.png in Resources */,
+				0E2A1B4A0FCFCF1100471032 /* Credits.rtf in Resources */,
+				0E2A1BE00FD063EA00471032 /* Preferences.xib in Resources */,
+				0E2A1BE30FD0670400471032 /* Advanced.png in Resources */,
+				0E2A1BE40FD0670400471032 /* Basic Keys.png in Resources */,
+				0E5DD4320FDA25CC000670D2 /* Pot Bets.png in Resources */,
+				0E5DD4640FDA4595000670D2 /* Open:Close.png in Resources */,
+				0EF91D800FDB81DE00FB01E7 /* Setup.png in Resources */,
+				0E5526AA0FDCBB150071ACC6 /* Hyper-Simple.plist in Resources */,
+				0E5526AB0FDCBB150071ACC6 /* Black.plist in Resources */,
+				0E5528230FDCD9BA0071ACC6 /* keyMap.plist in Resources */,
+				0EE7BDCE0FE7736500F1429A /* tesseract in Resources */,
+				0EE7BDEE0FE7748F00F1429A /* tessdata in Resources */,
+				0E2D92D00FEEBA64002836CA /* Slick.plist in Resources */,
+				0EB20C9B10028679008A5D14 /* BlazingStars Help in Resources */,
+				0EA807E81020D92C004F84D0 /* dsa_pub.pem in Resources */,
+				0EB8C2AF10433AC60023522F /* readme.rtf in Resources */,
+				0E46F1281044726E00EC807B /* convert in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0EA807A51020D3B9004F84D0 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "version=$(sed -n '\n/^[[:blank:]]*CFBundleShortVersionString<\\/key>$/ {\nN\ns/^[[:blank:]]*CFBundleShortVersionString<\\/key>\\n[[:blank:]]*\\(.*\\)<\\/string>/\\1/\np\n}' info.plist)\n\nbuild=$(sed -n '\n/^[[:blank:]]*CFBundleVersion<\\/key>$/ {\nN\ns/^[[:blank:]]*CFBundleVersion<\\/key>\\n[[:blank:]]*.*\\.\\(.*\\)<\\/string>/\\1/\np\n}' info.plist)\n\nbuild=$(($build +1))\n\ncp Info.plist 'Backup of Info.plist'\n\nsed '\n/^[[:blank:]]*CFBundleVersion<\\/key>$/ {\nN\ns/\\(\\).*\\(<\\/string>\\)/\\1'\"$version\\.$build\"'\\2/\nP\nD\n}' 'Backup of info.plist' > Info.plist";
+		};
+		0EA808701020E77E004F84D0 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/bash;
+			shellScript = "set -o errexit\n\n[ $BUILD_STYLE = Release ] || { echo Distribution target requires \"'Release'\" build style; false; }\n\nVERSION=$(defaults read \"$BUILT_PRODUCTS_DIR/$PRODUCT_NAME.app/Contents/Info\" CFBundleVersion)\nSHORTVERSION=$(defaults read \"$BUILT_PRODUCTS_DIR/$PRODUCT_NAME.app/Contents/Info\" CFBundleShortVersionString)\nDOWNLOAD_BASE_URL=\"http://fullyfunctionalsoftware.com/blazingstars\"\nRELEASENOTES_URL=\"http://fullyfunctionalsoftware.com/blazingstars/release-notes.html#version-$SHORTVERSION-$VERSION\"\n\nARCHIVE_FILENAME=\"$PRODUCT_NAME-$SHORTVERSION.zip\"\nDOWNLOAD_URL=\"$DOWNLOAD_BASE_URL/$ARCHIVE_FILENAME\"\nKEYCHAIN_PRIVKEY_NAME=\"Sparkle Private Key 1\"\n\nWD=$PWD\ncd \"$BUILT_PRODUCTS_DIR\"\nrm -f \"$PROJECT_NAME\"*.zip\nditto -ck --keepParent \"$PRODUCT_NAME.app\" \"$ARCHIVE_FILENAME\"\n\nSIZE=$(stat -f %z \"$ARCHIVE_FILENAME\")\nPUBDATE=$(date +\"%a, %d %b %G %T %z\")\nSIGNATURE=$(\n\topenssl dgst -sha1 -binary < \"$ARCHIVE_FILENAME\" \\\n\t| openssl dgst -dss1 -sign <(security find-generic-password -g -s \"$KEYCHAIN_PRIVKEY_NAME\" 2>&1 1>/dev/null | perl -pe '($_) = /\"(.+)\"/; s/\\\\012/\\n/g') \\\n\t| openssl enc -base64\n)\n\n[ $SIGNATURE ] || { echo Unable to load signing private key with name \"'$KEYCHAIN_PRIVKEY_NAME'\" from keychain; false; }\n\ncat <<EOF\n\t\t<item>\n\t\t\t<title>Version $SHORTVERSION (Build $VERSION)</title>\n\t\t\t<sparkle:releaseNotesLink>$RELEASENOTES_URL</sparkle:releaseNotesLink>\n\t\t\t<pubDate>$PUBDATE</pubDate>\n\t\t\t<enclosure\n\t\t\t\turl=\"$DOWNLOAD_URL\"\n\t\t\t\tsparkle:version=\"$VERSION\"\n\t\t\t\tsparkle:shortVersionString=\"$SHORTVERSION\"\n\t\t\t\ttype=\"application/octet-stream\"\n\t\t\t\tlength=\"$SIZE\"\n\t\t\t\tsparkle:dsaSignature=\"$SIGNATURE\"\n\t\t\t/>\n\t\t</item>\nEOF\n\necho scp \"'$HOME/Desktop/PokerHK/build/Release/$ARCHIVE_FILENAME'\" fullyfunctionalsoftware.com:public_html/blazingstars/\necho scp \"'$WD/appcast.xml'\" www.example.com:web/software/my-cool-app/appcast.xml\n\nif [[ ! -d \"dmg-build\" ]];\nthen\n\tmkdir BlazingStars\nrm -f BlazingStars/*\nfi\ncp -R $PRODUCT_NAME.app BlazingStars\ncp $PRODUCT_NAME.app/Contents/Resources/readme.rtf BlazingStars\ndropdmg -i -l BlazingStarsBeta BlazingStars \nrm -rf BlazingStars\nmv BlazingStars.dmg \"$PRODUCT_NAME-$SHORTVERSION.dmg\"\n";
+		};
+		0EB20CC3100291B2008A5D14 /* Index Help */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Index Help";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/bin/hiutil -Caf  $SRCROOT/English.lproj/BlazingStars\\ Help/BlazingStars\\ Help.helpindex $SRCROOT/English.lproj/BlazingStars\\ Help/\necho \"Doing the help.\"";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8D11072C0486CEB800E47090 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D11072D0486CEB800E47090 /* main.m in Sources */,
+				0E2A1AA10FCFB91200471032 /* AppController.m in Sources */,
+				0E2A1AA60FCFB9AD00471032 /* Menulet.m in Sources */,
+				0E2A1BD90FD0614B00471032 /* DBPrefsWindowController.m in Sources */,
+				0E2A1BDC0FD061E300471032 /* PrefsWindowController.m in Sources */,
+				0EC6840F0FD3984D000A33AA /* HKDispatchController.m in Sources */,
+				0EF91D700FDB805F00FB01E7 /* HKThemeController.m in Sources */,
+				0E85D1C10FDE43EE00E8E225 /* HKWindowManager.m in Sources */,
+				0EA4FC0E0FE174CC00CEE1BE /* CTGradient.m in Sources */,
+				0EA4FC0F0FE174CC00CEE1BE /* SRCommon.m in Sources */,
+				0EA4FC100FE174CC00CEE1BE /* SRKeyCodeTransformer.m in Sources */,
+				0EA4FC110FE174CC00CEE1BE /* SRRecorderCell.m in Sources */,
+				0EA4FC120FE174CC00CEE1BE /* SRRecorderControl.m in Sources */,
+				0EA4FC130FE174CC00CEE1BE /* SRValidator.m in Sources */,
+				0EE7BD980FE7718500F1429A /* HKScreenScraper.m in Sources */,
+				0EE7BE0E0FE775BA00F1429A /* NSImage+MGCropExtensions.m in Sources */,
+				0EE7BE0F0FE775BA00F1429A /* TFTesseractWrapper.m in Sources */,
+				0EE7BE100FE775BA00F1429A /* OpenGLScreenReader.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		0EA8087A1020E78C004F84D0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8D1107260486CEB800E47090 /* PokerHK */;
+			targetProxy = 0EA808791020E78C004F84D0 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		089C165CFE840E0CC02AAC07 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				089C165DFE840E0CC02AAC07 /* English */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		0E2A1BDE0FD063EA00471032 /* Preferences.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0E2A1BDF0FD063EA00471032 /* English */,
+			);
+			name = Preferences.xib;
+			sourceTree = "<group>";
+		};
+		0EB20C9710028679008A5D14 /* BlazingStars Help */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0EB20C9810028679008A5D14 /* English */,
+			);
+			name = "BlazingStars Help";
+			sourceTree = "<group>";
+		};
+		1DDD58140DA1D0A300B32029 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1DDD58150DA1D0A300B32029 /* English */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		0EA808721020E77E004F84D0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				PRODUCT_NAME = BlazingStars;
+			};
+			name = Debug;
+		};
+		0EA808731020E77E004F84D0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				PRODUCT_NAME = BlazingStars;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+		C01FCF4B08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 16;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = PokerHK_Prefix.pch;
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(HOME)/Applications";
+				PRODUCT_NAME = BlazingStars;
+				VERSIONING_SYSTEM = "";
+			};
+			name = Debug;
+		};
+		C01FCF4C08A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CURRENT_PROJECT_VERSION = 16;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = PokerHK_Prefix.pch;
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(HOME)/Applications";
+				PRODUCT_NAME = BlazingStars;
+				VERSIONING_SYSTEM = "";
+			};
+			name = Release;
+		};
+		C01FCF4F08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CURRENT_PROJECT_VERSION = 16;
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_ENABLE_OBJC_GC = required;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PREBINDING = NO;
+				PRODUCT_NAME = BlazingStars;
+				SDKROOT = macosx10.5;
+				VERSIONING_SYSTEM = "apple-generic";
+			};
+			name = Debug;
+		};
+		C01FCF5008A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CURRENT_PROJECT_VERSION = 16;
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_ENABLE_OBJC_GC = required;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				PREBINDING = NO;
+				PRODUCT_NAME = BlazingStars;
+				SDKROOT = macosx10.5;
+				VERSIONING_SYSTEM = "apple-generic";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0EA808781020E782004F84D0 /* Build configuration list for PBXAggregateTarget "BlazingStars" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0EA808721020E77E004F84D0 /* Debug */,
+				0EA808731020E77E004F84D0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "PokerHK" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4B08A954540054247B /* Debug */,
+				C01FCF4C08A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "PokerHK" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4F08A954540054247B /* Debug */,
+				C01FCF5008A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 29B97313FDCFA39411CA2CEA /* Project object */;
+}
