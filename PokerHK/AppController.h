@@ -27,6 +27,7 @@
 -(IBAction)displayDonate:(id)sender;
 -(void)turnOnRounding:(BOOL)round;
 -(void)hkChangedFor:(SRRecorderControl *)control withTag:(int)tag;
+-(void)voiceCommandsChangedState;
 -(void)setPotBetAmount:(float)amount forTag:(int)tag;
 -(void)setRoundingAmount:(float)amount;
 -(void)setRoundingType:(int)type;

@@ -147,6 +147,11 @@ extern NSString *appName;
 	[dispatchController registerHotKeyForControl:control withTag:tag];
 }
 
+-(void)voiceCommandsChangedState
+{
+	[dispatchController voiceCommandsChangedState];
+}
+
 -(void)setPotBetAmount:(float)amount forTag:(int)tag
 {
 	[dispatchController setPotBetAmount:amount forTag:tag];

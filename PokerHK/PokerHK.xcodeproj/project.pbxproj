@@ -34,6 +34,7 @@
 		0E2A1BE40FD0670400471032 /* Basic Keys.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E2A1BE20FD0670400471032 /* Basic Keys.png */; };
 		0E2D92D00FEEBA64002836CA /* Slick.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0E2D92CF0FEEBA63002836CA /* Slick.plist */; };
 		0E46F1281044726E00EC807B /* convert in Resources */ = {isa = PBXBuildFile; fileRef = 0E46F1271044726E00EC807B /* convert */; };
+		0E4D73AE10DF35C80058D4FA /* speechCommands.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0E4D73AD10DF35C80058D4FA /* speechCommands.plist */; };
 		0E5526AA0FDCBB150071ACC6 /* Hyper-Simple.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0E5526A80FDCBB150071ACC6 /* Hyper-Simple.plist */; };
 		0E5526AB0FDCBB150071ACC6 /* Black.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0E5526A90FDCBB150071ACC6 /* Black.plist */; };
 		0E5528230FDCD9BA0071ACC6 /* keyMap.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0E5528220FDCD9BA0071ACC6 /* keyMap.plist */; };
@@ -111,6 +112,7 @@
 		0E2D92CF0FEEBA63002836CA /* Slick.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Slick.plist; sourceTree = "<group>"; };
 		0E2D945A0FEED7CA002836CA /* HKDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKDefines.h; sourceTree = "<group>"; };
 		0E46F1271044726E00EC807B /* convert */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = convert; sourceTree = "<group>"; };
+		0E4D73AD10DF35C80058D4FA /* speechCommands.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = speechCommands.plist; sourceTree = "<group>"; };
 		0E5526A80FDCBB150071ACC6 /* Hyper-Simple.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Hyper-Simple.plist"; sourceTree = "<group>"; };
 		0E5526A90FDCBB150071ACC6 /* Black.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Black.plist; sourceTree = "<group>"; };
 		0E5528220FDCD9BA0071ACC6 /* keyMap.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = keyMap.plist; sourceTree = "<group>"; };
@@ -327,6 +329,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				0E4D73AD10DF35C80058D4FA /* speechCommands.plist */,
 				0EB8C2AE10433AC60023522F /* readme.rtf */,
 				0EA807E71020D92C004F84D0 /* dsa_pub.pem */,
 				0EB20C9710028679008A5D14 /* BlazingStars Help */,
@@ -425,6 +428,7 @@
 				0EA807E81020D92C004F84D0 /* dsa_pub.pem in Resources */,
 				0EB8C2AF10433AC60023522F /* readme.rtf in Resources */,
 				0E46F1281044726E00EC807B /* convert in Resources */,
+				0E4D73AE10DF35C80058D4FA /* speechCommands.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>fold</key>
+	<string>Fold</string>
+	<key>bet</key>
+	<string>Bet</string>
+	<key>call</key>
+	<string>Call</string>
+	<key>checkFold</key>
+	<string>Check Fold</string>
+	<key>foldToAny</key>
+	<string>Fold To Any</string>
+	<key>checkCall</key>
+	<string>Check Call</string>
+	<key>checkCallAny</key>
+	<string>Check Call Any</string>
+	<key>betRaise</key>
+	<string>Bet Raise</string>
+	<key>betRaiseAny</key>
+	<string>Bet Raise Any</string>
+	<key>sitOutNextHand</key>
+	<string>Sit Out Next Hand</string>
+	<key>autoPostSitOut</key>
+	<string>Auto Post Sit Out</string>
+	<key>leaveTable</key>
+	<string>Leave Table</string>
+	<key>leaveAllTables</key>
+	<string>Leave All Tables</string>
+	<key>increaseBet</key>
+	<string>Increase Bet</string>
+	<key>decreaseBet</key>
+	<string>Decrease Bet</string>
+</dict>
+</plist>

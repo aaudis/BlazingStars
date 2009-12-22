@@ -29,6 +29,7 @@
 @interface HKDispatchController : NSObject {
 	NSMutableDictionary *fieldMap;
 	NSDictionary *keyMap;
+	NSDictionary *speechCommands;
 	NSMutableDictionary *potBetAmounts;
 	pid_t pokerstarsPID;
 	AXUIElementRef appRef;	
@@ -47,6 +48,7 @@
 	BOOL autoBetRounding;
 	BOOL autoBetAllIn;
 	BOOL toggled;
+	NSSpeechRecognizer* speechRecognizer;
 }
 
 @property (copy) NSDictionary *keyMap;
@@ -71,8 +73,10 @@
 -(void)toggleAllHotKeys;
 -(void)activateHotKeys;
 -(void)deactivateHotKeys;
+- (void)simulateHotKey:(int)tag;
 -(void)potBet:(int)tag;
 -(void)leaveAllTables;
 -(void)sitOutAllTables;
 -(void)debugHK;
+-(void)voiceCommandsChangedState;
 @end

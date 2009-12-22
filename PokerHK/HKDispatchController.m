@@ -129,11 +129,29 @@ HKWindowManager *wm;
 	if ((self = [super init])) {
 		fieldMap = [[NSMutableDictionary alloc] init];
 		keyMap = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"keyMap" ofType: @"plist"]];
+		speechCommands = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"speechCommands" ofType:@"plist"]];
 		potBetAmounts = [[NSMutableDictionary alloc] init];
 		amountToChange = 2.0;
 		rounding = NO;
 		autoBetRounding = NO;
 		toggled = YES;
+
+		// Not in key map...need to refactor this.
+		NSMutableArray *commands = [NSMutableArray arrayWithCapacity:20];
+		for (id keyName in keyMap) {
+			[commands addObject:[speechCommands objectForKey:[[keyMap objectForKey:keyName] objectAtIndex:0]]];
+		}
+		[commands addObject:@"Increase Bet"];
+		[commands addObject:@"Decrease Bet"];
+		if ([[NSUserDefaults standardUserDefaults] boolForKey:@"voiceCommandsEnabledKey"]) {
+			speechRecognizer = [[NSSpeechRecognizer alloc] init];
+			[speechRecognizer setCommands:commands];
+			[speechRecognizer setDelegate:self];
+			[speechRecognizer setListensInForegroundOnly:NO];
+			[speechRecognizer setDisplayedCommandsTitle:@"BlazingStars commands"];			
+		} else {
+			speechRecognizer = nil;
+		}
     }
 	return self;
 }
@@ -174,6 +192,18 @@ HKWindowManager *wm;
 
 	// Get the PrefsWindowController.
 	prefsWindowController = [PrefsWindowController sharedPrefsWindowController];
+	
+	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"voiceCommandsEnabledKey"] == YES) {
+		NSLog(@"In awakeFromNib, dispatchController, starting speech recognition.");
+		[speechRecognizer startListening];	
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(stopVoiceCommands:) name:NSApplicationWillTerminateNotification object:nil];
+	}
+}
+
+- (void)stopVoiceCommands:(NSNotification *)notification
+{
+	NSLog(@"Turning off the speech recognizer.");
+	[speechRecognizer stopListening];
 }
 
 -(void)setPotBetAmount:(float)amount forTag:(int)tag
@@ -644,6 +674,107 @@ HKWindowManager *wm;
 
 }
 
+-(void)voiceCommandsChangedState
+{
+	NSLog(@"In voiceCommandsChangedState");
+	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"voiceCommandsEnabledKey"]) {
+		NSLog(@"Enabling voice commands.");
+		if (speechRecognizer == nil) {
+			NSMutableArray *commands = [NSMutableArray arrayWithCapacity:20];
+			for (id keyName in keyMap) {
+				[commands addObject:[speechCommands objectForKey:[[keyMap objectForKey:keyName] objectAtIndex:0]]];
+			}
+			[commands addObject:@"Increase Bet"];
+			[commands addObject:@"Decrease Bet"];
+			
+			speechRecognizer = [[NSSpeechRecognizer alloc] init];
+			[speechRecognizer setCommands:commands];
+			[speechRecognizer setDelegate:self];
+			[speechRecognizer setListensInForegroundOnly:NO];
+			[speechRecognizer setDisplayedCommandsTitle:@"BlazingStars commands"];						
+		}
+		
+		[speechRecognizer startListening];
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(stopVoiceCommands:) name:NSApplicationWillTerminateNotification object:nil];		
+	} else {
+		NSLog(@"Disabling voice commands.");
+		[speechRecognizer stopListening];
+		speechRecognizer = nil;
+	}
+}
+
+- (void)speechRecognizer:(NSSpeechRecognizer *)sender didRecognizeCommand:(id)command {
+	for (id key in speechCommands) {
+		if ([[speechCommands objectForKey:key] isEqualToString:command]) {
+			NSLog(@"Speech command recognized!  Command was: %@",key);
+
+			for (id field in keyMap) {
+				NSLog(@"km: %@, field: %@",[[keyMap objectForKey:field] objectAtIndex:0],field);
+				if ([[[keyMap objectForKey:field] objectAtIndex:0] isEqualToString:key]) {
+					NSLog(@"Found a match! %@",field);
+					[self simulateHotKey:[field intValue]];
+					return;
+				}
+			}
+			
+			// Not in key map.  I need to refactor this...
+			if ([key isEqualToString:@"increaseBet"]) {
+				[self simulateHotKey:13];
+			}
+			if ([key isEqualToString:@"decreaseBet"]) {
+				[self simulateHotKey:14];
+			}
+		}
+	}
+}
+
+- (void)simulateHotKey:(int)tag
+{
+	NSLog(@"In simulateHotKey, tag is: %d",tag);
+	// Global toggle key.
+	if (tag == TOGGLETAG) {
+		[self toggleAllHotKeys];
+	}
+	NSString *size,*prefix;
+	// Don't fire the keys if we're not in a poker window.
+	if ([wm pokerWindowIsActive] == YES) {
+		switch (tag) {
+			case 12:
+				[self sitOutAllTables];
+				break;
+			case 13:
+				[self incrementBetSize:1];
+				break;
+			case 14:
+				[self decrementBetSize:1];
+				break;
+			case 16:
+				[self leaveAllTables];
+				break;
+			case 17:
+			case 18:
+			case 19:
+			case 20:
+				[self potBet:tag];
+				break;
+			case 21:
+				[self allIn];
+				break;
+			case 99:
+				[self debugHK];
+				break;
+			default:
+				prefix = [[keyMap objectForKey:[NSString stringWithFormat:@"%d",tag]] objectAtIndex:0];
+				size = [[keyMap objectForKey:[NSString stringWithFormat:@"%d",tag]] objectAtIndex:1];
+								NSLog(@"Tag: %d Prefix: %@ Size: %@",tag,prefix,size);
+				[self buttonPress:prefix withButton:size];
+				break;
+		}
+	} else {
+		NSLog(@"I was asked to simulate a hotkey I don't know: %d",tag);
+	}
+}
+
 @end
 
 
@@ -687,7 +818,6 @@ pascal OSStatus hotKeyHandler(EventHandlerCallRef nextHandler,EventRef theEvent,
 			case 18:
 			case 19:
 			case 20:
-				NSLog(@"Got here!");
 				[(id)userData potBet:l];
 				break;
 			case 21:

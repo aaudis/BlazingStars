@@ -96,6 +96,7 @@
 -(IBAction)setThemeFromMenu:(id)sender;
 -(IBAction)setPotBetAmount:(id)sender;
 -(IBAction)turnOnRounding:(id)sender;
+-(IBAction)voiceCommandsChangedState:(id)sender;
 -(IBAction)setRoundingAmount:(id)sender;
 -(IBAction)setRoundingType:(id)sender;
 -(IBAction)autoBetRounding:(id)sender;

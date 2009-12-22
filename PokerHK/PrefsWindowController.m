@@ -146,6 +146,11 @@
 	[appController setRoundingType:[sender selectedRow]];
 }
 
+-(IBAction)voiceCommandsChangedState:(id)sender
+{
+	[appController voiceCommandsChangedState];
+}
+
 -(IBAction)autoBetRounding:(id)sender
 {
 	[appController autoBetRounding:[sender state]];
