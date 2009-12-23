@@ -55,6 +55,12 @@
 		0EB8C2AF10433AC60023522F /* readme.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 0EB8C2AE10433AC60023522F /* readme.rtf */; };
 		0EC67AFC0FD0AB73000A33AA /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EC67AFB0FD0AB73000A33AA /* Carbon.framework */; };
 		0EC6840F0FD3984D000A33AA /* HKDispatchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EC6840E0FD3984D000A33AA /* HKDispatchController.m */; };
+		0ED0FBDF10E20A1E000DF720 /* license.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 0ED0FBDE10E20A1E000DF720 /* license.rtf */; };
+		0ED0FBE710E212AC000DF720 /* create-dmg in Resources */ = {isa = PBXBuildFile; fileRef = 0ED0FBE410E212AC000DF720 /* create-dmg */; };
+		0ED0FBE810E212AC000DF720 /* dmg_background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0ED0FBE510E212AC000DF720 /* dmg_background.jpg */; };
+		0ED0FBE910E212AC000DF720 /* dmg_background.psd in Resources */ = {isa = PBXBuildFile; fileRef = 0ED0FBE610E212AC000DF720 /* dmg_background.psd */; };
+		0ED0FBF610E21352000DF720 /* AdiumApplescriptRunner in Resources */ = {isa = PBXBuildFile; fileRef = 0ED0FBF410E21351000DF720 /* AdiumApplescriptRunner */; };
+		0ED0FBF710E21352000DF720 /* template.applescript in Sources */ = {isa = PBXBuildFile; fileRef = 0ED0FBF510E21351000DF720 /* template.applescript */; };
 		0EE7BD980FE7718500F1429A /* HKScreenScraper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EE7BD970FE7718500F1429A /* HKScreenScraper.m */; };
 		0EE7BDCE0FE7736500F1429A /* tesseract in Resources */ = {isa = PBXBuildFile; fileRef = 0EE7BDC40FE7736500F1429A /* tesseract */; };
 		0EE7BDEE0FE7748F00F1429A /* tessdata in Resources */ = {isa = PBXBuildFile; fileRef = 0EE7BDE40FE7748F00F1429A /* tessdata */; };
@@ -143,6 +149,12 @@
 		0EC67AFB0FD0AB73000A33AA /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
 		0EC6840D0FD3984D000A33AA /* HKDispatchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKDispatchController.h; sourceTree = "<group>"; };
 		0EC6840E0FD3984D000A33AA /* HKDispatchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKDispatchController.m; sourceTree = "<group>"; };
+		0ED0FBDE10E20A1E000DF720 /* license.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = license.rtf; sourceTree = "<group>"; };
+		0ED0FBE410E212AC000DF720 /* create-dmg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = "create-dmg"; sourceTree = "<group>"; };
+		0ED0FBE510E212AC000DF720 /* dmg_background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = dmg_background.jpg; sourceTree = "<group>"; };
+		0ED0FBE610E212AC000DF720 /* dmg_background.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = dmg_background.psd; sourceTree = "<group>"; };
+		0ED0FBF410E21351000DF720 /* AdiumApplescriptRunner */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o"; path = AdiumApplescriptRunner; sourceTree = "<group>"; };
+		0ED0FBF510E21351000DF720 /* template.applescript */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.applescript; path = template.applescript; sourceTree = "<group>"; };
 		0EE7BD960FE7718500F1429A /* HKScreenScraper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKScreenScraper.h; sourceTree = "<group>"; };
 		0EE7BD970FE7718500F1429A /* HKScreenScraper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKScreenScraper.m; sourceTree = "<group>"; };
 		0EE7BDC40FE7736500F1429A /* tesseract */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = tesseract; sourceTree = "<group>"; };
@@ -270,6 +282,15 @@
 			name = ShortcutRecorder;
 			sourceTree = "<group>";
 		};
+		0ED0FBF310E21351000DF720 /* support */ = {
+			isa = PBXGroup;
+			children = (
+				0ED0FBF410E21351000DF720 /* AdiumApplescriptRunner */,
+				0ED0FBF510E21351000DF720 /* template.applescript */,
+			);
+			path = support;
+			sourceTree = "<group>";
+		};
 		0EE7BDEF0FE7759A00F1429A /* PotGrab */ = {
 			isa = PBXGroup;
 			children = (
@@ -334,6 +355,10 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				0ED0FBF310E21351000DF720 /* support */,
+				0ED0FBE410E212AC000DF720 /* create-dmg */,
+				0ED0FBE510E212AC000DF720 /* dmg_background.jpg */,
+				0ED0FBE610E212AC000DF720 /* dmg_background.psd */,
 				0E4D73AD10DF35C80058D4FA /* speechCommands.plist */,
 				0EB8C2AE10433AC60023522F /* readme.rtf */,
 				0EA807E71020D92C004F84D0 /* dsa_pub.pem */,
@@ -350,6 +375,7 @@
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
 				1DDD58140DA1D0A300B32029 /* MainMenu.xib */,
 				0E5528220FDCD9BA0071ACC6 /* keyMap.plist */,
+				0ED0FBDE10E20A1E000DF720 /* license.rtf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -434,6 +460,11 @@
 				0EB8C2AF10433AC60023522F /* readme.rtf in Resources */,
 				0E46F1281044726E00EC807B /* convert in Resources */,
 				0E4D73AE10DF35C80058D4FA /* speechCommands.plist in Resources */,
+				0ED0FBDF10E20A1E000DF720 /* license.rtf in Resources */,
+				0ED0FBE710E212AC000DF720 /* create-dmg in Resources */,
+				0ED0FBE810E212AC000DF720 /* dmg_background.jpg in Resources */,
+				0ED0FBE910E212AC000DF720 /* dmg_background.psd in Resources */,
+				0ED0FBF610E21352000DF720 /* AdiumApplescriptRunner in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -464,7 +495,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
-			shellScript = "set -o errexit\n\n[ $BUILD_STYLE = Release ] || { echo Distribution target requires \"'Release'\" build style; false; }\n\nVERSION=$(defaults read \"$BUILT_PRODUCTS_DIR/$PRODUCT_NAME.app/Contents/Info\" CFBundleVersion)\nSHORTVERSION=$(defaults read \"$BUILT_PRODUCTS_DIR/$PRODUCT_NAME.app/Contents/Info\" CFBundleShortVersionString)\nDOWNLOAD_BASE_URL=\"http://fullyfunctionalsoftware.com/blazingstars\"\nRELEASENOTES_URL=\"http://fullyfunctionalsoftware.com/blazingstars/release-notes.html#version-$SHORTVERSION-$VERSION\"\n\nARCHIVE_FILENAME=\"$PRODUCT_NAME-$SHORTVERSION.zip\"\nDOWNLOAD_URL=\"$DOWNLOAD_BASE_URL/$ARCHIVE_FILENAME\"\nKEYCHAIN_PRIVKEY_NAME=\"Sparkle Private Key 1\"\n\nWD=$PWD\ncd \"$BUILT_PRODUCTS_DIR\"\nrm -f \"$PROJECT_NAME\"*.zip\nditto -ck --keepParent \"$PRODUCT_NAME.app\" \"$ARCHIVE_FILENAME\"\n\nSIZE=$(stat -f %z \"$ARCHIVE_FILENAME\")\nPUBDATE=$(date +\"%a, %d %b %G %T %z\")\nSIGNATURE=$(\n\topenssl dgst -sha1 -binary < \"$ARCHIVE_FILENAME\" \\\n\t| openssl dgst -dss1 -sign <(security find-generic-password -g -s \"$KEYCHAIN_PRIVKEY_NAME\" 2>&1 1>/dev/null | perl -pe '($_) = /\"(.+)\"/; s/\\\\012/\\n/g') \\\n\t| openssl enc -base64\n)\n\n[ $SIGNATURE ] || { echo Unable to load signing private key with name \"'$KEYCHAIN_PRIVKEY_NAME'\" from keychain; false; }\n\ncat <<EOF\n\t\t<item>\n\t\t\t<title>Version $SHORTVERSION (Build $VERSION)</title>\n\t\t\t<sparkle:releaseNotesLink>$RELEASENOTES_URL</sparkle:releaseNotesLink>\n\t\t\t<pubDate>$PUBDATE</pubDate>\n\t\t\t<enclosure\n\t\t\t\turl=\"$DOWNLOAD_URL\"\n\t\t\t\tsparkle:version=\"$VERSION\"\n\t\t\t\tsparkle:shortVersionString=\"$SHORTVERSION\"\n\t\t\t\ttype=\"application/octet-stream\"\n\t\t\t\tlength=\"$SIZE\"\n\t\t\t\tsparkle:dsaSignature=\"$SIGNATURE\"\n\t\t\t/>\n\t\t</item>\nEOF\n\necho scp \"'$HOME/Desktop/PokerHK/build/Release/$ARCHIVE_FILENAME'\" fullyfunctionalsoftware.com:public_html/blazingstars/\necho scp \"'$WD/appcast.xml'\" www.example.com:web/software/my-cool-app/appcast.xml\n\nif [[ ! -d \"dmg-build\" ]];\nthen\n\tmkdir BlazingStars\nrm -f BlazingStars/*\nfi\ncp -R $PRODUCT_NAME.app BlazingStars\ncp $PRODUCT_NAME.app/Contents/Resources/readme.rtf BlazingStars\ndropdmg -i -l BlazingStarsBeta BlazingStars \nrm -rf BlazingStars\nmv BlazingStars.dmg \"$PRODUCT_NAME-$SHORTVERSION.dmg\"\n";
+			shellScript = "set -o errexit\n\n[ $BUILD_STYLE = Release ] || { echo Distribution target requires \"'Release'\" build style; false; }\n\nVERSION=$(defaults read \"$BUILT_PRODUCTS_DIR/$PRODUCT_NAME.app/Contents/Info\" CFBundleVersion)\nSHORTVERSION=$(defaults read \"$BUILT_PRODUCTS_DIR/$PRODUCT_NAME.app/Contents/Info\" CFBundleShortVersionString)\nDOWNLOAD_BASE_URL=\"http://fullyfunctionalsoftware.com/blazingstars\"\nRELEASENOTES_URL=\"http://fullyfunctionalsoftware.com/blazingstars/release-notes.html#version-$SHORTVERSION-$VERSION\"\n\nARCHIVE_FILENAME=\"$PRODUCT_NAME-$SHORTVERSION.zip\"\nDOWNLOAD_URL=\"$DOWNLOAD_BASE_URL/$ARCHIVE_FILENAME\"\nKEYCHAIN_PRIVKEY_NAME=\"Sparkle Private Key 1\"\n\nWD=$PWD\ncd \"$BUILT_PRODUCTS_DIR\"\nrm -f \"$PROJECT_NAME\"*.zip\nditto -ck --keepParent \"$PRODUCT_NAME.app\" \"$ARCHIVE_FILENAME\"\n\nSIZE=$(stat -f %z \"$ARCHIVE_FILENAME\")\nPUBDATE=$(date +\"%a, %d %b %G %T %z\")\nSIGNATURE=$(\n\topenssl dgst -sha1 -binary < \"$ARCHIVE_FILENAME\" \\\n\t| openssl dgst -dss1 -sign <(security find-generic-password -g -s \"$KEYCHAIN_PRIVKEY_NAME\" 2>&1 1>/dev/null | perl -pe '($_) = /\"(.+)\"/; s/\\\\012/\\n/g') \\\n\t| openssl enc -base64\n)\n\n[ $SIGNATURE ] || { echo Unable to load signing private key with name \"'$KEYCHAIN_PRIVKEY_NAME'\" from keychain; false; }\n\ncat <<EOF\n\t\t<item>\n\t\t\t<title>Version $SHORTVERSION (Build $VERSION)</title>\n\t\t\t<sparkle:releaseNotesLink>$RELEASENOTES_URL</sparkle:releaseNotesLink>\n\t\t\t<pubDate>$PUBDATE</pubDate>\n\t\t\t<enclosure\n\t\t\t\turl=\"$DOWNLOAD_URL\"\n\t\t\t\tsparkle:version=\"$VERSION\"\n\t\t\t\tsparkle:shortVersionString=\"$SHORTVERSION\"\n\t\t\t\ttype=\"application/octet-stream\"\n\t\t\t\tlength=\"$SIZE\"\n\t\t\t\tsparkle:dsaSignature=\"$SIGNATURE\"\n\t\t\t/>\n\t\t</item>\nEOF\n\necho scp \"'$HOME/Desktop/PokerHK/build/Release/$ARCHIVE_FILENAME'\" fullyfunctionalsoftware.com:public_html/blazingstars/\necho scp \"'$WD/appcast.xml'\" www.example.com:web/software/my-cool-app/appcast.xml\n\n\nif [[ ! -d \"dmg-build\" ]];\nthen\n\tmkdir BlazingStars\nrm -f BlazingStars/*\nfi\nln -s /Applications BlazingStars/Applications\U0013\ncp -R $PRODUCT_NAME.app BlazingStars\ncp $PRODUCT_NAME.app/Contents/Resources/readme.rtf BlazingStars\ncp $SRCROOT/license.rtf BlazingStars\n#cp $SRCROOT/dmg_background.jpg BlazingStars\n\n$SRCROOT/create-dmg --window-size 500 450 --background $SRCROOT/dmg_background.jpg --icon-size 96 --volname \"BlazingStars\" --icon \"Applications\" 380 180 --icon \"BlazingStars\" 110 180 --icon \"readme.rtf\" 200 335 --icon \"license.rtf\" 300 335 BlazingStars.dmg ./BlazingStars\n\n\n#dropdmg -i -l BlazingStarsBeta BlazingStars \nrm -rf BlazingStars\nmv BlazingStars.dmg \"$PRODUCT_NAME-$SHORTVERSION.dmg\"\n";
 		};
 		0EB20CC3100291B2008A5D14 /* Index Help */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -506,6 +537,7 @@
 				0EE7BE0F0FE775BA00F1429A /* TFTesseractWrapper.m in Sources */,
 				0EE7BE100FE775BA00F1429A /* OpenGLScreenReader.m in Sources */,
 				0E63778610E194D500A3DF98 /* PrefsView.m in Sources */,
+				0ED0FBF710E21352000DF720 /* template.applescript in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
