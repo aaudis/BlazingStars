@@ -185,6 +185,7 @@
 
 
 
+
 /*
  * Hot key functions.
  */
@@ -196,6 +197,5 @@
 											  forKey: [[tagDict objectForKey:[NSValue valueWithPointer:aRecorder]] objectAtIndex:SRKEY]];
 	[appController hkChangedFor:aRecorder withTag:[[[tagDict objectForKey:[NSValue valueWithPointer:aRecorder]] objectAtIndex:SRTAG] intValue]];
 }
-
 
 @end

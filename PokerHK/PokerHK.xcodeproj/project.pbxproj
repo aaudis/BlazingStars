@@ -40,6 +40,7 @@
 		0E5528230FDCD9BA0071ACC6 /* keyMap.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0E5528220FDCD9BA0071ACC6 /* keyMap.plist */; };
 		0E5DD4320FDA25CC000670D2 /* Pot Bets.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E5DD4310FDA25CC000670D2 /* Pot Bets.png */; };
 		0E5DD4640FDA4595000670D2 /* Open:Close.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E5DD4630FDA4595000670D2 /* Open:Close.png */; };
+		0E63778610E194D500A3DF98 /* PrefsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E63778510E194D500A3DF98 /* PrefsView.m */; };
 		0E85D1C10FDE43EE00E8E225 /* HKWindowManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E85D1C00FDE43EE00E8E225 /* HKWindowManager.m */; };
 		0EA4FC0E0FE174CC00CEE1BE /* CTGradient.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EA4FC020FE174CC00CEE1BE /* CTGradient.m */; };
 		0EA4FC0F0FE174CC00CEE1BE /* SRCommon.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EA4FC050FE174CC00CEE1BE /* SRCommon.m */; };
@@ -118,6 +119,8 @@
 		0E5528220FDCD9BA0071ACC6 /* keyMap.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = keyMap.plist; sourceTree = "<group>"; };
 		0E5DD4310FDA25CC000670D2 /* Pot Bets.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Pot Bets.png"; sourceTree = "<group>"; };
 		0E5DD4630FDA4595000670D2 /* Open:Close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Open:Close.png"; sourceTree = "<group>"; };
+		0E63778410E194D500A3DF98 /* PrefsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefsView.h; sourceTree = "<group>"; };
+		0E63778510E194D500A3DF98 /* PrefsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrefsView.m; sourceTree = "<group>"; };
 		0E85D1BF0FDE43EE00E8E225 /* HKWindowManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKWindowManager.h; sourceTree = "<group>"; };
 		0E85D1C00FDE43EE00E8E225 /* HKWindowManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKWindowManager.m; sourceTree = "<group>"; };
 		0EA4FC010FE174CC00CEE1BE /* CTGradient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTGradient.h; sourceTree = "<group>"; };
@@ -210,6 +213,8 @@
 				0E2A1BD80FD0614B00471032 /* DBPrefsWindowController.m */,
 				0E2A1BDA0FD061E300471032 /* PrefsWindowController.h */,
 				0E2A1BDB0FD061E300471032 /* PrefsWindowController.m */,
+				0E63778410E194D500A3DF98 /* PrefsView.h */,
+				0E63778510E194D500A3DF98 /* PrefsView.m */,
 			);
 			name = Prefs;
 			sourceTree = "<group>";
@@ -500,6 +505,7 @@
 				0EE7BE0E0FE775BA00F1429A /* NSImage+MGCropExtensions.m in Sources */,
 				0EE7BE0F0FE775BA00F1429A /* TFTesseractWrapper.m in Sources */,
 				0EE7BE100FE775BA00F1429A /* OpenGLScreenReader.m in Sources */,
+				0E63778610E194D500A3DF98 /* PrefsView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
