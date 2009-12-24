@@ -231,14 +231,27 @@
 			name = Prefs;
 			sourceTree = "<group>";
 		};
+		0E460AF410E3129A007D647C /* TextFiles */ = {
+			isa = PBXGroup;
+			children = (
+				0EB8C2AE10433AC60023522F /* readme.rtf */,
+				0E2A1B490FCFCF1100471032 /* Credits.rtf */,
+				0ED0FBDE10E20A1E000DF720 /* license.rtf */,
+			);
+			name = TextFiles;
+			sourceTree = "<group>";
+		};
 		0E5528D40FDCE2B80071ACC6 /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				0EF91D7F0FDB81DE00FB01E7 /* Setup.png */,
-				0E5DD4630FDA4595000670D2 /* Open:Close.png */,
-				0E5DD4310FDA25CC000670D2 /* Pot Bets.png */,
+				0ED0FBE510E212AC000DF720 /* dmg_background.jpg */,
+				0ED0FBE610E212AC000DF720 /* dmg_background.psd */,
 				0E2A1BE10FD0670400471032 /* Advanced.png */,
 				0E2A1BE20FD0670400471032 /* Basic Keys.png */,
+				0E2A1AE50FCFC71A00471032 /* icon-menulet.png */,
+				0E5DD4630FDA4595000670D2 /* Open:Close.png */,
+				0E5DD4310FDA25CC000670D2 /* Pot Bets.png */,
+				0EF91D7F0FDB81DE00FB01E7 /* Setup.png */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -256,7 +269,6 @@
 		0E5528E20FDCE2E80071ACC6 /* Icons */ = {
 			isa = PBXGroup;
 			children = (
-				0E2A1AE50FCFC71A00471032 /* icon-menulet.png */,
 				0E2A1AA90FCFBC4400471032 /* pokerhk.icns */,
 			);
 			name = Icons;
@@ -355,12 +367,10 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				0ED0FBF310E21351000DF720 /* support */,
 				0ED0FBE410E212AC000DF720 /* create-dmg */,
-				0ED0FBE510E212AC000DF720 /* dmg_background.jpg */,
-				0ED0FBE610E212AC000DF720 /* dmg_background.psd */,
+				0ED0FBF310E21351000DF720 /* support */,
 				0E4D73AD10DF35C80058D4FA /* speechCommands.plist */,
-				0EB8C2AE10433AC60023522F /* readme.rtf */,
+				0E460AF410E3129A007D647C /* TextFiles */,
 				0EA807E71020D92C004F84D0 /* dsa_pub.pem */,
 				0EB20C9710028679008A5D14 /* BlazingStars Help */,
 				0EE7BDE40FE7748F00F1429A /* tessdata */,
@@ -370,12 +380,10 @@
 				0E5528E10FDCE2D50071ACC6 /* Themes */,
 				0E5528D40FDCE2B80071ACC6 /* Images */,
 				0E2A1BDE0FD063EA00471032 /* Preferences.xib */,
-				0E2A1B490FCFCF1100471032 /* Credits.rtf */,
 				8D1107310486CEB800E47090 /* Info.plist */,
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
 				1DDD58140DA1D0A300B32029 /* MainMenu.xib */,
 				0E5528220FDCD9BA0071ACC6 /* keyMap.plist */,
-				0ED0FBDE10E20A1E000DF720 /* license.rtf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
