@@ -37,7 +37,7 @@
 
 -(void)keyDown:(NSEvent *)theEvent
 {
-	if ([theEvent keyCode] == 53){
+	if ([theEvent keyCode] == 53 || ([theEvent keyCode] == 13 && [theEvent modifierFlags] == 1048840)) {
 		[[self window] performClose:self];
 	}
 	[super keyDown:theEvent];
