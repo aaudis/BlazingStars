@@ -20,6 +20,49 @@
 @synthesize stepper;
 @synthesize scrollWheelCheckBox;
 
+
++(void)initialize {
+	// If this is the first run, set up sensible default hot keys.  
+	NSLog(@"Registering defaults for PrefsWindowController.");
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	NSMutableDictionary *shortcutDefaults = [NSMutableDictionary dictionary];
+	
+	KeyCombo kc;
+
+	kc.code = 3; kc.flags = 0; [shortcutDefaults setObject:[NSData dataWithBytes:&kc length:sizeof(KeyCombo)] forKey:@"FoldKey"];
+	kc.code = 8; kc.flags = 0; [shortcutDefaults setObject:[NSData dataWithBytes:&kc length:sizeof(KeyCombo)] forKey:@"CallKey"];
+	kc.code = 11; kc.flags = 0; [shortcutDefaults setObject:[NSData dataWithBytes:&kc length:sizeof(KeyCombo)] forKey:@"BetKey"];
+	kc.code = 12; kc.flags = 0; [shortcutDefaults setObject:[NSData dataWithBytes:&kc length:sizeof(KeyCombo)] forKey:@"CheckFoldKey"];	
+	kc.code = 13; kc.flags = 0; [shortcutDefaults setObject:[NSData dataWithBytes:&kc length:sizeof(KeyCombo)] forKey:@"FoldToAnyKey"];	
+	kc.code = 14; kc.flags = 0; [shortcutDefaults setObject:[NSData dataWithBytes:&kc length:sizeof(KeyCombo)] forKey:@"CheckCallKey"];	
+	kc.code = 15; kc.flags = 0; [shortcutDefaults setObject:[NSData dataWithBytes:&kc length:sizeof(KeyCombo)] forKey:@"CheckCallAnyKey"];	
+	kc.code = 17; kc.flags = 0; [shortcutDefaults setObject:[NSData dataWithBytes:&kc length:sizeof(KeyCombo)] forKey:@"BetRaiseKey"];	
+	kc.code = 16; kc.flags = 0; [shortcutDefaults setObject:[NSData dataWithBytes:&kc length:sizeof(KeyCombo)] forKey:@"BetRaiseAnyKey"];	
+	kc.code = 35; kc.flags = 0; [shortcutDefaults setObject:[NSData dataWithBytes:&kc length:sizeof(KeyCombo)] forKey:@"SitOutKey"];		
+	kc.code = 33; kc.flags = 0; [shortcutDefaults setObject:[NSData dataWithBytes:&kc length:sizeof(KeyCombo)] forKey:@"AutoPostKey"];	
+	kc.code = 30; kc.flags = 0; [shortcutDefaults setObject:[NSData dataWithBytes:&kc length:sizeof(KeyCombo)] forKey:@"SitOutAllTablesKey"];	
+	kc.code = 126; kc.flags = 10486016; [shortcutDefaults setObject:[NSData dataWithBytes:&kc length:sizeof(KeyCombo)] forKey:@"IncrementKey"];	
+	kc.code = 125; kc.flags = 10486016; [shortcutDefaults setObject:[NSData dataWithBytes:&kc length:sizeof(KeyCombo)] forKey:@"DecrementKey"];	
+	kc.code = 37; kc.flags = 0; [shortcutDefaults setObject:[NSData dataWithBytes:&kc length:sizeof(KeyCombo)] forKey:@"leaveTable"];	
+	kc.code = 37; kc.flags = 1179914; [shortcutDefaults setObject:[NSData dataWithBytes:&kc length:sizeof(KeyCombo)] forKey:@"leaveAllTables"];	
+	kc.code = 0; kc.flags = 1179914; [shortcutDefaults setObject:[NSData dataWithBytes:&kc length:sizeof(KeyCombo)] forKey:@"AllInKey"];		
+	kc.code = 35; kc.flags = 1573160; [shortcutDefaults setObject:[NSData dataWithBytes:&kc length:sizeof(KeyCombo)] forKey:@"ToggleAllKey"];	
+	kc.code = 40; kc.flags = 1048840; [shortcutDefaults setObject:[NSData dataWithBytes:&kc length:sizeof(KeyCombo)] forKey:@"DebugKey"];		
+
+	kc.code = 19; kc.flags = 1048840; [shortcutDefaults setObject:[NSData dataWithBytes:&kc length:sizeof(KeyCombo)] forKey:@"PotBetOneKey"];		
+	kc.code = 20; kc.flags = 1048840; [shortcutDefaults setObject:[NSData dataWithBytes:&kc length:sizeof(KeyCombo)] forKey:@"PotBetTwoKey"];	
+	kc.code = 21; kc.flags = 1048840; [shortcutDefaults setObject:[NSData dataWithBytes:&kc length:sizeof(KeyCombo)] forKey:@"PotBetThreeKey"];		
+	kc.code = 23; kc.flags = 1048840; [shortcutDefaults setObject:[NSData dataWithBytes:&kc length:sizeof(KeyCombo)] forKey:@"PotBetFourKey"];	
+	
+	[shortcutDefaults setObject:[NSNumber numberWithFloat:25.0] forKey:@"potBetOneKey"];
+	[shortcutDefaults setObject:[NSNumber numberWithFloat:50.0] forKey:@"potBetTwoKey"];
+	[shortcutDefaults setObject:[NSNumber numberWithFloat:75.0] forKey:@"potBetThreeKey"];
+	[shortcutDefaults setObject:[NSNumber numberWithFloat:100.0] forKey:@"potBetFourKey"];	
+	
+    [defaults registerDefaults:shortcutDefaults];
+}
+
+
 -(void)awakeFromNib
 {
 	themes = [NSArray arrayWithObjects:@"Hyper-Simple",@"Slick",@"Black",nil];
