@@ -60,6 +60,7 @@
 -(void)setRoundingType:(int)type;
 -(void)autoBetRounding:(BOOL)aBool;
 -(void)autoBetAllIn:(BOOL)aBool;
+-(BOOL)keyComboAlreadyRegistered:(KeyCombo)kc; 
 -(void)registerHotKeyForControl:(SRRecorderControl *)control withTag:(int)tag;
 -(void)buttonPress:(NSString *)prefix withButton:(NSString *)size;
 -(void)buttonPressAllTables:(int)tag;

@@ -118,7 +118,8 @@ HKWindowManager *wm;
 @synthesize toggled;
 
 - (void)alertDidEnd:(NSAlert *)alert returnCode:(int)returnCode contextInfo:(void *)contextInfo {
-	[NSApp terminate:self];
+	
+	return;
 }
 
 
@@ -244,6 +245,17 @@ HKWindowManager *wm;
 
 #pragma mark Hot Key Registration
 
+-(BOOL)keyComboAlreadyRegistered:(KeyCombo)kc 
+{
+	NSLog(@"Checking to see if key code is registered.");
+	for (id key in fieldMap) {
+		KeyCombo temp = [[key pointerValue] keyCombo];
+		if (temp.code == kc.code && temp.flags == kc.flags) 
+			return YES;
+	}
+	return NO;
+}
+
 -(void)registerHotKeyForControl:(SRRecorderControl *)control withTag:(int)tag
 {
 	NSLog(@"In registering function for SRRC. Tag: %d  Combo: %@",tag,[control keyComboString]);
@@ -253,8 +265,28 @@ HKWindowManager *wm;
 		NSLog(@"Yes, we found it.  Unregistering.");		
 	} 
 
+	
 	if ([control keyCombo].code != -1) {
-		[fieldMap setObject:[NSArray arrayWithObjects:[NSValue valueWithPointer:NULL],[NSNumber numberWithInt:tag],nil] forKey:[NSValue valueWithPointer:control]];
+		if ([self keyComboAlreadyRegistered:[control keyCombo]] == NO) {
+			[fieldMap setObject:[NSArray arrayWithObjects:[NSValue valueWithPointer:NULL],[NSNumber numberWithInt:tag],nil] forKey:[NSValue valueWithPointer:control]];			
+		} else {
+			NSLog(@"Key combo is a duplicate.");
+			// Warn the user.
+			NSAlert *alert = [NSAlert alertWithMessageText:[NSString stringWithFormat:@"Shortcut keys must be unique, and the key combination %@ is already being used.",[control keyComboString]]
+							defaultButton:@"OK" 
+							alternateButton:nil 
+							otherButton:nil
+				informativeTextWithFormat:@"You will need to select a new key combination."];
+
+			[alert beginSheetModalForWindow:[control window]
+							  modalDelegate:self
+							 didEndSelector:@selector(alertDidEnd:returnCode:contextInfo:)
+								contextInfo:NULL];
+
+			KeyCombo temp; temp.code = -1; temp.flags = 0;
+			[control setKeyCombo:temp];
+						
+			}
 	} else {
 		NSLog(@"Didn't register null key.");
 	}
