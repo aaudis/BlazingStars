@@ -101,9 +101,9 @@ extern NSString *appName;
 		NSAlert *alert = [[[NSAlert alloc] init] autorelease];
 		[alert addButtonWithTitle:@"OK"];
 		[alert addButtonWithTitle:@"Open Prefs..."];
-		[alert addButtonWithTitle:@"Help!"];
+		[alert addButtonWithTitle:@"Help"];
 		[alert setMessageText:@"Welcome to BlazingStars!"];
-		[alert setInformativeText:@"For BlazingStars to work properly, you must set the Theme in the Preferences to the correct theme you are using in the PokerStars client.  Press \"Open Prefs...\" there now, or press \"Help!\" to view the BlazingStars help files."];
+		[alert setInformativeText:@"Press \"Open Prefs...\" to configure, or press \"Help!\" to view the BlazingStars help files."];
 		[NSApp activateIgnoringOtherApps:YES];
 		int retVal = [alert runModal];
 		

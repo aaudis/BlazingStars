@@ -14,8 +14,6 @@
 @implementation PrefsWindowController
 @synthesize appController;
 @synthesize themeController;
-@synthesize themes;
-@synthesize selectedTheme;
 @synthesize radiobuttonMatrix;
 @synthesize stepper;
 @synthesize scrollWheelCheckBox;
@@ -65,12 +63,8 @@
 
 -(void)awakeFromNib
 {
-	themes = [NSArray arrayWithObjects:@"Hyper-Simple",@"Slick",@"Black",nil];
-	NSInteger defaultIndex = [[NSUserDefaults standardUserDefaults] integerForKey:@"themeKey"];
-	selectedTheme = [themes objectAtIndex:defaultIndex];
-	NSLog(@"defaultIndex: %d selectedTheme: %@",defaultIndex,selectedTheme);
-	[themeController setTheme:selectedTheme];
-
+    [self detectTheme];
+    
 	// Make the textfield take the initial value.
 	[changeAmountField setFloatValue:[stepper floatValue]];
 	
@@ -135,13 +129,37 @@
 	
 }
 
--(IBAction)setThemeFromMenu:(id)sender
-{
-	NSLog(@"Item: %@",[[sender selectedItem] title]);
-	[self setSelectedTheme:[[sender selectedItem] title]];
-	[themeController setTheme:selectedTheme];
+-(IBAction)redetectTheme:(id)sender {
+    [self detectTheme];
 }
 
+-(void)detectTheme {
+    NSLog(@"Detecting theme");
+    PokerStarsTheme *currentTheme = [PokerStarsInfo determineTheme];
+    NSLog(@"Detected theme %@", currentTheme);
+    while (![currentTheme supported]) {
+        NSAlert *alert = [[[NSAlert alloc] init] autorelease];
+		[alert addButtonWithTitle:@"Help"];
+		[alert addButtonWithTitle:@"Redetect Theme"];
+		[alert addButtonWithTitle:@"Quit"];
+		[alert setMessageText:[@"BlazingStars does not support your PokerStars table theme: " stringByAppendingString:[currentTheme name]]];
+		[alert setInformativeText:@"Supported themes are Classic, Slick, and Hyper-Simple."];
+        NSInteger result = [alert runModal];
+		if (result == NSAlertThirdButtonReturn) {
+            exit(0);
+            
+		} else if (result == NSAlertFirstButtonReturn) {
+            [[NSApplication sharedApplication] showHelp:self];
+            
+        } else {
+            currentTheme = [PokerStarsInfo determineTheme];
+            NSLog(@"Detected theme %@", currentTheme);
+        }
+    }
+    [themeController setPsTheme:currentTheme];
+    [currentThemeLabel setStringValue:[currentTheme name]];
+}
+     
 -(IBAction)setPotBetAmount:(id)sender
 {
 	NSLog(@"Changing pet bot amount to %f: ",[sender floatValue]);

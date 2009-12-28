@@ -49,6 +49,7 @@
 	IBOutlet NSTextField *roundingTextField;
 	IBOutlet NSStepper *roundingStepper;
 	IBOutlet NSMatrix *roundingMatrix;	
+    IBOutlet NSTextField *currentThemeLabel;
 	
 	
 	AppController * appController;
@@ -82,18 +83,13 @@
 	IBOutlet SRRecorderControl *toggleAllHotkeys;
 	IBOutlet SRRecorderControl *debugHK;
 
-	NSArray *themes;
-	NSString *selectedTheme;
 }
 @property AppController * appController;
 @property HKThemeController *themeController;
-@property (copy) NSArray *themes;
-@property (copy) NSString *selectedTheme;
 @property IBOutlet NSMatrix *radiobuttonMatrix;
 @property IBOutlet NSStepper *stepper;
 @property IBOutlet NSButton *scrollWheelCheckBox;
 
--(IBAction)setThemeFromMenu:(id)sender;
 -(IBAction)setPotBetAmount:(id)sender;
 -(IBAction)turnOnRounding:(id)sender;
 -(IBAction)voiceCommandsChangedState:(id)sender;
@@ -101,4 +97,5 @@
 -(IBAction)setRoundingType:(id)sender;
 -(IBAction)autoBetRounding:(id)sender;
 -(IBAction)autoBetAllIn:(id)sender;
+-(void)detectTheme;
 @end

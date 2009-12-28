@@ -74,6 +74,8 @@
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+		AA286D1B10E92C3C00D8DBED /* PokerStarsInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = AA286D1810E92C3C00D8DBED /* PokerStarsInfo.m */; };
+		AA286D1C10E92C3C00D8DBED /* PokerStarsTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = AA286D1A10E92C3C00D8DBED /* PokerStarsTheme.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -178,6 +180,10 @@
 		32CA4F630368D1EE00C91783 /* PokerHK_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PokerHK_Prefix.pch; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* BlazingStars.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BlazingStars.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA286D1710E92C3C00D8DBED /* PokerStarsInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PokerStarsInfo.h; sourceTree = "<group>"; };
+		AA286D1810E92C3C00D8DBED /* PokerStarsInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PokerStarsInfo.m; sourceTree = "<group>"; };
+		AA286D1910E92C3C00D8DBED /* PokerStarsTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PokerStarsTheme.h; sourceTree = "<group>"; };
+		AA286D1A10E92C3C00D8DBED /* PokerStarsTheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PokerStarsTheme.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -198,6 +204,10 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				AA286D1710E92C3C00D8DBED /* PokerStarsInfo.h */,
+				AA286D1810E92C3C00D8DBED /* PokerStarsInfo.m */,
+				AA286D1910E92C3C00D8DBED /* PokerStarsTheme.h */,
+				AA286D1A10E92C3C00D8DBED /* PokerStarsTheme.m */,
 				0EE7BDEF0FE7759A00F1429A /* PotGrab */,
 				0E2A1CBF0FD07D8700471032 /* Prefs */,
 				0EA4FC000FE174CC00CEE1BE /* ShortcutRecorder */,
@@ -546,6 +556,8 @@
 				0EE7BE100FE775BA00F1429A /* OpenGLScreenReader.m in Sources */,
 				0E63778610E194D500A3DF98 /* PrefsView.m in Sources */,
 				0ED0FBF710E21352000DF720 /* template.applescript in Sources */,
+				AA286D1B10E92C3C00D8DBED /* PokerStarsInfo.m in Sources */,
+				AA286D1C10E92C3C00D8DBED /* PokerStarsTheme.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

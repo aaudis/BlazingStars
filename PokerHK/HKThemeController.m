@@ -24,11 +24,6 @@
 -(void)awakeFromNib
 {
 	[[PrefsWindowController sharedPrefsWindowController] setThemeController:self];
-	NSArray *themes = [NSArray arrayWithObjects:@"Hyper-Simple",@"Slick",@"Black",nil];
-	NSInteger defaultIndex = [[NSUserDefaults standardUserDefaults] integerForKey:@"themeKey"];
-	NSString *selectedTheme = [themes objectAtIndex:defaultIndex];
-	NSLog(@"Getting the theme in themeController: %@",selectedTheme);
-	[self setTheme:selectedTheme];	
 }
 
 -(void)setTheme:(NSString *)theTheme
@@ -37,21 +32,18 @@
 	theme = [theTheme copy];
 	themeDict = [self themeDictionary:theme];
 	NSLog(@"Theme dict is: %@", themeDict);
-	
-	// Hyper-simple theme support is still a little buggy, so we'll warn them once.
-	if ([theme isEqual:@"Hyper-Simple"] && [[NSUserDefaults standardUserDefaults] boolForKey:@"hsWarningKey"]) {
-		NSAlert *alert = [[[NSAlert alloc] init] autorelease];
-		[alert addButtonWithTitle:@"OK"];
-		[alert addButtonWithTitle:@"Don't warn again"];
-		[alert setMessageText:@"Warning - support for Hyper-Simple pot-betting is currently buggy!"];
-		[alert setInformativeText:@"Use of pot betting for the Hyper-Simple theme is not currently recommended.  Use at your own risk, especially if you have selected the automatic bet option."];
-		if ([alert runModal] == NSAlertSecondButtonReturn) {
-			NSLog(@"Stifling warning!");
-			[[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"hsWarningKey"];
-		};
-		
-		
-	}
+}
+
+-(PokerStarsTheme *)psTheme {
+    return psTheme;
+}
+
+-(void)setPsTheme:(PokerStarsTheme *)thePsTheme
+{
+	NSLog(@"Setting theme: %@",thePsTheme);
+	psTheme = thePsTheme;
+    NSString *selectedThemeName = [psTheme name];
+	[self setTheme:selectedThemeName];
 }
 
 -(id)param:(NSString *)key
