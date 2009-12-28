@@ -15,14 +15,12 @@
 
 @interface HKThemeController : NSObject {
     PokerStarsTheme *psTheme;
-	NSString *theme;
 	NSDictionary *themeDict;
 }
-@property (copy) NSString *theme;
-
 -(NSDictionary *)themeDictionary:(NSString *)themeName;
 -(id)param:(NSString *)key;
 -(void)setPsTheme:(PokerStarsTheme *)thePsTheme;
 -(PokerStarsTheme *)psTheme;
+
 
 @end

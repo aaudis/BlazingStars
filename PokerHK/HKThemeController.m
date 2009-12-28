@@ -12,26 +12,18 @@
 
 @implementation HKThemeController
 
-@synthesize theme;
-
 -(NSDictionary *)themeDictionary:(NSString *)themeName
 {
+    NSLog(@"Loading themeDictionary for %@", themeName);
 	NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] 
 													pathForResource:themeName ofType: @"plist"]];
+    NSLog(@"dict = %@", dict);
 	return dict;
 }
 
 -(void)awakeFromNib
 {
 	[[PrefsWindowController sharedPrefsWindowController] setThemeController:self];
-}
-
--(void)setTheme:(NSString *)theTheme
-{
-	NSLog(@"Setting theme: %@",theTheme);
-	theme = [theTheme copy];
-	themeDict = [self themeDictionary:theme];
-	NSLog(@"Theme dict is: %@", themeDict);
 }
 
 -(PokerStarsTheme *)psTheme {
@@ -42,8 +34,9 @@
 {
 	NSLog(@"Setting theme: %@",thePsTheme);
 	psTheme = thePsTheme;
-    NSString *selectedThemeName = [psTheme name];
-	[self setTheme:selectedThemeName];
+	themeDict = [self themeDictionary:[psTheme name]];
+	NSLog(@"Theme dict is: %@", themeDict);
+    
 }
 
 -(id)param:(NSString *)key

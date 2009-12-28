@@ -37,10 +37,10 @@
         return [[PokerStarsTheme alloc] initWithName:@"Slick" supported:YES];
     }
     if ([s isEqualToString:@"default"]) {
-        return [[PokerStarsTheme alloc] initWithName:@"Classic" supported:YES];
+        return [[PokerStarsTheme alloc] initWithName:@"Classic" supported:NO];
     }
     if ([s isEqualToString:@"black"]) {
-        return [[PokerStarsTheme alloc] initWithName:@"Black" supported:NO];
+        return [[PokerStarsTheme alloc] initWithName:@"Black" supported:YES];
     }
     if ([s isEqualToString:@"simple"]) {
         return [[PokerStarsTheme alloc] initWithName:@"No Images" supported:NO];
@@ -55,7 +55,7 @@
         return [[PokerStarsTheme alloc] initWithName:@"Stars" supported:NO];
     }
     if ([s isEqualToString:@"ordinary"]) {
-        return [[PokerStarsTheme alloc] initWithName:@"Hyper-Simple" supported:NO];
+        return [[PokerStarsTheme alloc] initWithName:@"Hyper-Simple" supported:YES];
     }
     if ([s isEqualToString:@"saloon"]) {
         return [[PokerStarsTheme alloc] initWithName:@"Saloon" supported:NO];
