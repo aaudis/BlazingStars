@@ -10,6 +10,8 @@
 
 @implementation PokerStarsTheme
 
+@synthesize themeDict;
+
 -(id)initWithName: (NSString*) themeName supported:(BOOL)themeSupported {
     if (![super init]) {
         return nil;
@@ -17,6 +19,14 @@
     
     name = themeName;
     supported = themeSupported;
+	
+	if (themeSupported) {
+		NSLog(@"Loading themeDictionary for %@", themeName);
+		NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] 
+																		 pathForResource:themeName ofType: @"plist"]];
+		NSLog(@"dict = %@", dict);
+		self.themeDict = dict;
+	}
     return self;
 }
 

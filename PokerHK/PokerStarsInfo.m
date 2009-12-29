@@ -29,7 +29,7 @@
     }
     
     NSString *s = [preference substringToIndex:range.location];
-    
+	
     if ([s hasPrefix:@"renaissance"]) {
         return [[PokerStarsTheme alloc] initWithName:@"Renaissance" supported:NO];
     }

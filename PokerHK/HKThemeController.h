@@ -17,7 +17,6 @@
     PokerStarsTheme *psTheme;
 	NSDictionary *themeDict;
 }
--(NSDictionary *)themeDictionary:(NSString *)themeName;
 -(id)param:(NSString *)key;
 -(void)setPsTheme:(PokerStarsTheme *)thePsTheme;
 -(PokerStarsTheme *)psTheme;

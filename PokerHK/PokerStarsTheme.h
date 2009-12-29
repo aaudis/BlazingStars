@@ -10,8 +10,12 @@
 
 @interface PokerStarsTheme : NSObject {
     BOOL supported;
-    NSString *name; 
+    NSString *name;
+	NSDictionary *themeDict;
 }
+
+@property (copy) NSDictionary *themeDict;
+
 -(id)initWithName: (NSString*) themeName supported:(BOOL)themeSupported;
 -(BOOL)supported;
 -(NSString *)name;

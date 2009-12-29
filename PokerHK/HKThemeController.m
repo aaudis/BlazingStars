@@ -12,15 +12,6 @@
 
 @implementation HKThemeController
 
--(NSDictionary *)themeDictionary:(NSString *)themeName
-{
-    NSLog(@"Loading themeDictionary for %@", themeName);
-	NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] 
-													pathForResource:themeName ofType: @"plist"]];
-    NSLog(@"dict = %@", dict);
-	return dict;
-}
-
 -(void)awakeFromNib
 {
 	[[PrefsWindowController sharedPrefsWindowController] setThemeController:self];
@@ -34,14 +25,11 @@
 {
 	NSLog(@"Setting theme: %@",thePsTheme);
 	psTheme = thePsTheme;
-	themeDict = [self themeDictionary:[psTheme name]];
-	NSLog(@"Theme dict is: %@", themeDict);
-    
 }
 
 -(id)param:(NSString *)key
 {
-	return [themeDict objectForKey:key];
+	return [[psTheme themeDict] objectForKey:key];
 }
 
 @end
