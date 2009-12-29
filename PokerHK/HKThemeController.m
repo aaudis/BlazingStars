@@ -12,9 +12,15 @@
 
 @implementation HKThemeController
 
--(void)awakeFromNib
-{
+-(id)init {
+    if (![super init]) {
+        return nil;
+    };
 	[[PrefsWindowController sharedPrefsWindowController] setThemeController:self];
+    return self;
+}
+
+-(void)awakeFromNib {
 }
 
 -(PokerStarsTheme *)psTheme {
