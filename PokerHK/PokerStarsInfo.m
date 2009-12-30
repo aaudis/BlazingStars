@@ -6,10 +6,13 @@
 //
 
 #import "PokerStarsInfo.h"
+#import "HKDefines.h"
+
+extern NSString *appName;
 
 // declare private methods
 @interface PokerStarsInfo() 
-+(BOOL)applicationInstalled:(NSString *)appName;
++(BOOL)applicationInstalled:(NSString *)applicationName;
 +(NSString *)pokerStarsPreferencesFilename;
 +(NSString *)pokerStarsPreference: (NSString *)preference inSection:(NSString *)section;
 @end
@@ -73,8 +76,8 @@
 /* 
  Returns YES if an application with the given name exists in the Applications folder
  */
-+(BOOL)applicationInstalled: (NSString *)appName {
-    NSString *path = [NSString stringWithFormat:@"/Applications/%@.app", appName];
++(BOOL)applicationInstalled: (NSString *)applicationName {
+    NSString *path = [NSString stringWithFormat:@"/Applications/%@.app", applicationName];
     BOOL directory;
     NSFileManager *fileManager = [NSFileManager defaultManager];
     return [fileManager fileExistsAtPath:path isDirectory:&directory];
@@ -84,9 +87,9 @@
  Returns the name of the poker stars preferences file
  */
 +(NSString *) pokerStarsPreferencesFilename {
-    if ([self applicationInstalled:@"PokerStarsIT"]) {
-        return [@"~/Library/Preferences/com.pokerstars.it.user.ini" stringByExpandingTildeInPath];
-    }
+	if ([appName isEqualToString:@"PokerStarsIT"]) {
+		return [@"~/Library/Preferences/com.pokerstars.it.user.ini" stringByExpandingTildeInPath];
+	}
     return [@"~/Library/Preferences/com.pokerstars.user.ini" stringByExpandingTildeInPath];
 }
 

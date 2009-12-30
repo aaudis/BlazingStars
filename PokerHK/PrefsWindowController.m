@@ -143,7 +143,7 @@
 		[alert addButtonWithTitle:@"Redetect Theme"];
 		[alert addButtonWithTitle:@"Quit"];
 		[alert setMessageText:[@"BlazingStars does not support your PokerStars table theme: " stringByAppendingString:[currentTheme name]]];
-		[alert setInformativeText:@"Supported themes are Classic, Slick, and Hyper-Simple."];
+		[alert setInformativeText:@"Supported themes are Black, Slick, and Hyper-Simple."];
         NSInteger result = [alert runModal];
 		if (result == NSAlertThirdButtonReturn) {
             exit(0);
