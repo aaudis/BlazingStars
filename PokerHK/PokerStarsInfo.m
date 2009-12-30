@@ -42,7 +42,8 @@ extern NSString *appName;
     if ([s isEqualToString:@"default"]) {
         return [[PokerStarsTheme alloc] initWithName:@"Classic" supported:NO];
     }
-    if ([s isEqualToString:@"black"]) {
+	// Work around for a bug in the PokerStars IT preferences.  
+    if ([s isEqualToString:@"black"] || [s isEqualToString:@"xblack"]) {
         return [[PokerStarsTheme alloc] initWithName:@"Black" supported:YES];
     }
     if ([s isEqualToString:@"simple"]) {
