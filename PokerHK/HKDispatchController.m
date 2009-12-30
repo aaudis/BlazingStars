@@ -520,8 +520,8 @@ HKWindowManager *wm;
 	CGEventSetFlags(keyEventDown,0);			
 	
 	for (int j = 0; j < 10; j++) {
-		CGEventPost(kCGSessionEventTap, keyEventDown);		
-		CGEventPost(kCGSessionEventTap, keyEventUp);
+		CGEventPost(kCGAnnotatedSessionEventTap, keyEventDown);		
+		CGEventPost(kCGAnnotatedSessionEventTap, keyEventUp);
 	}
 	
 
@@ -531,8 +531,8 @@ HKWindowManager *wm;
 	CGEventSetFlags(keyEventDown,0);			
 	
 	for (int j = 0; j < 10; j++) {
-		CGEventPost(kCGSessionEventTap, keyEventDown);		
-		CGEventPost(kCGSessionEventTap, keyEventUp);
+		CGEventPost(kCGAnnotatedSessionEventTap, keyEventDown);		
+		CGEventPost(kCGAnnotatedSessionEventTap, keyEventUp);
 	}
 	
 	UniChar buffer;
@@ -544,9 +544,9 @@ HKWindowManager *wm;
 		[valueToSet getCharacters:&buffer range:NSMakeRange(i, 1)];
 		NSLog(@"Character: %c",buffer);
 		CGEventKeyboardSetUnicodeString(keyEventDown, 1, &buffer);
-		CGEventPost(kCGSessionEventTap, keyEventDown);
+		CGEventPost(kCGAnnotatedSessionEventTap, keyEventDown);
 		CGEventKeyboardSetUnicodeString(keyEventUp, 1, &buffer);
-		CGEventPost(kCGSessionEventTap, keyEventUp);
+		CGEventPost(kCGAnnotatedSessionEventTap, keyEventUp);
 	}
 }
 
