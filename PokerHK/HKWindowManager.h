@@ -20,6 +20,7 @@ enum {
 	HKGeneralTable = 5,
 	HKTournamentRegistration = 6,
 	HKTablePopup = 7,
+	HKPLOTable = 8,
 };
 
 

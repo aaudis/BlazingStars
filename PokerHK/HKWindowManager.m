@@ -192,6 +192,8 @@ HKWindowManager *wm = NULL;
 			return HKTournamentPopup;
 		} else if ([title rangeOfString:@"Hold'em"].location != NSNotFound) {
 			return HKHoldemCashTable;
+		} else if ([title rangeOfString:@"Omaha"].location != NSNotFound) {
+			return HKPLOTable;
 		} else {
 			return HKNotTable;
 		}		
@@ -239,7 +241,7 @@ HKWindowManager *wm = NULL;
 -(BOOL)pokerWindowIsActive
 {
 	int retVal = [self windowIsTable:[self getMainWindow]];
-	if (retVal == HKTournamentTable || retVal == HKHoldemCashTable) {
+	if (retVal == HKTournamentTable || retVal == HKHoldemCashTable || retVal == HKPLOTable) {
 		return YES;
 	} else {
 		return NO;

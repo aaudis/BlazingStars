@@ -211,7 +211,6 @@
 				0EE7BDEF0FE7759A00F1429A /* PotGrab */,
 				0E2A1CBF0FD07D8700471032 /* Prefs */,
 				0EA4FC000FE174CC00CEE1BE /* ShortcutRecorder */,
-				0E2A1A9F0FCFB91200471032 /* AppController.h */,
 				0E2A1AA00FCFB91200471032 /* AppController.m */,
 				0E2A1AA40FCFB9AD00471032 /* Menulet.h */,
 				0E2A1AA50FCFB9AD00471032 /* Menulet.m */,
@@ -232,7 +231,6 @@
 			isa = PBXGroup;
 			children = (
 				0E2A1BD70FD0614B00471032 /* DBPrefsWindowController.h */,
-				0E2A1BD80FD0614B00471032 /* DBPrefsWindowController.m */,
 				0E2A1BDA0FD061E300471032 /* PrefsWindowController.h */,
 				0E2A1BDB0FD061E300471032 /* PrefsWindowController.m */,
 				0E63778410E194D500A3DF98 /* PrefsView.h */,
@@ -356,6 +354,8 @@
 		29B97314FDCFA39411CA2CEA /* PokerHK */ = {
 			isa = PBXGroup;
 			children = (
+				0E2A1BD80FD0614B00471032 /* DBPrefsWindowController.m */,
+				0E2A1A9F0FCFB91200471032 /* AppController.h */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
