@@ -441,16 +441,51 @@ HKWindowManager *wm;
 	NSLog(@"x=%f,y=%f",clickPoint.x,clickPoint.y);
 	AXUIElementRef betBoxRef;
 	
-	AXUIElementCopyElementAtPosition(appRef,
+	AXError err = AXUIElementCopyElementAtPosition(appRef,
 									 clickPoint.x,
 									 clickPoint.y,
 									 &betBoxRef);
 	
+	switch(err) {
+		case kAXErrorNoValue:
+			NSLog(@"CopyElementAtPosition reports that the bet box is not where we think it is! (kAXErrorNoValue)");
+			return -1;
+		case kAXErrorIllegalArgument:
+			NSLog(@"CopyElementAtPosition reports that one of the arguments is illegal! (kAXErrorIllegalArgument)");
+			return -1;
+		case kAXErrorInvalidUIElement:
+			NSLog(@"CopyElementAtPosition reports that the AXUIElementRef (appRef) is invalid! (kAXErrorInvalidUIElement)");
+			return -1;
+		case kAXErrorCannotComplete:
+			NSLog(@"CopyElementAtPosition reports that the messaging API has failed! (kAXErrorCannotComplete)");
+			return -1;
+		case kAXErrorNotImplemented:
+			NSLog(@"CopyElementAtPosition reports that the process does not fully support the accessibility API! (kAXErrorNotImplmented)");
+			return -1;
+		default: NSLog(@"CopyElementAtPosition succeeded!"); break;
+	}
+	
 	NSString *value;
-	AXError err = AXUIElementCopyAttributeValue(betBoxRef, kAXValueAttribute,(CFTypeRef *)&value);
+	err = AXUIElementCopyAttributeValue(betBoxRef, kAXValueAttribute,(CFTypeRef *)&value);
 	
 	if (!value || err != kAXErrorSuccess) {
 		NSLog(@"Could not retrieve value from betBoxRef!");
+		
+		switch(err) {
+			case kAXErrorAttributeUnsupported:
+				NSLog(@"CopyAttributeValue reports that the specified AXUIElementref (betBoxRef) does not support the specified attribute (ValueAttribute)! (kAXErrorAttributeUnsupported)");
+			case kAXErrorNoValue:
+				NSLog(@"CopyAttributeValue reports that the bet box is not where we think it is! (kAXErrorNoValue)");
+			case kAXErrorIllegalArgument:
+				NSLog(@"CopyAttributeValue reports that one of the arguments is illegal! (kAXErrorIllegalArgument)");
+			case kAXErrorInvalidUIElement:
+				NSLog(@"CopyAttributeValue reports that the AXUIElementRef (betBoxRef) is invalid! (kAXErrorInvalidUIElement)");
+			case kAXErrorCannotComplete:
+				NSLog(@"CopyAttributeValue reports that the messaging API has failed! (kAXErrorCannotComplete)");
+			case kAXErrorNotImplemented:
+				NSLog(@"CopyAttributeValue reports that the process does not fully support the accessibility API! (kAXErrorNotImplmented)");
+			default: NSLog(@"CopyAttributeValue succeeded!? How did we get here?"); break;
+		}
 		return -1;
 	}
 	NSLog(@"Value:  %@",value);
