@@ -42,6 +42,7 @@
 		0E5DD4640FDA4595000670D2 /* Open:Close.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E5DD4630FDA4595000670D2 /* Open:Close.png */; };
 		0E63778610E194D500A3DF98 /* PrefsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E63778510E194D500A3DF98 /* PrefsView.m */; };
 		0E85D1C10FDE43EE00E8E225 /* HKWindowManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E85D1C00FDE43EE00E8E225 /* HKWindowManager.m */; };
+		0EA4581010F31EF600CE056C /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EA4580F10F31EF600CE056C /* Quartz.framework */; };
 		0EA4FC0E0FE174CC00CEE1BE /* CTGradient.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EA4FC020FE174CC00CEE1BE /* CTGradient.m */; };
 		0EA4FC0F0FE174CC00CEE1BE /* SRCommon.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EA4FC050FE174CC00CEE1BE /* SRCommon.m */; };
 		0EA4FC100FE174CC00CEE1BE /* SRKeyCodeTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EA4FC070FE174CC00CEE1BE /* SRKeyCodeTransformer.m */; };
@@ -64,7 +65,6 @@
 		0EE7BD980FE7718500F1429A /* HKScreenScraper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EE7BD970FE7718500F1429A /* HKScreenScraper.m */; };
 		0EE7BDCE0FE7736500F1429A /* tesseract in Resources */ = {isa = PBXBuildFile; fileRef = 0EE7BDC40FE7736500F1429A /* tesseract */; };
 		0EE7BDEE0FE7748F00F1429A /* tessdata in Resources */ = {isa = PBXBuildFile; fileRef = 0EE7BDE40FE7748F00F1429A /* tessdata */; };
-		0EE7BE0E0FE775BA00F1429A /* NSImage+MGCropExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EE7BE090FE775BA00F1429A /* NSImage+MGCropExtensions.m */; };
 		0EE7BE0F0FE775BA00F1429A /* TFTesseractWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EE7BE0B0FE775BA00F1429A /* TFTesseractWrapper.m */; };
 		0EE7BE100FE775BA00F1429A /* OpenGLScreenReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EE7BE0D0FE775BA00F1429A /* OpenGLScreenReader.m */; };
 		0EE7BE1D0FE7765000F1429A /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EE7BE1C0FE7765000F1429A /* OpenGL.framework */; };
@@ -131,6 +131,7 @@
 		0E63778510E194D500A3DF98 /* PrefsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrefsView.m; sourceTree = "<group>"; };
 		0E85D1BF0FDE43EE00E8E225 /* HKWindowManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKWindowManager.h; sourceTree = "<group>"; };
 		0E85D1C00FDE43EE00E8E225 /* HKWindowManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKWindowManager.m; sourceTree = "<group>"; };
+		0EA4580F10F31EF600CE056C /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
 		0EA4FC010FE174CC00CEE1BE /* CTGradient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTGradient.h; sourceTree = "<group>"; };
 		0EA4FC020FE174CC00CEE1BE /* CTGradient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTGradient.m; sourceTree = "<group>"; };
 		0EA4FC030FE174CC00CEE1BE /* ShortcutRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShortcutRecorder.h; sourceTree = "<group>"; };
@@ -161,8 +162,6 @@
 		0EE7BD970FE7718500F1429A /* HKScreenScraper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKScreenScraper.m; sourceTree = "<group>"; };
 		0EE7BDC40FE7736500F1429A /* tesseract */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = tesseract; sourceTree = "<group>"; };
 		0EE7BDE40FE7748F00F1429A /* tessdata */ = {isa = PBXFileReference; lastKnownFileType = folder; path = tessdata; sourceTree = "<group>"; };
-		0EE7BE080FE775BA00F1429A /* NSImage+MGCropExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSImage+MGCropExtensions.h"; sourceTree = "<group>"; };
-		0EE7BE090FE775BA00F1429A /* NSImage+MGCropExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSImage+MGCropExtensions.m"; sourceTree = "<group>"; };
 		0EE7BE0A0FE775BA00F1429A /* TFTesseractWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFTesseractWrapper.h; sourceTree = "<group>"; };
 		0EE7BE0B0FE775BA00F1429A /* TFTesseractWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFTesseractWrapper.m; sourceTree = "<group>"; };
 		0EE7BE0C0FE775BA00F1429A /* OpenGLScreenReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenGLScreenReader.h; sourceTree = "<group>"; };
@@ -195,6 +194,7 @@
 				0EC67AFC0FD0AB73000A33AA /* Carbon.framework in Frameworks */,
 				0EE7BE1D0FE7765000F1429A /* OpenGL.framework in Frameworks */,
 				0EA807CE1020D5A9004F84D0 /* Sparkle.framework in Frameworks */,
+				0EA4581010F31EF600CE056C /* Quartz.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -316,8 +316,6 @@
 		0EE7BDEF0FE7759A00F1429A /* PotGrab */ = {
 			isa = PBXGroup;
 			children = (
-				0EE7BE080FE775BA00F1429A /* NSImage+MGCropExtensions.h */,
-				0EE7BE090FE775BA00F1429A /* NSImage+MGCropExtensions.m */,
 				0EE7BE0A0FE775BA00F1429A /* TFTesseractWrapper.h */,
 				0EE7BE0B0FE775BA00F1429A /* TFTesseractWrapper.m */,
 				0EE7BE0C0FE775BA00F1429A /* OpenGLScreenReader.h */,
@@ -405,6 +403,7 @@
 				0EC67AFB0FD0AB73000A33AA /* Carbon.framework */,
 				1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */,
 				1058C7A2FEA54F0111CA2CBB /* Other Frameworks */,
+				0EA4580F10F31EF600CE056C /* Quartz.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -551,7 +550,6 @@
 				0EA4FC120FE174CC00CEE1BE /* SRRecorderControl.m in Sources */,
 				0EA4FC130FE174CC00CEE1BE /* SRValidator.m in Sources */,
 				0EE7BD980FE7718500F1429A /* HKScreenScraper.m in Sources */,
-				0EE7BE0E0FE775BA00F1429A /* NSImage+MGCropExtensions.m in Sources */,
 				0EE7BE0F0FE775BA00F1429A /* TFTesseractWrapper.m in Sources */,
 				0EE7BE100FE775BA00F1429A /* OpenGLScreenReader.m in Sources */,
 				0E63778610E194D500A3DF98 /* PrefsView.m in Sources */,

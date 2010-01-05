@@ -8,7 +8,6 @@
 
 #import <Carbon/Carbon.h>
 #import "HKScreenScraper.h"
-#import "NSImage+MGCropExtensions.h"
 #import "TFTesseractWrapper.h"
 #import "OpenGLScreenReader.h"
 #import "HKDefines.h"
@@ -106,22 +105,20 @@ static NSRect FlippedScreenBounds(NSRect bounds)
 	[windowManager debugWindow:windowRect];
 #endif
 
-	NSRect cropRect = FlippedScreenBounds(windowRect);
-	NSLog(@"cropRect sx=%f sy=%f h=%f w=%f",cropRect.origin.x,cropRect.origin.y,cropRect.size.height,cropRect.size.width);
 	CGImageRef screenCap;
     OpenGLScreenReader *mOpenGLScreenReader = [[OpenGLScreenReader alloc] init];
-	
 	[mOpenGLScreenReader readFullScreenToBuffer];
 	screenCap = [mOpenGLScreenReader createImage];
 	
-	NSBitmapImageRep *bitmapRep = [[NSBitmapImageRep alloc] initWithCGImage:screenCap];
+	CGImageRef subImage = CGImageCreateWithImageInRect(screenCap, NSRectToCGRect(windowRect));
+	
+	NSBitmapImageRep *bitmapRep = [[NSBitmapImageRep alloc] initWithCGImage:subImage];
 	// Create an NSImage and add the bitmap rep to it...
 	NSImage *imageConvert = [[NSImage alloc] init];
 	[imageConvert addRepresentation:bitmapRep];
 	[bitmapRep release];
 	
-	NSImage *cropped = [imageConvert imageFromRect:cropRect];
-	NSData *tiffData = [cropped TIFFRepresentation];
+	NSData *tiffData = [imageConvert TIFFRepresentation];
 	[tiffData writeToFile:@"/tmp/testimage.tif" atomically:NO];
 	
 	NSBundle * thisBundle = [NSBundle bundleForClass:[self class]];
@@ -134,9 +131,7 @@ static NSRect FlippedScreenBounds(NSRect bounds)
 	
 	NSString *inputPath = [NSString stringWithString:@"/tmp/testimage.tif"];
 	NSString *outputfilename = [NSString stringWithString:@"/tmp/processed.tif"];
-//	NSArray *arguments = [NSArray arrayWithObjects:inputPath,@"-despeckle", @"-resample",@"600x600",outputfilename, nil];
-	NSArray *arguments = [NSArray arrayWithObjects:inputPath,@"-resample",@"600x600",@"-unsharp",@"7.4x3.0+3.0+0.0",
-						  @"-colorspace",@"Gray",@"-depth",@"8",@"+matte",outputfilename, nil];	
+	NSArray *arguments = [NSArray arrayWithObjects:inputPath,@"-resample",@"600x600",@"-depth",@"8",@"-threshold",@"30%",outputfilename, nil];	
 	
 	[task setArguments: arguments];
 	NSLog(@"Arguments: %@",[task arguments]);
