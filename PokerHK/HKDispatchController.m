@@ -187,6 +187,11 @@ HKWindowManager *wm;
 	
 	if (!appRef) {
 		NSLog(@"Could not get application ref.");
+		NSException* apiException = [NSException
+									exceptionWithName:@"PokerStarsNotFoundException"
+									reason:@"Cannot get accessibility API reference to the PokerStars application."									
+									userInfo:nil];
+		@throw apiException;
 	}
 
 	systemWideElement = AXUIElementCreateSystemWide();
