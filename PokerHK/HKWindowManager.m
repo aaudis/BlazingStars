@@ -10,6 +10,8 @@
 #import "HKDefines.h"
 
 extern NSString *appName;
+extern AXUIElementRef appRef;
+extern pid_t pokerstarsPID;
 
 static NSRect FlippedScreenBounds(NSRect bounds)
 {
@@ -49,13 +51,6 @@ HKWindowManager *wm = NULL;
 	windowDict = [[NSMutableDictionary alloc] init];
 	
 	NSWorkspace * ws = [NSWorkspace sharedWorkspace];
-	NSArray *pids = [ws launchedApplications];
-	
-	for (id app in pids) {
-		if ([[app objectForKey:@"NSApplicationName"] isEqualToString:appName]) {
-			pokerstarsPID =(pid_t) [[app objectForKey:@"NSApplicationProcessIdentifier"] intValue];
-		}
-	}
 	
 	NSLog(@"Creating observer for didTerminateApplication notification");
 	NSNotificationCenter *center = [ws notificationCenter];
@@ -66,18 +61,33 @@ HKWindowManager *wm = NULL;
 				 object:nil];
 	
 	NSLog(@"Registering windowobserver for HKWindowManager.");
-	AXObserverCreate(pokerstarsPID, axObserverCallback, &observer);
-	appref = AXUIElementCreateApplication(pokerstarsPID);
+	AXError err = AXObserverCreate(pokerstarsPID, axObserverCallback, &observer);
 	
-	AXObserverAddNotification(observer, appref, kAXWindowCreatedNotification, (void *)self);
-	AXObserverAddNotification(observer, appref, kAXWindowResizedNotification, (void *)self);	
-	AXObserverAddNotification(observer, appref, kAXApplicationActivatedNotification, (void *)self);	
-	AXObserverAddNotification(observer, appref, kAXApplicationDeactivatedNotification, (void *)self);	
+	if (err != kAXErrorSuccess) {
+		switch(err) {
+			case kAXErrorIllegalArgument:
+				NSLog(@"Illegal Argument!");
+				break;
+			case kAXErrorFailure:
+				NSLog(@"Failure!");
+				break;
+			default:
+				NSLog(@"Some other error!");
+				break;
+		}
+	}
+	
+	AXObserverAddNotification(observer, appRef, kAXWindowCreatedNotification, (void *)self);
+	AXObserverAddNotification(observer, appRef, kAXWindowResizedNotification, (void *)self);	
+	AXObserverAddNotification(observer, appRef, kAXApplicationActivatedNotification, (void *)self);	
+	AXObserverAddNotification(observer, appRef, kAXApplicationDeactivatedNotification, (void *)self);	
 	CFRunLoopAddSource ([[NSRunLoop currentRunLoop] getCFRunLoop], AXObserverGetRunLoopSource(observer), kCFRunLoopDefaultMode);
+//	CFRunLoopAddSource(CFRunLoopGetCurrent(),
+//					AXObserverGetRunLoopSource(observer), kCFRunLoopCommonModes);
 	
 	NSLog(@"Window manager getting window list for windowDict.");
 	NSArray *children;
-	AXUIElementCopyAttributeValues(appref, kAXChildrenAttribute, 0, 100, (CFArrayRef *)&children);
+	AXUIElementCopyAttributeValues(appRef, kAXChildrenAttribute, 0, 100, (CFArrayRef *)&children);
 	
 	NSString *name; 
 	NSString *role;
@@ -252,7 +262,7 @@ HKWindowManager *wm = NULL;
 {
 	AXUIElementRef mainWindow;
 	NSArray *children;
-	AXError axErr = AXUIElementCopyAttributeValues(appref, kAXChildrenAttribute,0,100, (CFArrayRef *)&children);
+	AXError axErr = AXUIElementCopyAttributeValues(appRef, kAXChildrenAttribute,0,100, (CFArrayRef *)&children);
 	if (axErr != kAXErrorSuccess) {
 		NSLog(@"Retrieving children failed. %d", axErr);
 	}
@@ -277,7 +287,7 @@ HKWindowManager *wm = NULL;
 {
 	NSMutableArray *pokerTables = [[NSMutableArray alloc] init];
 	NSArray *children;
-	AXError axErr = AXUIElementCopyAttributeValues(appref, kAXChildrenAttribute,0,100, (CFArrayRef *)&children);
+	AXError axErr = AXUIElementCopyAttributeValues(appRef, kAXChildrenAttribute,0,100, (CFArrayRef *)&children);
 	if (axErr != kAXErrorSuccess) {
 		NSLog(@"Retrieving children failed. %d", axErr);
 	}
@@ -463,7 +473,7 @@ HKWindowManager *wm = NULL;
 				NSLog(@"Now I'm trying to find the lobby for this tournament.");
 				// Now need to scan all the windows to find the lobby.  
 				NSArray *children;
-				AXUIElementCopyAttributeValues(appref, kAXChildrenAttribute,0,100, (CFArrayRef *)&children);
+				AXUIElementCopyAttributeValues(appRef, kAXChildrenAttribute,0,100, (CFArrayRef *)&children);
 				
 				NSEnumerator * enumerator = [children objectEnumerator];
 				AXUIElementRef child;  NSString *childTitle;
@@ -563,7 +573,7 @@ HKWindowManager *wm = NULL;
 		NSMutableArray *windowsToClose = [[NSMutableArray alloc] init];
 		
 		// Build list of Table popups.
-		AXUIElementCopyAttributeValues(appref,kAXChildrenAttribute,0,500,(CFArrayRef *)&children);
+		AXUIElementCopyAttributeValues(appRef,kAXChildrenAttribute,0,500,(CFArrayRef *)&children);
 		for (id child in children) {
 			if ([self windowIsTableAtOpening:(AXUIElementRef)	child] == HKTablePopup) {
 				[windowsToClose addObject:child];
@@ -633,7 +643,7 @@ HKWindowManager *wm = NULL;
 {
 	[windowDict removeAllObjects];
 	NSArray *children;
-	AXUIElementCopyAttributeValues(appref, kAXChildrenAttribute, 0, 100, (CFArrayRef *)&children);
+	AXUIElementCopyAttributeValues(appRef, kAXChildrenAttribute, 0, 100, (CFArrayRef *)&children);
 	
 	NSString *name; 
 	

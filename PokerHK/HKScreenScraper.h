@@ -15,8 +15,8 @@
 @class HKWindowManager;
 
 @interface HKScreenScraper : NSObject {
-	pid_t pokerstarsPID;
-	AXUIElementRef appRef;
+//	pid_t pokerstarsPID;
+//	AXUIElementRef appRef;
 	IBOutlet HKDispatchController *dc;
 	IBOutlet HKWindowManager *windowManager;
 	NSString *currencyName;

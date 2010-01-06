@@ -31,8 +31,8 @@
 	NSDictionary *keyMap;
 	NSDictionary *speechCommands;
 	NSMutableDictionary *potBetAmounts;
-	pid_t pokerstarsPID;
-	AXUIElementRef appRef;	
+	//pid_t pokerstarsPID;
+	//AXUIElementRef appRef;	
 	AXUIElementRef systemWideElement;
 	AXObserverRef keyObserver;	
 	IBOutlet HKThemeController *themeController;

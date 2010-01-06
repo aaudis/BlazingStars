@@ -31,9 +31,9 @@ enum {
 @class HKThemeController;
 
 @interface HKWindowManager : NSObject {
-	pid_t pokerstarsPID;
+//	pid_t pokerstarsPID;
 	AXObserverRef observer;
-	AXUIElementRef appref;
+//	AXUIElementRef appref;
 	
 	IBOutlet HKDispatchController *dispatchController;
 	IBOutlet HKThemeController *themeController;

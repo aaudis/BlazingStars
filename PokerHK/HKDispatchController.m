@@ -182,18 +182,6 @@ HKWindowManager *wm;
 		}
 	}
 	
-	// Accessibility framework stuff now.
-	appRef = AXUIElementCreateApplication(pokerstarsPID);
-	
-	if (!appRef) {
-		NSLog(@"Could not get application ref.");
-		NSException* apiException = [NSException
-									exceptionWithName:@"PokerStarsNotFoundException"
-									reason:@"Cannot get accessibility API reference to the PokerStars application."									
-									userInfo:nil];
-		@throw apiException;
-	}
-
 	systemWideElement = AXUIElementCreateSystemWide();
 
 	// Get the PrefsWindowController.
@@ -479,16 +467,22 @@ HKWindowManager *wm;
 		switch(err) {
 			case kAXErrorAttributeUnsupported:
 				NSLog(@"CopyAttributeValue reports that the specified AXUIElementref (betBoxRef) does not support the specified attribute (ValueAttribute)! (kAXErrorAttributeUnsupported)");
+				return -1;
 			case kAXErrorNoValue:
 				NSLog(@"CopyAttributeValue reports that the bet box is not where we think it is! (kAXErrorNoValue)");
+				return -1;
 			case kAXErrorIllegalArgument:
 				NSLog(@"CopyAttributeValue reports that one of the arguments is illegal! (kAXErrorIllegalArgument)");
+				return -1;
 			case kAXErrorInvalidUIElement:
 				NSLog(@"CopyAttributeValue reports that the AXUIElementRef (betBoxRef) is invalid! (kAXErrorInvalidUIElement)");
+				return -1;
 			case kAXErrorCannotComplete:
 				NSLog(@"CopyAttributeValue reports that the messaging API has failed! (kAXErrorCannotComplete)");
+				return -1;
 			case kAXErrorNotImplemented:
 				NSLog(@"CopyAttributeValue reports that the process does not fully support the accessibility API! (kAXErrorNotImplmented)");
+				return -1;
 			default: NSLog(@"CopyAttributeValue succeeded!? How did we get here?"); break;
 		}
 		return -1;

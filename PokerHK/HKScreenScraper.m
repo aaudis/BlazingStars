@@ -13,6 +13,7 @@
 #import "HKDefines.h"
 
 extern NSString *appName;
+extern AXUIElementRef appRef;
 
 static NSRect FlippedScreenBounds(NSRect bounds)
 {
@@ -27,18 +28,7 @@ static NSRect FlippedScreenBounds(NSRect bounds)
 @synthesize currencyName;
 
 -(void)awakeFromNib
-{
-	NSWorkspace * ws = [NSWorkspace sharedWorkspace];
-	NSArray *pids = [ws launchedApplications];
-	
-	for (id app in pids) {
-		if ([[app objectForKey:@"NSApplicationName"] isEqualToString: appName]) {
-			pokerstarsPID =(pid_t) [[app objectForKey:@"NSApplicationProcessIdentifier"] intValue];
-		}
-	}
-	
-	appRef = AXUIElementCreateApplication(pokerstarsPID);
-	
+{	
 	if ([appName isEqualToString:@"PokerStars"]) {
 		self.currencyName = @"$";
 	} else {

@@ -12,3 +12,5 @@
 #define TOGGLETAG 22
 
 NSString *appName;
+AXUIElementRef appRef;
+pid_t pokerstarsPID;

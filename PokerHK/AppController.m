@@ -10,6 +10,8 @@
 #import "HKDefines.h"
 
 extern NSString *appName;
+extern AXUIElementRef appRef;
+extern pid_t pokerstarsPID;
 
 //@class PrefsWindowController;
 @implementation AppController
@@ -46,9 +48,27 @@ extern NSString *appName;
 			appName = [NSString stringWithFormat:@"PokerStars"];
 			NSLog(@"appName is: %@",appName);			
 		}
+	
+		NSArray *pids = [[NSWorkspace sharedWorkspace] launchedApplications];
+		
+		for (id app in pids) {
+			if ([[app objectForKey:@"NSApplicationName"] isEqualToString: appName]) {
+				pokerstarsPID =(pid_t) [[app objectForKey:@"NSApplicationProcessIdentifier"] intValue];
+			}		
+		}
+		
+		appRef = AXUIElementCreateApplication(pokerstarsPID);
+		
+		if (!appRef) {
+			NSLog(@"Could not get application ref.");
+			NSException* apiException = [NSException
+										 exceptionWithName:@"PokerStarsNotFoundException"
+										 reason:@"Cannot get accessibility API reference to the PokerStars application."									
+										 userInfo:nil];
+			@throw apiException;
+		}
 	}
 	return self;
-	
 }
 
 -(void)awakeFromNib
