@@ -676,7 +676,7 @@ HKWindowManager *wm = NULL;
 
 -(void)windowFocusDidChange
 {
-	if ([self windowIsTable:[self getMainWindow]] && [self activated] == YES && [[NSUserDefaults standardUserDefaults] boolForKey:@"windowFrameKey"]) {
+	if ([self pokerWindowIsActive] && [self activated] == YES && [[NSUserDefaults standardUserDefaults] boolForKey:@"windowFrameKey"]) {
 		NSLog(@"Window changed to a poker window!");
 		[self drawWindowFrame];
 	} else {
