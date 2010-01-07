@@ -29,10 +29,12 @@
 -(void)hkChangedFor:(SRRecorderControl *)control withTag:(int)tag;
 -(void)voiceCommandsChangedState;
 -(void)setPotBetAmount:(float)amount forTag:(int)tag;
+-(void)setPFRAmount:(float)amount;
 -(void)setRoundingAmount:(float)amount;
 -(void)setRoundingType:(int)type;
 -(void)autoBetRounding:(BOOL)aBool;
 -(void)autoBetAllIn:(BOOL)aBool;
+-(void)autoPFR:(BOOL)aBool;
 //-(void)hkChangedIn:(GTMHotKeyTextField *)field;
 
 @end

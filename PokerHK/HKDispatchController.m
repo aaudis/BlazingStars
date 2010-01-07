@@ -206,6 +206,11 @@ HKWindowManager *wm;
 	NSLog(@"Pot bet amounts now: %@",potBetAmounts);
 }
 
+-(void)setPFRAmount:(float)amount
+{
+	pfrAmount = amount;
+}
+
 -(void)turnOnRounding:(BOOL)round
 {
 	NSLog(@"Setting rounding to: %@\n", (round ? @"YES" : @"NO"));
@@ -234,6 +239,12 @@ HKWindowManager *wm;
 {
 	NSLog(@"Setting autoBetAllIn to:%@\n",(aBool ? @"YES" : @"NO"));
 	autoBetAllIn = aBool;
+}
+
+-(void)autoPFR:(BOOL)aBool
+{
+	NSLog(@"Setting autoPFR to:%@\n",(aBool ? @"YES" : @"NO"));
+	autoPFR = aBool;
 }
 
 #pragma mark Hot Key Registration
@@ -667,6 +678,21 @@ HKWindowManager *wm;
 	}
 }
 
+-(void)pfr
+{		
+	NSArray *gameParameters = [windowManager getGameParameters];
+	float blindSize = [[gameParameters objectAtIndex:HKBigBlind] floatValue];	
+	
+	NSLog(@"Setting bet size to %f times the big blind of %f, total is %f",pfrAmount,blindSize,pfrAmount*blindSize);
+	[self setBetSize:pfrAmount*blindSize];
+	
+	if (autoPFR == YES) {
+		NSString *prefix = [[keyMap objectForKey:[NSString stringWithFormat:@"%d",3]] objectAtIndex:0];
+		NSString *size = [[keyMap objectForKey:[NSString stringWithFormat:@"%d",3]] objectAtIndex:1];
+		[self buttonPress:prefix withButton:size];						
+	}
+}
+
 -(void)allIn
 {
 	[self setBetSize:99999];
@@ -826,6 +852,9 @@ HKWindowManager *wm;
 			case 21:
 				[self allIn];
 				break;
+			case 23:
+				[self pfr];
+				break;
 			case 99:
 				[self debugHK];
 				break;
@@ -888,6 +917,9 @@ pascal OSStatus hotKeyHandler(EventHandlerCallRef nextHandler,EventRef theEvent,
 				break;
 			case 21:
 				[(id)userData allIn];
+				break;
+			case 23:
+				[(id)userData pfr];
 				break;
 			case 99:
 				[(id)userData debugHK];

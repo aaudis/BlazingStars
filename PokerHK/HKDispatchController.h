@@ -31,8 +31,7 @@
 	NSDictionary *keyMap;
 	NSDictionary *speechCommands;
 	NSMutableDictionary *potBetAmounts;
-	//pid_t pokerstarsPID;
-	//AXUIElementRef appRef;	
+	float pfrAmount;
 	AXUIElementRef systemWideElement;
 	AXObserverRef keyObserver;	
 	IBOutlet HKThemeController *themeController;
@@ -47,6 +46,7 @@
 	int roundingType;
 	BOOL autoBetRounding;
 	BOOL autoBetAllIn;
+	BOOL autoPFR;
 	BOOL toggled;
 	NSSpeechRecognizer* speechRecognizer;
 }
@@ -55,11 +55,13 @@
 @property BOOL toggled;
 
 -(void)setPotBetAmount:(float)amount forTag:(int)tag;
+-(void)setPFRAmount:(float)amount;
 -(void)turnOnRounding:(BOOL)round;
 -(void)setRoundingAmount:(float)amount;
 -(void)setRoundingType:(int)type;
 -(void)autoBetRounding:(BOOL)aBool;
 -(void)autoBetAllIn:(BOOL)aBool;
+-(void)autoPFR:(BOOL)aBool;
 -(BOOL)keyComboAlreadyRegistered:(KeyCombo)kc; 
 -(void)registerHotKeyForControl:(SRRecorderControl *)control withTag:(int)tag;
 -(void)buttonPress:(NSString *)prefix withButton:(NSString *)size;
@@ -76,6 +78,7 @@
 -(void)deactivateHotKeys;
 - (void)simulateHotKey:(int)tag;
 -(void)potBet:(int)tag;
+-(void)pfr;
 -(void)leaveAllTables;
 -(void)sitOutAllTables;
 -(void)debugHK;

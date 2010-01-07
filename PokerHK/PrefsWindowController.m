@@ -52,11 +52,14 @@
 	kc.code = 20; kc.flags = 1048840; [shortcutDefaults setObject:[NSData dataWithBytes:&kc length:sizeof(KeyCombo)] forKey:@"PotBetTwoKey"];	
 	kc.code = 21; kc.flags = 1048840; [shortcutDefaults setObject:[NSData dataWithBytes:&kc length:sizeof(KeyCombo)] forKey:@"PotBetThreeKey"];		
 	kc.code = 23; kc.flags = 1048840; [shortcutDefaults setObject:[NSData dataWithBytes:&kc length:sizeof(KeyCombo)] forKey:@"PotBetFourKey"];	
+	kc.code = 49; kc.flags = 256;     [shortcutDefaults setObject:[NSData dataWithBytes:&kc length:sizeof(KeyCombo)] forKey:@"PFRKey"];
 	
 	[shortcutDefaults setObject:[NSNumber numberWithFloat:25.0] forKey:@"potBetOneKey"];
 	[shortcutDefaults setObject:[NSNumber numberWithFloat:50.0] forKey:@"potBetTwoKey"];
 	[shortcutDefaults setObject:[NSNumber numberWithFloat:75.0] forKey:@"potBetThreeKey"];
 	[shortcutDefaults setObject:[NSNumber numberWithFloat:100.0] forKey:@"potBetFourKey"];	
+	
+	[shortcutDefaults setObject:[NSNumber numberWithFloat:4.0] forKey:@"pfrKey"];	
 	
     [defaults registerDefaults:shortcutDefaults];
 }
@@ -93,6 +96,7 @@
 			   [NSArray arrayWithObjects:[NSNumber numberWithInt:20],@"PotBetFourKey",nil],[NSValue valueWithPointer:potBetFour],
 			   [NSArray arrayWithObjects:[NSNumber numberWithInt:21],@"AllInKey",nil],[NSValue valueWithPointer:allIn],
 			   [NSArray arrayWithObjects:[NSNumber numberWithInt:22],@"ToggleAllKey",nil],[NSValue valueWithPointer:toggleAllHotkeys],
+			   [NSArray arrayWithObjects:[NSNumber numberWithInt:23],@"PFRKey",nil],[NSValue valueWithPointer:pfr],
 			   [NSArray arrayWithObjects:[NSNumber numberWithInt:99],@"DebugKey",nil],[NSValue valueWithPointer:debugHK],			   
 			   nil];
 	
@@ -119,6 +123,8 @@
 	for (int i = 17; i < 21; i++) {
 		[self setPotBetAmount:[potBetPrefsView viewWithTag:i]];
 	}
+	
+	[self setPFRAmount:[potBetPrefsView viewWithTag:23]];
 
 	// Trigger the rounding controls.
 	[self turnOnRounding:[potBetPrefsView viewWithTag:ROUNDINGONTAG]];
@@ -127,6 +133,8 @@
 	[self autoBetRounding:[potBetPrefsView viewWithTag:AUTOBETROUNDINGTAG]];
 		
 	[self autoBetAllIn:[potBetPrefsView viewWithTag:AUTOBETALLINTAG]];
+	[self autoPFR:[potBetPrefsView viewWithTag:AUTOPFRTAG]];
+
 	
 	// Set the frame colour from the defaults.
 	NSArray *colorValues = [[NSUserDefaults standardUserDefaults] objectForKey: @"windowFrameColourKey"];
@@ -207,6 +215,14 @@
 	}
 }
 
+-(IBAction)setPFRAmount:(id)sender
+{
+	NSLog(@"Changing pfr amount to %f: ",[sender floatValue]);
+	[pfrStepperField setFloatValue:[sender floatValue]];
+	[pfrStepper setFloatValue:[sender floatValue]];
+	[appController setPFRAmount:[sender floatValue]];	
+}
+
 -(IBAction)turnOnRounding:(id)sender
 {
 	[appController turnOnRounding:[sender state]];
@@ -240,7 +256,6 @@
                             nil];
 	
     [[NSUserDefaults standardUserDefaults] setObject: colorValues
-	 
                                               forKey: @"windowFrameColourKey"];
 }
 
@@ -252,6 +267,11 @@
 -(IBAction)autoBetAllIn:(id)sender
 {
 	[appController autoBetAllIn:[sender state]];
+}
+
+-(IBAction)autoPFR:(id)sender
+{
+	[appController autoPFR:[sender state]];
 }
 
 /* 

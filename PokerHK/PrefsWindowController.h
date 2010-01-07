@@ -20,6 +20,7 @@
 #define ROUNDINGTYPETAG 902
 #define AUTOBETROUNDINGTAG 903
 #define AUTOBETALLINTAG 904
+#define AUTOPFRTAG 905
 
 @class AppController;
 @class HKThemeController;
@@ -52,7 +53,9 @@
 	IBOutlet NSMatrix *roundingMatrix;	
     IBOutlet NSTextField *currentThemeLabel;
 	IBOutlet NSColorWell *windowFrameColourWell;
-	
+	IBOutlet NSStepper *pfrStepper;
+	IBOutlet NSTextField *pfrStepperField;
+	IBOutlet NSButton *autoPFRCheckBox;
 	
 	AppController * appController;
 	HKThemeController *themeController;
@@ -84,6 +87,7 @@
 	IBOutlet SRRecorderControl *allIn;
 	IBOutlet SRRecorderControl *toggleAllHotkeys;
 	IBOutlet SRRecorderControl *debugHK;
+	IBOutlet SRRecorderControl *pfr;
 
 }
 @property AppController * appController;
@@ -94,12 +98,14 @@
 @property IBOutlet NSColorWell *windowFrameColourWell;
 
 -(IBAction)setPotBetAmount:(id)sender;
+-(IBAction)setPFRAmount:(id)sender;
 -(IBAction)turnOnRounding:(id)sender;
 -(IBAction)voiceCommandsChangedState:(id)sender;
 -(IBAction)setRoundingAmount:(id)sender;
 -(IBAction)setRoundingType:(id)sender;
 -(IBAction)autoBetRounding:(id)sender;
 -(IBAction)autoBetAllIn:(id)sender;
+-(IBAction)autoPFR:(id)sender;
 -(IBAction)setWindowFrameColor:(id)sender;
 -(void)detectTheme;
 @end
