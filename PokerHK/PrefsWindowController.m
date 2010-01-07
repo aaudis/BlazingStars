@@ -17,6 +17,7 @@
 @synthesize radiobuttonMatrix;
 @synthesize stepper;
 @synthesize scrollWheelCheckBox;
+@synthesize windowFrameColourWell;
 
 
 +(void)initialize {
@@ -127,6 +128,22 @@
 		
 	[self autoBetAllIn:[potBetPrefsView viewWithTag:AUTOBETALLINTAG]];
 	
+	// Set the frame colour from the defaults.
+	NSArray *colorValues = [[NSUserDefaults standardUserDefaults] objectForKey: @"windowFrameColourKey"];
+	
+    if(colorValues && ([colorValues count] >= 4)) {
+		
+		NSLog(@"Colour found!");
+        NSColor *color = [NSColor colorWithDeviceRed: [[colorValues objectAtIndex: 0] floatValue]				
+                                     green: [[colorValues objectAtIndex: 1] floatValue]				
+                                      blue: [[colorValues objectAtIndex: 2] floatValue]				
+                                     alpha: [[colorValues objectAtIndex: 3] floatValue]];
+		
+		
+		[windowFrameColourWell setColor:color];
+		
+    }
+	
 }
 
 -(IBAction)redetectTheme:(id)sender {
@@ -212,6 +229,21 @@
 	[appController voiceCommandsChangedState];
 }
 
+-(IBAction)setWindowFrameColor:(id)sender
+{
+	NSLog(@"Setting colour to defaults!");
+	NSArray *colorValues = [NSArray arrayWithObjects:							
+                            [NSNumber numberWithFloat: [[windowFrameColourWell color] redComponent]],
+                            [NSNumber numberWithFloat: [[windowFrameColourWell color] greenComponent]],
+                            [NSNumber numberWithFloat: [[windowFrameColourWell color] blueComponent]],
+                            [NSNumber numberWithFloat: [[windowFrameColourWell color] alphaComponent]],
+                            nil];
+	
+    [[NSUserDefaults standardUserDefaults] setObject: colorValues
+	 
+                                              forKey: @"windowFrameColourKey"];
+}
+
 -(IBAction)autoBetRounding:(id)sender
 {
 	[appController autoBetRounding:[sender state]];
@@ -230,6 +262,7 @@
 {
 	[self addView:basicKeysPrefsView label:@"Basic Keys"];
 	[self addView:potBetPrefsView label:@"Pot Bets"];
+	[self addView:windowView label:@"Windows"];
 	[self addView:openClosePrefsView label:@"Open:Close"];
 	[self addView:setupPrefsView label:@"Setup"];
 	[self addView:advancedPrefsView label:@"Advanced"];

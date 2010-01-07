@@ -42,6 +42,9 @@
 		0E5DD4640FDA4595000670D2 /* Open:Close.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E5DD4630FDA4595000670D2 /* Open:Close.png */; };
 		0E63778610E194D500A3DF98 /* PrefsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E63778510E194D500A3DF98 /* PrefsView.m */; };
 		0E85D1C10FDE43EE00E8E225 /* HKWindowManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E85D1C00FDE43EE00E8E225 /* HKWindowManager.m */; };
+		0E8A2E0910F4868000C26293 /* Windows.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E8A2E0810F4868000C26293 /* Windows.png */; };
+		0E8A2EF310F49A2F00C26293 /* HKTransparentBorderedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E8A2EF210F49A2F00C26293 /* HKTransparentBorderedView.m */; };
+		0E8A2FE410F53FF800C26293 /* HKTransparentWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E8A2FE310F53FF800C26293 /* HKTransparentWindow.m */; };
 		0EA4581010F31EF600CE056C /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EA4580F10F31EF600CE056C /* Quartz.framework */; };
 		0EA4FC0E0FE174CC00CEE1BE /* CTGradient.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EA4FC020FE174CC00CEE1BE /* CTGradient.m */; };
 		0EA4FC0F0FE174CC00CEE1BE /* SRCommon.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EA4FC050FE174CC00CEE1BE /* SRCommon.m */; };
@@ -131,6 +134,11 @@
 		0E63778510E194D500A3DF98 /* PrefsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrefsView.m; sourceTree = "<group>"; };
 		0E85D1BF0FDE43EE00E8E225 /* HKWindowManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKWindowManager.h; sourceTree = "<group>"; };
 		0E85D1C00FDE43EE00E8E225 /* HKWindowManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKWindowManager.m; sourceTree = "<group>"; };
+		0E8A2E0810F4868000C26293 /* Windows.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Windows.png; sourceTree = "<group>"; };
+		0E8A2EF110F49A2F00C26293 /* HKTransparentBorderedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKTransparentBorderedView.h; sourceTree = "<group>"; };
+		0E8A2EF210F49A2F00C26293 /* HKTransparentBorderedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKTransparentBorderedView.m; sourceTree = "<group>"; };
+		0E8A2FE210F53FF800C26293 /* HKTransparentWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKTransparentWindow.h; sourceTree = "<group>"; };
+		0E8A2FE310F53FF800C26293 /* HKTransparentWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKTransparentWindow.m; sourceTree = "<group>"; };
 		0EA4580F10F31EF600CE056C /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
 		0EA4FC010FE174CC00CEE1BE /* CTGradient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTGradient.h; sourceTree = "<group>"; };
 		0EA4FC020FE174CC00CEE1BE /* CTGradient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTGradient.m; sourceTree = "<group>"; };
@@ -211,6 +219,7 @@
 				0EE7BDEF0FE7759A00F1429A /* PotGrab */,
 				0E2A1CBF0FD07D8700471032 /* Prefs */,
 				0EA4FC000FE174CC00CEE1BE /* ShortcutRecorder */,
+				0E8A319E10F55E0800C26293 /* TransparentFrame */,
 				0E2A1A9F0FCFB91200471032 /* AppController.h */,
 				0E2A1AA00FCFB91200471032 /* AppController.m */,
 				0E2A1AA40FCFB9AD00471032 /* Menulet.h */,
@@ -254,6 +263,7 @@
 		0E5528D40FDCE2B80071ACC6 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				0E8A2E0810F4868000C26293 /* Windows.png */,
 				0ED0FBE510E212AC000DF720 /* dmg_background.jpg */,
 				0ED0FBE610E212AC000DF720 /* dmg_background.psd */,
 				0E2A1BE10FD0670400471032 /* Advanced.png */,
@@ -282,6 +292,17 @@
 				0E2A1AA90FCFBC4400471032 /* pokerhk.icns */,
 			);
 			name = Icons;
+			sourceTree = "<group>";
+		};
+		0E8A319E10F55E0800C26293 /* TransparentFrame */ = {
+			isa = PBXGroup;
+			children = (
+				0E8A2EF110F49A2F00C26293 /* HKTransparentBorderedView.h */,
+				0E8A2EF210F49A2F00C26293 /* HKTransparentBorderedView.m */,
+				0E8A2FE210F53FF800C26293 /* HKTransparentWindow.h */,
+				0E8A2FE310F53FF800C26293 /* HKTransparentWindow.m */,
+			);
+			name = TransparentFrame;
 			sourceTree = "<group>";
 		};
 		0EA4FC000FE174CC00CEE1BE /* ShortcutRecorder */ = {
@@ -482,6 +503,7 @@
 				0ED0FBE810E212AC000DF720 /* dmg_background.jpg in Resources */,
 				0ED0FBE910E212AC000DF720 /* dmg_background.psd in Resources */,
 				0ED0FBF610E21352000DF720 /* AdiumApplescriptRunner in Resources */,
+				0E8A2E0910F4868000C26293 /* Windows.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -556,6 +578,8 @@
 				0ED0FBF710E21352000DF720 /* template.applescript in Sources */,
 				AA286D1B10E92C3C00D8DBED /* PokerStarsInfo.m in Sources */,
 				AA286D1C10E92C3C00D8DBED /* PokerStarsTheme.m in Sources */,
+				0E8A2EF310F49A2F00C26293 /* HKTransparentBorderedView.m in Sources */,
+				0E8A2FE410F53FF800C26293 /* HKTransparentWindow.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

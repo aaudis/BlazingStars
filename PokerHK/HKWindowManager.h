@@ -40,11 +40,13 @@ enum {
 	
 	NSMutableDictionary *windowDict;
 	BOOL activated;
+	NSWindow *frameWindow;
 }
 
 @property BOOL activated;
 
 -(void)debugWindow:(NSRect)windowRect;
+-(void)drawWindowFrame;
 -(void)clickPointForXSize:(float)xsize andYSize:(float)ysize andHeight:(float)height andWidth:(float)width;
 -(NSPoint)getClickPointForXSize:(float)xsize andYSize:(float)ysize andHeight:(float)height andWidth:(float)width;
 -(BOOL)pokerWindowIsActive;
@@ -59,6 +61,8 @@ enum {
 -(void)windowDidOpen:(AXUIElementRef)elementRef;
 -(void)windowDidResize:(AXUIElementRef)elementRef;
 -(void)windowDidClose:(AXUIElementRef)elementRef;
+-(void)windowFocusDidChange;
+-(void)windowDidMove;
 -(void)applicationDidActivate;
 -(void)applicationDidDeactivate;
 -(void)appTerminated:(NSNotification *)note;

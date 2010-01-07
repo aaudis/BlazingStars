@@ -7,19 +7,13 @@
 //
 
 #import "HKWindowManager.h"
+#import "HKTransparentBorderedView.h"
+#import "HKTransparentWindow.h"
 #import "HKDefines.h"
 
 extern NSString *appName;
 extern AXUIElementRef appRef;
 extern pid_t pokerstarsPID;
-
-static NSRect FlippedScreenBounds(NSRect bounds)
-{
-    float screenHeight = NSMaxY([[[NSScreen screens] objectAtIndex:0] frame]);
-    bounds.origin.y = screenHeight - NSMaxY(bounds);
-	NSLog(@"BOUNDS: %f",bounds.origin.y);
-    return bounds;
-}
 
 void axObserverCallback(AXObserverRef observer, 
 						AXUIElementRef elementRef, 
@@ -78,12 +72,14 @@ HKWindowManager *wm = NULL;
 	}
 	
 	AXObserverAddNotification(observer, appRef, kAXWindowCreatedNotification, (void *)self);
-	AXObserverAddNotification(observer, appRef, kAXWindowResizedNotification, (void *)self);	
+	AXObserverAddNotification(observer, appRef, kAXWindowResizedNotification, (void *)self);
+	AXObserverAddNotification(observer, appRef, kAXWindowMovedNotification, (void *)self);
+	AXObserverAddNotification(observer, appRef, kAXFocusedWindowChangedNotification, (void *)self);		
 	AXObserverAddNotification(observer, appRef, kAXApplicationActivatedNotification, (void *)self);	
 	AXObserverAddNotification(observer, appRef, kAXApplicationDeactivatedNotification, (void *)self);	
+
+
 	CFRunLoopAddSource ([[NSRunLoop currentRunLoop] getCFRunLoop], AXObserverGetRunLoopSource(observer), kCFRunLoopDefaultMode);
-//	CFRunLoopAddSource(CFRunLoopGetCurrent(),
-//					AXObserverGetRunLoopSource(observer), kCFRunLoopCommonModes);
 	
 	NSLog(@"Window manager getting window list for windowDict.");
 	NSArray *children;
@@ -111,6 +107,19 @@ HKWindowManager *wm = NULL;
 }
 
 #pragma mark Window Interaction
+
+-(void)drawWindowFrame
+{
+	// Close old window first, or they'll clutter the screen endlessly.
+	[frameWindow close];
+	AXUIElementRef mw = [self getMainWindow];
+	NSRect frameRect = [NSWindow contentRectForFrameRect:FlippedScreenBounds([self getWindowBounds:mw]) styleMask:NSTitledWindowMask];	
+
+	frameWindow = [[HKTransparentWindow alloc] initWithContentRect:frameRect styleMask:NSBorderlessWindowMask backing:NSBackingStoreNonretained defer:YES];
+	[frameWindow orderFront:nil];
+	
+}
+
 -(void)debugWindow:(NSRect)windowRect
 {
 	NSWindow *window = [[NSWindow alloc] initWithContentRect:FlippedScreenBounds(windowRect) styleMask:NSBorderlessWindowMask backing:NSBackingStoreNonretained defer:YES];
@@ -606,6 +615,9 @@ HKWindowManager *wm = NULL;
 			NSLog(@"Error: %d",err);			
 		}
 	}		
+	
+	// If we opened a window and it was a poker window, draw the frame if we have to.
+	[self windowFocusDidChange];
 	return;
 
 }
@@ -662,6 +674,22 @@ HKWindowManager *wm = NULL;
 	
 }
 
+-(void)windowFocusDidChange
+{
+	if ([self windowIsTable:[self getMainWindow]] && [self activated] == YES && [[NSUserDefaults standardUserDefaults] boolForKey:@"windowFrameKey"]) {
+		NSLog(@"Window changed to a poker window!");
+		[self drawWindowFrame];
+	} else {
+		[frameWindow close];
+	}
+}
+
+-(void)windowDidMove
+{
+	// For now, this is effectively the same as the window focus procedure, so I'll just call that method.
+	[self windowFocusDidChange];
+}
+
 -(void)appTerminated:(NSNotification *)note
 {
     NSLog(@"terminated %@\n", [[note userInfo] objectForKey:@"NSApplicationName"]);
@@ -682,6 +710,9 @@ HKWindowManager *wm = NULL;
 		NSLog(@"We're already activated!");
 	}
 	
+	// Window focus changed notification gets called before the applicationDidActivate notification (why?), so we have to force the overlay
+	// to redraw.
+	[self windowFocusDidChange];
 }
 
 -(void)applicationDidDeactivate
@@ -717,6 +748,12 @@ void axObserverCallback(AXObserverRef observer,
 		[wm applicationDidDeactivate];
 	} else if (CFStringCompare(notification,kAXUIElementDestroyedNotification,0) == 0) {
 		[wm windowDidClose:elementRef];
+	} else if (CFStringCompare(notification,kAXFocusedWindowChangedNotification,0) == 0) {
+		NSLog(@"Window changed...");
+		[wm windowFocusDidChange];
+	} else if (CFStringCompare(notification,kAXWindowMovedNotification,0) == 0) {
+		NSLog(@"Window moved...");
+		[wm windowDidMove];
 	}
 }
 

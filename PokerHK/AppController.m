@@ -162,6 +162,11 @@ extern pid_t pokerstarsPID;
                                                inBook:@"BlazingStars Help"];
 }
 
+-(IBAction)setWindowFrameColor:(id)sender
+{
+	
+}
+
 -(void)hkChangedFor:(SRRecorderControl *)control withTag:(int)tag
 {
 	[dispatchController registerHotKeyForControl:control withTag:tag];

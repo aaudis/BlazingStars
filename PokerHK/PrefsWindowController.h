@@ -28,6 +28,7 @@
 	// Subviews to load.
 	IBOutlet NSView *basicKeysPrefsView;
 	IBOutlet NSView *potBetPrefsView;
+	IBOutlet NSView *windowView;
 	IBOutlet NSView *openClosePrefsView;
 	IBOutlet NSView *setupPrefsView;
 	IBOutlet NSView *advancedPrefsView;
@@ -50,6 +51,7 @@
 	IBOutlet NSStepper *roundingStepper;
 	IBOutlet NSMatrix *roundingMatrix;	
     IBOutlet NSTextField *currentThemeLabel;
+	IBOutlet NSColorWell *windowFrameColourWell;
 	
 	
 	AppController * appController;
@@ -89,6 +91,7 @@
 @property IBOutlet NSMatrix *radiobuttonMatrix;
 @property IBOutlet NSStepper *stepper;
 @property IBOutlet NSButton *scrollWheelCheckBox;
+@property IBOutlet NSColorWell *windowFrameColourWell;
 
 -(IBAction)setPotBetAmount:(id)sender;
 -(IBAction)turnOnRounding:(id)sender;
@@ -97,5 +100,6 @@
 -(IBAction)setRoundingType:(id)sender;
 -(IBAction)autoBetRounding:(id)sender;
 -(IBAction)autoBetAllIn:(id)sender;
+-(IBAction)setWindowFrameColor:(id)sender;
 -(void)detectTheme;
 @end

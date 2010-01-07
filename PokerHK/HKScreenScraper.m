@@ -15,15 +15,6 @@
 extern NSString *appName;
 extern AXUIElementRef appRef;
 
-static NSRect FlippedScreenBounds(NSRect bounds)
-{
-    float screenHeight = NSMaxY([[[NSScreen screens] objectAtIndex:0] frame]);
-    bounds.origin.y = screenHeight - NSMaxY(bounds);
-	NSLog(@"BOUNDS: %f",bounds.origin.y);
-    return bounds;
-}
-
-
 @implementation HKScreenScraper
 @synthesize currencyName;
 
