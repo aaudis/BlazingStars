@@ -14,8 +14,6 @@
 #import <AppKit/NSAccessibility.h>
 #import <asl.h>
 
-extern NSString *appName;
-
 EventHotKeyRef	gHotKeyRef;
 EventHotKeyID	gHotKeyID;
 EventHandlerUPP	gAppHotKeyFunction;
@@ -97,7 +95,8 @@ void WindowListApplierFunction(const void *inputDictionary, void *context)
         [outputEntry setObject:[NSNumber numberWithInt:data->order] forKey:kWindowOrderKey];
 		
 		// Look for PokerStars window:
-		if ([applicationName isEqual:appName]) {
+		HKLowLevel *lowLevel = [[HKLowLevel alloc] init];
+		if ([applicationName isEqual:[lowLevel appName]]) {
 			data->order++;
 			
 			[data->outputArray addObject:outputEntry];
@@ -128,13 +127,14 @@ HKWindowManager *wm;
 -(id)init
 {
 	if ((self = [super init])) {
+		logger = [SOLogger loggerForFacility:@"com.fullyfunctionalsoftware.blazingstars" options:ASL_OPT_STDERR];
+		[logger info:@"Initializing dispatchController."];
+				
 		fieldMap = [[NSMutableDictionary alloc] init];
 		keyMap = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"keyMap" ofType: @"plist"]];
 		speechCommands = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"speechCommands" ofType:@"plist"]];
 		potBetAmounts = [[NSMutableDictionary alloc] init];
 		amountToChange = 2.0;
-		rounding = NO;
-		autoBetRounding = NO;
 		toggled = YES;
 
 		// Not in key map...need to refactor this.
@@ -174,21 +174,13 @@ HKWindowManager *wm;
 	InstallApplicationEventHandler(&hotKeyHandler,1,&eventType,(void *)self,&hotkeyEventHandlerRef);
 	InstallEventHandler(GetEventMonitorTarget(),&mouseEventHandler,1,&mouseEventType,(void *)self,&mouseEventHandlerRef);
 	
-	NSArray *pids = [[NSWorkspace sharedWorkspace] launchedApplications];
-	
-	for (id app in pids) {
-		if ([[app objectForKey:@"NSApplicationName"] isEqualToString: @"PokerStars"]) {
-			pokerstarsPID =(pid_t) [[app objectForKey:@"NSApplicationProcessIdentifier"] intValue];
-		}
-	}
-	
 	systemWideElement = AXUIElementCreateSystemWide();
 
 	// Get the PrefsWindowController.
 	prefsWindowController = [PrefsWindowController sharedPrefsWindowController];
 	
 	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"voiceCommandsEnabledKey"] == YES) {
-		NSLog(@"In awakeFromNib, dispatchController, starting speech recognition.");
+		[logger info:@"Activating speech recognition at startup."];
 		[speechRecognizer startListening];	
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(stopVoiceCommands:) name:NSApplicationWillTerminateNotification object:nil];
 	}
@@ -196,14 +188,12 @@ HKWindowManager *wm;
 
 - (void)stopVoiceCommands:(NSNotification *)notification
 {
-	NSLog(@"Turning off the speech recognizer.");
 	[speechRecognizer stopListening];
 }
 
 -(void)setPotBetAmount:(float)amount forTag:(int)tag
 {
 	[potBetAmounts setObject:[NSNumber numberWithFloat:amount] forKey:[NSNumber numberWithInt:tag]];
-	NSLog(@"Pot bet amounts now: %@",potBetAmounts);
 }
 
 -(void)setPFRAmount:(float)amount
@@ -211,47 +201,21 @@ HKWindowManager *wm;
 	pfrAmount = amount;
 }
 
--(void)turnOnRounding:(BOOL)round
-{
-	NSLog(@"Setting rounding to: %@\n", (round ? @"YES" : @"NO"));
-	rounding = round;
-}
-
 -(void)setRoundingAmount:(float)amount
 {
-	NSLog(@"Setting rounding amount to: %f\n",amount);
 	roundingAmount = amount;
 }
 
 -(void)setRoundingType:(int)type
 {
-	NSLog(@"Setting rounding type to: %d\n",type);
 	roundingType = type;
 }
 
--(void)autoBetRounding:(BOOL)aBool
-{
-	NSLog(@"Setting autoBetRounding to: %@\n",(aBool ? @"YES" : @"NO"));
-	autoBetRounding = aBool;
-}
-
--(void)autoBetAllIn:(BOOL)aBool
-{
-	NSLog(@"Setting autoBetAllIn to:%@\n",(aBool ? @"YES" : @"NO"));
-	autoBetAllIn = aBool;
-}
-
--(void)autoPFR:(BOOL)aBool
-{
-	NSLog(@"Setting autoPFR to:%@\n",(aBool ? @"YES" : @"NO"));
-	autoPFR = aBool;
-}
 
 #pragma mark Hot Key Registration
 
 -(BOOL)keyComboAlreadyRegistered:(KeyCombo)kc 
 {
-	NSLog(@"Checking to see if key code is registered.");
 	for (id key in fieldMap) {
 		KeyCombo temp = [[key pointerValue] keyCombo];
 		if (temp.code == kc.code && temp.flags == kc.flags) 
@@ -262,11 +226,10 @@ HKWindowManager *wm;
 
 -(void)registerHotKeyForControl:(SRRecorderControl *)control withTag:(int)tag
 {
-	NSLog(@"In registering function for SRRC. Tag: %d  Combo: %@",tag,[control keyComboString]);
+	[logger info:@"In registering function for SRRC. Tag: %d  Combo: %@",tag,[control keyComboString]];
 	
 	if ([[fieldMap allKeys] containsObject:[NSValue valueWithPointer:control]] == YES) {
 		[fieldMap removeObjectForKey:[NSValue valueWithPointer:control]];
-		NSLog(@"Yes, we found it.  Unregistering.");		
 	} 
 
 	
@@ -274,8 +237,6 @@ HKWindowManager *wm;
 		if ([self keyComboAlreadyRegistered:[control keyCombo]] == NO) {
 			[fieldMap setObject:[NSArray arrayWithObjects:[NSValue valueWithPointer:NULL],[NSNumber numberWithInt:tag],nil] forKey:[NSValue valueWithPointer:control]];			
 		} else {
-			NSLog(@"Key combo is a duplicate.");
-			// Warn the user.
 			NSAlert *alert = [NSAlert alertWithMessageText:[NSString stringWithFormat:@"Shortcut keys must be unique, and the key combination %@ is already being used.",[control keyComboString]]
 							defaultButton:@"OK" 
 							alternateButton:nil 
@@ -292,13 +253,12 @@ HKWindowManager *wm;
 						
 			}
 	} else {
-		NSLog(@"Didn't register null key.");
+		[logger notice:@"Didn't register null key."];
 	}
 }
 
 -(void)unregisterAllHotKeys
 {
-	NSLog(@"Unregistering all hotkeys.");
 	SRRecorderControl *sc;
 	NSMutableDictionary *newFieldMap = [[NSMutableDictionary alloc] init];
 	for (id key in fieldMap) {
@@ -306,11 +266,10 @@ HKWindowManager *wm;
 		int tag = [[[fieldMap objectForKey:key] objectAtIndex:1] intValue];
 
 		if (tag != TOGGLETAG) {
-			NSLog(@"Unregister combo: %@ withTag: %d",[sc keyComboString],[[[fieldMap objectForKey:key] objectAtIndex:1] intValue]);
 			OSStatus errCode = UnregisterEventHotKey([[[fieldMap objectForKey:key] objectAtIndex:0] pointerValue]);
 			[newFieldMap setObject:[NSArray arrayWithObjects:[NSValue valueWithPointer:NULL],[NSNumber numberWithInt:tag],nil] forKey:key];
 			if (errCode != noErr) {
-				NSLog(@"Failed to unregister hotkey! :-> %d",errCode);
+				[logger warning:@"Unregistering hotkey combo: %@ withTag: %d failed!",[sc keyComboString],[[[fieldMap objectForKey:key] objectAtIndex:1] intValue]];
 			}
 			
 		}
@@ -320,7 +279,6 @@ HKWindowManager *wm;
 
 -(void)registerAllHotKeys
 {
-	NSLog(@"Registering all keys!");
 	EventHotKeyRef hkref;
 	NSMutableDictionary *newFieldMap = [[NSMutableDictionary alloc] init];
 	for (id field in fieldMap) {
@@ -330,40 +288,31 @@ HKWindowManager *wm;
 		gHotKeyID.signature='wwhk';
 		gHotKeyID.id=tag;
 		
-		NSLog(@"Tag: %d Keycombo: %@",tag,[control keyComboString]);
+		//NSLog(@"Tag: %d Keycombo: %@",tag,[control keyComboString]);
 				
 		OSStatus err = RegisterEventHotKey([control keyCombo].code, SRCocoaToCarbonFlags([control keyCombo].flags), gHotKeyID, 
 							GetApplicationEventTarget(), 0, &hkref);
 
 		if (err != noErr) {
-			NSLog(@"Registration failed! %d",err);
+			[logger warning:@"Registration failed! %d",err];
 		}
 		
 		[newFieldMap setObject:[NSArray arrayWithObjects:[NSValue valueWithPointer:hkref],[NSNumber numberWithInt:tag],nil] forKey:field];
 	}
-	NSLog(@"Length: %d -> %@",[[fieldMap allKeys] count],fieldMap);
 	fieldMap = [newFieldMap mutableCopy];
 }
 
 
 -(void)toggleAllHotKeys
 {
-	NSLog(@"Toggling all hotkeys.");
-	NSLog(@"Toggled is: %@\n", (toggled ? @"YES" : @"NO")); 
-	NSLog(@"Activated is: %@\n", ([windowManager activated] ? @"YES" : @"NO"));
-	
 	if (toggled == YES) {
-		NSLog(@"Toggling off.");
 		toggled = NO;
 		if ([windowManager activated] == YES) {
-			NSLog(@"unregistering!");
 			[self unregisterAllHotKeys];			
 		}
 	} else if (toggled == NO) {
-		NSLog(@"Toggling on.");
 		toggled = YES;
 		if ([windowManager activated] == YES) {
-			NSLog(@"registering!");
 			[self registerAllHotKeys];			
 		}
 	}
@@ -371,47 +320,25 @@ HKWindowManager *wm;
 
 -(void)activateHotKeys
 {
-	NSLog(@"Turning hotkeys on because window activated.");
-	NSLog(@"Toggled is: %@\n", (toggled ? @"YES" : @"NO")); 
-	NSLog(@"Activated is: %@\n", ([windowManager activated] ? @"YES" : @"NO"));
-	
 	if (toggled == YES) {
-		if ([windowManager activated] == YES) {
-			NSLog(@"registering!");
+		if ([windowManager activated] == YES)
 			[self registerAllHotKeys];			
-		}		
-	} else {
-		NSLog(@"Global hotkey deactivation is turned on - skipping hotkey registration.");
-	}
+	} 
 }
 
 -(void)deactivateHotKeys
 {
-	NSLog(@"Turning hotkeys off because window deactivated.");
-	NSLog(@"Toggled is: %@\n", (toggled ? @"YES" : @"NO")); 
-	NSLog(@"Activated is: %@\n", ([windowManager activated] ? @"YES" : @"NO"));
-	
 	if (toggled == YES) {
 		if ([windowManager activated] == NO) {
-			NSLog(@"runegistering!");
 			[self unregisterAllHotKeys];			
 		}		
-	} else {
-		NSLog(@"Global hotkey deactivation is turned on - skipping hotkey registration.");
-	}	
+	} 	
 }
 
 #pragma mark Hot Key Execution.
 
 -(void)buttonPress:(NSString *)prefix withButton:(NSString *)size
 {
-	// The prefix maps the button to the plist for the specified theme.  
-	NSLog(@"Prefix: %@  Size: %@ X: %g Y: %g H: %g W: %g",prefix,size,
-		[[themeController param:[prefix stringByAppendingString:@"OriginX"]] floatValue],
-		[[themeController param:[prefix stringByAppendingString:@"OriginY"]] floatValue],
-		[[themeController param:[size stringByAppendingString:@"ButtonHeight"]] floatValue],
-		  [[themeController param:[size stringByAppendingString:@"ButtonWidth"]] floatValue]);
-	
 	[windowManager clickPointForXSize:[[themeController param:[prefix stringByAppendingString:@"OriginX"]] floatValue]
 					andYSize:[[themeController param:[prefix stringByAppendingString:@"OriginY"]] floatValue]
 				   andHeight:[[themeController param:[size stringByAppendingString:@"ButtonHeight"]] floatValue]
@@ -421,10 +348,8 @@ HKWindowManager *wm;
 -(void)buttonPressAllTables:(int)tag
 {
 	NSArray *tables = [windowManager getAllPokerTables];
-	NSLog(@"Poker table list: %@",tables);
-	
+
 	for (id table in tables) {
-		NSLog(@"If no tables, shouldn't get here.");
 		AXUIElementRef tableRef = [table pointerValue];
 		AXUIElementPerformAction(tableRef, kAXRaiseAction);
 		
@@ -435,6 +360,13 @@ HKWindowManager *wm;
 	}
 }
 
+-(void)autoBet
+{
+	NSString *prefix = [[keyMap objectForKey:[NSString stringWithFormat:@"%d",3]] objectAtIndex:0];
+	NSString *size = [[keyMap objectForKey:[NSString stringWithFormat:@"%d",3]] objectAtIndex:1];
+	[self buttonPress:prefix withButton:size];			
+}
+
 -(float)getBetSize
 {
 	NSPoint clickPoint = [windowManager getClickPointForXSize:[[themeController param:@"betBoxOriginX"] floatValue]
@@ -442,64 +374,62 @@ HKWindowManager *wm;
 										andHeight:[[themeController param:@"betBoxHeight"] floatValue]
 										 andWidth:[[themeController param:@"betBoxWidth"] floatValue]];
 	
-	NSLog(@"x=%f,y=%f",clickPoint.x,clickPoint.y);
+
 	AXUIElementRef betBoxRef;
 	
-	AXError err = AXUIElementCopyElementAtPosition(appRef,
+	AXError err = AXUIElementCopyElementAtPosition([lowLevel appRef],
 									 clickPoint.x,
 									 clickPoint.y,
 									 &betBoxRef);
 	
 	switch(err) {
 		case kAXErrorNoValue:
-			NSLog(@"CopyElementAtPosition reports that the bet box is not where we think it is! (kAXErrorNoValue)");
+			[logger critical:@"CopyElementAtPosition reports that the bet box is not where we think it is! (kAXErrorNoValue)"];
 			return -1;
 		case kAXErrorIllegalArgument:
-			NSLog(@"CopyElementAtPosition reports that one of the arguments is illegal! (kAXErrorIllegalArgument)");
+			[logger critical:@"CopyElementAtPosition reports that one of the arguments is illegal! (kAXErrorIllegalArgument)"];
 			return -1;
 		case kAXErrorInvalidUIElement:
-			NSLog(@"CopyElementAtPosition reports that the AXUIElementRef (appRef) is invalid! (kAXErrorInvalidUIElement)");
+			[logger critical:@"CopyElementAtPosition reports that the AXUIElementRef (appRef) is invalid! (kAXErrorInvalidUIElement)"];
 			return -1;
 		case kAXErrorCannotComplete:
-			NSLog(@"CopyElementAtPosition reports that the messaging API has failed! (kAXErrorCannotComplete)");
+			[logger critical:@"CopyElementAtPosition reports that the messaging API has failed! (kAXErrorCannotComplete)"];
 			return -1;
 		case kAXErrorNotImplemented:
-			NSLog(@"CopyElementAtPosition reports that the process does not fully support the accessibility API! (kAXErrorNotImplmented)");
+			[logger critical:@"CopyElementAtPosition reports that the process does not fully support the accessibility API! (kAXErrorNotImplmented)"];
 			return -1;
-		default: NSLog(@"CopyElementAtPosition succeeded!"); break;
+		default: 
+			 break;
 	}
 	
 	NSString *value;
 	err = AXUIElementCopyAttributeValue(betBoxRef, kAXValueAttribute,(CFTypeRef *)&value);
 	
 	if (!value || err != kAXErrorSuccess) {
-		NSLog(@"Could not retrieve value from betBoxRef!");
-		
 		switch(err) {
 			case kAXErrorAttributeUnsupported:
-				NSLog(@"CopyAttributeValue reports that the specified AXUIElementref (betBoxRef) does not support the specified attribute (ValueAttribute)! (kAXErrorAttributeUnsupported)");
+				[logger critical:@"CopyAttributeValue reports that the specified AXUIElementref (betBoxRef) does not support the specified attribute (ValueAttribute)! (kAXErrorAttributeUnsupported)"];
 				return -1;
 			case kAXErrorNoValue:
-				NSLog(@"CopyAttributeValue reports that the bet box is not where we think it is! (kAXErrorNoValue)");
+				[logger critical:@"CopyAttributeValue reports that the bet box is not where we think it is! (kAXErrorNoValue)"];
 				return -1;
 			case kAXErrorIllegalArgument:
-				NSLog(@"CopyAttributeValue reports that one of the arguments is illegal! (kAXErrorIllegalArgument)");
+				[logger critical:@"CopyAttributeValue reports that one of the arguments is illegal! (kAXErrorIllegalArgument)"];
 				return -1;
 			case kAXErrorInvalidUIElement:
-				NSLog(@"CopyAttributeValue reports that the AXUIElementRef (betBoxRef) is invalid! (kAXErrorInvalidUIElement)");
+				[logger critical:@"CopyAttributeValue reports that the AXUIElementRef (betBoxRef) is invalid! (kAXErrorInvalidUIElement)"];
 				return -1;
 			case kAXErrorCannotComplete:
-				NSLog(@"CopyAttributeValue reports that the messaging API has failed! (kAXErrorCannotComplete)");
+				[logger critical:@"CopyAttributeValue reports that the messaging API has failed! (kAXErrorCannotComplete)"];
 				return -1;
 			case kAXErrorNotImplemented:
-				NSLog(@"CopyAttributeValue reports that the process does not fully support the accessibility API! (kAXErrorNotImplmented)");
+				[logger critical:@"CopyAttributeValue reports that the process does not fully support the accessibility API! (kAXErrorNotImplmented)"];
 				return -1;
-			default: NSLog(@"CopyAttributeValue succeeded!? How did we get here?"); break;
+			default: 
+				break;
 		}
 		return -1;
 	}
-	NSLog(@"Value:  %@",value);
-
 	return [value floatValue];
 }
 
@@ -510,89 +440,27 @@ HKWindowManager *wm;
 										   andHeight:[[themeController param:@"betBoxHeight"] floatValue]
 											andWidth:[[themeController param:@"betBoxWidth"] floatValue]];
 	
-	NSLog(@"x=%f,y=%f",clickPoint.x,clickPoint.y);
 	AXUIElementRef betBoxRef;
 	
-	AXUIElementCopyElementAtPosition(appRef,
+	AXUIElementCopyElementAtPosition([lowLevel appRef],
 									 clickPoint.x,
 									 clickPoint.y,
 									 &betBoxRef);
 	
 	// Set up string to the value to bet, and then strip trailing zeros if the bet is an even amount.
 	NSString *valueToSet = [NSString stringWithFormat:@"%.2f",amount];
-	NSLog(@"Attempting to set value: %@", valueToSet);
+	[logger info:@"Attempting to set value: %@", valueToSet];
 	if ([[valueToSet substringFromIndex:[valueToSet length]-2] isEqual:@"00"]) {
 		valueToSet = [valueToSet substringToIndex:[valueToSet length]-3];
-		NSLog(@"String is now: %@",valueToSet);
+		[logger info:@"String is now: %@",valueToSet];
 	}
 	
+	[lowLevel clickAt:NSPointToCGPoint(clickPoint)];
 
-	CGAssociateMouseAndMouseCursorPosition(false);
-	CGEventRef mouseEvent = CGEventCreateMouseEvent(NULL, kCGEventLeftMouseDown,NSPointToCGPoint(clickPoint), kCGMouseButtonLeft);
-	
-	// Cancel any of the modifier keys - this cost me a day of bug-hunting!
-	CGEventSetFlags(mouseEvent,0);
-	CGEventPost(kCGSessionEventTap,mouseEvent);
-	
-	mouseEvent = CGEventCreateMouseEvent(NULL,kCGEventLeftMouseUp,NSPointToCGPoint(clickPoint),kCGMouseButtonLeft);
-	CGEventSetFlags(mouseEvent,0);
-	CGEventPost(kCGSessionEventTap,mouseEvent);
-	CGAssociateMouseAndMouseCursorPosition(true);
-	
-	NSLog(@"Num of events in queue: %d",GetNumEventsInQueue(GetMainEventQueue()));
-	
-	NSLog(@"Flushing queue!");
-	FlushEventQueue(GetMainEventQueue());
-	FlushEventQueue(GetCurrentEventQueue());	
-	
-	CGEventRef keyEventDown = CGEventCreateKeyboardEvent(NULL,124,true);
-	CGEventSetFlags(keyEventDown,0);
-	CGEventRef keyEventUp = CGEventCreateKeyboardEvent(NULL, 124, false);
-	CGEventSetFlags(keyEventUp,0);
-
-	for (int j = 0; j < 10; j++) {
-		CGEventPost(kCGSessionEventTap, keyEventDown);	
-		CGEventPost(kCGSessionEventTap, keyEventUp);
-		
-		FlushEventQueue(GetMainEventQueue());
-		FlushEventQueue(GetCurrentEventQueue());	
-		
-	}	
-	
-	keyEventDown = CGEventCreateKeyboardEvent(NULL,117,true);
-	CGEventSetFlags(keyEventDown,0);			
-	keyEventUp = CGEventCreateKeyboardEvent(NULL,117,false);
-	CGEventSetFlags(keyEventDown,0);			
-	
-	for (int j = 0; j < 10; j++) {
-		CGEventPost(kCGAnnotatedSessionEventTap, keyEventDown);		
-		CGEventPost(kCGAnnotatedSessionEventTap, keyEventUp);
-	}
-	
-
-	keyEventDown = CGEventCreateKeyboardEvent(NULL,51,true);
-	CGEventSetFlags(keyEventDown,0);			
-	keyEventUp = CGEventCreateKeyboardEvent(NULL,51,false);
-	CGEventSetFlags(keyEventDown,0);			
-	
-	for (int j = 0; j < 10; j++) {
-		CGEventPost(kCGAnnotatedSessionEventTap, keyEventDown);		
-		CGEventPost(kCGAnnotatedSessionEventTap, keyEventUp);
-	}
-	
-	UniChar buffer;
-	keyEventDown = CGEventCreateKeyboardEvent(NULL, 1, true);
-	keyEventUp = CGEventCreateKeyboardEvent(NULL, 1, false);
-	CGEventSetFlags(keyEventDown,0);		
-	CGEventSetFlags(keyEventUp,0);		
-	for (int i = 0; i < [valueToSet length]; i++) {
-		[valueToSet getCharacters:&buffer range:NSMakeRange(i, 1)];
-		NSLog(@"Character: %c",buffer);
-		CGEventKeyboardSetUnicodeString(keyEventDown, 1, &buffer);
-		CGEventPost(kCGAnnotatedSessionEventTap, keyEventDown);
-		CGEventKeyboardSetUnicodeString(keyEventUp, 1, &buffer);
-		CGEventPost(kCGAnnotatedSessionEventTap, keyEventUp);
-	}
+	[lowLevel keyPress:124 repeated:10 withFlush:YES];
+	[lowLevel keyPress:117 repeated:10 withFlush:YES];
+	[lowLevel keyPress:51 repeated:10 withFlush:YES];	
+	[lowLevel writeString:valueToSet];
 }
 
 -(float)betIncrement 
@@ -607,11 +475,9 @@ HKWindowManager *wm;
 	switch(row) {
 		case 0:
 			betIncrement = amountToChange * [[gameParams objectAtIndex:HKBigBlind] floatValue];
-			NSLog(@"amountToChange: %g  bigBlind: %g  betIncrement: %g", amountToChange,[[gameParams objectAtIndex:HKBigBlind] floatValue], betIncrement);
 			break;
 		case 1:
 			betIncrement = amountToChange * [[gameParams objectAtIndex:HKSmallBlind] floatValue];
-			NSLog(@"amountToChange: %g  smallBlind: %g  betIncrement: %g", amountToChange,[[gameParams objectAtIndex:HKSmallBlind] floatValue], betIncrement);			
 			break;
 	}
 	return betIncrement;
@@ -620,7 +486,6 @@ HKWindowManager *wm;
 -(void)incrementBetSize:(long)delta
 {
 	float betSize = [self getBetSize];
-	NSLog(@"Got betsize: %g",betSize);
 	betSize += [self betIncrement] * (float)delta;
 	[self setBetSize:betSize];
 }
@@ -628,54 +493,37 @@ HKWindowManager *wm;
 -(void)decrementBetSize:(long)delta
 {
 	float betSize = [self getBetSize];
-	NSLog(@"Got betsize: %g",betSize);
 	betSize -= [self betIncrement] * (float)delta;
 	[self setBetSize:betSize];
 }
 
 -(void)potBet:(int)tag
 {
-	NSLog(@"In potBet");
-	
+	[logger info:@"Pot betting initiated."];
+
 	float potSize = [screenScraper getPotSize];
-	NSLog(@"Got pot size: %f",potSize);
+	[logger info:@"Pot size is %f",potSize];
 	
-	// Process:  need to get the value from the 
 	float potBetAmt = [[potBetAmounts objectForKey:[NSNumber numberWithInt:tag]] floatValue] / 100;
-	NSLog(@"Got potBetAmt: %f",potBetAmt);
 	float betSize = potSize * potBetAmt;
 	
-	NSLog(@"New betsize: %f",betSize);
-		
-	if (rounding == YES) {
-		NSLog(@"Rounding!");
+	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"roundingBoolKey"]) {
 		NSArray *gameParameters = [windowManager getGameParameters];		
 		float blindSize;
-		if (roundingType == 1) {
-			NSLog(@"Small blind!");
+		if (roundingType == 1)
 			blindSize = [[gameParameters objectAtIndex:HKSmallBlind] floatValue];
-		} else {
-			NSLog(@"Big blind!");
+		else 
 			blindSize = [[gameParameters objectAtIndex:HKBigBlind] floatValue];
-		}
-		NSLog(@"blindSize: %f",blindSize);
-		float blindAdj = blindSize * roundingAmount;
-		NSLog(@"blindAdjustment: %f",blindAdj);
-		if (fmod(betSize,blindAdj) != 0) {
-			NSLog(@"Adjusting!");
-			betSize = ((int)(betSize / blindAdj) * blindAdj) + blindAdj;			
-		}
 
-		NSLog(@"Betsize after adjustment: %f",betSize);
+		float blindAdj = blindSize * roundingAmount;
+		if (fmod(betSize,blindAdj) != 0)
+			betSize = ((int)(betSize / blindAdj) * blindAdj) + blindAdj;			
 	} 
 
 	[self setBetSize:betSize];
 	
-	if (autoBetRounding == YES) {
-		NSString *prefix = [[keyMap objectForKey:[NSString stringWithFormat:@"%d",3]] objectAtIndex:0];
-		NSString *size = [[keyMap objectForKey:[NSString stringWithFormat:@"%d",3]] objectAtIndex:1];
-		[self buttonPress:prefix withButton:size];		
-	}
+	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"autoBetRoundingKey"]) 
+		[self autoBet];
 }
 
 -(void)pfr
@@ -683,25 +531,18 @@ HKWindowManager *wm;
 	NSArray *gameParameters = [windowManager getGameParameters];
 	float blindSize = [[gameParameters objectAtIndex:HKBigBlind] floatValue];	
 	
-	NSLog(@"Setting bet size to %f times the big blind of %f, total is %f",pfrAmount,blindSize,pfrAmount*blindSize);
 	[self setBetSize:pfrAmount*blindSize];
 	
-	if (autoPFR == YES) {
-		NSString *prefix = [[keyMap objectForKey:[NSString stringWithFormat:@"%d",3]] objectAtIndex:0];
-		NSString *size = [[keyMap objectForKey:[NSString stringWithFormat:@"%d",3]] objectAtIndex:1];
-		[self buttonPress:prefix withButton:size];						
-	}
+	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"autoPFRBetKey"] == YES)
+		[self autoBet];
 }
 
 -(void)allIn
 {
 	[self setBetSize:99999];
 	
-	if (autoBetAllIn == YES) {
-		NSString *prefix = [[keyMap objectForKey:[NSString stringWithFormat:@"%d",3]] objectAtIndex:0];
-		NSString *size = [[keyMap objectForKey:[NSString stringWithFormat:@"%d",3]] objectAtIndex:1];
-		[self buttonPress:prefix withButton:size];				
-	}
+	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"autoBetAllInKey"] == YES) 
+		[self autoBet];
 }
 
 -(void)leaveAllTables
@@ -717,27 +558,26 @@ HKWindowManager *wm;
 
 -(void)debugHK
 {
-	NSLog(@"In the debugging hotkey.");
+	[logger debug:@"In the debugging hotkey."];
 	CFArrayRef windowList = CGWindowListCopyWindowInfo(kCGWindowListOptionAll, kCGNullWindowID);
 
-//	NSLog(@"window list: %@",windowList);
 	NSMutableArray * prunedWindowList = [NSMutableArray array];
     WindowListApplierData data = {prunedWindowList, 0};
     CFArrayApplyFunction(windowList, CFRangeMake(0, CFArrayGetCount(windowList)), &WindowListApplierFunction, &data);
     CFRelease(windowList);
 
-	NSLog(@"pruned window list: %@",prunedWindowList);
+	[logger debug:@"pruned window list: %@",prunedWindowList];
 	
-	AXUIElementRef window = [windowManager getMainWindow];
+	AXUIElementRef window = [lowLevel getMainWindow];
 	
 	NSString *name;
 	AXUIElementCopyAttributeValue(window,kAXTitleAttribute, (CFTypeRef *)&name);
 	
-	NSLog(@"Current window name: %@",name);
+	[logger debug:@"Current window name: %@",name];
 	NSArray *components = [name componentsSeparatedByString:@"-"];
-	NSLog(@"Components: %@",components);
+	[logger debug:@"Components: %@",components];
 	
-	NSLog(@"Writing log to pasteboard.");
+	[logger debug:@"Writing log to pasteboard."];
 	NSPasteboard *cb = [NSPasteboard generalPasteboard];
 	[cb declareTypes:[NSArray arrayWithObjects:NSStringPboardType, nil] owner:nil];
 	
@@ -762,15 +602,12 @@ HKWindowManager *wm;
 	aslresponse_free(r);
 
 	[cb setString:log forType: NSStringPboardType];
-
-
 }
 
 -(void)voiceCommandsChangedState
 {
-	NSLog(@"In voiceCommandsChangedState");
 	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"voiceCommandsEnabledKey"]) {
-		NSLog(@"Enabling voice commands.");
+		[logger info:@"Activating speech commands."];
 		if (speechRecognizer == nil) {
 			NSMutableArray *commands = [NSMutableArray arrayWithCapacity:20];
 			for (id keyName in keyMap) {
@@ -789,7 +626,7 @@ HKWindowManager *wm;
 		[speechRecognizer startListening];
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(stopVoiceCommands:) name:NSApplicationWillTerminateNotification object:nil];		
 	} else {
-		NSLog(@"Disabling voice commands.");
+		[logger info:@"Deactivating voice commands."];
 		[speechRecognizer stopListening];
 		speechRecognizer = nil;
 	}
@@ -798,17 +635,14 @@ HKWindowManager *wm;
 - (void)speechRecognizer:(NSSpeechRecognizer *)sender didRecognizeCommand:(id)command {
 	for (id key in speechCommands) {
 		if ([[speechCommands objectForKey:key] isEqualToString:command]) {
-			NSLog(@"Speech command recognized!  Command was: %@",key);
+			[logger info:@"Speech command recognized!  Command was: %@",key];
 
 			for (id field in keyMap) {
-				NSLog(@"km: %@, field: %@",[[keyMap objectForKey:field] objectAtIndex:0],field);
 				if ([[[keyMap objectForKey:field] objectAtIndex:0] isEqualToString:key]) {
-					NSLog(@"Found a match! %@",field);
 					[self simulateHotKey:[field intValue]];
 					return;
 				}
-			}
-			
+			}			
 			// Not in key map.  I need to refactor this...
 			if ([key isEqualToString:@"increaseBet"]) {
 				[self simulateHotKey:13];
@@ -822,7 +656,6 @@ HKWindowManager *wm;
 
 - (void)simulateHotKey:(int)tag
 {
-	NSLog(@"In simulateHotKey, tag is: %d",tag);
 	// Global toggle key.
 	if (tag == TOGGLETAG) {
 		[self toggleAllHotKeys];
@@ -866,7 +699,7 @@ HKWindowManager *wm;
 				break;
 		}
 	} else {
-		NSLog(@"I was asked to simulate a hotkey I don't know: %d",tag);
+		[logger warning:@"I was asked to simulate a hotkey I don't know: %d",tag];
 	}
 }
 
@@ -876,8 +709,6 @@ HKWindowManager *wm;
 pascal OSStatus hotKeyHandler(EventHandlerCallRef nextHandler,EventRef theEvent,
 							  void *userData)
 {
-	NSLog(@"In hotKeyHandler!");
-
 	OSStatus retCode;
 	
 	EventHotKeyID hkCom;
@@ -937,24 +768,16 @@ pascal OSStatus hotKeyHandler(EventHandlerCallRef nextHandler,EventRef theEvent,
 	}
 	retCode = noErr;
 	
-	NSLog(@"Number of events in mainQueue: %d  Number of events in currentQueue: %d", 
-		GetNumEventsInQueue(GetMainEventQueue()),
-		  GetNumEventsInQueue(GetCurrentEventQueue()));
-
-	NSLog(@"Flushing the queue!");
 	// Flush the events from the hotkey queue.
-	OSStatus mainQueue = FlushEventQueue(GetMainEventQueue());
-	OSStatus currentQueue = FlushEventQueue(GetCurrentEventQueue());
-	
-	NSLog(@"Error status for main queue: %d.  Error status for current queue: %d.",mainQueue, currentQueue);
-	
+	FlushEventQueue(GetMainEventQueue());
+	FlushEventQueue(GetCurrentEventQueue());
+
 	return retCode;
 }
 
 pascal OSStatus mouseEventHandler(EventHandlerCallRef nextHandler,EventRef theEvent,
 							  void *userData)
 {
-//	NSLog(@"In mouse event handler!");
 	if ([[[PrefsWindowController sharedPrefsWindowController] scrollWheelCheckBox] state] == NSOnState) {
 		if ([wm pokerWindowIsActive] == YES) {
 			long delta;

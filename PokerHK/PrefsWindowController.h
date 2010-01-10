@@ -7,6 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import <SOLogger/SOLogger.h>
 #import "DBPrefsWindowController.h"
 #import "HKThemeController.h"
 #import "AppController.h"
@@ -26,6 +27,8 @@
 @class HKThemeController;
 
 @interface PrefsWindowController : DBPrefsWindowController {
+	SOLogger *logger;
+	
 	// Subviews to load.
 	IBOutlet NSView *basicKeysPrefsView;
 	IBOutlet NSView *potBetPrefsView;
@@ -90,7 +93,7 @@
 	IBOutlet SRRecorderControl *pfr;
 
 }
-@property AppController * appController;
+@property AppController *appController;
 @property HKThemeController *themeController;
 @property IBOutlet NSMatrix *radiobuttonMatrix;
 @property IBOutlet NSStepper *stepper;
@@ -99,13 +102,9 @@
 
 -(IBAction)setPotBetAmount:(id)sender;
 -(IBAction)setPFRAmount:(id)sender;
--(IBAction)turnOnRounding:(id)sender;
 -(IBAction)voiceCommandsChangedState:(id)sender;
 -(IBAction)setRoundingAmount:(id)sender;
 -(IBAction)setRoundingType:(id)sender;
--(IBAction)autoBetRounding:(id)sender;
--(IBAction)autoBetAllIn:(id)sender;
--(IBAction)autoPFR:(id)sender;
--(IBAction)setWindowFrameColor:(id)sender;
 -(void)detectTheme;
+-(IBAction)redetectTheme:(id)sender;
 @end

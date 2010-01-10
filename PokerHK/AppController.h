@@ -10,6 +10,7 @@
 #import "PrefsWindowController.h"
 #import "HKDispatchController.h"
 #import "HKWindowManager.h"
+#import "HKLowLevel.h"
 #import "ShortcutRecorder.h"
 #import "HKDefines.h";
 //@class PrefsWindowController;
@@ -19,22 +20,16 @@
 @interface AppController : NSObject {
 	IBOutlet HKDispatchController *dispatchController;
 	IBOutlet HKWindowManager *windowManager;
+	IBOutlet HKLowLevel *lowLevel;
 }
 -(void)finishedLaunching:(NSNotification *)notification;
--(AXUIElementRef)getFrontMostApp;
 -(IBAction)openPreferences:(id)sender;
 -(IBAction)openAboutPanel:(id)sender;
 -(IBAction)displayDonate:(id)sender;
--(void)turnOnRounding:(BOOL)round;
 -(void)hkChangedFor:(SRRecorderControl *)control withTag:(int)tag;
 -(void)voiceCommandsChangedState;
 -(void)setPotBetAmount:(float)amount forTag:(int)tag;
 -(void)setPFRAmount:(float)amount;
 -(void)setRoundingAmount:(float)amount;
 -(void)setRoundingType:(int)type;
--(void)autoBetRounding:(BOOL)aBool;
--(void)autoBetAllIn:(BOOL)aBool;
--(void)autoPFR:(BOOL)aBool;
-//-(void)hkChangedIn:(GTMHotKeyTextField *)field;
-
 @end

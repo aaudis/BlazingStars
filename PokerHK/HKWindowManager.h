@@ -7,9 +7,11 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import <SOLogger/SOLogger.h>
 #import "HKDefines.h"
 #import "HKDispatchController.h"
 #import "HKThemeController.h"
+#import "HKLowLevel.h"
 
 enum {
 	HKNotTable = 0,
@@ -21,6 +23,7 @@ enum {
 	HKTournamentRegistration = 6,
 	HKTablePopup = 7,
 	HKPLOTable = 8,
+	HKErrorGettingAttributeValue = 9,
 };
 
 
@@ -31,33 +34,46 @@ enum {
 @class HKThemeController;
 
 @interface HKWindowManager : NSObject {
-//	pid_t pokerstarsPID;
 	AXObserverRef observer;
-//	AXUIElementRef appref;
-	
+
 	IBOutlet HKDispatchController *dispatchController;
 	IBOutlet HKThemeController *themeController;
+	IBOutlet HKLowLevel *lowLevel;
 	
 	NSMutableDictionary *windowDict;
 	BOOL activated;
 	NSWindow *frameWindow;
+	
+	SOLogger *logger;
 }
 
 @property BOOL activated;
 
 -(void)debugWindow:(NSRect)windowRect;
 -(void)drawWindowFrame;
+
 -(void)clickPointForXSize:(float)xsize andYSize:(float)ysize andHeight:(float)height andWidth:(float)width;
 -(NSPoint)getClickPointForXSize:(float)xsize andYSize:(float)ysize andHeight:(float)height andWidth:(float)width;
--(BOOL)pokerWindowIsActive;
+
+-(void)updateWindowDict;
+-(void)addWindowToWindowDict:(AXUIElementRef)windowRef;
+
+-(double)findTournamentNum:(NSString *)title inLobby:(BOOL)lobbyBool;
+-(AXUIElementRef)findLobbyForTournament:(double)tnum;
+-(void)closeLobbyForTournament:(AXUIElementRef)elementRef;
+-(void)closeTournamentRegistrationPopup:(AXUIElementRef)popupRef;
+-(void)closeTablePopupWindows;
+-(AXUIElementRef)findOKButtonInPopupWindow:(AXUIElementRef)windowRef;
+
 -(int)windowIsTable:(AXUIElementRef)windowRef;
 -(int)windowIsTableAtOpening:(AXUIElementRef)windowRef;
--(AXUIElementRef)getMainWindow;
+-(BOOL)pokerWindowIsActive;
 -(NSArray *)getAllPokerTables;
--(NSRect)getWindowBounds:(AXUIElementRef)windowRef;
+
 -(NSRect)getPotBounds:(AXUIElementRef)windowRef;
 -(NSArray *)getGameParameters;
--(double)findTournamentNum:(NSString *)title inLobby:(BOOL)lobbyBool;
+
+
 -(void)windowDidOpen:(AXUIElementRef)elementRef;
 -(void)windowDidResize:(AXUIElementRef)elementRef;
 -(void)windowDidClose:(AXUIElementRef)elementRef;
@@ -65,5 +81,5 @@ enum {
 -(void)windowDidMove;
 -(void)applicationDidActivate;
 -(void)applicationDidDeactivate;
--(void)appTerminated:(NSNotification *)note;
+
 @end

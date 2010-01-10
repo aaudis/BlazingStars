@@ -7,6 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import <SOLogger/SOLogger.h>
 #import "PrefsWindowController.h"
 #import "PokerStarsInfo.h"
 #import "PokerStarsTheme.h"
@@ -16,6 +17,8 @@
 @interface HKThemeController : NSObject {
     PokerStarsTheme *psTheme;
 	NSDictionary *themeDict;
+	
+	SOLogger *logger;
 }
 -(id)param:(NSString *)key;
 -(void)setPsTheme:(PokerStarsTheme *)thePsTheme;

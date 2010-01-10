@@ -33,6 +33,9 @@
 		0E2A1BE30FD0670400471032 /* Advanced.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E2A1BE10FD0670400471032 /* Advanced.png */; };
 		0E2A1BE40FD0670400471032 /* Basic Keys.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E2A1BE20FD0670400471032 /* Basic Keys.png */; };
 		0E2D92D00FEEBA64002836CA /* Slick.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0E2D92CF0FEEBA63002836CA /* Slick.plist */; };
+		0E33E22C10F6DFEA004C9847 /* HKLowLevel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E33E22B10F6DFEA004C9847 /* HKLowLevel.m */; };
+		0E33E23D10F6E3BE004C9847 /* SOLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E33E23C10F6E3BE004C9847 /* SOLogger.framework */; };
+		0E33E25610F6E87B004C9847 /* SOLogger.framework in Copy Sparkle */ = {isa = PBXBuildFile; fileRef = 0E33E23C10F6E3BE004C9847 /* SOLogger.framework */; };
 		0E46F1281044726E00EC807B /* convert in Resources */ = {isa = PBXBuildFile; fileRef = 0E46F1271044726E00EC807B /* convert */; };
 		0E4D73AE10DF35C80058D4FA /* speechCommands.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0E4D73AD10DF35C80058D4FA /* speechCommands.plist */; };
 		0E5526AA0FDCBB150071ACC6 /* Hyper-Simple.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0E5526A80FDCBB150071ACC6 /* Hyper-Simple.plist */; };
@@ -98,6 +101,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				0E33E25610F6E87B004C9847 /* SOLogger.framework in Copy Sparkle */,
 				0EA807DA1020D5E5004F84D0 /* Sparkle.framework in Copy Sparkle */,
 			);
 			name = "Copy Sparkle";
@@ -123,6 +127,9 @@
 		0E2A1BE20FD0670400471032 /* Basic Keys.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Basic Keys.png"; sourceTree = "<group>"; };
 		0E2D92CF0FEEBA63002836CA /* Slick.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Slick.plist; sourceTree = "<group>"; };
 		0E2D945A0FEED7CA002836CA /* HKDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKDefines.h; sourceTree = "<group>"; };
+		0E33E22A10F6DFEA004C9847 /* HKLowLevel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKLowLevel.h; sourceTree = "<group>"; };
+		0E33E22B10F6DFEA004C9847 /* HKLowLevel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKLowLevel.m; sourceTree = "<group>"; };
+		0E33E23C10F6E3BE004C9847 /* SOLogger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SOLogger.framework; sourceTree = "<group>"; };
 		0E46F1271044726E00EC807B /* convert */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = convert; sourceTree = "<group>"; };
 		0E4D73AD10DF35C80058D4FA /* speechCommands.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = speechCommands.plist; sourceTree = "<group>"; };
 		0E5526A80FDCBB150071ACC6 /* Hyper-Simple.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Hyper-Simple.plist"; sourceTree = "<group>"; };
@@ -203,6 +210,7 @@
 				0EE7BE1D0FE7765000F1429A /* OpenGL.framework in Frameworks */,
 				0EA807CE1020D5A9004F84D0 /* Sparkle.framework in Frameworks */,
 				0EA4581010F31EF600CE056C /* Quartz.framework in Frameworks */,
+				0E33E23D10F6E3BE004C9847 /* SOLogger.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -233,6 +241,8 @@
 				0EE7BD960FE7718500F1429A /* HKScreenScraper.h */,
 				0EE7BD970FE7718500F1429A /* HKScreenScraper.m */,
 				0E2D945A0FEED7CA002836CA /* HKDefines.h */,
+				0E33E22A10F6DFEA004C9847 /* HKLowLevel.h */,
+				0E33E22B10F6DFEA004C9847 /* HKLowLevel.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -420,6 +430,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0E33E23C10F6E3BE004C9847 /* SOLogger.framework */,
 				0EE7BE1C0FE7765000F1429A /* OpenGL.framework */,
 				0EC67AFB0FD0AB73000A33AA /* Carbon.framework */,
 				1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */,
@@ -580,6 +591,7 @@
 				AA286D1C10E92C3C00D8DBED /* PokerStarsTheme.m in Sources */,
 				0E8A2EF310F49A2F00C26293 /* HKTransparentBorderedView.m in Sources */,
 				0E8A2FE410F53FF800C26293 /* HKTransparentWindow.m in Sources */,
+				0E33E22C10F6DFEA004C9847 /* HKLowLevel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

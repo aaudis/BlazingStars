@@ -21,10 +21,8 @@
     supported = themeSupported;
 	
 	if (themeSupported) {
-		NSLog(@"Loading themeDictionary for %@", themeName);
 		NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] 
 																		 pathForResource:themeName ofType: @"plist"]];
-		NSLog(@"dict = %@", dict);
 		self.themeDict = dict;
 	}
     return self;

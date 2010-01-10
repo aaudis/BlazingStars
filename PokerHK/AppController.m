@@ -19,54 +19,6 @@ extern pid_t pokerstarsPID;
 -(id)init
 {
 	if ((self = [super init])) {
-		
-		if (!AXAPIEnabled()) {
-			NSAlert *alert = [[[NSAlert alloc] init] autorelease];
-			[alert addButtonWithTitle:@"OK"];
-			[alert setMessageText:@"Accessibility API must be activated in the Universal Access Preferences Pane."];
-			[alert setInformativeText:@"Make sure that the \"Enable access for assistive devices\" check box is selected at the bottom of the preference pane.  BlazingStars will now quit to allow you to modify the settings."];
-			[alert runModal];
-			[[NSApplication sharedApplication] terminate: nil];
-		}
-		
-		NSWorkspace * ws = [NSWorkspace sharedWorkspace];
-		NSArray * apps = [ws valueForKeyPath:@"launchedApplications.NSApplicationName"];
-		if (![apps containsObject:@"PokerStars"] && ![apps containsObject:@"PokerStarsIT"]) {
-			NSAlert *alert = [[[NSAlert alloc] init] autorelease];
-			[alert addButtonWithTitle:@"OK"];
-			[alert setMessageText:@"PokerStars client not found!"];
-			[alert setInformativeText:@"The PokerStars client must be running for this program to operate.  Please start the client and then re-open BlazingStars."];
-			[NSApp activateIgnoringOtherApps:YES];
-			[alert runModal];
-			[[NSApplication sharedApplication] terminate: nil];
-		}
-		
-		if ([apps containsObject:@"PokerStarsIT"]) {
-			appName = [NSString stringWithFormat:@"PokerStarsIT"];
-			NSLog(@"appName is: %@",appName);
-		} else {
-			appName = [NSString stringWithFormat:@"PokerStars"];
-			NSLog(@"appName is: %@",appName);			
-		}
-	
-		NSArray *pids = [[NSWorkspace sharedWorkspace] launchedApplications];
-		
-		for (id app in pids) {
-			if ([[app objectForKey:@"NSApplicationName"] isEqualToString: appName]) {
-				pokerstarsPID =(pid_t) [[app objectForKey:@"NSApplicationProcessIdentifier"] intValue];
-			}		
-		}
-		
-		appRef = AXUIElementCreateApplication(pokerstarsPID);
-		
-		if (!appRef) {
-			NSLog(@"Could not get application ref.");
-			NSException* apiException = [NSException
-										 exceptionWithName:@"PokerStarsNotFoundException"
-										 reason:@"Cannot get accessibility API reference to the PokerStars application."									
-										 userInfo:nil];
-			@throw apiException;
-		}
 	}
 	return self;
 }
@@ -81,17 +33,6 @@ extern pid_t pokerstarsPID;
 	 name:NSApplicationDidFinishLaunchingNotification object:nil];
 }
 
--(AXUIElementRef)getFrontMostApp
-{
-    pid_t pid;
-    ProcessSerialNumber psn;
-	
-    GetFrontProcess(&psn);
-    GetProcessPID(&psn, &pid);
-    return AXUIElementCreateApplication(pid);
-}
-
-
 - (void)finishedLaunching:(NSNotification *)notification
 {
 	NSLog(@"BlazingStars finished launching.");
@@ -102,14 +43,12 @@ extern pid_t pokerstarsPID;
     AXUIElementRef frontMostApp;
 
     /* Here we go. Find out which process is front-most */
-    frontMostApp = [self getFrontMostApp];
+    frontMostApp = [lowLevel getFrontMostApp];
     /* Get the title of the window */
     AXUIElementCopyAttributeValue(frontMostApp, kAXTitleAttribute, (CFTypeRef *)&appTitle);
 
 	if ([appTitle isEqual:@"PokerStars"]) {
-		NSLog(@"PokerStars is frontmost!  Activating hotkeys.");
 		if ([windowManager activated] == NO) {
-			NSLog(@"Sending didActivate.");
 			[windowManager applicationDidActivate];
 		}
 	}
@@ -187,11 +126,6 @@ extern pid_t pokerstarsPID;
 	[dispatchController setPFRAmount:amount];
 }
 
--(void)turnOnRounding:(BOOL)round
-{
-	[dispatchController turnOnRounding:round];
-}
-
 -(void)setRoundingAmount:(float)amount
 {
 	[dispatchController setRoundingAmount:amount];
@@ -200,21 +134,6 @@ extern pid_t pokerstarsPID;
 -(void)setRoundingType:(int)type
 {
 	[dispatchController setRoundingType:type];
-}
-
--(void)autoBetRounding:(BOOL)aBool
-{
-	[dispatchController autoBetRounding:aBool];
-}
-
--(void)autoBetAllIn:(BOOL)aBool
-{
-	[dispatchController autoBetAllIn:aBool];
-}
-
--(void)autoPFR:(BOOL)aBool
-{
-	[dispatchController autoPFR:aBool];
 }
 
 @end

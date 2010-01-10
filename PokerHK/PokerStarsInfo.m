@@ -7,8 +7,7 @@
 
 #import "PokerStarsInfo.h"
 #import "HKDefines.h"
-
-extern NSString *appName;
+#import "HKLowLevel.h"
 
 // declare private methods
 @interface PokerStarsInfo() 
@@ -88,7 +87,8 @@ extern NSString *appName;
  Returns the name of the poker stars preferences file
  */
 +(NSString *) pokerStarsPreferencesFilename {
-	if ([appName isEqualToString:@"PokerStarsIT"]) {
+	HKLowLevel *lowLevel = [[HKLowLevel alloc] init];
+	if ([[lowLevel appName] isEqualToString:@"PokerStarsIT"]) {
 		return [@"~/Library/Preferences/com.pokerstars.it.user.ini" stringByExpandingTildeInPath];
 	}
     return [@"~/Library/Preferences/com.pokerstars.user.ini" stringByExpandingTildeInPath];

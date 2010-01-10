@@ -22,7 +22,6 @@
 
 +(void)initialize {
 	// If this is the first run, set up sensible default hot keys.  
-	NSLog(@"Registering defaults for PrefsWindowController.");
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	NSMutableDictionary *shortcutDefaults = [NSMutableDictionary dictionary];
 	
@@ -64,9 +63,11 @@
     [defaults registerDefaults:shortcutDefaults];
 }
 
-
 -(void)awakeFromNib
 {
+	logger = [SOLogger loggerForFacility:@"com.fullyfunctionalsoftware.blazingstars" options:ASL_OPT_STDERR];
+	[logger info:@"Initializing prefsWindowController."];
+	
     [self detectTheme];
     
 	// Make the textfield take the initial value.
@@ -108,11 +109,9 @@
 		[sc setAllowsKeyOnly:YES escapeKeysRecord:NO];
 		
 		NSString *dictKey = [[tagDict objectForKey:tag] objectAtIndex:SRKEY];
-		NSLog(@"Attempting to find key: %@",dictKey);
 		if ([[NSUserDefaults standardUserDefaults] objectForKey:dictKey] != nil) {
 			[[[NSUserDefaults standardUserDefaults] objectForKey:dictKey] getBytes:&key length:sizeof(KeyCombo)];
 			[sc setKeyCombo:key];
-			NSLog(@"code: %d flags: %d",key.code,key.flags);
 		} else {
 			KeyCombo k = [sc keyCombo];
 			[[NSUserDefaults standardUserDefaults] setObject:[NSData dataWithBytes:&k length:sizeof(KeyCombo)] forKey:dictKey];
@@ -127,31 +126,8 @@
 	[self setPFRAmount:[potBetPrefsView viewWithTag:23]];
 
 	// Trigger the rounding controls.
-	[self turnOnRounding:[potBetPrefsView viewWithTag:ROUNDINGONTAG]];
 	[self setRoundingAmount:[potBetPrefsView viewWithTag:ROUNDINGAMOUNTTAG]];
 	[self setRoundingType:[potBetPrefsView viewWithTag:ROUNDINGTYPETAG]];
-	[self autoBetRounding:[potBetPrefsView viewWithTag:AUTOBETROUNDINGTAG]];
-		
-	[self autoBetAllIn:[potBetPrefsView viewWithTag:AUTOBETALLINTAG]];
-	[self autoPFR:[potBetPrefsView viewWithTag:AUTOPFRTAG]];
-
-	
-	// Set the frame colour from the defaults.
-	NSArray *colorValues = [[NSUserDefaults standardUserDefaults] objectForKey: @"windowFrameColourKey"];
-	
-    if(colorValues && ([colorValues count] >= 4)) {
-		
-		NSLog(@"Colour found!");
-        NSColor *color = [NSColor colorWithDeviceRed: [[colorValues objectAtIndex: 0] floatValue]				
-                                     green: [[colorValues objectAtIndex: 1] floatValue]				
-                                      blue: [[colorValues objectAtIndex: 2] floatValue]				
-                                     alpha: [[colorValues objectAtIndex: 3] floatValue]];
-		
-		
-		[windowFrameColourWell setColor:color];
-		
-    }
-	
 }
 
 -(IBAction)redetectTheme:(id)sender {
@@ -159,9 +135,8 @@
 }
 
 -(void)detectTheme {
-    NSLog(@"Detecting theme");
     PokerStarsTheme *currentTheme = [PokerStarsInfo determineTheme];
-    NSLog(@"Detected theme %@", currentTheme);
+	[logger info:@"Detected theme %@", currentTheme];
     while (![currentTheme supported]) {
         NSAlert *alert = [[[NSAlert alloc] init] autorelease];
 		[alert addButtonWithTitle:@"Help"];
@@ -178,7 +153,7 @@
             
         } else {
             currentTheme = [PokerStarsInfo determineTheme];
-            NSLog(@"Detected theme %@", currentTheme);
+			[logger info:@"Detected theme %@", currentTheme];
         }
     }
     [themeController setPsTheme:currentTheme];
@@ -187,7 +162,6 @@
      
 -(IBAction)setPotBetAmount:(id)sender
 {
-	NSLog(@"Changing pet bot amount to %f: ",[sender floatValue]);
 	switch ([sender tag]) {
 		case 17:
 			[potStepperOneField setFloatValue:[sender floatValue]];
@@ -210,22 +184,15 @@
 			[appController setPotBetAmount:[sender floatValue] forTag:[sender tag]];
 			break;
 		default:
-			NSLog(@"setPotBetAmount:  why am I here? %d",[sender tag]);
 			break;
 	}
 }
 
 -(IBAction)setPFRAmount:(id)sender
 {
-	NSLog(@"Changing pfr amount to %f: ",[sender floatValue]);
 	[pfrStepperField setFloatValue:[sender floatValue]];
 	[pfrStepper setFloatValue:[sender floatValue]];
 	[appController setPFRAmount:[sender floatValue]];	
-}
-
--(IBAction)turnOnRounding:(id)sender
-{
-	[appController turnOnRounding:[sender state]];
 }
 
 -(IBAction)setRoundingAmount:(id)sender
@@ -243,35 +210,6 @@
 -(IBAction)voiceCommandsChangedState:(id)sender
 {
 	[appController voiceCommandsChangedState];
-}
-
--(IBAction)setWindowFrameColor:(id)sender
-{
-	NSLog(@"Setting colour to defaults!");
-	NSArray *colorValues = [NSArray arrayWithObjects:							
-                            [NSNumber numberWithFloat: [[windowFrameColourWell color] redComponent]],
-                            [NSNumber numberWithFloat: [[windowFrameColourWell color] greenComponent]],
-                            [NSNumber numberWithFloat: [[windowFrameColourWell color] blueComponent]],
-                            [NSNumber numberWithFloat: [[windowFrameColourWell color] alphaComponent]],
-                            nil];
-	
-    [[NSUserDefaults standardUserDefaults] setObject: colorValues
-                                              forKey: @"windowFrameColourKey"];
-}
-
--(IBAction)autoBetRounding:(id)sender
-{
-	[appController autoBetRounding:[sender state]];
-}
-
--(IBAction)autoBetAllIn:(id)sender
-{
-	[appController autoBetAllIn:[sender state]];
-}
-
--(IBAction)autoPFR:(id)sender
-{
-	[appController autoPFR:[sender state]];
 }
 
 /* 
@@ -292,7 +230,6 @@
 - (IBAction)showWindow:(id)sender 
 {
 	[super showWindow:sender];
-	NSLog(@"Setting the delegate!");
 	[[self window] setDelegate:self];
 	[[self window] makeKeyAndOrderFront:sender];
 }
@@ -305,7 +242,6 @@
  */
 - (void)shortcutRecorder:(SRRecorderControl *)aRecorder keyComboDidChange:(KeyCombo)newKeyCombo
 {
-	NSLog(@"Hot key captured in SRRC!");
 	NSData *key = [NSData dataWithBytes:&newKeyCombo length:sizeof(KeyCombo)];
 	[[NSUserDefaults standardUserDefaults] setObject:key
 											  forKey: [[tagDict objectForKey:[NSValue valueWithPointer:aRecorder]] objectAtIndex:SRKEY]];

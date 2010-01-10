@@ -23,7 +23,6 @@
 
 - (void)drawRect:(NSRect)dirtyRect
 {
-	NSLog(@"Drawing rect.");
     NSColor *bgColor = [NSColor colorWithCalibratedWhite:0.0 alpha:0.0];
     NSRect bgRect = [self bounds];
 	

@@ -17,6 +17,10 @@
         return nil;
     };
 	[[PrefsWindowController sharedPrefsWindowController] setThemeController:self];
+	
+	logger = [SOLogger loggerForFacility:@"com.fullyfunctionalsoftware.blazingstars" options:ASL_OPT_STDERR];
+	[logger info:@"Initializing themeController."];
+	
     return self;
 }
 
@@ -29,7 +33,7 @@
 
 -(void)setPsTheme:(PokerStarsTheme *)thePsTheme
 {
-	NSLog(@"Setting theme: %@",thePsTheme);
+	[logger info:@"Setting theme: %@",thePsTheme];
 	psTheme = thePsTheme;
 }
 
