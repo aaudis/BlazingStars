@@ -165,6 +165,8 @@
 	// Cancel any of the modifier keys - this caused me a day of bug-hunting!
 	CGEventSetFlags(mouseEvent,0);
 	CGEventPost(kCGHIDEventTap,mouseEvent);
+	
+	CFRelease(mouseEvent);
 	mouseEvent = CGEventCreateMouseEvent(NULL,kCGEventLeftMouseUp,point,kCGMouseButtonLeft);
 	CGEventSetFlags(mouseEvent,0);
 	CGEventPost(kCGHIDEventTap,mouseEvent);
@@ -172,6 +174,8 @@
 	CGAssociateMouseAndMouseCursorPosition(true);	
 	FlushEventQueue(GetMainEventQueue());
 	FlushEventQueue(GetCurrentEventQueue());
+	
+	CFRelease(mouseEvent);
 }
 
 -(void)keyPress:(int)keyCode with:(int)flags
@@ -187,6 +191,8 @@
 	FlushEventQueue(GetMainEventQueue());
 	FlushEventQueue(GetCurrentEventQueue());	
 		
+	CFRelease(keyEventUp);
+	CFRelease(keyEventDown);
 }
 
 -(void)keyPress:(int)keyCode 
@@ -211,7 +217,8 @@
 			FlushEventQueue(GetCurrentEventQueue());	
 		}
 	}	
-	
+	CFRelease(keyEventUp);
+	CFRelease(keyEventDown);
 }
 
 -(void)writeString:(NSString *)valueToSet
@@ -229,7 +236,9 @@
 		CGEventKeyboardSetUnicodeString(keyEventUp, 1, &buffer);
 		CGEventPost(kCGAnnotatedSessionEventTap, keyEventUp);
 	}
-	
+	CFRelease(keyEventUp);
+	CFRelease(keyEventDown);
+
 }
 
 -(void)appTerminated:(NSNotification *)note
