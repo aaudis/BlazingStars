@@ -10,6 +10,7 @@
 #import "HKTransparentBorderedView.h"
 #import "HKTransparentWindow.h"
 #import "HKDefines.h"
+#import "PokerStarsInfo.h"
 
 void axObserverCallback(AXObserverRef observer, 
 						AXUIElementRef elementRef, 
@@ -158,8 +159,13 @@ HKWindowManager *wm = NULL;
 				return;
 			}
 			
-			[windowDict setObject:[NSArray arrayWithObjects:NSStringFromSize(NSSizeFromCGSize(sizeVal)),nil] forKey:name];			
+			// Let's see if we can find the textArea.
+			AXUIElementRef chatRef = [self findChatBoxForWindow:(AXUIElementRef) child];
+			
+			
+			[windowDict setObject:[NSArray arrayWithObjects:NSStringFromSize(NSSizeFromCGSize(sizeVal)),chatRef,nil] forKey:name];			
 			AXObserverAddNotification(observer, (AXUIElementRef)child, kAXUIElementDestroyedNotification, (void *)self);			
+			AXObserverAddNotification(observer, chatRef, kAXValueChangedNotification, (void *)self);
 		}
 	}
 	[logger info:@"windowDict: %@",windowDict];
@@ -184,12 +190,39 @@ HKWindowManager *wm = NULL;
 		return;		
 	}
 	
-	[windowDict setObject:[NSArray arrayWithObjects:NSStringFromSize(NSSizeFromCGSize(sizeVal)),nil] forKey:title];		
-	AXObserverAddNotification(observer,windowRef, kAXUIElementDestroyedNotification, (void *)self);			
+	AXUIElementRef chatRef = [self findChatBoxForWindow:(AXUIElementRef) windowRef];	
+	
+	[windowDict setObject:[NSArray arrayWithObjects:NSStringFromSize(NSSizeFromCGSize(sizeVal)),chatRef,nil] forKey:title];		
+	AXObserverAddNotification(observer,windowRef, kAXUIElementDestroyedNotification, (void *)self);	
+	AXObserverAddNotification(observer, chatRef, kAXValueChangedNotification, (void *)self);	
 	[logger info:@"windowDict is now: %@",windowDict];
 }
 
 #pragma mark WindowDidOpen helpers.
+
+-(AXUIElementRef)findChatBoxForWindow:(AXUIElementRef)windowRef
+{
+	AXUIElementRef chatRef;
+	NSString *role;
+	for (id child in [lowLevel getChildrenFrom:windowRef]) {
+		AXUIElementCopyAttributeValue((AXUIElementRef)child, kAXRoleAttribute,(CFTypeRef *)&role);
+		if ([role isEqualToString:@"AXScrollArea"]) {
+			[logger debug:@"Found scroll area!"];
+			for (id subChild in [lowLevel getChildrenFrom:(AXUIElementRef)child]) {
+				AXUIElementCopyAttributeValue((AXUIElementRef)subChild, kAXRoleAttribute,(CFTypeRef *)&role);						
+				if ([role isEqualToString:@"AXTextField"]) {
+					[logger debug:@"Found dealer chat!"];
+					NSString *chat;
+					AXUIElementCopyAttributeValue((AXUIElementRef)subChild, kAXValueAttribute, (CFTypeRef *)&chat);
+					[logger debug:@"Chat area text:\n%@",chat];
+					chatRef = (AXUIElementRef)subChild;
+					break;
+				}
+			}
+		}
+	}	
+	return chatRef;
+}
 
 -(double)findTournamentNum:(NSString *)title inLobby:(BOOL)lobbyBool
 {
@@ -599,6 +632,29 @@ HKWindowManager *wm = NULL;
 	} 
 }
 
+-(void)chatChanged:(AXUIElementRef)chatRef
+{
+	[logger debug:@"chatChanged activated!"];
+	
+	NSString *text;
+	
+	AXUIElementCopyAttributeValue(chatRef, kAXValueAttribute, (CFTypeRef *)&text);
+	text = [text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+	NSArray* lines = [text componentsSeparatedByCharactersInSet: [NSCharacterSet newlineCharacterSet]];
+
+	NSString *lastLine = [lines lastObject];
+	
+	[logger debug:@"Last line: %@",lastLine];
+	// Dealer: WinawerZero, it's your turn. You have 8 seconds to act
+	// WinawerZero, TIME BANK
+	
+	if ([lastLine rangeOfString:[PokerStarsInfo determineUserName]].location != NSNotFound &&
+		[lastLine rangeOfString:@"TIME BANK"].location != NSNotFound) {
+		[logger debug:@"Time bank was activated!!"];
+	}
+	
+}
+
 @end
 
 
@@ -622,6 +678,8 @@ void axObserverCallback(AXObserverRef observer,
 		[wm windowFocusDidChange];
 	} else if (CFStringCompare(notification,kAXWindowMovedNotification,0) == 0) {
 		[wm windowDidMove];
+	} else if (CFStringCompare(notification, kAXValueChangedNotification, 0) == 0) {
+		[wm chatChanged:elementRef];
 	}
 }
 

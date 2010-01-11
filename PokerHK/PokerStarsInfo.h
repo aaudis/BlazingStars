@@ -11,5 +11,6 @@
 @interface PokerStarsInfo : NSObject {
 }
 +(PokerStarsTheme *)determineTheme;
++(NSString *)determineUserName;
 
 @end

@@ -58,6 +58,7 @@ enum {
 -(void)updateWindowDict;
 -(void)addWindowToWindowDict:(AXUIElementRef)windowRef;
 
+-(AXUIElementRef)findChatBoxForWindow:(AXUIElementRef)windowRef;
 -(double)findTournamentNum:(NSString *)title inLobby:(BOOL)lobbyBool;
 -(AXUIElementRef)findLobbyForTournament:(double)tnum;
 -(void)closeLobbyForTournament:(AXUIElementRef)elementRef;
@@ -81,5 +82,6 @@ enum {
 -(void)windowDidMove;
 -(void)applicationDidActivate;
 -(void)applicationDidDeactivate;
+-(void)chatChanged:(AXUIElementRef)chatRef;
 
 @end

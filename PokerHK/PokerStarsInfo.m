@@ -73,6 +73,11 @@
     return [[PokerStarsTheme alloc] initWithName:[@"Unknown PokerStars theme: " stringByAppendingString: s] supported:NO];
 }
 
++(NSString *)determineUserName
+{
+	return [PokerStarsInfo pokerStarsPreference: @"Name" inSection:@"User"];
+}
+
 /* 
  Returns YES if an application with the given name exists in the Applications folder
  */
