@@ -39,7 +39,7 @@
         return [[PokerStarsTheme alloc] initWithName:@"Slick" supported:YES];
     }
     if ([s isEqualToString:@"default"]) {
-        return [[PokerStarsTheme alloc] initWithName:@"Classic" supported:NO];
+        return [[PokerStarsTheme alloc] initWithName:@"Classic" supported:YES];
     }
 	// Work around for a bug in the PokerStars IT preferences.  
     if ([s isEqualToString:@"black"] || [s isEqualToString:@"xblack"]) {

@@ -11,6 +11,8 @@
 	<key>checkFold</key>
 	<string>Check Fold</string>
 	<key>foldToAny</key>
+	<string>Fold To Bet</string>
+	<key>foldToAnyLeft</key>
 	<string>Fold To Any</string>
 	<key>checkCall</key>
 	<string>Check Call</string>

@@ -2,10 +2,10 @@
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="7.10">
 	<data>
 		<int key="IBDocument.SystemTarget">1050</int>
-		<string key="IBDocument.SystemVersion">10B504</string>
+		<string key="IBDocument.SystemVersion">10C540</string>
 		<string key="IBDocument.InterfaceBuilderVersion">740</string>
-		<string key="IBDocument.AppKitVersion">1038.2</string>
-		<string key="IBDocument.HIToolboxVersion">437.00</string>
+		<string key="IBDocument.AppKitVersion">1038.25</string>
+		<string key="IBDocument.HIToolboxVersion">458.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
 			<string key="NS.object.0">740</string>
@@ -13,11 +13,11 @@
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
 			<integer value="7"/>
-			<integer value="1"/>
-			<integer value="308"/>
 			<integer value="283"/>
-			<integer value="709"/>
+			<integer value="72"/>
 			<integer value="642"/>
+			<integer value="308"/>
+			<integer value="709"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -210,6 +210,22 @@
 											<reference key="NSTextColor" ref="255908456"/>
 										</object>
 									</object>
+									<object class="NSTextField" id="144243247">
+										<reference key="NSNextResponder" ref="396221430"/>
+										<int key="NSvFlags">268</int>
+										<string key="NSFrame">{{15, 125}, {81, 17}}</string>
+										<reference key="NSSuperview" ref="396221430"/>
+										<bool key="NSEnabled">YES</bool>
+										<object class="NSTextFieldCell" key="NSCell" id="360350997">
+											<int key="NSCellFlags">68288064</int>
+											<int key="NSCellFlags2">272630784</int>
+											<string key="NSContents">Fold to any:</string>
+											<reference key="NSSupport" ref="486726547"/>
+											<reference key="NSControlView" ref="144243247"/>
+											<reference key="NSBackgroundColor" ref="348588480"/>
+											<reference key="NSTextColor" ref="255908456"/>
+										</object>
+									</object>
 									<object class="NSTextField" id="293399165">
 										<reference key="NSNextResponder" ref="396221430"/>
 										<int key="NSvFlags">268</int>
@@ -364,6 +380,13 @@
 										<reference key="NSNextResponder" ref="396221430"/>
 										<int key="NSvFlags">268</int>
 										<string key="NSFrame">{{122, 209}, {145, 22}}</string>
+										<reference key="NSSuperview" ref="396221430"/>
+										<string key="NSClassName">SRRecorderControl</string>
+									</object>
+									<object class="NSCustomView" id="955630578">
+										<reference key="NSNextResponder" ref="396221430"/>
+										<int key="NSvFlags">268</int>
+										<string key="NSFrame">{{122, 120}, {145, 22}}</string>
 										<reference key="NSSuperview" ref="396221430"/>
 										<string key="NSClassName">SRRecorderControl</string>
 									</object>
@@ -1716,11 +1739,6 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 				<string key="NSClassName">PrefsView</string>
 			</object>
 			<object class="NSUserDefaultsController" id="344817510">
-				<object class="NSMutableArray" key="NSDeclaredKeys">
-					<bool key="EncodedWithXMLCoder">YES</bool>
-					<string>debugOverlayWindowKey</string>
-					<string>windowFrameColourKey</string>
-				</object>
 				<bool key="NSSharedInstance">YES</bool>
 			</object>
 			<object class="NSCustomView" id="775902063">
@@ -3610,6 +3628,22 @@ IGtleSBjb21iaW5hdGlvbi4KA</string>
 					</object>
 					<int key="connectionID">735</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">delegate</string>
+						<reference key="source" ref="955630578"/>
+						<reference key="destination" ref="1001"/>
+					</object>
+					<int key="connectionID">737</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">foldToAnyLeft</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="955630578"/>
+					</object>
+					<int key="connectionID">740</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -3741,6 +3775,8 @@ IGtleSBjb21iaW5hdGlvbi4KA</string>
 							<reference ref="831622450"/>
 							<reference ref="98429830"/>
 							<reference ref="150982394"/>
+							<reference ref="955630578"/>
+							<reference ref="144243247"/>
 						</object>
 						<reference key="parent" ref="109093987"/>
 					</object>
@@ -4990,6 +5026,26 @@ IGtleSBjb21iaW5hdGlvbi4KA</string>
 						<reference key="object" ref="526637449"/>
 						<reference key="parent" ref="596944857"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">736</int>
+						<reference key="object" ref="955630578"/>
+						<reference key="parent" ref="18084193"/>
+						<string key="objectName">Fold</string>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">738</int>
+						<reference key="object" ref="144243247"/>
+						<object class="NSMutableArray" key="children">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<reference ref="360350997"/>
+						</object>
+						<reference key="parent" ref="18084193"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">739</int>
+						<reference key="object" ref="360350997"/>
+						<reference key="parent" ref="144243247"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -5177,6 +5233,10 @@ IGtleSBjb21iaW5hdGlvbi4KA</string>
 					<string>706.IBPluginDependency</string>
 					<string>727.IBPluginDependency</string>
 					<string>728.IBPluginDependency</string>
+					<string>736.IBPluginDependency</string>
+					<string>738.IBAttributePlaceholdersKey</string>
+					<string>738.IBPluginDependency</string>
+					<string>739.IBPluginDependency</string>
 					<string>75.IBAttributePlaceholdersKey</string>
 					<string>75.IBPluginDependency</string>
 					<string>76.IBPluginDependency</string>
@@ -5193,7 +5253,7 @@ IGtleSBjb21iaW5hdGlvbi4KA</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{11, 432}, {849, 320}}</string>
+					<string>{{50, 432}, {849, 320}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<object class="NSMutableDictionary">
@@ -5441,6 +5501,17 @@ IGtleSBjb21iaW5hdGlvbi4KA</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<object class="NSMutableDictionary">
+						<string key="NS.key.0">ToolTip</string>
+						<object class="IBToolTipAttribute" key="NS.object.0">
+							<string key="name">ToolTip</string>
+							<reference key="object" ref="144243247"/>
+							<string key="toolTip">Toggles the Fold checkbox.</string>
+						</object>
+					</object>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<object class="NSMutableDictionary">
 						<string key="NS.key.0">ToolTip</string>
 						<object class="IBToolTipAttribute" key="NS.object.0">
@@ -5490,7 +5561,7 @@ IGtleSBjb21iaW5hdGlvbi4KA</string>
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">735</int>
+			<int key="maxID">740</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -5578,6 +5649,7 @@ IGtleSBjb21iaW5hdGlvbi4KA</string>
 							<string>decrement</string>
 							<string>fold</string>
 							<string>foldToAny</string>
+							<string>foldToAnyLeft</string>
 							<string>increment</string>
 							<string>leaveAllTables</string>
 							<string>leaveTable</string>
@@ -5628,6 +5700,7 @@ IGtleSBjb21iaW5hdGlvbi4KA</string>
 							<string>SRRecorderControl</string>
 							<string>SRRecorderControl</string>
 							<string>NSTextField</string>
+							<string>SRRecorderControl</string>
 							<string>SRRecorderControl</string>
 							<string>SRRecorderControl</string>
 							<string>SRRecorderControl</string>

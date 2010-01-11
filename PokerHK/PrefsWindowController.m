@@ -32,13 +32,14 @@
 	kc.code = 11; kc.flags = 0; [shortcutDefaults setObject:[NSData dataWithBytes:&kc length:sizeof(KeyCombo)] forKey:@"BetKey"];
 	kc.code = 12; kc.flags = 0; [shortcutDefaults setObject:[NSData dataWithBytes:&kc length:sizeof(KeyCombo)] forKey:@"CheckFoldKey"];	
 	kc.code = 13; kc.flags = 0; [shortcutDefaults setObject:[NSData dataWithBytes:&kc length:sizeof(KeyCombo)] forKey:@"FoldToAnyKey"];	
+	kc.code = 45; kc.flags = 0; [shortcutDefaults setObject:[NSData dataWithBytes:&kc length:sizeof(KeyCombo)] forKey:@"FoldToAnyLeftKey"];		
 	kc.code = 14; kc.flags = 0; [shortcutDefaults setObject:[NSData dataWithBytes:&kc length:sizeof(KeyCombo)] forKey:@"CheckCallKey"];	
 	kc.code = 15; kc.flags = 0; [shortcutDefaults setObject:[NSData dataWithBytes:&kc length:sizeof(KeyCombo)] forKey:@"CheckCallAnyKey"];	
 	kc.code = 17; kc.flags = 0; [shortcutDefaults setObject:[NSData dataWithBytes:&kc length:sizeof(KeyCombo)] forKey:@"BetRaiseKey"];	
 	kc.code = 16; kc.flags = 0; [shortcutDefaults setObject:[NSData dataWithBytes:&kc length:sizeof(KeyCombo)] forKey:@"BetRaiseAnyKey"];	
 	kc.code = 35; kc.flags = 0; [shortcutDefaults setObject:[NSData dataWithBytes:&kc length:sizeof(KeyCombo)] forKey:@"SitOutKey"];		
 	kc.code = 33; kc.flags = 0; [shortcutDefaults setObject:[NSData dataWithBytes:&kc length:sizeof(KeyCombo)] forKey:@"AutoPostKey"];	
-	kc.code = 30; kc.flags = 0; [shortcutDefaults setObject:[NSData dataWithBytes:&kc length:sizeof(KeyCombo)] forKey:@"SitOutAllTablesKey"];	
+	kc.code = 30; kc.flags = 0; [shortcutDefaults setObject:[NSData dataWithBytes:&kc length:sizeof(KeyCombo)] forKey:@"SitOutAllTablesKey"];
 	kc.code = 126; kc.flags = 10486016; [shortcutDefaults setObject:[NSData dataWithBytes:&kc length:sizeof(KeyCombo)] forKey:@"IncrementKey"];	
 	kc.code = 125; kc.flags = 10486016; [shortcutDefaults setObject:[NSData dataWithBytes:&kc length:sizeof(KeyCombo)] forKey:@"DecrementKey"];	
 	kc.code = 37; kc.flags = 0; [shortcutDefaults setObject:[NSData dataWithBytes:&kc length:sizeof(KeyCombo)] forKey:@"leaveTable"];	
@@ -98,7 +99,8 @@
 			   [NSArray arrayWithObjects:[NSNumber numberWithInt:21],@"AllInKey",nil],[NSValue valueWithPointer:allIn],
 			   [NSArray arrayWithObjects:[NSNumber numberWithInt:22],@"ToggleAllKey",nil],[NSValue valueWithPointer:toggleAllHotkeys],
 			   [NSArray arrayWithObjects:[NSNumber numberWithInt:23],@"PFRKey",nil],[NSValue valueWithPointer:pfr],
-			   [NSArray arrayWithObjects:[NSNumber numberWithInt:99],@"DebugKey",nil],[NSValue valueWithPointer:debugHK],			   
+			   [NSArray arrayWithObjects:[NSNumber numberWithInt:24],@"FoldToAnyLeftKey",nil],[NSValue valueWithPointer:foldToAnyLeft], 
+			   [NSArray arrayWithObjects:[NSNumber numberWithInt:99],@"DebugKey",nil],[NSValue valueWithPointer:debugHK],	
 			   nil];
 	
 	SRRecorderControl *sc; 	KeyCombo key;
@@ -143,7 +145,7 @@
 		[alert addButtonWithTitle:@"Redetect Theme"];
 		[alert addButtonWithTitle:@"Quit"];
 		[alert setMessageText:[@"BlazingStars does not support your PokerStars table theme: " stringByAppendingString:[currentTheme name]]];
-		[alert setInformativeText:@"Supported themes are Black, Slick, and Hyper-Simple."];
+		[alert setInformativeText:@"Supported themes are Classic, Black, Slick, and Hyper-Simple."];
         NSInteger result = [alert runModal];
 		if (result == NSAlertThirdButtonReturn) {
             exit(0);

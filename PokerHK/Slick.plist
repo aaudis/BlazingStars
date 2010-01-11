@@ -30,6 +30,10 @@
 	<real>0.521</real>
 	<key>foldToAnyOriginY</key>
 	<real>0.91</real>
+	<key>foldToAnyLeftOriginX</key>
+	<real>0.01</real>
+	<key>foldToAnyLeftOriginY</key>
+	<real>0.65</real>
 	<key>checkCallOriginX</key>
 	<real>0.6830000000000001</real>
 	<key>checkCallOriginY</key>

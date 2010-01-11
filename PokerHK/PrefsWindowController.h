@@ -72,6 +72,7 @@
 	IBOutlet SRRecorderControl *bet;
 	IBOutlet SRRecorderControl *checkFold;
 	IBOutlet SRRecorderControl *foldToAny;
+	IBOutlet SRRecorderControl *foldToAnyLeft;
 	IBOutlet SRRecorderControl *checkCall;
 	IBOutlet SRRecorderControl *checkCallAny;
 	IBOutlet SRRecorderControl *betRaise;

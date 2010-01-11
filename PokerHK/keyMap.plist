@@ -67,5 +67,10 @@
 		<string>leaveAllTables</string>
 		<string>small</string>
 	</array>
+	<key>24</key>
+	<array>
+		<string>foldToAnyLeft</string>
+		<string>small</string>
+	</array>
 </dict>
 </plist>

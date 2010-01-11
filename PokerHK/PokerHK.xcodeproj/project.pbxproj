@@ -77,6 +77,7 @@
 		0EF91D700FDB805F00FB01E7 /* HKThemeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EF91D6F0FDB805F00FB01E7 /* HKThemeController.m */; };
 		0EF91D800FDB81DE00FB01E7 /* Setup.png in Resources */ = {isa = PBXBuildFile; fileRef = 0EF91D7F0FDB81DE00FB01E7 /* Setup.png */; };
 		1DDD58160DA1D0A300B32029 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DDD58140DA1D0A300B32029 /* MainMenu.xib */; };
+		32EC1B3310F9ED25000C972F /* Classic.plist in Resources */ = {isa = PBXBuildFile; fileRef = 32EC1B3210F9ED25000C972F /* Classic.plist */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
@@ -192,6 +193,7 @@
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		32CA4F630368D1EE00C91783 /* PokerHK_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PokerHK_Prefix.pch; sourceTree = "<group>"; };
+		32EC1B3210F9ED25000C972F /* Classic.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Classic.plist; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* BlazingStars.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BlazingStars.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA286D1710E92C3C00D8DBED /* PokerStarsInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PokerStarsInfo.h; sourceTree = "<group>"; };
@@ -289,6 +291,7 @@
 		0E5528E10FDCE2D50071ACC6 /* Themes */ = {
 			isa = PBXGroup;
 			children = (
+				32EC1B3210F9ED25000C972F /* Classic.plist */,
 				0E2D92CF0FEEBA63002836CA /* Slick.plist */,
 				0E5526A80FDCBB150071ACC6 /* Hyper-Simple.plist */,
 				0E5526A90FDCBB150071ACC6 /* Black.plist */,
@@ -515,6 +518,7 @@
 				0ED0FBE910E212AC000DF720 /* dmg_background.psd in Resources */,
 				0ED0FBF610E21352000DF720 /* AdiumApplescriptRunner in Resources */,
 				0E8A2E0910F4868000C26293 /* Windows.png in Resources */,
+				32EC1B3310F9ED25000C972F /* Classic.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
