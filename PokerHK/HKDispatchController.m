@@ -345,6 +345,26 @@ HKWindowManager *wm;
 					andWidth:[[themeController param:[size stringByAppendingString:@"ButtonWidth"]] floatValue]];		
 }
 
+-(void)buttonPress:(NSString *)prefix withButton:(NSString *)size onTable:(AXUIElementRef)tableRef
+{
+	AXError err = AXUIElementPerformAction(tableRef, kAXRaiseAction);
+	NSString *role,*title;
+	AXUIElementCopyAttributeValue(tableRef, kAXRoleAttribute, (CFTypeRef *)&role);
+	AXUIElementCopyAttributeValue(tableRef, kAXRoleAttribute, (CFTypeRef *)&title);
+	
+	[logger debug:@"Window info->  role: %@  title: %@",role,title];
+	
+	if (err == kAXErrorSuccess) {
+		[windowManager clickPointForXSize:[[themeController param:[prefix stringByAppendingString:@"OriginX"]] floatValue]
+								 andYSize:[[themeController param:[prefix stringByAppendingString:@"OriginY"]] floatValue]
+								andHeight:[[themeController param:[size stringByAppendingString:@"ButtonHeight"]] floatValue]
+								 andWidth:[[themeController param:[size stringByAppendingString:@"ButtonWidth"]] floatValue]];				
+	} else{
+		[logger warning:@"Could not raise the table to press the time bank button. Error: %d",err];
+	}
+}
+
+
 -(void)buttonPressAllTables:(int)tag
 {
 	NSArray *tables = [windowManager getAllPokerTables];

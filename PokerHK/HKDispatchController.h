@@ -60,6 +60,7 @@
 -(BOOL)keyComboAlreadyRegistered:(KeyCombo)kc; 
 -(void)registerHotKeyForControl:(SRRecorderControl *)control withTag:(int)tag;
 -(void)buttonPress:(NSString *)prefix withButton:(NSString *)size;
+-(void)buttonPress:(NSString *)prefix withButton:(NSString *)size onTable:(AXUIElementRef)tableRef;
 -(void)buttonPressAllTables:(int)tag;
 -(void)autoBet;
 -(float)getBetSize;
@@ -72,7 +73,7 @@
 -(void)toggleAllHotKeys;
 -(void)activateHotKeys;
 -(void)deactivateHotKeys;
-- (void)simulateHotKey:(int)tag;
+-(void)simulateHotKey:(int)tag;
 -(void)potBet:(int)tag;
 -(void)pfr;
 -(void)leaveAllTables;

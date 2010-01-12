@@ -634,8 +634,6 @@ HKWindowManager *wm = NULL;
 
 -(void)chatChanged:(AXUIElementRef)chatRef
 {
-	[logger debug:@"chatChanged activated!"];
-	
 	NSString *text;
 	
 	AXUIElementCopyAttributeValue(chatRef, kAXValueAttribute, (CFTypeRef *)&text);
@@ -644,17 +642,22 @@ HKWindowManager *wm = NULL;
 
 	NSString *lastLine = [lines lastObject];
 	
-	[logger debug:@"Last line: %@",lastLine];
-	// Dealer: WinawerZero, it's your turn. You have 8 seconds to act
-	// WinawerZero, TIME BANK
-	
-	if ([lastLine rangeOfString:[PokerStarsInfo determineUserName]].location != NSNotFound &&
-		[lastLine rangeOfString:@"TIME BANK"].location != NSNotFound) {
-		[logger debug:@"Time bank was activated!!"];
+	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"autoTimeBankKey"]) {
+		if ([lastLine rangeOfString:[PokerStarsInfo determineUserName]].location != NSNotFound &&
+			[lastLine rangeOfString:@"seconds to act"].location != NSNotFound) {
+			[logger debug:@"Last line: %@",lastLine];			
+			[logger debug:@"Time bank was activated!!"];
+			
+			AXUIElementRef scrollRef,tableRef;
+			AXUIElementCopyAttributeValue(chatRef, kAXParentAttribute, (CFTypeRef *)&scrollRef);
+			AXUIElementCopyAttributeValue(scrollRef, kAXParentAttribute, (CFTypeRef *)&tableRef);		
+			[dispatchController buttonPress:@"timeBank" withButton:@"big" onTable:tableRef];			
+		}		
 	}
 	
 }
 
+		 
 @end
 
 

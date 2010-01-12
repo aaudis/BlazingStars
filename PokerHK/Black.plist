@@ -18,6 +18,10 @@
 	<real>0.82</real>
 	<key>betOriginY</key>
 	<real>0.9</real>
+	<key>timeBankOriginX</key>
+	<real>0.46</real>
+	<key>timeBankOriginY</key>
+	<real>0.8</real>
 	<key>checkFoldOriginX</key>
 	<real>0.521</real>
 	<key>checkFoldOriginY</key>
