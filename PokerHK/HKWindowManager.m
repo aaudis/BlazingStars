@@ -352,6 +352,7 @@ HKWindowManager *wm = NULL;
 		if ([role isEqual:@"AXButton"]) {
 			NSString *buttonName;
 			AXUIElementCopyAttributeValue((AXUIElementRef) child,kAXTitleAttribute,(CFTypeRef *)&buttonName);
+			[logger debug:@"In findOKButtonInPopupWindow, button name is: %@",buttonName];
 			if ([buttonName isEqual:@"OK"] || [buttonName isEqual:@"Check"]) {
 				OKButton = (AXUIElementRef) child;
 			}
@@ -373,7 +374,7 @@ HKWindowManager *wm = NULL;
 		}
 	}
 	
-	[logger debug:@"Windowss to close: %@",windowsToClose];
+	[logger debug:@"Windows to close: %@",windowsToClose];
 	
 	// Go through each table popup, try to press the close button.  This is *extremely* inelegant, but I'm having trouble coming up
 	// with another way to handle this right now.
@@ -443,7 +444,8 @@ HKWindowManager *wm = NULL;
 		} else if ([title isEqualToString:@"Tournament Registration"]) {
 			[logger info:@"Title %@ identified as HKTournamentRegistration",title];
 			return HKTournamentRegistration;
-		} else if ([title rangeOfString:@"Table"].location != NSNotFound && [title length] > 5 ){
+		} else if (([title rangeOfString:@"Table"].location != NSNotFound && [title length] > 5) ||
+				   [title isEqualToString:@"PokerStars"]){
 			[logger info:@"Title %@ identified as HKTablePopup",title];
 			return HKTablePopup;
 		} else {
@@ -635,12 +637,14 @@ HKWindowManager *wm = NULL;
 -(void)chatChanged:(AXUIElementRef)chatRef
 {
 	NSString *text;
-	
+
 	AXUIElementCopyAttributeValue(chatRef, kAXValueAttribute, (CFTypeRef *)&text);
 	text = [text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
 	NSArray* lines = [text componentsSeparatedByCharactersInSet: [NSCharacterSet newlineCharacterSet]];
 
 	NSString *lastLine = [lines lastObject];
+
+	//[logger debug:@"Last line: %@",lastLine];
 	
 	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"autoTimeBankKey"]) {
 		if ([lastLine rangeOfString:[PokerStarsInfo determineUserName]].location != NSNotFound &&

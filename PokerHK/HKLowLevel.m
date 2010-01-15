@@ -19,7 +19,6 @@
 {
 	if ((self = [super init])) {
 		logger = [SOLogger loggerForFacility:@"com.fullyfunctionalsoftware.blazingstars" options:ASL_OPT_STDERR];
-		[logger info:@"Initializing low-level interface in HKLowLevel."];
 	
 		if (!AXAPIEnabled()) {
 			NSAlert *alert = [[[NSAlert alloc] init] autorelease];
