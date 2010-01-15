@@ -560,7 +560,7 @@ HKWindowManager *wm;
 
 -(void)allIn
 {
-	[self setBetSize:99999];
+	[self setBetSize:9999999];
 	
 	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"autoBetAllInKey"] == YES) 
 		[self autoBet];
