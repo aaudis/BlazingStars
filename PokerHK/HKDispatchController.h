@@ -32,7 +32,7 @@
 	NSMutableDictionary *fieldMap;
 	NSDictionary *keyMap;
 	NSDictionary *speechCommands;
-	NSMutableDictionary *potBetAmounts;
+	NSMutableDictionary *potBetAmounts, *pfrAmounts;
 	float pfrAmount;
 	AXUIElementRef systemWideElement;
 	AXObserverRef keyObserver;	
@@ -54,7 +54,7 @@
 @property BOOL toggled;
 
 -(void)setPotBetAmount:(float)amount forTag:(int)tag;
--(void)setPFRAmount:(float)amount;
+-(void)setPFRAmount:(float)amount forTag:(int)tag;
 -(void)setRoundingAmount:(float)amount;
 -(void)setRoundingType:(int)type;
 -(BOOL)keyComboAlreadyRegistered:(KeyCombo)kc; 
@@ -75,7 +75,7 @@
 -(void)deactivateHotKeys;
 -(void)simulateHotKey:(int)tag;
 -(void)potBet:(int)tag;
--(void)pfr;
+-(void)pfr:(int)tag;
 -(void)leaveAllTables;
 -(void)sitOutAllTables;
 -(void)debugHK;

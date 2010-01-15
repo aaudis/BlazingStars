@@ -29,7 +29,7 @@
 -(void)hkChangedFor:(SRRecorderControl *)control withTag:(int)tag;
 -(void)voiceCommandsChangedState;
 -(void)setPotBetAmount:(float)amount forTag:(int)tag;
--(void)setPFRAmount:(float)amount;
+-(void)setPFRAmount:(float)amount forTag:(int)tag;
 -(void)setRoundingAmount:(float)amount;
 -(void)setRoundingType:(int)type;
 @end

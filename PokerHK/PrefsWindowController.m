@@ -59,7 +59,9 @@
 	[shortcutDefaults setObject:[NSNumber numberWithFloat:75.0] forKey:@"potBetThreeKey"];
 	[shortcutDefaults setObject:[NSNumber numberWithFloat:100.0] forKey:@"potBetFourKey"];	
 	
-	[shortcutDefaults setObject:[NSNumber numberWithFloat:4.0] forKey:@"pfrKey"];	
+	[shortcutDefaults setObject:[NSNumber numberWithFloat:2.5] forKey:@"pfrOneKey"];	
+	[shortcutDefaults setObject:[NSNumber numberWithFloat:3.0] forKey:@"pfrTwoKey"];	
+	[shortcutDefaults setObject:[NSNumber numberWithFloat:4.0] forKey:@"pfrThreeKey"];	
 	
     [defaults registerDefaults:shortcutDefaults];
 }
@@ -98,8 +100,10 @@
 			   [NSArray arrayWithObjects:[NSNumber numberWithInt:20],@"PotBetFourKey",nil],[NSValue valueWithPointer:potBetFour],
 			   [NSArray arrayWithObjects:[NSNumber numberWithInt:21],@"AllInKey",nil],[NSValue valueWithPointer:allIn],
 			   [NSArray arrayWithObjects:[NSNumber numberWithInt:22],@"ToggleAllKey",nil],[NSValue valueWithPointer:toggleAllHotkeys],
-			   [NSArray arrayWithObjects:[NSNumber numberWithInt:23],@"PFRKey",nil],[NSValue valueWithPointer:pfr],
-			   [NSArray arrayWithObjects:[NSNumber numberWithInt:24],@"FoldToAnyLeftKey",nil],[NSValue valueWithPointer:foldToAnyLeft], 
+			   [NSArray arrayWithObjects:[NSNumber numberWithInt:23],@"PFROneKey",nil],[NSValue valueWithPointer:pfrOne],
+			   [NSArray arrayWithObjects:[NSNumber numberWithInt:24],@"PFRTwoKey",nil],[NSValue valueWithPointer:pfrTwo],
+			   [NSArray arrayWithObjects:[NSNumber numberWithInt:25],@"PFRThreeKey",nil],[NSValue valueWithPointer:pfrThree],
+			   [NSArray arrayWithObjects:[NSNumber numberWithInt:26],@"FoldToAnyLeftKey",nil],[NSValue valueWithPointer:foldToAnyLeft], 
 			   [NSArray arrayWithObjects:[NSNumber numberWithInt:99],@"DebugKey",nil],[NSValue valueWithPointer:debugHK],	
 			   nil];
 	
@@ -125,7 +129,9 @@
 		[self setPotBetAmount:[potBetPrefsView viewWithTag:i]];
 	}
 	
-	[self setPFRAmount:[potBetPrefsView viewWithTag:23]];
+	for (int i = 23; i < 26; i++) {
+		[self setPFRAmount:[potBetPrefsView viewWithTag:i]];
+	}
 
 	// Trigger the rounding controls.
 	[self setRoundingAmount:[potBetPrefsView viewWithTag:ROUNDINGAMOUNTTAG]];
@@ -192,9 +198,26 @@
 
 -(IBAction)setPFRAmount:(id)sender
 {
-	[pfrStepperField setFloatValue:[sender floatValue]];
-	[pfrStepper setFloatValue:[sender floatValue]];
-	[appController setPFRAmount:[sender floatValue]];	
+	switch ([sender tag]) {
+		case 23:
+			[pfrStepperOneField setFloatValue:[sender floatValue]];
+			[pfrOneStepper setFloatValue:[sender floatValue]];
+			[appController setPFRAmount:[sender floatValue] forTag:[sender tag]];	
+			break;
+		case 24:
+			[pfrStepperTwoField setFloatValue:[sender floatValue]];
+			[pfrTwoStepper setFloatValue:[sender floatValue]];
+			[appController setPFRAmount:[sender floatValue] forTag:[sender tag]];	
+			break;
+		case 25:
+			[pfrStepperThreeField setFloatValue:[sender floatValue]];
+			[pfrThreeStepper setFloatValue:[sender floatValue]];
+			[appController setPFRAmount:[sender floatValue] forTag:[sender tag]];	
+			break;
+		default:
+			break;
+			
+	}
 }
 
 -(IBAction)setRoundingAmount:(id)sender

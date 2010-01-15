@@ -56,8 +56,12 @@
 	IBOutlet NSMatrix *roundingMatrix;	
     IBOutlet NSTextField *currentThemeLabel;
 	IBOutlet NSColorWell *windowFrameColourWell;
-	IBOutlet NSStepper *pfrStepper;
-	IBOutlet NSTextField *pfrStepperField;
+	IBOutlet NSStepper *pfrOneStepper;
+	IBOutlet NSStepper *pfrTwoStepper;
+	IBOutlet NSStepper *pfrThreeStepper;
+	IBOutlet NSTextField *pfrStepperOneField;
+	IBOutlet NSTextField *pfrStepperTwoField;
+	IBOutlet NSTextField *pfrStepperThreeField;	
 	IBOutlet NSButton *autoPFRCheckBox;
 	
 	AppController * appController;
@@ -91,7 +95,9 @@
 	IBOutlet SRRecorderControl *allIn;
 	IBOutlet SRRecorderControl *toggleAllHotkeys;
 	IBOutlet SRRecorderControl *debugHK;
-	IBOutlet SRRecorderControl *pfr;
+	IBOutlet SRRecorderControl *pfrOne;
+	IBOutlet SRRecorderControl *pfrTwo;
+	IBOutlet SRRecorderControl *pfrThree;	
 
 }
 @property AppController *appController;

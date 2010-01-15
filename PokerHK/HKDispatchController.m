@@ -134,6 +134,7 @@ HKWindowManager *wm;
 		keyMap = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"keyMap" ofType: @"plist"]];
 		speechCommands = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"speechCommands" ofType:@"plist"]];
 		potBetAmounts = [[NSMutableDictionary alloc] init];
+		pfrAmounts = [[NSMutableDictionary alloc] init];
 		amountToChange = 2.0;
 		toggled = YES;
 
@@ -196,9 +197,9 @@ HKWindowManager *wm;
 	[potBetAmounts setObject:[NSNumber numberWithFloat:amount] forKey:[NSNumber numberWithInt:tag]];
 }
 
--(void)setPFRAmount:(float)amount
+-(void)setPFRAmount:(float)amount forTag:(int)tag
 {
-	pfrAmount = amount;
+	[pfrAmounts setObject:[NSNumber numberWithFloat:amount] forKey:[NSNumber numberWithInt:tag]];
 }
 
 -(void)setRoundingAmount:(float)amount
@@ -546,12 +547,12 @@ HKWindowManager *wm;
 		[self autoBet];
 }
 
--(void)pfr
+-(void)pfr:(int)tag
 {		
 	NSArray *gameParameters = [windowManager getGameParameters];
 	float blindSize = [[gameParameters objectAtIndex:HKBigBlind] floatValue];	
 	
-	[self setBetSize:pfrAmount*blindSize];
+	[self setBetSize:[[pfrAmounts objectForKey:[NSNumber numberWithInt:tag]] floatValue]*blindSize];
 	
 	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"autoPFRBetKey"] == YES)
 		[self autoBet];
@@ -706,8 +707,14 @@ HKWindowManager *wm;
 				[self allIn];
 				break;
 			case 23:
-				[self pfr];
+				[self pfr:tag];
 				break;
+			case 24:
+				[self pfr:tag];
+				break;
+			case 25:
+				[self pfr:tag];
+				break;				
 			case 99:
 				[self debugHK];
 				break;
@@ -770,8 +777,14 @@ pascal OSStatus hotKeyHandler(EventHandlerCallRef nextHandler,EventRef theEvent,
 				[(id)userData allIn];
 				break;
 			case 23:
-				[(id)userData pfr];
+				[(id)userData pfr:l];
 				break;
+			case 24:
+				[(id)userData pfr:l];
+				break;
+			case 25:
+				[(id)userData pfr:l];
+				break;				
 			case 99:
 				[(id)userData debugHK];
 				break;

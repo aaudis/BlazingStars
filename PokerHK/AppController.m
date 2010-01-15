@@ -121,9 +121,9 @@ extern pid_t pokerstarsPID;
 	[dispatchController setPotBetAmount:amount forTag:tag];
 }
 
--(void)setPFRAmount:(float)amount
+-(void)setPFRAmount:(float)amount forTag:(int)tag
 {
-	[dispatchController setPFRAmount:amount];
+	[dispatchController setPFRAmount:amount forTag:tag];
 }
 
 -(void)setRoundingAmount:(float)amount
