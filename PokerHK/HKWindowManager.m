@@ -590,6 +590,7 @@ HKWindowManager *wm = NULL;
 
 -(void)windowDidResize:(AXUIElementRef)elementRef
 {
+	[self windowFocusDidChange];
 	[self updateWindowDict];
 }
 
