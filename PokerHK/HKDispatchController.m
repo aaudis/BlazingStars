@@ -752,6 +752,8 @@ pascal OSStatus hotKeyHandler(EventHandlerCallRef nextHandler,EventRef theEvent,
 		return noErr;
 	}
 	
+	NSLog(@"In hot key handler, got tag: %d",l);
+	
 	// Don't fire the keys if we're not in a poker window.
 	if ([wm pokerWindowIsActive] == YES) {
 		switch (l) {
@@ -791,6 +793,7 @@ pascal OSStatus hotKeyHandler(EventHandlerCallRef nextHandler,EventRef theEvent,
 			default:
 				prefix = [[[(id)userData keyMap] objectForKey:[NSString stringWithFormat:@"%d",l]] objectAtIndex:0];
 				size = [[[(id)userData keyMap] objectForKey:[NSString stringWithFormat:@"%d",l]] objectAtIndex:1];
+				NSLog(@"Prefix: %@  Size: %@",prefix,size);
 				[(id)userData buttonPress:prefix withButton:size];
 				break;
 		}
