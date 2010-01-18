@@ -73,6 +73,32 @@
 	
     [self detectTheme];
     
+	[self populateControls];
+	
+    NSURL* url = [NSURL fileURLWithPath:@"/System/Library/PreferencePanes/Speech.prefPane"];
+	
+	NSMutableAttributedString *string = [[NSMutableAttributedString alloc] init];
+	[string appendAttributedString: [[NSAttributedString alloc] initWithString:@"To change settings for voice commands, explore the preferences in the Speech panel of the System Preferences (click to open).  To get a list of commands, say the command \"Show me what to say\"."]];
+	NSRange selectedRange = NSMakeRange(109, 15);
+	[string beginEditing];
+	[string addAttribute:NSLinkAttributeName
+				   value:url
+				   range:selectedRange];
+	[string addAttribute:NSForegroundColorAttributeName	 
+				   value:[NSColor blueColor]	 
+				   range:selectedRange];	
+	[string addAttribute:NSUnderlineStyleAttributeName	 
+				   value:[NSNumber numberWithInt:NSSingleUnderlineStyle]
+				   range:selectedRange];	
+	[string endEditing];	
+	
+    // set the attributed string to the NSTextField
+    [voiceComandsTextField setAttributedStringValue: string];
+
+}
+
+-(void)populateControls
+{
 	// Make the textfield take the initial value.
 	[changeAmountField setFloatValue:[stepper floatValue]];
 	
@@ -132,10 +158,18 @@
 	for (int i = 23; i < 26; i++) {
 		[self setPFRAmount:[potBetPrefsView viewWithTag:i]];
 	}
-
+	
 	// Trigger the rounding controls.
 	[self setRoundingAmount:[potBetPrefsView viewWithTag:ROUNDINGAMOUNTTAG]];
 	[self setRoundingType:[potBetPrefsView viewWithTag:ROUNDINGTYPETAG]];
+	
+}
+
+- (BOOL)textField:(NSTextField *)textField openURL:(NSURL *)anURL
+{
+	[logger debug:@"In delegate method for textField"];
+	[[NSWorkspace sharedWorkspace] openURL:anURL];
+	return YES;
 }
 
 -(IBAction)redetectTheme:(id)sender {
@@ -259,7 +293,79 @@
 	[[self window] makeKeyAndOrderFront:sender];
 }
 
-
+-(IBAction)resetDefaults:(id)sender
+{
+	[logger info:@"Resetting defaults to factory state!"];
+	
+	NSAlert *alert = [NSAlert alertWithMessageText:@"Resetting to factory defaults will remove all saved preferences, including all hotkeys and checkboxes, and restore them to factory default values.  This is permanent, and cannot be undone!  Are you sure you want to do this?"
+					defaultButton:@"Yes, I'm sure" 
+				  alternateButton:@"Cancel" 
+					  otherButton:nil 
+		informativeTextWithFormat:@""];
+	
+	if ([alert runModal] == NSAlertAlternateReturn)
+		return;
+	
+	BOOL autoChecks = [[NSUserDefaults standardUserDefaults] boolForKey:@"SUEnableAutomaticChecks"];
+	
+	[[NSUserDefaults standardUserDefaults] removePersistentDomainForName:@"com.fullyfunctional.blazingstars"];
+	[NSUserDefaults resetStandardUserDefaults];
+	[NSUserDefaults standardUserDefaults];
+	
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	NSMutableDictionary *shortcutDefaults = [NSMutableDictionary dictionary];
+	
+	KeyCombo kc;
+	
+	kc.code = 3; kc.flags = 0; [shortcutDefaults setObject:[NSData dataWithBytes:&kc length:sizeof(KeyCombo)] forKey:@"FoldKey"];
+	kc.code = 8; kc.flags = 0; [shortcutDefaults setObject:[NSData dataWithBytes:&kc length:sizeof(KeyCombo)] forKey:@"CallKey"];
+	kc.code = 11; kc.flags = 0; [shortcutDefaults setObject:[NSData dataWithBytes:&kc length:sizeof(KeyCombo)] forKey:@"BetKey"];
+	kc.code = 12; kc.flags = 0; [shortcutDefaults setObject:[NSData dataWithBytes:&kc length:sizeof(KeyCombo)] forKey:@"CheckFoldKey"];	
+	kc.code = 13; kc.flags = 0; [shortcutDefaults setObject:[NSData dataWithBytes:&kc length:sizeof(KeyCombo)] forKey:@"FoldToAnyKey"];	
+	kc.code = 45; kc.flags = 0; [shortcutDefaults setObject:[NSData dataWithBytes:&kc length:sizeof(KeyCombo)] forKey:@"FoldToAnyLeftKey"];		
+	kc.code = 14; kc.flags = 0; [shortcutDefaults setObject:[NSData dataWithBytes:&kc length:sizeof(KeyCombo)] forKey:@"CheckCallKey"];	
+	kc.code = 15; kc.flags = 0; [shortcutDefaults setObject:[NSData dataWithBytes:&kc length:sizeof(KeyCombo)] forKey:@"CheckCallAnyKey"];	
+	kc.code = 17; kc.flags = 0; [shortcutDefaults setObject:[NSData dataWithBytes:&kc length:sizeof(KeyCombo)] forKey:@"BetRaiseKey"];	
+	kc.code = 16; kc.flags = 0; [shortcutDefaults setObject:[NSData dataWithBytes:&kc length:sizeof(KeyCombo)] forKey:@"BetRaiseAnyKey"];	
+	kc.code = 35; kc.flags = 0; [shortcutDefaults setObject:[NSData dataWithBytes:&kc length:sizeof(KeyCombo)] forKey:@"SitOutKey"];		
+	kc.code = 33; kc.flags = 0; [shortcutDefaults setObject:[NSData dataWithBytes:&kc length:sizeof(KeyCombo)] forKey:@"AutoPostKey"];	
+	kc.code = 30; kc.flags = 0; [shortcutDefaults setObject:[NSData dataWithBytes:&kc length:sizeof(KeyCombo)] forKey:@"SitOutAllTablesKey"];
+	kc.code = 126; kc.flags = 10486016; [shortcutDefaults setObject:[NSData dataWithBytes:&kc length:sizeof(KeyCombo)] forKey:@"IncrementKey"];	
+	kc.code = 125; kc.flags = 10486016; [shortcutDefaults setObject:[NSData dataWithBytes:&kc length:sizeof(KeyCombo)] forKey:@"DecrementKey"];	
+	kc.code = 37; kc.flags = 0; [shortcutDefaults setObject:[NSData dataWithBytes:&kc length:sizeof(KeyCombo)] forKey:@"leaveTable"];	
+	kc.code = 37; kc.flags = 1179914; [shortcutDefaults setObject:[NSData dataWithBytes:&kc length:sizeof(KeyCombo)] forKey:@"leaveAllTables"];	
+	kc.code = 0; kc.flags = 1179914; [shortcutDefaults setObject:[NSData dataWithBytes:&kc length:sizeof(KeyCombo)] forKey:@"AllInKey"];		
+	kc.code = 35; kc.flags = 1573160; [shortcutDefaults setObject:[NSData dataWithBytes:&kc length:sizeof(KeyCombo)] forKey:@"ToggleAllKey"];	
+	kc.code = 40; kc.flags = 1048840; [shortcutDefaults setObject:[NSData dataWithBytes:&kc length:sizeof(KeyCombo)] forKey:@"DebugKey"];		
+	
+	kc.code = 19; kc.flags = 1048840; [shortcutDefaults setObject:[NSData dataWithBytes:&kc length:sizeof(KeyCombo)] forKey:@"PotBetOneKey"];		
+	kc.code = 20; kc.flags = 1048840; [shortcutDefaults setObject:[NSData dataWithBytes:&kc length:sizeof(KeyCombo)] forKey:@"PotBetTwoKey"];	
+	kc.code = 21; kc.flags = 1048840; [shortcutDefaults setObject:[NSData dataWithBytes:&kc length:sizeof(KeyCombo)] forKey:@"PotBetThreeKey"];		
+	kc.code = 23; kc.flags = 1048840; [shortcutDefaults setObject:[NSData dataWithBytes:&kc length:sizeof(KeyCombo)] forKey:@"PotBetFourKey"];	
+	kc.code = 49; kc.flags = 256;     [shortcutDefaults setObject:[NSData dataWithBytes:&kc length:sizeof(KeyCombo)] forKey:@"PFRKey"];
+	
+	[shortcutDefaults setObject:[NSNumber numberWithFloat:25.0] forKey:@"potBetOneKey"];
+	[shortcutDefaults setObject:[NSNumber numberWithFloat:50.0] forKey:@"potBetTwoKey"];
+	[shortcutDefaults setObject:[NSNumber numberWithFloat:75.0] forKey:@"potBetThreeKey"];
+	[shortcutDefaults setObject:[NSNumber numberWithFloat:100.0] forKey:@"potBetFourKey"];	
+	
+	[shortcutDefaults setObject:[NSNumber numberWithFloat:2.5] forKey:@"pfrOneKey"];	
+	[shortcutDefaults setObject:[NSNumber numberWithFloat:3.0] forKey:@"pfrTwoKey"];	
+	[shortcutDefaults setObject:[NSNumber numberWithFloat:4.0] forKey:@"pfrThreeKey"];	
+	
+    [defaults registerDefaults:shortcutDefaults];
+	
+	// Need to set a few keys by hand;  this is obviously not the first time we've run
+	// the program, so disable the "intro" stuff.
+	[defaults setBool:YES forKey:@"FirstRunCompletedKey"];
+	[defaults setBool:YES forKey:@"SUHasLaunchedBefore"];
+	[defaults setBool:autoChecks forKey:@"SUEnableAutomaticChecks"];
+	
+	[NSUserDefaults resetStandardUserDefaults];
+	[NSUserDefaults standardUserDefaults];
+	
+	[self populateControls];
+}
 
 
 /*

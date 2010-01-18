@@ -12,6 +12,7 @@
 #import "HKThemeController.h"
 #import "AppController.h"
 #import "ShortcutRecorder.h"
+#import "DSClickableURLTextField.h"
 
 #define SRTAG 0
 #define SRKEY 1
@@ -63,6 +64,7 @@
 	IBOutlet NSTextField *pfrStepperTwoField;
 	IBOutlet NSTextField *pfrStepperThreeField;	
 	IBOutlet NSButton *autoPFRCheckBox;
+	IBOutlet DSClickableURLTextField *voiceComandsTextField;
 	
 	AppController * appController;
 	HKThemeController *themeController;
@@ -107,6 +109,7 @@
 @property IBOutlet NSButton *scrollWheelCheckBox;
 @property IBOutlet NSColorWell *windowFrameColourWell;
 
+-(void)populateControls;
 -(IBAction)setPotBetAmount:(id)sender;
 -(IBAction)setPFRAmount:(id)sender;
 -(IBAction)voiceCommandsChangedState:(id)sender;
@@ -114,4 +117,5 @@
 -(IBAction)setRoundingType:(id)sender;
 -(void)detectTheme;
 -(IBAction)redetectTheme:(id)sender;
+-(IBAction)resetDefaults:(id)sender;
 @end
