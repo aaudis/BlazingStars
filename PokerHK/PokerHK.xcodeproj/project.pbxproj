@@ -63,6 +63,7 @@
 		0EC67AFC0FD0AB73000A33AA /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EC67AFB0FD0AB73000A33AA /* Carbon.framework */; };
 		0EC6840F0FD3984D000A33AA /* HKDispatchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EC6840E0FD3984D000A33AA /* HKDispatchController.m */; };
 		0ECA7478110119E100562BF2 /* DSClickableURLTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ECA7477110119E100562BF2 /* DSClickableURLTextField.m */; };
+		0ECA761A1104F8BC00562BF2 /* FramePreviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ECA76191104F8BC00562BF2 /* FramePreviewView.m */; };
 		0ED0FBDF10E20A1E000DF720 /* license.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 0ED0FBDE10E20A1E000DF720 /* license.rtf */; };
 		0ED0FBE710E212AC000DF720 /* create-dmg in Resources */ = {isa = PBXBuildFile; fileRef = 0ED0FBE410E212AC000DF720 /* create-dmg */; };
 		0ED0FBE810E212AC000DF720 /* dmg_background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0ED0FBE510E212AC000DF720 /* dmg_background.jpg */; };
@@ -171,6 +172,8 @@
 		0EC6840E0FD3984D000A33AA /* HKDispatchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKDispatchController.m; sourceTree = "<group>"; };
 		0ECA7476110119E100562BF2 /* DSClickableURLTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSClickableURLTextField.h; sourceTree = "<group>"; };
 		0ECA7477110119E100562BF2 /* DSClickableURLTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSClickableURLTextField.m; sourceTree = "<group>"; };
+		0ECA76181104F8BC00562BF2 /* FramePreviewView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FramePreviewView.h; sourceTree = "<group>"; };
+		0ECA76191104F8BC00562BF2 /* FramePreviewView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FramePreviewView.m; sourceTree = "<group>"; };
 		0ED0FBDE10E20A1E000DF720 /* license.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = license.rtf; sourceTree = "<group>"; };
 		0ED0FBE410E212AC000DF720 /* create-dmg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = "create-dmg"; sourceTree = "<group>"; };
 		0ED0FBE510E212AC000DF720 /* dmg_background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = dmg_background.jpg; sourceTree = "<group>"; };
@@ -263,6 +266,8 @@
 				0E2A1BDB0FD061E300471032 /* PrefsWindowController.m */,
 				0E63778410E194D500A3DF98 /* PrefsView.h */,
 				0E63778510E194D500A3DF98 /* PrefsView.m */,
+				0ECA76181104F8BC00562BF2 /* FramePreviewView.h */,
+				0ECA76191104F8BC00562BF2 /* FramePreviewView.m */,
 			);
 			name = Prefs;
 			sourceTree = "<group>";
@@ -602,6 +607,7 @@
 				0E8A2FE410F53FF800C26293 /* HKTransparentWindow.m in Sources */,
 				0E33E22C10F6DFEA004C9847 /* HKLowLevel.m in Sources */,
 				0ECA7478110119E100562BF2 /* DSClickableURLTextField.m in Sources */,
+				0ECA761A1104F8BC00562BF2 /* FramePreviewView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
