@@ -27,86 +27,6 @@ pascal OSStatus mouseEventHandler(EventHandlerCallRef nextHandler,EventRef theEv
 
 void axHotKeyObserverCallback(AXObserverRef observer, AXUIElementRef elementRef, CFStringRef notification, void *refcon);	
 
-typedef struct
-	{
-		// Where to add window information
-		NSMutableArray * outputArray;
-		// Tracks the index of the window when first inserted
-		// so that we can always request that the windows be drawn in order.
-		int order;
-	} WindowListApplierData;
-
-NSString *kAppNameKey = @"applicationName";    // Application Name & PID
-NSString *kWindowOriginKey = @"windowOrigin";    // Window Origin as a string
-NSString *kWindowSizeKey = @"windowSize";        // Window Size as a string
-NSString *kWindowIDKey = @"windowID";            // Window ID
-NSString *kWindowLevelKey = @"windowLevel";    // Window Level
-NSString *kWindowOrderKey = @"windowOrder";    // The overall front-to-back ordering of the windows as returned by the window server
-NSString *kWindowNameKey = @"windowName";
-
-void WindowListApplierFunction(const void *inputDictionary, void *context)
-{
-    NSDictionary *entry = (NSDictionary*)inputDictionary;
-    WindowListApplierData *data = (WindowListApplierData*)context;
-    
-    // The flags that we pass to CGWindowListCopyWindowInfo will automatically filter out most undesirable windows.
-    // However, it is possible that we will get back a window that we cannot read from, so we'll filter those out manually.
-    int sharingState = [[entry objectForKey:(id)kCGWindowSharingState] intValue];
-    if(sharingState != kCGWindowSharingNone)
-    {
-        NSMutableDictionary *outputEntry = [NSMutableDictionary dictionary];
-        
-        // Grab the application name, but since it's optional so we need to check before we can use it.
-        NSString *applicationName = [entry objectForKey:(id)kCGWindowOwnerName];
-        if(applicationName != NULL)
-        {
-            // PID is required so we assume it's present.
-            NSString *nameAndPID = [NSString stringWithFormat:@"%@ (%@)", applicationName, [entry objectForKey:(id)kCGWindowOwnerPID]];
-            [outputEntry setObject:nameAndPID forKey:kAppNameKey];
-        }
-        else
-        {
-            // The application name was not provided, so we use a fake application name to designate this.
-            // PID is required so we assume it's present.
-            NSString *nameAndPID = [NSString stringWithFormat:@"((unknown)) (%@)", [entry objectForKey:(id)kCGWindowOwnerPID]];
-            [outputEntry setObject:nameAndPID forKey:kAppNameKey];
-        }
-			
-        // Grab the Window Bounds, it's a dictionary in the array, but we want to display it as strings
-        CGRect bounds;
-        CGRectMakeWithDictionaryRepresentation((CFDictionaryRef)[entry objectForKey:(id)kCGWindowBounds], &bounds);
-        NSString *originString = [NSString stringWithFormat:@"%.0f/%.0f", bounds.origin.x, bounds.origin.y];
-        [outputEntry setObject:originString forKey:kWindowOriginKey];
-        NSString *sizeString = [NSString stringWithFormat:@"%.0f*%.0f", bounds.size.width, bounds.size.height];
-        [outputEntry setObject:sizeString forKey:kWindowSizeKey];
-        
-        // Grab the Window ID & Window Level. Both are required, so just copy from one to the other
-        [outputEntry setObject:[entry objectForKey:(id)kCGWindowNumber] forKey:kWindowIDKey];
-        [outputEntry setObject:[entry objectForKey:(id)kCGWindowLayer] forKey:kWindowLevelKey];
-        
-		NSString *windowName = [entry objectForKey:(id)kCGWindowName];
-		if (windowName != NULL) {
-			[outputEntry setObject:windowName forKey:kWindowNameKey];
-		}
-        // Finally, we are passed the windows in order from front to back by the window server
-        // Should the user sort the window list we want to retain that order so that screen shots
-        // look correct no matter what selection they make, or what order the items are in. We do this
-        // by maintaining a window order key that we'll apply later.
-        [outputEntry setObject:[NSNumber numberWithInt:data->order] forKey:kWindowOrderKey];
-		
-		// Look for PokerStars window:
-		HKLowLevel *lowLevel = [[HKLowLevel alloc] init];
-		if ([applicationName isEqual:[lowLevel appName]]) {
-			data->order++;
-			
-			[data->outputArray addObject:outputEntry];
-			
-		}
-    }
-}
-
-
-
 // Allow global access to the controller.
 HKDispatchController *dc;
 HKWindowManager *wm;
@@ -365,7 +285,6 @@ HKWindowManager *wm;
 	}
 }
 
-
 -(void)buttonPressAllTables:(int)tag
 {
 	NSArray *tables = [windowManager getAllPokerTables];
@@ -580,49 +499,13 @@ HKWindowManager *wm;
 -(void)debugHK
 {
 	[logger debug:@"In the debugging hotkey."];
-	CFArrayRef windowList = CGWindowListCopyWindowInfo(kCGWindowListOptionAll, kCGNullWindowID);
-
-	NSMutableArray * prunedWindowList = [NSMutableArray array];
-    WindowListApplierData data = {prunedWindowList, 0};
-    CFArrayApplyFunction(windowList, CFRangeMake(0, CFArrayGetCount(windowList)), &WindowListApplierFunction, &data);
-    CFRelease(windowList);
-
-	[logger debug:@"pruned window list: %@",prunedWindowList];
-	
 	AXUIElementRef window = [lowLevel getMainWindow];
 	
-	NSString *name;
-	AXUIElementCopyAttributeValue(window,kAXTitleAttribute, (CFTypeRef *)&name);
+	int windowID = [lowLevel getWindowIDForTable:window];
+	[logger debug:@"Window ID for main table is: %d",windowID];
 	
-	[logger debug:@"Current window name: %@",name];
-	NSArray *components = [name componentsSeparatedByString:@"-"];
-	[logger debug:@"Components: %@",components];
 	
-	[logger debug:@"Writing log to pasteboard."];
-	NSPasteboard *cb = [NSPasteboard generalPasteboard];
-	[cb declareTypes:[NSArray arrayWithObjects:NSStringPboardType, nil] owner:nil];
 	
-	NSMutableString *log = [NSMutableString stringWithCapacity:1000];
-	
-	aslmsg q,m;
-	aslresponse r;
-	q = asl_new(ASL_TYPE_QUERY);
-	asl_set_query(q, ASL_KEY_SENDER, "BlazingStars", ASL_QUERY_OP_EQUAL);
-	r = asl_search(NULL, q);
-
-	int i;
-	const char *key;
-	
-	while (NULL != (m = aslresponse_next(r)))
-	{
-		for (i = 0; (NULL != (key = asl_key(m, i))); i++)
-		{
-			[log appendString:[NSString stringWithFormat:@"%s %s %s\n",asl_get(m,"CFLog Local Time"),asl_get(m,ASL_KEY_SENDER),asl_get(m,ASL_KEY_MSG)]];
-		}
-	}
-	aslresponse_free(r);
-
-	[cb setString:log forType: NSStringPboardType];
 }
 
 -(void)voiceCommandsChangedState

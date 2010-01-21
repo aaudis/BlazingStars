@@ -656,6 +656,9 @@ HKWindowManager *wm = NULL;
 			AXUIElementRef scrollRef,tableRef;
 			AXUIElementCopyAttributeValue(chatRef, kAXParentAttribute, (CFTypeRef *)&scrollRef);
 			AXUIElementCopyAttributeValue(scrollRef, kAXParentAttribute, (CFTypeRef *)&tableRef);		
+			NSString *title;
+			AXUIElementCopyAttributeValue(tableRef, kAXTitleAttribute, (CFTypeRef*)&title);
+			[logger debug:@"Trying to activate time bank for table: %@",title];
 			[dispatchController buttonPress:@"timeBank" withButton:@"big" onTable:tableRef];			
 		}		
 	}

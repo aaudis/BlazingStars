@@ -32,5 +32,7 @@
 -(void)keyPress:(int)keyCode;
 -(void)keyPress:(int)keyCode repeated:(int)times withFlush:(BOOL)flush;
 -(void)writeString:(NSString *)valueToSet;
+-(NSArray *)getCGPokerStarsWindowList;
+-(int)getWindowIDForTable:(AXUIElementRef)tableRef;
 
 @end
