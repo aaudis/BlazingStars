@@ -142,6 +142,7 @@
 		0E5DD4630FDA4595000670D2 /* Open:Close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Open:Close.png"; sourceTree = "<group>"; };
 		0E63778410E194D500A3DF98 /* PrefsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefsView.h; sourceTree = "<group>"; };
 		0E63778510E194D500A3DF98 /* PrefsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrefsView.m; sourceTree = "<group>"; };
+		0E6F6080110905350076AE43 /* CGSPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGSPrivate.h; sourceTree = "<group>"; };
 		0E85D1BF0FDE43EE00E8E225 /* HKWindowManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKWindowManager.h; sourceTree = "<group>"; };
 		0E85D1C00FDE43EE00E8E225 /* HKWindowManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKWindowManager.m; sourceTree = "<group>"; };
 		0E8A2E0810F4868000C26293 /* Windows.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Windows.png; sourceTree = "<group>"; };
@@ -412,6 +413,7 @@
 			children = (
 				32CA4F630368D1EE00C91783 /* PokerHK_Prefix.pch */,
 				29B97316FDCFA39411CA2CEA /* main.m */,
+				0E6F6080110905350076AE43 /* CGSPrivate.h */,
 			);
 			name = "Other Sources";
 			sourceTree = "<group>";

@@ -7,6 +7,7 @@
 //
 
 #import "HKLowLevel.h"
+#import "CGSPrivate.h"
 #import <Carbon/Carbon.h>
 #import <AppKit/NSAccessibility.h>
 
@@ -27,6 +28,7 @@ NSString *kWindowIDKey = @"windowID";            // Window ID
 NSString *kWindowLevelKey = @"windowLevel";    // Window Level
 NSString *kWindowOrderKey = @"windowOrder";    // The overall front-to-back ordering of the windows as returned by the window server
 NSString *kWindowNameKey = @"windowName";
+NSString *kWindowWorkspaceKey = @"workspace";
 
 void WindowListApplierFunction(const void *inputDictionary, void *context)
 {
@@ -72,6 +74,13 @@ void WindowListApplierFunction(const void *inputDictionary, void *context)
 		if (windowName != NULL) {
 			[outputEntry setObject:windowName forKey:kWindowNameKey];
 		}
+		
+		// SH:  See if we can grab the workspace to see if we're in the same workspace.
+		NSNumber *workspace = [entry objectForKey:(id)kCGWindowWorkspace];
+		if (workspace != NULL) {
+			[outputEntry setObject:workspace forKey:kWindowWorkspaceKey];
+		}
+		
         // Finally, we are passed the windows in order from front to back by the window server
         // Should the user sort the window list we want to retain that order so that screen shots
         // look correct no matter what selection they make, or what order the items are in. We do this
@@ -79,8 +88,8 @@ void WindowListApplierFunction(const void *inputDictionary, void *context)
         [outputEntry setObject:[NSNumber numberWithInt:data->order] forKey:kWindowOrderKey];
 		
 		// Look for PokerStars window:
-		HKLowLevel *lowLevel = [[HKLowLevel alloc] init];
-		if ([applicationName isEqual:[lowLevel appName]]) {
+//		HKLowLevel *lowLevel = [[HKLowLevel alloc] init];
+		if ([applicationName isEqual:@"PokerStars"] || [applicationName isEqual:@"PokerStarsIT"]) {
 			data->order++;
 			
 			[data->outputArray addObject:outputEntry];
@@ -151,6 +160,21 @@ void WindowListApplierFunction(const void *inputDictionary, void *context)
 				   selector:@selector(appTerminated:)
 					   name:NSWorkspaceDidTerminateApplicationNotification
 					 object:nil];
+		
+		int psWorkspace = [self getPokerStarsWorkspace];
+		CGSWorkspace workspaceID;
+		CGSGetWorkspace(_CGSDefaultConnection(), &workspaceID);
+		if (workspaceID != psWorkspace) {
+			[logger critical:@"Could not find PokerStars in this space! BS: %d PS: %d",workspaceID,psWorkspace];
+			NSAlert *alert = [[[NSAlert alloc] init] autorelease];
+			[alert addButtonWithTitle:@"OK"];
+			[alert setMessageText:@"PokerStars client not found in this Space!"];
+			[alert setInformativeText:@"BlazingStars must be started in the same Space (virtual desktop) as PokerStars.  Please re-open BlazingStars in the correct Space."];
+			[NSApp activateIgnoringOtherApps:YES];
+			[alert runModal];
+			[[NSApplication sharedApplication] terminate: nil];			
+			
+		}
 		
 	}
 	return self;
@@ -332,12 +356,10 @@ void WindowListApplierFunction(const void *inputDictionary, void *context)
 -(NSArray *)getCGPokerStarsWindowList
 {
 	CFArrayRef windowList = CGWindowListCopyWindowInfo(kCGWindowListOptionAll, kCGNullWindowID);
-	
 	NSMutableArray * prunedWindowList = [NSMutableArray array];
     WindowListApplierData data = {prunedWindowList, 0};
     CFArrayApplyFunction(windowList, CFRangeMake(0, CFArrayGetCount(windowList)), &WindowListApplierFunction, &data);
     CFRelease(windowList);
-	
 	[logger debug:@"pruned window list: %@",prunedWindowList];
 	return prunedWindowList;
 }
@@ -361,6 +383,17 @@ void WindowListApplierFunction(const void *inputDictionary, void *context)
 	return -1;
 }
 
-
+-(int)getPokerStarsWorkspace
+{
+	NSArray *windowList = [self getCGPokerStarsWindowList];
+	
+	for (id window in windowList) {
+		NSNumber *workspace = [window objectForKey:kWindowWorkspaceKey];
+		if (workspace) {
+			return [workspace intValue];
+		}
+	}
+	return -1;
+}
 
 @end

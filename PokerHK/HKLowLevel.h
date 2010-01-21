@@ -34,5 +34,6 @@
 -(void)writeString:(NSString *)valueToSet;
 -(NSArray *)getCGPokerStarsWindowList;
 -(int)getWindowIDForTable:(AXUIElementRef)tableRef;
+-(int)getPokerStarsWorkspace;
 
 @end
