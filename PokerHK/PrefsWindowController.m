@@ -62,6 +62,10 @@
 	[shortcutDefaults setObject:[NSNumber numberWithFloat:2.5] forKey:@"pfrOneKey"];	
 	[shortcutDefaults setObject:[NSNumber numberWithFloat:3.0] forKey:@"pfrTwoKey"];	
 	[shortcutDefaults setObject:[NSNumber numberWithFloat:4.0] forKey:@"pfrThreeKey"];	
+
+	NSColor *aColor = [NSColor yellowColor];
+	NSData *theData=[NSArchiver archivedDataWithRootObject:aColor];
+	[shortcutDefaults setObject:theData forKey:@"windowFrameColourKey"];
 	
     [defaults registerDefaults:shortcutDefaults];
 }
@@ -352,6 +356,10 @@
 	[shortcutDefaults setObject:[NSNumber numberWithFloat:2.5] forKey:@"pfrOneKey"];	
 	[shortcutDefaults setObject:[NSNumber numberWithFloat:3.0] forKey:@"pfrTwoKey"];	
 	[shortcutDefaults setObject:[NSNumber numberWithFloat:4.0] forKey:@"pfrThreeKey"];	
+	
+	NSColor *aColor = [NSColor yellowColor];
+	NSData *theData=[NSArchiver archivedDataWithRootObject:aColor];
+	[shortcutDefaults setObject:theData forKey:@"windowFrameColourKey"];
 	
     [defaults registerDefaults:shortcutDefaults];
 	
