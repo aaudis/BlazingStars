@@ -163,9 +163,11 @@ HKWindowManager *wm = NULL;
 			AXUIElementRef chatRef = [self findChatBoxForWindow:(AXUIElementRef) child];
 			
 			
-			[windowDict setObject:[NSArray arrayWithObjects:NSStringFromSize(NSSizeFromCGSize(sizeVal)),chatRef,nil] forKey:name];			
-			AXObserverAddNotification(observer, (AXUIElementRef)child, kAXUIElementDestroyedNotification, (void *)self);			
-			AXObserverAddNotification(observer, chatRef, kAXValueChangedNotification, (void *)self);
+			if (chatRef) {
+				[windowDict setObject:[NSArray arrayWithObjects:NSStringFromSize(NSSizeFromCGSize(sizeVal)),chatRef,nil] forKey:name];			
+				AXObserverAddNotification(observer, (AXUIElementRef)child, kAXUIElementDestroyedNotification, (void *)self);			
+				AXObserverAddNotification(observer, chatRef, kAXValueChangedNotification, (void *)self);				
+			}
 		}
 	}
 	[logger info:@"windowDict: %@",windowDict];
@@ -192,9 +194,11 @@ HKWindowManager *wm = NULL;
 	
 	AXUIElementRef chatRef = [self findChatBoxForWindow:(AXUIElementRef) windowRef];	
 	
-	[windowDict setObject:[NSArray arrayWithObjects:NSStringFromSize(NSSizeFromCGSize(sizeVal)),chatRef,nil] forKey:title];		
-	AXObserverAddNotification(observer,windowRef, kAXUIElementDestroyedNotification, (void *)self);	
-	AXObserverAddNotification(observer, chatRef, kAXValueChangedNotification, (void *)self);	
+	if (chatRef) {
+		[windowDict setObject:[NSArray arrayWithObjects:NSStringFromSize(NSSizeFromCGSize(sizeVal)),chatRef,nil] forKey:title];		
+		AXObserverAddNotification(observer,windowRef, kAXUIElementDestroyedNotification, (void *)self);	
+		AXObserverAddNotification(observer, chatRef, kAXValueChangedNotification, (void *)self);			
+	}
 	[logger info:@"windowDict is now: %@",windowDict];
 }
 
@@ -202,7 +206,7 @@ HKWindowManager *wm = NULL;
 
 -(AXUIElementRef)findChatBoxForWindow:(AXUIElementRef)windowRef
 {
-	AXUIElementRef chatRef;
+	AXUIElementRef chatRef = NULL;
 	NSString *role;
 	for (id child in [lowLevel getChildrenFrom:windowRef]) {
 		AXUIElementCopyAttributeValue((AXUIElementRef)child, kAXRoleAttribute,(CFTypeRef *)&role);
@@ -424,7 +428,7 @@ HKWindowManager *wm = NULL;
 	
 	NSString *title;
 	AXUIElementCopyAttributeValue(windowRef, kAXTitleAttribute, (CFTypeRef *)&title);	
-	
+
 	if ([title length] > 0) {
 		// Sometimes, the table opens faster and the full title is available at the beginning.  If there's two hyphens,
 		// we know it's a table of some kind.
@@ -453,9 +457,11 @@ HKWindowManager *wm = NULL;
 			return HKNotTable;
 		}				
 	} else {
+		[logger info:@"Identification failed - returning HKNotTable"];
 		return HKNotTable;
 	}
-	
+	[logger info:@"Identification fell through - returning HKNotTable"];
+	return HKNotTable;
 }
 
 -(BOOL)pokerWindowIsActive
