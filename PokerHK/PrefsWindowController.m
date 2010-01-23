@@ -305,7 +305,7 @@
 					defaultButton:@"Restore Defaults" 
 				  alternateButton:@"Cancel" 
 					  otherButton:nil 
-		informativeTextWithFormat:@"You can't undo this action"];
+		informativeTextWithFormat:@"You can't undo this action."];
 	
 	if ([alert runModal] == NSAlertAlternateReturn)
 		return;
