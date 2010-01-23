@@ -301,11 +301,11 @@
 {
 	[logger info:@"Resetting defaults to factory state!"];
 	
-	NSAlert *alert = [NSAlert alertWithMessageText:@"Resetting to factory defaults will remove all saved preferences, including all hotkeys and checkboxes, and restore them to factory default values.  This is permanent, and cannot be undone!  Are you sure you want to do this?"
-					defaultButton:@"Yes, I'm sure" 
+	NSAlert *alert = [NSAlert alertWithMessageText:@"Are you sure you want to permanently restore the default settings?"
+					defaultButton:@"Restore Defaults" 
 				  alternateButton:@"Cancel" 
 					  otherButton:nil 
-		informativeTextWithFormat:@""];
+		informativeTextWithFormat:@"You can't undo this action"];
 	
 	if ([alert runModal] == NSAlertAlternateReturn)
 		return;
