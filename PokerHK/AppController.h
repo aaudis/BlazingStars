@@ -14,13 +14,16 @@
 #import "ShortcutRecorder.h"
 #import "HKDefines.h";
 //@class PrefsWindowController;
+@class AboutWindowController;
 @class HKDispatchController;
 @class HKWindowManager;
+
 
 @interface AppController : NSObject {
 	IBOutlet HKDispatchController *dispatchController;
 	IBOutlet HKWindowManager *windowManager;
 	IBOutlet HKLowLevel *lowLevel;
+    AboutWindowController *aboutWindowController;
 }
 -(void)finishedLaunching:(NSNotification *)notification;
 -(IBAction)openPreferences:(id)sender;

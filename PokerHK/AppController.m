@@ -8,6 +8,7 @@
 
 #import "AppController.h"
 #import "HKDefines.h"
+#import "AboutWindowController.h"
 
 extern NSString *appName;
 extern AXUIElementRef appRef;
@@ -91,8 +92,10 @@ extern pid_t pokerstarsPID;
 
 -(IBAction)openAboutPanel:(id)sender
 {
-	[NSApp activateIgnoringOtherApps:YES];
-	[NSApp orderFrontStandardAboutPanel:sender];
+    if (!aboutWindowController) {
+        aboutWindowController = [[AboutWindowController alloc] init];
+    } 
+    [aboutWindowController showAboutPanel:sender];
 }
 
 - (IBAction)displayDonate:(id)sender

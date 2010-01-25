@@ -83,8 +83,10 @@
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+		AA06DB39110CA03500C7A44C /* AboutWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA06DB38110CA03500C7A44C /* AboutWindow.xib */; };
 		AA286D1B10E92C3C00D8DBED /* PokerStarsInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = AA286D1810E92C3C00D8DBED /* PokerStarsInfo.m */; };
 		AA286D1C10E92C3C00D8DBED /* PokerStarsTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = AA286D1A10E92C3C00D8DBED /* PokerStarsTheme.m */; };
+		AA667C9B110CDE3400B778E8 /* AboutWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA667C9A110CDE3400B778E8 /* AboutWindowController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -203,10 +205,13 @@
 		32EC1B3210F9ED25000C972F /* Classic.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Classic.plist; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* BlazingStars.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BlazingStars.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA06DB38110CA03500C7A44C /* AboutWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AboutWindow.xib; sourceTree = "<group>"; };
 		AA286D1710E92C3C00D8DBED /* PokerStarsInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PokerStarsInfo.h; sourceTree = "<group>"; };
 		AA286D1810E92C3C00D8DBED /* PokerStarsInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PokerStarsInfo.m; sourceTree = "<group>"; };
 		AA286D1910E92C3C00D8DBED /* PokerStarsTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PokerStarsTheme.h; sourceTree = "<group>"; };
 		AA286D1A10E92C3C00D8DBED /* PokerStarsTheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PokerStarsTheme.m; sourceTree = "<group>"; };
+		AA667C99110CDE3400B778E8 /* AboutWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutWindowController.h; sourceTree = "<group>"; };
+		AA667C9A110CDE3400B778E8 /* AboutWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutWindowController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -252,6 +257,8 @@
 				0E2D945A0FEED7CA002836CA /* HKDefines.h */,
 				0E33E22A10F6DFEA004C9847 /* HKLowLevel.h */,
 				0E33E22B10F6DFEA004C9847 /* HKLowLevel.m */,
+				AA667C99110CDE3400B778E8 /* AboutWindowController.h */,
+				AA667C9A110CDE3400B778E8 /* AboutWindowController.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -438,6 +445,7 @@
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
 				1DDD58140DA1D0A300B32029 /* MainMenu.xib */,
 				0E5528220FDCD9BA0071ACC6 /* keyMap.plist */,
+				AA06DB38110CA03500C7A44C /* AboutWindow.xib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -531,6 +539,7 @@
 				0ED0FBF610E21352000DF720 /* AdiumApplescriptRunner in Resources */,
 				0E8A2E0910F4868000C26293 /* Windows.png in Resources */,
 				32EC1B3310F9ED25000C972F /* Classic.plist in Resources */,
+				AA06DB39110CA03500C7A44C /* AboutWindow.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -610,6 +619,7 @@
 				0E33E22C10F6DFEA004C9847 /* HKLowLevel.m in Sources */,
 				0ECA7478110119E100562BF2 /* DSClickableURLTextField.m in Sources */,
 				0ECA761A1104F8BC00562BF2 /* FramePreviewView.m in Sources */,
+				AA667C9B110CDE3400B778E8 /* AboutWindowController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
