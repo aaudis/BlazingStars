@@ -449,9 +449,15 @@ HKWindowManager *wm = NULL;
 			[logger info:@"Title %@ identified as HKTournamentRegistration",title];
 			return HKTournamentRegistration;
 		} else if (([title rangeOfString:@"Table"].location != NSNotFound && [title length] > 5) ||
-				   [title isEqualToString:@"PokerStars"]){
-			[logger info:@"Title %@ identified as HKTablePopup",title];
-			return HKTablePopup;
+				   [title isEqualToString:@"PokerStars"]) {
+			// Have to handle the case of the window that pops up when you click "leave" in a tournament game.
+			if ([[title componentsSeparatedByString:@" "] count] != 3) {
+				[logger info:@"Title %@ identified as HKTablePopup",title];
+				return HKTablePopup;
+			} else if ([[NSUserDefaults standardUserDefaults] boolForKey:@"tournamentTableLeavingPopupKey"]) {
+				[logger info:@"Title %@ identified as HKTablePopup, table closing popup.  Closing it.",title];
+				return HKTablePopup;
+			}
 		} else {
 			[logger info:@"title %@ identified as HKNotTable",title];
 			return HKNotTable;
