@@ -41,7 +41,7 @@
 			<object class="NSWindowTemplate" id="1005">
 				<int key="NSWindowStyleMask">3</int>
 				<int key="NSWindowBacking">2</int>
-				<string key="NSWindowRect">{{60, 823}, {400, 302}}</string>
+				<string key="NSWindowRect">{{60, 770}, {400, 355}}</string>
 				<int key="NSWTFlags">544735232</int>
 				<string key="NSWindowTitle">About BlazingStars</string>
 				<string key="NSWindowClass">NSPanel</string>
@@ -55,7 +55,7 @@
 						<object class="NSTextField" id="217570062">
 							<reference key="NSNextResponder" ref="1006"/>
 							<int key="NSvFlags">268</int>
-							<string key="NSFrame">{{0, 168}, {400, 134}}</string>
+							<string key="NSFrame">{{0, 221}, {400, 134}}</string>
 							<reference key="NSSuperview" ref="1006"/>
 							<int key="NSViewLayerContentsRedrawPolicy">2</int>
 							<bool key="NSEnabled">YES</bool>
@@ -80,7 +80,7 @@
 						<object class="NSBox" id="23900133">
 							<reference key="NSNextResponder" ref="1006"/>
 							<int key="NSvFlags">12</int>
-							<string key="NSFrame">{{0, 166}, {400, 5}}</string>
+							<string key="NSFrame">{{0, 219}, {400, 5}}</string>
 							<reference key="NSSuperview" ref="1006"/>
 							<int key="NSViewLayerContentsRedrawPolicy">2</int>
 							<string key="NSOffsets">{0, 0}</string>
@@ -115,7 +115,7 @@
 						<object class="NSTextField" id="723141326">
 							<reference key="NSNextResponder" ref="1006"/>
 							<int key="NSvFlags">268</int>
-							<string key="NSFrame">{{17, 248}, {170, 34}}</string>
+							<string key="NSFrame">{{17, 301}, {170, 34}}</string>
 							<reference key="NSSuperview" ref="1006"/>
 							<int key="NSViewLayerContentsRedrawPolicy">2</int>
 							<bool key="NSEnabled">YES</bool>
@@ -152,7 +152,7 @@
 						<object class="NSTextField" id="880726798">
 							<reference key="NSNextResponder" ref="1006"/>
 							<int key="NSvFlags">268</int>
-							<string key="NSFrame">{{17, 223}, {170, 17}}</string>
+							<string key="NSFrame">{{17, 276}, {170, 17}}</string>
 							<reference key="NSSuperview" ref="1006"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSTextFieldCell" key="NSCell" id="622580046">
@@ -168,7 +168,7 @@
 						<object class="NSButton" id="206030023">
 							<reference key="NSNextResponder" ref="1006"/>
 							<int key="NSvFlags">268</int>
-							<string key="NSFrame">{{287, 192}, {90, 90}}</string>
+							<string key="NSFrame">{{287, 245}, {90, 90}}</string>
 							<reference key="NSSuperview" ref="1006"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSButtonCell" key="NSCell" id="915831899">
@@ -192,7 +192,7 @@
 						<object class="NSTextField" id="705892369">
 							<reference key="NSNextResponder" ref="1006"/>
 							<int key="NSvFlags">12</int>
-							<string key="NSFrame">{{20, 20}, {360, 140}}</string>
+							<string key="NSFrame">{{20, 20}, {360, 193}}</string>
 							<reference key="NSSuperview" ref="1006"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSTextFieldCell" key="NSCell" id="358534182">
@@ -218,7 +218,7 @@
 							</object>
 						</object>
 					</object>
-					<string key="NSFrameSize">{400, 302}</string>
+					<string key="NSFrameSize">{400, 355}</string>
 					<reference key="NSSuperview"/>
 				</object>
 				<string key="NSScreenRect">{{0, 0}, {1920, 1178}}</string>
@@ -410,9 +410,9 @@
 				</object>
 				<object class="NSMutableArray" key="dict.values">
 					<bool key="EncodedWithXMLCoder">YES</bool>
-					<string>{{493, 744}, {400, 302}}</string>
+					<string>{{493, 401}, {400, 355}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{493, 744}, {400, 302}}</string>
+					<string>{{493, 401}, {400, 355}}</string>
 					<boolean value="NO"/>
 					<string>{196, 240}</string>
 					<string>{{202, 428}, {480, 270}}</string>
