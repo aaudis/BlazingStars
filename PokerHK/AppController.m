@@ -126,6 +126,7 @@ extern pid_t pokerstarsPID;
 
 -(void)setPFRAmount:(float)amount forTag:(int)tag
 {
+	NSLog(@"Setting PFR amount to :%f",amount);
 	[dispatchController setPFRAmount:amount forTag:tag];
 }
 
