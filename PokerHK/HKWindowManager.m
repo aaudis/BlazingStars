@@ -415,6 +415,10 @@ HKWindowManager *wm = NULL;
 				return HKTournamentLobby;
 			if ([title rangeOfString:@"Tournament Registration"].location != NSNotFound)
 				return HKTournamentLobby;
+			if ([title rangeOfString:@"Tournament"].location != NSNotFound &&
+				[title rangeOfString:@"Table"].location != NSNotFound &&
+				[title rangeOfString:@"Blinds"].location != NSNotFound)
+				return HKTournamentTable;
 		}
 	} else {
 		return HKNotTable;
