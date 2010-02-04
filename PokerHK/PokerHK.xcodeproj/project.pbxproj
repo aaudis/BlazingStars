@@ -58,11 +58,11 @@
 		0EA807CE1020D5A9004F84D0 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EA807CD1020D5A9004F84D0 /* Sparkle.framework */; };
 		0EA807DA1020D5E5004F84D0 /* Sparkle.framework in Copy Sparkle */ = {isa = PBXBuildFile; fileRef = 0EA807CD1020D5A9004F84D0 /* Sparkle.framework */; };
 		0EA807E81020D92C004F84D0 /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 0EA807E71020D92C004F84D0 /* dsa_pub.pem */; };
+		0EAD6628111A60A800FCE08C /* DSClickableURLTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EAD6627111A60A800FCE08C /* DSClickableURLTextField.m */; };
 		0EB20C9B10028679008A5D14 /* BlazingStars Help in Resources */ = {isa = PBXBuildFile; fileRef = 0EB20C9710028679008A5D14 /* BlazingStars Help */; };
 		0EB8C2AF10433AC60023522F /* readme.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 0EB8C2AE10433AC60023522F /* readme.rtf */; };
 		0EC67AFC0FD0AB73000A33AA /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EC67AFB0FD0AB73000A33AA /* Carbon.framework */; };
 		0EC6840F0FD3984D000A33AA /* HKDispatchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EC6840E0FD3984D000A33AA /* HKDispatchController.m */; };
-		0ECA7478110119E100562BF2 /* DSClickableURLTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ECA7477110119E100562BF2 /* DSClickableURLTextField.m */; };
 		0ECA761A1104F8BC00562BF2 /* FramePreviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ECA76191104F8BC00562BF2 /* FramePreviewView.m */; };
 		0ED0FBDF10E20A1E000DF720 /* license.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 0ED0FBDE10E20A1E000DF720 /* license.rtf */; };
 		0ED0FBE710E212AC000DF720 /* create-dmg in Resources */ = {isa = PBXBuildFile; fileRef = 0ED0FBE410E212AC000DF720 /* create-dmg */; };
@@ -168,13 +168,13 @@
 		0EA4FC0D0FE174CC00CEE1BE /* SRValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRValidator.m; sourceTree = "<group>"; };
 		0EA807CD1020D5A9004F84D0 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
 		0EA807E71020D92C004F84D0 /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dsa_pub.pem; sourceTree = "<group>"; };
+		0EAD6626111A60A800FCE08C /* DSClickableURLTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSClickableURLTextField.h; sourceTree = "<group>"; };
+		0EAD6627111A60A800FCE08C /* DSClickableURLTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSClickableURLTextField.m; sourceTree = "<group>"; };
 		0EB20C9810028679008A5D14 /* English */ = {isa = PBXFileReference; lastKnownFileType = folder; name = English; path = "English.lproj/BlazingStars Help"; sourceTree = "<group>"; };
 		0EB8C2AE10433AC60023522F /* readme.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = readme.rtf; sourceTree = "<group>"; };
 		0EC67AFB0FD0AB73000A33AA /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
 		0EC6840D0FD3984D000A33AA /* HKDispatchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKDispatchController.h; sourceTree = "<group>"; };
 		0EC6840E0FD3984D000A33AA /* HKDispatchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKDispatchController.m; sourceTree = "<group>"; };
-		0ECA7476110119E100562BF2 /* DSClickableURLTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSClickableURLTextField.h; sourceTree = "<group>"; };
-		0ECA7477110119E100562BF2 /* DSClickableURLTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSClickableURLTextField.m; sourceTree = "<group>"; };
 		0ECA76181104F8BC00562BF2 /* FramePreviewView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FramePreviewView.h; sourceTree = "<group>"; };
 		0ECA76191104F8BC00562BF2 /* FramePreviewView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FramePreviewView.m; sourceTree = "<group>"; };
 		0ED0FBDE10E20A1E000DF720 /* license.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = license.rtf; sourceTree = "<group>"; };
@@ -266,8 +266,8 @@
 		0E2A1CBF0FD07D8700471032 /* Prefs */ = {
 			isa = PBXGroup;
 			children = (
-				0ECA7476110119E100562BF2 /* DSClickableURLTextField.h */,
-				0ECA7477110119E100562BF2 /* DSClickableURLTextField.m */,
+				0EAD6626111A60A800FCE08C /* DSClickableURLTextField.h */,
+				0EAD6627111A60A800FCE08C /* DSClickableURLTextField.m */,
 				0E2A1BD70FD0614B00471032 /* DBPrefsWindowController.h */,
 				0E2A1BD80FD0614B00471032 /* DBPrefsWindowController.m */,
 				0E2A1BDA0FD061E300471032 /* PrefsWindowController.h */,
@@ -617,9 +617,9 @@
 				0E8A2EF310F49A2F00C26293 /* HKTransparentBorderedView.m in Sources */,
 				0E8A2FE410F53FF800C26293 /* HKTransparentWindow.m in Sources */,
 				0E33E22C10F6DFEA004C9847 /* HKLowLevel.m in Sources */,
-				0ECA7478110119E100562BF2 /* DSClickableURLTextField.m in Sources */,
 				0ECA761A1104F8BC00562BF2 /* FramePreviewView.m in Sources */,
 				AA667C9B110CDE3400B778E8 /* AboutWindowController.m in Sources */,
+				0EAD6628111A60A800FCE08C /* DSClickableURLTextField.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

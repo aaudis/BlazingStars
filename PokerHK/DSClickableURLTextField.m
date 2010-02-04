@@ -50,8 +50,11 @@
 
 #import "DSClickableURLTextField.h"
 
-
 @implementation DSClickableURLTextField
+
+#pragma mark -
+#pragma mark Init / Dealloc
+#pragma mark -
 
 /* Set the text field to be non-editable and
 	non-selectable. */
@@ -61,6 +64,8 @@
 		[self setEditable:NO];
 		[self setSelectable:NO];
 		canCopyURLs = NO;
+		canDragURLs = YES;
+		displayToolTips = YES;
 	}
 	
 	return self;
@@ -74,6 +79,8 @@
 		[self setEditable:NO];
 		[self setSelectable:NO];
 		canCopyURLs = NO;
+		canDragURLs = YES;
+		displayToolTips = YES;
 	}
 	
 	return self;
@@ -83,9 +90,13 @@
 {
 	[clickedURL release];
 	[URLStorage release];
-	
+	[dragTextBackgroundColor release];
 	[super dealloc];
 }
+
+#pragma mark -
+#pragma mark Subclassed methods
+#pragma mark -
 
 /* Enforces that the text field be non-editable and
 	non-selectable. Probably not needed, but I always
@@ -93,163 +104,242 @@
 */
 - (void)awakeFromNib
 {
+	//[super awakeFromNib];
 	[self setEditable:NO];
 	[self setSelectable:NO];
 }
 
 - (void)setAttributedStringValue:(NSAttributedString *)aStr
 {
-	[URLStorage setAttributedString:aStr];
-	[[self window] invalidateCursorRectsForView:self];
-	[super setAttributedStringValue:aStr];
+	[self setObjectValue:aStr];
 }
 
 - (void)setStringValue:(NSString *)aStr
 {
-	NSAttributedString *attrString = [[[NSAttributedString alloc] initWithString:aStr attributes:nil] autorelease];
-	[self setAttributedStringValue:attrString];
+	[self setObjectValue:aStr];
 }
 
-- (void)setCanCopyURLs:(BOOL)aFlag
+- (void)setObjectValue:(id)anObj
 {
-	canCopyURLs = aFlag;
-}
-
-- (BOOL)canCopyURLs
-{
-	return canCopyURLs;
-}
-
-- (void)resetCursorRects
-{
-	if ( [[self attributedStringValue] length] == 0 ) {
-		[super resetCursorRects];
-		return;
-	}
-	
-	NSRect cellBounds = [[self cell] drawingRectForBounds:[self bounds]];
-
 	if ( URLStorage == nil ) {
-		BOOL cellWraps = ![[self cell] isScrollable];
-		NSSize containerSize = NSMakeSize( cellWraps ? cellBounds.size.width : MAXFLOAT, cellWraps ? MAXFLOAT : cellBounds.size.height );
+		NSRect cellBounds = [[self cell] drawingRectForBounds:[self bounds]];
+		NSSize containerSize = cellBounds.size;
 		URLContainer = [[[NSTextContainer alloc] initWithContainerSize:containerSize] autorelease];
 		URLManager = [[[NSLayoutManager alloc] init] autorelease];
 		URLStorage = [[NSTextStorage alloc] init];
 		
-		[URLStorage addLayoutManager:URLManager];
-		[URLManager addTextContainer:URLContainer];
-		[URLContainer setLineFragmentPadding:2.f];
+		[URLContainer setLineFragmentPadding:(CGFloat)0.];
+		[URLManager setUsesScreenFonts:YES];
+		[URLManager setBackgroundLayoutEnabled:NO];
 		
-		[URLStorage setAttributedString:[self attributedStringValue]];
+		[URLManager addTextContainer:URLContainer];
+		[URLStorage addLayoutManager:URLManager];
 	}
 	
-	unsigned myLength = [URLStorage length];
-	NSRange returnRange = { NSNotFound, 0 }, stringRange = { 0, myLength }, glyphRange = { NSNotFound, 0 };
+	if ( [anObj isKindOfClass:[NSAttributedString class]] ) {
+		[URLStorage setAttributedString:anObj];
+		/* Fix a bug where fonts don't match and causes a mismatch of what is seen
+			and what is used to calculate where link is at.
+		*/
+		if ( [anObj length] > 0 ) {
+			NSUInteger strLen = [anObj length];
+			NSRange stringRange = { 0, strLen }, returnRange = { NSNotFound, 0 };
+			while ( stringRange.location < strLen ) {
+				NSFont *testFont = [anObj attribute:NSFontAttributeName atIndex:stringRange.location longestEffectiveRange:&returnRange inRange:stringRange];
+				if ( testFont == nil ) {
+					if ( (NSMaxRange(returnRange) == strLen) || (NSMaxRange(returnRange) == 0) ) {
+						[URLStorage addAttribute:NSFontAttributeName value:[self font] range:NSMakeRange(0, strLen)];
+						break;
+					} else
+						[URLStorage addAttribute:NSFontAttributeName value:[self font] range:returnRange];
+				}
+				stringRange.location = NSMaxRange(returnRange);
+				stringRange.length = strLen - stringRange.location;
+			}
+		}
+	} else if ( [anObj isKindOfClass:[NSString class]] ) {
+		/* Assume the entire string is a link */
+		NSMutableParagraphStyle *aStyle = [[[NSMutableParagraphStyle alloc] init] autorelease];
+	#if MAC_OS_X_VERSION_MIN_REQUIRED < MAC_OS_X_VERSION_10_4
+		if ( [[self cell] respondsToSelector:@selector(lineBreakMode)] ) {
+			NSUInteger mode = NSLineBreakByWordWrapping;
+			NSCell *cell = [self cell];
+			NSInvocation *inv = [NSInvocation invocationWithMethodSignature:[cell methodSignatureForSelector:@selector(lineBreakMode)]];
+			[inv setTarget:cell];
+			[inv setSelector:@selector(lineBreakMode)];
+			[inv invoke];
+			[inv getReturnValue:&mode];
+			[aStyle setLineBreakMode:mode];
+		}
+	#else
+		[aStyle setLineBreakMode:[[self cell] lineBreakMode]];
+	#endif
+		[aStyle setAlignment:[self alignment]];
+		NSDictionary *attribs = [NSDictionary dictionaryWithObjectsAndKeys:[NSColor blueColor], NSForegroundColorAttributeName, [NSNumber numberWithInt:NSSingleUnderlineStyle], NSUnderlineStyleAttributeName, aStyle, NSParagraphStyleAttributeName, anObj, NSLinkAttributeName, [self font], NSFontAttributeName, nil];
+		NSAttributedString *aStr = [[[NSAttributedString alloc] initWithString:anObj attributes:attribs] autorelease];
+		[URLStorage setAttributedString:aStr];
+		anObj = aStr;
+	} else {
+		[NSException raise:NSInternalInconsistencyException format:@"%@ can only take an attributed string or normal string as its object value", NSStringFromClass([self class])];
+	}
+	[super setObjectValue:anObj];
+	[[self window] invalidateCursorRectsForView:self];
+}
+
+- (void)resetCursorRects
+{
+	if ( (URLStorage == nil) || ([URLStorage length] == 0) ) {
+		[super resetCursorRects];
+		return;
+	}
+	
 	NSCursor *pointingCursor = nil;
 	
-	/* Here mainly for 10.2 compatibility (in case anyone even tries for that anymore) */
+#if MAC_OS_X_VERSION_MIN_REQUIRED < MAC_OS_X_VERSION_10_3
 	if ( [NSCursor respondsToSelector:@selector(pointingHandCursor)] ) {
 		pointingCursor = [NSCursor performSelector:@selector(pointingHandCursor)];
 	} else {
 		[super resetCursorRects];
 		return;
 	}
+#else
+	pointingCursor = [NSCursor pointingHandCursor];
+#endif
 	
-	/* Moved out of the while and for loops as there's no need to recalculate
-	   it every time through */
+	NSRect cellBounds = [[self cell] drawingRectForBounds:[self bounds]];
+	
+	NSUInteger myLength = [URLStorage length];
+	NSRange stringRange = { 0, myLength };
+	
+	if ( displayToolTips ) [self removeAllToolTips];
+	
 	NSRect superVisRect = [self convertRect:[[self superview] visibleRect] fromView:[self superview]];
-
+	
 	while ( stringRange.location < myLength ) {
+		NSRange returnRange = { NSNotFound, 0 };
 		id aVal = [URLStorage attribute:NSLinkAttributeName atIndex:stringRange.location longestEffectiveRange:&returnRange inRange:stringRange];
 		
 		if ( aVal != nil ) {
-			NSRectArray aRectArray = NULL;
-			unsigned numRects = 0, j = 0;
-			glyphRange = [URLManager glyphRangeForCharacterRange:returnRange actualCharacterRange:nil];
-			aRectArray = [URLManager rectArrayForGlyphRange:glyphRange withinSelectedGlyphRange:glyphRange inTextContainer:URLContainer rectCount:&numRects];
-
-			for ( j = 0; j < numRects; j++ ) {
-				/* Check to make sure the rect is visible before setting the cursor */
-				NSRect glyphRect = aRectArray[j];
-				glyphRect.origin.x += cellBounds.origin.x;
-				glyphRect.origin.y += cellBounds.origin.y;
-				
-				NSRect textRect = NSIntersectionRect(glyphRect, cellBounds);
+			NSUInteger numRects = 0, i = 0;
+			NSRange glyphRange = [URLManager glyphRangeForCharacterRange:returnRange actualCharacterRange:NULL];
+			NSRectArray rectArray = [URLManager rectArrayForGlyphRange:glyphRange withinSelectedGlyphRange:NSMakeRange(NSNotFound, 0) inTextContainer:URLContainer rectCount:&numRects], linkRects = NULL;
+			linkRects = calloc( numRects, sizeof( NSRect ) );
+			memcpy( linkRects, rectArray, numRects * sizeof( NSRect ) );
+			for ( i = 0; i < numRects; i++ ) {
+				NSRange thisRange = NSIntersectionRange([URLManager glyphRangeForBoundingRect:linkRects[i] inTextContainer:URLContainer], glyphRange);
+				NSRect linkRect = [URLManager boundingRectForGlyphRange:thisRange inTextContainer:URLContainer];
+				linkRect.origin.x += cellBounds.origin.x;
+				linkRect.origin.y += cellBounds.origin.y;
+				NSRect textRect = NSIntersectionRect(linkRect, cellBounds);
 				NSRect cursorRect = NSIntersectionRect(textRect, superVisRect);
-
-				if ( NSIntersectsRect( textRect, superVisRect ) )
+				if ( NSIntersectsRect( textRect, superVisRect ) ) {
 					[self addCursorRect:cursorRect cursor:pointingCursor];
+					if ( displayToolTips ) [self addToolTipRect:cursorRect owner:self userData:nil];
+				}
 			}
+			free( linkRects );
 		}
 		stringRange.location = NSMaxRange(returnRange);
 		stringRange.length = myLength - stringRange.location;
 	}
-	NSLog(@"\n");
 }
 
-- (NSURL*)urlAtMouse:(NSEvent *)mouseEvent
+#pragma mark -
+#pragma mark Supporting Methods
+#pragma mark -
+
+- (NSURL *)urlAtMouse:(NSPoint)mousePoint
 {
-	NSURL*	urlAtMouse = nil;
-	NSPoint mousePoint = [self convertPoint:[mouseEvent locationInWindow] fromView:nil];
+	NSURL *urlAtMouse = nil;
 	NSRect cellBounds = [[self cell] drawingRectForBounds:[self bounds]];
 	
 	if ( ([URLStorage length] > 0 ) && [self mouse:mousePoint inRect:cellBounds] ) {
 		id aVal = nil;
-		NSRange returnRange = { NSNotFound, 0 }, glyphRange = { NSNotFound, 0 };
-		NSRectArray linkRect = NULL;
-		unsigned glyphIndex = [URLManager glyphIndexForPoint:mousePoint inTextContainer:URLContainer];
-		unsigned charIndex = [URLManager characterIndexForGlyphAtIndex:glyphIndex];
-		unsigned numRects = 0, j = 0;
+		NSRange returnRange = { NSNotFound, 0 };
+		NSUInteger glyphIndex = [URLManager glyphIndexForPoint:mousePoint inTextContainer:URLContainer];
+		NSUInteger charIndex = [URLManager characterIndexForGlyphAtIndex:glyphIndex];
 		
 		aVal = [URLStorage attribute:NSLinkAttributeName atIndex:charIndex longestEffectiveRange:&returnRange inRange:NSMakeRange(charIndex, [URLStorage length] - charIndex)];
-		if ( (aVal != nil) ) {
-			glyphRange = [URLManager glyphRangeForCharacterRange:returnRange actualCharacterRange:nil];
-			linkRect = [URLManager rectArrayForGlyphRange:glyphRange withinSelectedGlyphRange:glyphRange inTextContainer:URLContainer rectCount:&numRects];
-			for ( j = 0; j < numRects; j++ ) {
-				NSRect testHit = linkRect[j];
-				testHit.origin.x += cellBounds.origin.x;
-				testHit.origin.x += cellBounds.origin.y;
-				if ( [self mouse:mousePoint inRect:NSIntersectionRect(testHit, cellBounds)] ) {
+		
+		if ( aVal != nil ) {
+			NSUInteger numRects = 0, i = 0;
+			NSRange glyphRange = [URLManager glyphRangeForCharacterRange:returnRange actualCharacterRange:NULL];
+			NSRectArray rectArray = [URLManager rectArrayForGlyphRange:glyphRange withinSelectedGlyphRange:NSMakeRange(NSNotFound, 0) inTextContainer:URLContainer rectCount:&numRects], linkRects = NULL;
+			linkRects = calloc( numRects, sizeof( NSRect ) );
+			memcpy( linkRects, rectArray, numRects * sizeof( NSRect ) );
+			for ( i = 0; i < numRects; i++ ) {
+				NSRange thisRange = NSIntersectionRange([URLManager glyphRangeForBoundingRect:linkRects[i] inTextContainer:URLContainer], glyphRange);
+				NSRect linkRect = [URLManager boundingRectForGlyphRange:thisRange inTextContainer:URLContainer];
+				linkRect.origin.x += cellBounds.origin.x;
+				linkRect.origin.y += cellBounds.origin.y;
+				if ( [self mouse:mousePoint inRect:NSIntersectionRect(linkRect, cellBounds)] ) {
 					// be smart about links stored as strings
-					if ( [aVal isKindOfClass:[NSString class]] )
-						aVal = [NSURL URLWithString:aVal];
+					if ( [aVal isKindOfClass:[NSString class]] ) aVal = [NSURL URLWithString:aVal];
 					urlAtMouse = aVal;
-					break;
 				}
 			}
+			free( linkRects );
 		}
 	}
 	return urlAtMouse;
 }
 
+- (NSString *)stringAtMouse:(NSPoint)mousePoint
+{
+	NSString *mouseString = nil;
+	NSRect cellBounds = [[self cell] drawingRectForBounds:[self bounds]];
+	
+	if ( [URLStorage length] && [self mouse:mousePoint inRect:cellBounds] ) {
+		id aVal = nil;
+		NSRange charRange = { NSNotFound, 0 };
+		NSUInteger glyphIndex = [URLManager glyphIndexForPoint:mousePoint inTextContainer:URLContainer];
+		NSUInteger charIndex = [URLManager characterIndexForGlyphAtIndex:glyphIndex];
+		
+		aVal = [URLStorage attribute:NSLinkAttributeName atIndex:charIndex longestEffectiveRange:&charRange inRange:NSMakeRange(0, [URLStorage length])];
+		
+		if ( aVal ) {
+			mouseString = [[URLStorage string] substringWithRange:charRange];
+		}
+	}
+	return mouseString;
+}
+
+- (void)copyURL:(id)sender
+{
+	NSPasteboard *copyBoard = [NSPasteboard pasteboardWithName:NSGeneralPboard];
+	NSArray *objs = [sender representedObject];
+	NSURL *copyURL = [objs objectAtIndex:0];
+	NSString *urlString = ([objs count] > 1) ? [objs objectAtIndex:1] : [copyURL absoluteString];
+	[copyBoard declareTypes:[NSArray arrayWithObjects:NSURLPboardType, NSStringPboardType, nil] owner:nil];
+	[copyURL writeToPasteboard:copyBoard];
+	[copyBoard setString:urlString forType:NSStringPboardType];
+}
+
+#pragma mark -
+#pragma mark Event Handling
+#pragma mark -
+
 - (NSMenu *)menuForEvent:(NSEvent *)aEvent
 {
-	if ( !canCopyURLs )
-		return nil;
+	if ( !canCopyURLs ) return nil;
+	NSPoint mousePoint = [self convertPoint:[aEvent locationInWindow] fromView:nil];
+	NSURL *anURL = [self urlAtMouse:mousePoint];
 	
-	NSURL *anURL = [self urlAtMouse:aEvent];
-	
-	if ( anURL != nil ) {
+	if ( anURL ) {
+		NSString *mouseString = [self stringAtMouse:mousePoint];
 		NSMenu *aMenu = [[[NSMenu alloc] initWithTitle:@"Copy URL"] autorelease];
-		NSMenuItem *anItem = [[[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Copy URL", @"Copy URL") action:@selector(copyURL:) keyEquivalent:@""] autorelease];
+		NSMenuItem *anItem = [[[NSMenuItem alloc] initWithTitle:@"" action:@selector(copyURL:) keyEquivalent:@""] autorelease];
+		NSString *title = NSLocalizedString(@"Copy URL", @"Copy URL");
+		NSFont *menuFont = [NSFont menuFontOfSize:[NSFont systemFontSizeForControlSize:NSSmallControlSize]];
+		[anItem setAttributedTitle:[[[NSAttributedString alloc] initWithString:title attributes:[NSDictionary dictionaryWithObject:menuFont forKey:NSFontAttributeName]] autorelease]];
 		[anItem setTarget:self];
-		[anItem setRepresentedObject:anURL];
+		[anItem setRepresentedObject:[NSArray arrayWithObjects:anURL, mouseString, nil]];
 		[aMenu addItem:anItem];
 		
 		return aMenu;
 	}
 	
 	return nil;
-}
-
-- (void)copyURL:(id)sender
-{
-	NSPasteboard *copyBoard = [NSPasteboard pasteboardWithName:NSGeneralPboard];
-	NSURL *copyURL = [sender representedObject];
-	
-	[copyBoard declareTypes:[NSArray arrayWithObjects:NSURLPboardType, NSStringPboardType, nil] owner:nil];
-	[copyURL writeToPasteboard:copyBoard];
-	[copyBoard setString:[copyURL absoluteString] forType:NSStringPboardType];
 }
 
 - (void)mouseDown:(NSEvent *)mouseEvent
@@ -261,12 +351,93 @@
 		the wrong URL accidentally.
 	*/
 	[clickedURL release];
-	clickedURL = [[self urlAtMouse:mouseEvent] retain];
+	clickedURL = [[self urlAtMouse:[self convertPoint:[mouseEvent locationInWindow] fromView:nil]] retain];
+}
+
+- (void)mouseDragged:(NSEvent *)mouseEvent
+{
+	if ( canDragURLs && (clickedURL != nil) ) {
+		NSPoint mouseLoc = [self convertPoint:[mouseEvent locationInWindow] fromView:nil];
+		NSString *mouseString = [self stringAtMouse:mouseLoc];
+		NSPasteboard *dragBoard = [NSPasteboard pasteboardWithName:NSDragPboard];
+		NSImage *anImg = nil, *dragImage = nil;
+		NSString *iconType = nil, *scheme = [clickedURL scheme];
+		CGFloat imgSize = (CGFloat)64.;
+		NSAttributedString *str = nil;
+		NSRect imgRect = NSZeroRect, dragRect = NSZeroRect, txtRect = NSZeroRect;
+		
+		if ( mouseString ) {
+			str = [[[NSAttributedString alloc] initWithString:mouseString attributes:[NSDictionary dictionaryWithObjectsAndKeys:[self font], NSFontAttributeName, [NSColor alternateSelectedControlTextColor], NSForegroundColorAttributeName, nil]] autorelease];
+		}
+		
+		if ( [scheme isEqualToString:@"http"] ) iconType = @"webloc";
+		else if ( [scheme isEqualToString:@"mailto"] ) iconType = @"mailloc";
+		else if ( [scheme isEqualToString:@"ftp"] ) iconType = @"ftploc";
+		else if ( [scheme isEqualToString:@"afp"] ) iconType = @"afploc";
+		else if ( [scheme isEqualToString:@"at"] ) iconType = @"atloc";
+		else iconType = @"inetloc";
+		
+		
+		anImg = [[NSWorkspace sharedWorkspace] iconForFileType:iconType];
+		[anImg setScalesWhenResized:YES];
+		[anImg setSize:NSMakeSize( imgSize, imgSize )];
+		
+		imgRect = dragRect = (NSRect){ {(CGFloat)0., (CGFloat)0.}, [anImg size] };
+		
+		if ( str ) {
+			NSSize s = [str size];
+			dragRect.size.height += (s.height + (CGFloat)4.);
+			if ( dragRect.size.width < (s.width + (CGFloat)10.) )
+				dragRect.size.width = (s.width + (CGFloat)10.);
+			dragRect = NSIntegralRect( dragRect );
+			txtRect = NSMakeRect( (CGFloat)0., (CGFloat)0., s.width, s.height );
+			txtRect.origin.x = NSMidX(dragRect) - (NSWidth(txtRect) / (CGFloat)2.);
+			txtRect.origin.y += (CGFloat)2.;
+			txtRect = NSIntegralRect( txtRect );
+			imgRect.origin.x = NSMidX(dragRect) - (NSWidth(imgRect) / (CGFloat)2.);
+			imgRect.origin.y = NSHeight(dragRect) - imgSize;
+			imgRect = NSIntegralRect( imgRect );
+		}
+		
+		dragImage = [[[NSImage alloc] initWithSize:dragRect.size] autorelease];
+		
+		[dragImage lockFocus];
+		[[NSGraphicsContext currentContext] setImageInterpolation:NSImageInterpolationHigh];
+		[[NSGraphicsContext currentContext] setShouldAntialias:YES];
+		if ( str ) {
+			NSRect pathRect = txtRect;
+			pathRect.origin.x -= (CGFloat)4.;
+			pathRect.size.width += (CGFloat)8.;
+			pathRect.origin.y -= (CGFloat)2.;
+			pathRect.size.height += (CGFloat)4.;
+			pathRect = NSOffsetRect( NSIntegralRect( pathRect ), (CGFloat)0.5, (CGFloat)0.5 );
+			NSBezierPath *path = [NSBezierPath bezierPathWithRect:pathRect];
+			[[self dragTextBackgroundColor] set];
+			[path fill];
+			[[NSColor blackColor] set];
+			[path stroke];
+			[str drawInRect:txtRect];
+		}
+		[anImg drawInRect:imgRect fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:(CGFloat)1.0];
+		[dragImage unlockFocus];
+		
+		[dragBoard declareTypes:[NSArray arrayWithObjects:NSURLPboardType, NSStringPboardType, nil] owner:nil];
+		[clickedURL writeToPasteboard:dragBoard];
+		if ( mouseString ) [dragBoard setString:mouseString forType:NSStringPboardType];
+		else [dragBoard setString:[clickedURL absoluteString] forType:NSStringPboardType];
+		
+		mouseLoc.x -= NSMidX(imgRect);
+		mouseLoc.y += NSMidY(imgRect);
+		
+		[self dragImage:dragImage at:mouseLoc offset:NSMakeSize((CGFloat)0., (CGFloat)0.) event:mouseEvent pasteboard:dragBoard source:self slideBack:YES];
+		[clickedURL release];
+		clickedURL = nil;
+	}
 }
 
 - (void)mouseUp:(NSEvent *)mouseEvent
 {
-	NSURL* urlAtMouse = [self urlAtMouse:mouseEvent];
+	NSURL *urlAtMouse = [self urlAtMouse:[self convertPoint:[mouseEvent locationInWindow] fromView:nil]];
 	if ( (urlAtMouse != nil)  &&  [urlAtMouse isEqualTo:clickedURL] ) {
 		// check if delegate wants to open the URL itself, if not, let the workspace open the URL
 		if ( ([self delegate] == nil)  || ![[self delegate] respondsToSelector:@selector(textField:openURL:)] || ![[self delegate] textField:self openURL:urlAtMouse] )
@@ -275,6 +446,76 @@
 	[clickedURL release];
 	clickedURL = nil;
 	[super mouseUp:mouseEvent];
+}
+
+#pragma mark -
+#pragma mark Accessors
+#pragma mark -
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6
+- (void)setDelegate:(id <DSClickableURLTextFieldDelegate>)del
+{
+	[super setDelegate:del];
+}
+
+- (id <DSClickableURLTextFieldDelegate>)delegate
+{
+	return (id <DSClickableURLTextFieldDelegate>)[super delegate];
+}
+#endif
+
+- (void)setCanCopyURLs:(BOOL)aFlag
+{
+	canCopyURLs = aFlag;
+}
+
+- (BOOL)canCopyURLs
+{
+	return canCopyURLs;
+}
+
+- (void)setCanDragURLs:(BOOL)flag
+{
+	canDragURLs = flag;
+}
+
+- (BOOL)canDragURLs
+{
+	return canDragURLs;
+}
+
+- (void)setDisplayToolTips:(BOOL)flag
+{
+	displayToolTips = flag;
+}
+
+- (BOOL)displayToolTips
+{
+	return displayToolTips;
+}
+
+- (void)setDragTextBackgroundColor:(NSColor *)color
+{
+	[color retain];
+	[dragTextBackgroundColor release];
+	dragTextBackgroundColor = color;
+}
+
+- (NSColor *)dragTextBackgroundColor
+{
+	if ( dragTextBackgroundColor ) return [[dragTextBackgroundColor retain] autorelease];
+	else return [[[[NSColor alternateSelectedControlColor] colorWithAlphaComponent:(CGFloat)0.75] retain] autorelease];
+}
+
+#pragma mark -
+#pragma mark Tooltips
+#pragma mark -
+
+- (NSString *)view:(NSView *)view stringForToolTip:(NSToolTipTag)tag point:(NSPoint)point userData:(void *)userData
+{
+	NSURL *anURL = [self urlAtMouse:point];
+	if ( anURL ) return [anURL absoluteString];
+	return nil;
 }
 
 @end

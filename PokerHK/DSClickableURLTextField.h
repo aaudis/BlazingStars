@@ -1,7 +1,7 @@
 /*
 	DSClickableURLTextField
 	
-	Copyright (c) 2006 - 2007 Night Productions, by Darkshadow. All Rights Reserved.
+	Copyright (c) 2006 - 2009 Night Productions, by Darkshadow. All Rights Reserved.
 	http://www.nightproductions.net/developer.htm
 	darkshadow@nightproductions.net
 	
@@ -50,19 +50,45 @@
 
 #import <Cocoa/Cocoa.h>
 
+#ifndef MAC_OS_X_VERSION_10_6
+	#define MAC_OS_X_VERSION_10_6 1060
+#endif
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6
+	@protocol DSClickableURLTextFieldDelegate <NSTextFieldDelegate>
+		@optional
+		- (BOOL)textField:(id)textField openURL:(NSURL *)url;
+	@end
+#endif
+
 @interface DSClickableURLTextField : NSTextField {
-	NSTextStorage *URLStorage;
+	NSTextStorage	*URLStorage;
 	NSLayoutManager *URLManager;
 	NSTextContainer *URLContainer;
 	NSURL			*clickedURL;
+	NSColor			*dragTextBackgroundColor;
 	BOOL			canCopyURLs;
+	BOOL			canDragURLs;
+	BOOL			displayToolTips;
 }
 
+#if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_6
+- (void)setDelegate:(id <DSClickableURLTextFieldDelegate>)del;
+- (id <DSClickableURLTextFieldDelegate>)delegate;
+#endif
 - (void)setCanCopyURLs:(BOOL)aFlag;
 - (BOOL)canCopyURLs;
+- (void)setCanDragURLs:(BOOL)flag;
+- (BOOL)canDragURLs;
+- (void)setDisplayToolTips:(BOOL)flag;
+- (BOOL)displayToolTips;
+- (void)setDragTextBackgroundColor:(NSColor *)color;
+- (NSColor *)dragTextBackgroundColor;
 
 @end
 
+#if MAC_OS_X_VERSION_MAX_ALLOWED < MAC_OS_X_VERSION_10_6
 @interface NSObject (DSClickableURLTextFieldDelegate)
-- (BOOL)textField:(id)textField openURL:(NSURL*)url;
+- (BOOL)textField:(id)textField openURL:(NSURL *)url;
 @end
+#endif
