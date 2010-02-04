@@ -164,7 +164,7 @@ void WindowListApplierFunction(const void *inputDictionary, void *context)
 		int psWorkspace = [self getPokerStarsWorkspace];
 		CGSWorkspace workspaceID;
 		CGSGetWorkspace(_CGSDefaultConnection(), &workspaceID);
-		if (workspaceID != psWorkspace) {
+		if (workspaceID != psWorkspace && psWorkspace != -1) {
 			[logger critical:@"Could not find PokerStars in this space! BS: %d PS: %d",workspaceID,psWorkspace];
 			NSAlert *alert = [[[NSAlert alloc] init] autorelease];
 			[alert addButtonWithTitle:@"OK"];
