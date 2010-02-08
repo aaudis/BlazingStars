@@ -370,6 +370,7 @@ HKWindowManager *wm;
 		}
 		return -1;
 	}
+	[logger info:@"Bet size is: %f",[value floatValue]];
 	return [value floatValue];
 }
 
@@ -426,7 +427,9 @@ HKWindowManager *wm;
 -(void)incrementBetSize:(long)delta
 {
 	float betSize = [self getBetSize];
-	betSize += [self betIncrement] * (float)delta;
+	[logger debug:@"betSize here is: %f",betSize];
+	betSize += ([self betIncrement] * (float)delta);
+	[logger debug:@"betSize after is: %f",betSize];	
 	[self setBetSize:betSize];
 }
 
@@ -697,20 +700,28 @@ pascal OSStatus hotKeyHandler(EventHandlerCallRef nextHandler,EventRef theEvent,
 pascal OSStatus mouseEventHandler(EventHandlerCallRef nextHandler,EventRef theEvent,
 							  void *userData)
 {
-	if ([[[PrefsWindowController sharedPrefsWindowController] scrollWheelCheckBox] state] == NSOnState) {
+/*	if ([[[PrefsWindowController sharedPrefsWindowController] scrollWheelCheckBox] state] == NSOnState) {
 		if ([wm pokerWindowIsActive] == YES) {
+			[NSThread sleepForTimeInterval:0.5];
 			long delta;
 			GetEventParameter(theEvent, kEventParamMouseWheelDelta, typeSInt32, NULL, sizeof(long), NULL, &delta);
 			NSLog(@"Got delta: %d",delta);
 			if (delta > 0) {
-				[(id)userData incrementBetSize:delta];
-			} else {
-				[(id)userData decrementBetSize:delta];
+				NSLog(@"Calling increment.");
+				[(id)userData incrementBetSize:1];
+			} else if (delta < 0) {
+				NSLog(@"Calling decrement.");				
+				[(id)userData decrementBetSize:1];
 			}
+			FlushEventQueue(GetMainEventQueue());
+			FlushEventQueue(GetCurrentEventQueue());			
+			[NSThread sleepForTimeInterval:0.5];
 		} else {
 			CallNextEventHandler(nextHandler, theEvent);
+			FlushEventQueue(GetMainEventQueue());
+			FlushEventQueue(GetCurrentEventQueue());			
 			return eventNotHandledErr;
 		}
 	}
-	return noErr;
+	return noErr;*/
 }
