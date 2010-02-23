@@ -724,4 +724,5 @@ pascal OSStatus mouseEventHandler(EventHandlerCallRef nextHandler,EventRef theEv
 		}
 	}
 	return noErr;*/
+	return noErr;
 }
