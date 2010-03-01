@@ -33,7 +33,7 @@
     NSString *s = [preference substringToIndex:range.location];
 	
     if ([s hasPrefix:@"renaissance"]) {
-        return [[PokerStarsTheme alloc] initWithName:@"Renaissance" supported:NO];
+        return [[PokerStarsTheme alloc] initWithName:@"Renaissance" supported:YES];
     }
     if ([s hasPrefix:@"slick"]) {
         return [[PokerStarsTheme alloc] initWithName:@"Slick" supported:YES];
@@ -49,7 +49,7 @@
         return [[PokerStarsTheme alloc] initWithName:@"No Images" supported:NO];
     }
     if ([s isEqualToString:@"shiny"]) {
-        return [[PokerStarsTheme alloc] initWithName:@"Shiny" supported:NO];
+        return [[PokerStarsTheme alloc] initWithName:@"Shiny" supported:YES];
     }
     if ([s isEqualToString:@"marine"]) {
         return [[PokerStarsTheme alloc] initWithName:@"Marine" supported:NO];

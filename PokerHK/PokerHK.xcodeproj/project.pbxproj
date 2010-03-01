@@ -60,6 +60,8 @@
 		0EA807E81020D92C004F84D0 /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 0EA807E71020D92C004F84D0 /* dsa_pub.pem */; };
 		0EAD6628111A60A800FCE08C /* DSClickableURLTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EAD6627111A60A800FCE08C /* DSClickableURLTextField.m */; };
 		0EB20C9B10028679008A5D14 /* BlazingStars Help in Resources */ = {isa = PBXBuildFile; fileRef = 0EB20C9710028679008A5D14 /* BlazingStars Help */; };
+		0EB4DAA9113C76CE00CE6AE4 /* Shiny.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0EB4DAA8113C76CE00CE6AE4 /* Shiny.plist */; };
+		0EB4DAAD113C79E300CE6AE4 /* Renaissance.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0EB4DAAC113C79E300CE6AE4 /* Renaissance.plist */; };
 		0EB8C2AF10433AC60023522F /* readme.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 0EB8C2AE10433AC60023522F /* readme.rtf */; };
 		0EC67AFC0FD0AB73000A33AA /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EC67AFB0FD0AB73000A33AA /* Carbon.framework */; };
 		0EC6840F0FD3984D000A33AA /* HKDispatchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EC6840E0FD3984D000A33AA /* HKDispatchController.m */; };
@@ -171,6 +173,8 @@
 		0EAD6626111A60A800FCE08C /* DSClickableURLTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSClickableURLTextField.h; sourceTree = "<group>"; };
 		0EAD6627111A60A800FCE08C /* DSClickableURLTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSClickableURLTextField.m; sourceTree = "<group>"; };
 		0EB20C9810028679008A5D14 /* English */ = {isa = PBXFileReference; lastKnownFileType = folder; name = English; path = "English.lproj/BlazingStars Help"; sourceTree = "<group>"; };
+		0EB4DAA8113C76CE00CE6AE4 /* Shiny.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Shiny.plist; sourceTree = "<group>"; };
+		0EB4DAAC113C79E300CE6AE4 /* Renaissance.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Renaissance.plist; sourceTree = "<group>"; };
 		0EB8C2AE10433AC60023522F /* readme.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = readme.rtf; sourceTree = "<group>"; };
 		0EC67AFB0FD0AB73000A33AA /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
 		0EC6840D0FD3984D000A33AA /* HKDispatchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKDispatchController.h; sourceTree = "<group>"; };
@@ -309,6 +313,8 @@
 		0E5528E10FDCE2D50071ACC6 /* Themes */ = {
 			isa = PBXGroup;
 			children = (
+				0EB4DAAC113C79E300CE6AE4 /* Renaissance.plist */,
+				0EB4DAA8113C76CE00CE6AE4 /* Shiny.plist */,
 				32EC1B3210F9ED25000C972F /* Classic.plist */,
 				0E2D92CF0FEEBA63002836CA /* Slick.plist */,
 				0E5526A80FDCBB150071ACC6 /* Hyper-Simple.plist */,
@@ -540,6 +546,8 @@
 				0E8A2E0910F4868000C26293 /* Windows.png in Resources */,
 				32EC1B3310F9ED25000C972F /* Classic.plist in Resources */,
 				AA06DB39110CA03500C7A44C /* AboutWindow.xib in Resources */,
+				0EB4DAA9113C76CE00CE6AE4 /* Shiny.plist in Resources */,
+				0EB4DAAD113C79E300CE6AE4 /* Renaissance.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
