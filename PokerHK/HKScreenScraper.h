@@ -21,10 +21,10 @@
 	IBOutlet HKDispatchController *dc;
 	IBOutlet HKWindowManager *windowManager;
 	IBOutlet HKLowLevel *lowLevel;
-	NSString *currencyName;
+	NSArray *currencyCharacters;
 }
 
-@property (nonatomic, retain) NSString *currencyName;
+@property (nonatomic, retain) NSArray *currencyCharacters;
 
 -(float)getPotSize;
 

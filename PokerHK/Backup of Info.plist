@@ -21,9 +21,9 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>23</string>
+	<string>24</string>
 	<key>CFBundleShortVersionString</key>
-	<string>0.9.9b</string>
+	<string>1.0.0</string>
 	<key>NSHumanReadableCopyright</key>
 	<string>Copyright Fully Functional Software, 2009, 2010</string>
 	<key>NSMainNibFile</key>

@@ -13,19 +13,14 @@
 #import "HKDefines.h"
 
 @implementation HKScreenScraper
-@synthesize currencyName;
+@synthesize currencyCharacters;
 
 -(void)awakeFromNib
 {	
 	logger = [SOLogger loggerForFacility:@"com.fullyfunctionalsoftware.blazingstars" options:ASL_OPT_STDERR];
 	[logger info:@"Initializing screenScraper."];
-	
-	if ([[lowLevel appName] isEqualToString:@"PokerStars"]) {
-		self.currencyName = @"$";
-	} else {
-		self.currencyName = @"€";
-	}
-	
+
+	self.currencyCharacters = [[NSArray alloc] initWithObjects:@"$", @"€", @"£", nil];
 }
 
 -(NSString *)runTesseract:(NSString *)inFilePath
@@ -68,7 +63,6 @@
 	return output;
 }
 
-
 -(float)getPotSize
 {
 	AXUIElementRef mainWindow = [lowLevel getMainWindow];
@@ -103,7 +97,7 @@
 	
 	NSString *inputPath = [NSString stringWithString:@"/tmp/testimage.tif"];
 	NSString *outputfilename = [NSString stringWithString:@"/tmp/processed.tif"];
-	NSArray *arguments = [NSArray arrayWithObjects:inputPath,@"-resample",@"600x600",@"-depth",@"8",@"-threshold",@"30%",outputfilename, nil];	
+	NSArray *arguments = [NSArray arrayWithObjects:inputPath,@"-resample",@"600x600",@"-depth",@"8",@"-threshold",@"31%",outputfilename, nil];	
 	
 	[task setArguments: arguments];
 	[task launch];	
@@ -144,25 +138,28 @@
 	// potsize is zero.  Until I can come up with a more elegant way to fix this, I'm just going to 
 	// look for the problem and drop everything before the $.  
 	// This should drop everything before the $...
-	if ([result rangeOfString:self.currencyName].location != NSNotFound) {
-		result = [[result componentsSeparatedByString:self.currencyName] objectAtIndex:1];		
-		[logger info:@"Pot after dropping everything before the %@: %@", self.currencyName,result];
+	for (id currencyCharacter in self.currencyCharacters) {
+		if ([result rangeOfString:currencyCharacter].location != NSNotFound) {
+			result = [[result componentsSeparatedByString:currencyCharacter] objectAtIndex:1];		
+			[logger info:@"Pot after dropping everything before the %@: %@", currencyCharacter,result];
+			break;
+		}
 	}
 	
 	NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
 	[formatter setNumberStyle:NSNumberFormatterDecimalStyle];	
 	[formatter setGeneratesDecimalNumbers:YES];
+	[formatter setDecimalSeparator:@"."];
 	NSNumber *pot = [formatter numberFromString:result];
 	[logger info:@"New pot value from formatter is: %g",[pot doubleValue]];
 	returnVal = [pot floatValue];
-	
 	
 	// Use the fact that any decimal followed by more than two digits is a comma.  
 	NSRange position = [result rangeOfCharacterFromSet:[NSCharacterSet characterSetWithCharactersInString:@"."]];
 	if (position.location != NSNotFound) {
 		[logger info:@"Position of decimal: %d",position.location];
 	}
-
+	
 	return returnVal;
 }
 
