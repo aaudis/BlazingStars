@@ -21,6 +21,12 @@
 +(PokerStarsTheme *)determineTheme {
     NSString *preference = [PokerStarsInfo pokerStarsPreference: @"0" inSection:@"themes"];
     if (preference == nil) {
+		NSAlert *alert = [[[NSAlert alloc] init] autorelease];
+		[alert addButtonWithTitle:@"OK"];
+		[alert setMessageText:[NSString stringWithFormat:@"Fatal error: BlazingStars could not find the PokerStars preferences file at %@.",
+			[PokerStarsInfo pokerStarsPreferencesFilename]]];
+		[alert setInformativeText:@"Without this file, BlazingStars cannot determine the theme in use by PokerStars;  BlazingStars will now quit."];
+		[alert runModal];		
         @throw [NSException exceptionWithName:@"ThemeException" reason:@"Can't access PokerStars preferences" userInfo:nil];
     }
 

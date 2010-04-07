@@ -622,7 +622,7 @@ HKWindowManager *wm;
 pascal OSStatus hotKeyHandler(EventHandlerCallRef nextHandler,EventRef theEvent,
 							  void *userData)
 {
-	OSStatus retCode;
+	OSStatus retCode = noErr;
 	
 	EventHotKeyID hkCom;
 	GetEventParameter(theEvent,kEventParamDirectObject,typeEventHotKeyID,NULL,
@@ -688,7 +688,6 @@ pascal OSStatus hotKeyHandler(EventHandlerCallRef nextHandler,EventRef theEvent,
 	} else {
 		retCode = eventNotHandledErr;
 	}
-	retCode = noErr;
 	
 	// Flush the events from the hotkey queue.
 	FlushEventQueue(GetMainEventQueue());
