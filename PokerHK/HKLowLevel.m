@@ -309,7 +309,7 @@ void WindowListApplierFunction(const void *inputDictionary, void *context)
 {
 	CGEventRef keyEventDown = CGEventCreateKeyboardEvent(NULL,keyCode,true);
 	CGEventSetFlags(keyEventDown,0);
-	CGEventRef keyEventUp = CGEventCreateKeyboardEvent(NULL, 124, false);
+	CGEventRef keyEventUp = CGEventCreateKeyboardEvent(NULL, keyCode, false);
 	CGEventSetFlags(keyEventUp,0);
 	
 	for (int j = 0; j < times; j++) {

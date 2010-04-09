@@ -15,6 +15,7 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
 
+	[CMCrashReporter check];
 }
 
 

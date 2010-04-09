@@ -8,6 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "PrefsWindowController.h"
+#import <CMCrashReporter/CMCrashReporter.h>
 
 @interface Menulet : NSObject {
 	NSStatusItem *statusItem;

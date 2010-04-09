@@ -36,6 +36,8 @@
 		0E33E22C10F6DFEA004C9847 /* HKLowLevel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E33E22B10F6DFEA004C9847 /* HKLowLevel.m */; };
 		0E33E23D10F6E3BE004C9847 /* SOLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E33E23C10F6E3BE004C9847 /* SOLogger.framework */; };
 		0E33E25610F6E87B004C9847 /* SOLogger.framework in Copy Sparkle */ = {isa = PBXBuildFile; fileRef = 0E33E23C10F6E3BE004C9847 /* SOLogger.framework */; };
+		0E46AF5C116E951F000980A7 /* CMCrashReporter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E46AF5B116E951F000980A7 /* CMCrashReporter.framework */; };
+		0E46AF63116E9523000980A7 /* CMCrashReporter.framework in Copy CrashReporter */ = {isa = PBXBuildFile; fileRef = 0E46AF5B116E951F000980A7 /* CMCrashReporter.framework */; };
 		0E46F1281044726E00EC807B /* convert in Resources */ = {isa = PBXBuildFile; fileRef = 0E46F1271044726E00EC807B /* convert */; };
 		0E4D73AE10DF35C80058D4FA /* speechCommands.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0E4D73AD10DF35C80058D4FA /* speechCommands.plist */; };
 		0E5526AA0FDCBB150071ACC6 /* Hyper-Simple.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0E5526A80FDCBB150071ACC6 /* Hyper-Simple.plist */; };
@@ -102,6 +104,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		0E46ADCE116D3643000980A7 /* Copy CrashReporter */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				0E46AF63116E9523000980A7 /* CMCrashReporter.framework in Copy CrashReporter */,
+			);
+			name = "Copy CrashReporter";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		0EA807D91020D5D5004F84D0 /* Copy Sparkle */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -137,6 +150,7 @@
 		0E33E22A10F6DFEA004C9847 /* HKLowLevel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKLowLevel.h; sourceTree = "<group>"; };
 		0E33E22B10F6DFEA004C9847 /* HKLowLevel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKLowLevel.m; sourceTree = "<group>"; };
 		0E33E23C10F6E3BE004C9847 /* SOLogger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SOLogger.framework; sourceTree = "<group>"; };
+		0E46AF5B116E951F000980A7 /* CMCrashReporter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CMCrashReporter.framework; sourceTree = "<group>"; };
 		0E46F1271044726E00EC807B /* convert */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = convert; sourceTree = "<group>"; };
 		0E4D73AD10DF35C80058D4FA /* speechCommands.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = speechCommands.plist; sourceTree = "<group>"; };
 		0E5526A80FDCBB150071ACC6 /* Hyper-Simple.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Hyper-Simple.plist"; sourceTree = "<group>"; };
@@ -229,6 +243,7 @@
 				0EA807CE1020D5A9004F84D0 /* Sparkle.framework in Frameworks */,
 				0EA4581010F31EF600CE056C /* Quartz.framework in Frameworks */,
 				0E33E23D10F6E3BE004C9847 /* SOLogger.framework in Frameworks */,
+				0E46AF5C116E951F000980A7 /* CMCrashReporter.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -394,6 +409,7 @@
 		1058C7A2FEA54F0111CA2CBB /* Other Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0E46AF5B116E951F000980A7 /* CMCrashReporter.framework */,
 				29B97324FDCFA39411CA2CEA /* AppKit.framework */,
 				13E42FB307B3F0F600E4EEF1 /* CoreData.framework */,
 				29B97325FDCFA39411CA2CEA /* Foundation.framework */,
@@ -482,6 +498,7 @@
 				8D1107290486CEB800E47090 /* Resources */,
 				8D11072C0486CEB800E47090 /* Sources */,
 				8D11072E0486CEB800E47090 /* Frameworks */,
+				0E46ADCE116D3643000980A7 /* Copy CrashReporter */,
 			);
 			buildRules = (
 			);
