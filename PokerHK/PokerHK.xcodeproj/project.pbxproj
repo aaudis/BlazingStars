@@ -22,6 +22,9 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		0E09148111729BC800F5928A /* Hyper-Simple.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0E09148011729BC800F5928A /* Hyper-Simple.plist */; };
+		0E09148511729C0200F5928A /* FullTiltTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E09148411729C0200F5928A /* FullTiltTheme.m */; };
+		0E0914891172BB7400F5928A /* FullTiltInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E0914881172BB7400F5928A /* FullTiltInfo.m */; };
 		0E2A1AA10FCFB91200471032 /* AppController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E2A1AA00FCFB91200471032 /* AppController.m */; };
 		0E2A1AA60FCFB9AD00471032 /* Menulet.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E2A1AA50FCFB9AD00471032 /* Menulet.m */; };
 		0E2A1AAA0FCFBC4400471032 /* pokerhk.icns in Resources */ = {isa = PBXBuildFile; fileRef = 0E2A1AA90FCFBC4400471032 /* pokerhk.icns */; };
@@ -40,7 +43,7 @@
 		0E46AF63116E9523000980A7 /* CMCrashReporter.framework in Copy CrashReporter */ = {isa = PBXBuildFile; fileRef = 0E46AF5B116E951F000980A7 /* CMCrashReporter.framework */; };
 		0E46F1281044726E00EC807B /* convert in Resources */ = {isa = PBXBuildFile; fileRef = 0E46F1271044726E00EC807B /* convert */; };
 		0E4D73AE10DF35C80058D4FA /* speechCommands.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0E4D73AD10DF35C80058D4FA /* speechCommands.plist */; };
-		0E5526AA0FDCBB150071ACC6 /* Hyper-Simple.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0E5526A80FDCBB150071ACC6 /* Hyper-Simple.plist */; };
+		0E5526AA0FDCBB150071ACC6 /* Racetrack.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0E5526A80FDCBB150071ACC6 /* Racetrack.plist */; };
 		0E5526AB0FDCBB150071ACC6 /* Black.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0E5526A90FDCBB150071ACC6 /* Black.plist */; };
 		0E5528230FDCD9BA0071ACC6 /* keyMap.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0E5528220FDCD9BA0071ACC6 /* keyMap.plist */; };
 		0E5DD4320FDA25CC000670D2 /* Pot Bets.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E5DD4310FDA25CC000670D2 /* Pot Bets.png */; };
@@ -131,6 +134,11 @@
 
 /* Begin PBXFileReference section */
 		089C165DFE840E0CC02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		0E09148011729BC800F5928A /* Hyper-Simple.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Hyper-Simple.plist"; sourceTree = "<group>"; };
+		0E09148311729C0200F5928A /* FullTiltTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FullTiltTheme.h; sourceTree = "<group>"; };
+		0E09148411729C0200F5928A /* FullTiltTheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FullTiltTheme.m; sourceTree = "<group>"; };
+		0E0914871172BB7400F5928A /* FullTiltInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FullTiltInfo.h; sourceTree = "<group>"; };
+		0E0914881172BB7400F5928A /* FullTiltInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FullTiltInfo.m; sourceTree = "<group>"; };
 		0E2A1A9F0FCFB91200471032 /* AppController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppController.h; sourceTree = "<group>"; };
 		0E2A1AA00FCFB91200471032 /* AppController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppController.m; sourceTree = "<group>"; };
 		0E2A1AA40FCFB9AD00471032 /* Menulet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Menulet.h; sourceTree = "<group>"; };
@@ -153,7 +161,7 @@
 		0E46AF5B116E951F000980A7 /* CMCrashReporter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CMCrashReporter.framework; sourceTree = "<group>"; };
 		0E46F1271044726E00EC807B /* convert */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = convert; sourceTree = "<group>"; };
 		0E4D73AD10DF35C80058D4FA /* speechCommands.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = speechCommands.plist; sourceTree = "<group>"; };
-		0E5526A80FDCBB150071ACC6 /* Hyper-Simple.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Hyper-Simple.plist"; sourceTree = "<group>"; };
+		0E5526A80FDCBB150071ACC6 /* Racetrack.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Racetrack.plist; sourceTree = "<group>"; };
 		0E5526A90FDCBB150071ACC6 /* Black.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Black.plist; sourceTree = "<group>"; };
 		0E5528220FDCD9BA0071ACC6 /* keyMap.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = keyMap.plist; sourceTree = "<group>"; };
 		0E5DD4310FDA25CC000670D2 /* Pot Bets.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Pot Bets.png"; sourceTree = "<group>"; };
@@ -253,10 +261,7 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				AA286D1710E92C3C00D8DBED /* PokerStarsInfo.h */,
-				AA286D1810E92C3C00D8DBED /* PokerStarsInfo.m */,
-				AA286D1910E92C3C00D8DBED /* PokerStarsTheme.h */,
-				AA286D1A10E92C3C00D8DBED /* PokerStarsTheme.m */,
+				0E09148611729C0800F5928A /* ThemeManagement */,
 				0EE7BDEF0FE7759A00F1429A /* PotGrab */,
 				0E2A1CBF0FD07D8700471032 /* Prefs */,
 				0EA4FC000FE174CC00CEE1BE /* ShortcutRecorder */,
@@ -280,6 +285,21 @@
 				AA667C9A110CDE3400B778E8 /* AboutWindowController.m */,
 			);
 			name = Classes;
+			sourceTree = "<group>";
+		};
+		0E09148611729C0800F5928A /* ThemeManagement */ = {
+			isa = PBXGroup;
+			children = (
+				0E0914871172BB7400F5928A /* FullTiltInfo.h */,
+				0E0914881172BB7400F5928A /* FullTiltInfo.m */,
+				0E09148311729C0200F5928A /* FullTiltTheme.h */,
+				0E09148411729C0200F5928A /* FullTiltTheme.m */,
+				AA286D1710E92C3C00D8DBED /* PokerStarsInfo.h */,
+				AA286D1810E92C3C00D8DBED /* PokerStarsInfo.m */,
+				AA286D1910E92C3C00D8DBED /* PokerStarsTheme.h */,
+				AA286D1A10E92C3C00D8DBED /* PokerStarsTheme.m */,
+			);
+			name = ThemeManagement;
 			sourceTree = "<group>";
 		};
 		0E2A1CBF0FD07D8700471032 /* Prefs */ = {
@@ -328,11 +348,12 @@
 		0E5528E10FDCE2D50071ACC6 /* Themes */ = {
 			isa = PBXGroup;
 			children = (
+				0E09148011729BC800F5928A /* Hyper-Simple.plist */,
 				0EB4DAAC113C79E300CE6AE4 /* Renaissance.plist */,
 				0EB4DAA8113C76CE00CE6AE4 /* Shiny.plist */,
 				32EC1B3210F9ED25000C972F /* Classic.plist */,
 				0E2D92CF0FEEBA63002836CA /* Slick.plist */,
-				0E5526A80FDCBB150071ACC6 /* Hyper-Simple.plist */,
+				0E5526A80FDCBB150071ACC6 /* Racetrack.plist */,
 				0E5526A90FDCBB150071ACC6 /* Black.plist */,
 			);
 			name = Themes;
@@ -544,7 +565,7 @@
 				0E5DD4320FDA25CC000670D2 /* Pot Bets.png in Resources */,
 				0E5DD4640FDA4595000670D2 /* Open:Close.png in Resources */,
 				0EF91D800FDB81DE00FB01E7 /* Setup.png in Resources */,
-				0E5526AA0FDCBB150071ACC6 /* Hyper-Simple.plist in Resources */,
+				0E5526AA0FDCBB150071ACC6 /* Racetrack.plist in Resources */,
 				0E5526AB0FDCBB150071ACC6 /* Black.plist in Resources */,
 				0E5528230FDCD9BA0071ACC6 /* keyMap.plist in Resources */,
 				0EE7BDCE0FE7736500F1429A /* tesseract in Resources */,
@@ -565,6 +586,7 @@
 				AA06DB39110CA03500C7A44C /* AboutWindow.xib in Resources */,
 				0EB4DAA9113C76CE00CE6AE4 /* Shiny.plist in Resources */,
 				0EB4DAAD113C79E300CE6AE4 /* Renaissance.plist in Resources */,
+				0E09148111729BC800F5928A /* Hyper-Simple.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -645,6 +667,8 @@
 				0ECA761A1104F8BC00562BF2 /* FramePreviewView.m in Sources */,
 				AA667C9B110CDE3400B778E8 /* AboutWindowController.m in Sources */,
 				0EAD6628111A60A800FCE08C /* DSClickableURLTextField.m in Sources */,
+				0E09148511729C0200F5928A /* FullTiltTheme.m in Sources */,
+				0E0914891172BB7400F5928A /* FullTiltInfo.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -102,6 +102,7 @@
 	IBOutlet SRRecorderControl *pfrThree;	
 
 }
+
 @property AppController *appController;
 @property HKThemeController *themeController;
 @property IBOutlet NSMatrix *radiobuttonMatrix;

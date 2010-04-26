@@ -46,9 +46,10 @@ HKWindowManager *wm = NULL;
 {
 	wm = self;
 	
-	AXError err = AXObserverCreate([lowLevel pokerstarsPID], axObserverCallback, &observer);
-	
+	AXError err = AXObserverCreate([lowLevel appPID], axObserverCallback, &observer);
+
 	if (err != kAXErrorSuccess) {
+		[logger info:@"Failed creating observer for ID: %d",[lowLevel appPID]];
 		[logger critical:@"Creating observer for window notifications in windowManager failed.  Exiting!"];
 		[[NSApplication sharedApplication] terminate: nil];			
 	}

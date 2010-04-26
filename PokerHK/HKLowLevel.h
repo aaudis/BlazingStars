@@ -13,16 +13,16 @@
 @interface HKLowLevel : NSObject {
 	NSString *appName;
 	AXUIElementRef appRef;
-	pid_t pokerstarsPID;
+	pid_t appPID;
 	
 	SOLogger *logger;
 }
 
 @property (copy) NSString *appName;
-@property (assign) pid_t pokerstarsPID;
+@property (assign) pid_t appPID;
 @property (assign) AXUIElementRef appRef;
 
--(BOOL)pokerStarsClientIsActive;
+-(BOOL)pokerClientIsActive;
 -(AXUIElementRef)getFrontMostApp;
 -(AXUIElementRef)getMainWindow;
 -(NSRect)getWindowBounds:(AXUIElementRef)windowRef;
@@ -32,8 +32,8 @@
 -(void)keyPress:(int)keyCode;
 -(void)keyPress:(int)keyCode repeated:(int)times withFlush:(BOOL)flush;
 -(void)writeString:(NSString *)valueToSet;
--(NSArray *)getCGPokerStarsWindowList;
+-(NSArray *)getCGPokerClientWindowList;
 -(int)getWindowIDForTable:(AXUIElementRef)tableRef;
--(int)getPokerStarsWorkspace;
+-(int)getPokerClientWorkspace;
 
 @end

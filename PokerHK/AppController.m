@@ -12,7 +12,7 @@
 
 extern NSString *appName;
 extern AXUIElementRef appRef;
-extern pid_t pokerstarsPID;
+extern pid_t appPID;
 
 //@class PrefsWindowController;
 @implementation AppController

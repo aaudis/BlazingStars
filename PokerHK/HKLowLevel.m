@@ -89,12 +89,12 @@ void WindowListApplierFunction(const void *inputDictionary, void *context)
 		
 		// Look for PokerStars window:
 //		HKLowLevel *lowLevel = [[HKLowLevel alloc] init];
-		if ([applicationName isEqual:@"PokerStars"] || [applicationName isEqual:@"PokerStarsIT"]) {
+		if ([applicationName isEqual:@"PokerStars"] || [applicationName isEqual:@"PokerStarsIT"] || 
+			[applicationName isEqual:@"Full Tilt Poker"]) {
 			data->order++;
-			
 			[data->outputArray addObject:outputEntry];
+		} 
 			
-		}
     }
 }
 
@@ -102,7 +102,7 @@ void WindowListApplierFunction(const void *inputDictionary, void *context)
 
 @implementation HKLowLevel
 
-@synthesize appName,pokerstarsPID,appRef;
+@synthesize appName,appPID,appRef;
 
 -(id)init 
 {
@@ -125,11 +125,14 @@ void WindowListApplierFunction(const void *inputDictionary, void *context)
 			appName = [NSString stringWithFormat:@"PokerStarsIT"];
 		} else if ([apps containsObject:@"PokerStars"]) {
 			appName = [NSString stringWithFormat:@"PokerStars"];
+		} else if ([apps containsObject:@"Full Tilt Poker"]) {
+			appName = [NSString stringWithFormat:@"Full Tilt Poker"];
+			[logger info:@"Found FullTilt client!"];
 		} else {
 			NSAlert *alert = [[[NSAlert alloc] init] autorelease];
 			[alert addButtonWithTitle:@"OK"];
-			[alert setMessageText:@"PokerStars client not found!"];
-			[alert setInformativeText:@"The PokerStars client must be running for this program to operate.  Please start the client and then re-open BlazingStars."];
+			[alert setMessageText:@"Poker client not found!"];
+			[alert setInformativeText:@"The PokerStars or Full Tilt client must be running for this program to operate.  Please start the client and then re-open BlazingStars."];
 			[NSApp activateIgnoringOtherApps:YES];
 			[alert runModal];
 			[[NSApplication sharedApplication] terminate: nil];			
@@ -139,17 +142,17 @@ void WindowListApplierFunction(const void *inputDictionary, void *context)
 		
 		for (id app in pids) {
 			if ([[app objectForKey:@"NSApplicationName"] isEqualToString: appName]) {
-				pokerstarsPID =(pid_t) [[app objectForKey:@"NSApplicationProcessIdentifier"] intValue];
+				appPID =(pid_t) [[app objectForKey:@"NSApplicationProcessIdentifier"] intValue];
 			}		
 		}		
 		
-		appRef = AXUIElementCreateApplication(pokerstarsPID);
+		appRef = AXUIElementCreateApplication(appPID);
 		
 		if (!appRef) {
-			[logger critical:@"Could not get accessibility API reference to the PokerStars application."];
+			[logger critical:@"Could not get accessibility API reference to the %@ application.",appName];
 			NSException* apiException = [NSException
-										 exceptionWithName:@"PokerStarsNotFoundException"
-										 reason:@"Cannot get accessibility API reference to the PokerStars application."									
+										 exceptionWithName:@"PokerClientNotFoundException"
+										 reason:@"Cannot get accessibility API reference to the Full Tilt application."									
 										 userInfo:nil];
 			@throw apiException;
 		}		
@@ -161,15 +164,15 @@ void WindowListApplierFunction(const void *inputDictionary, void *context)
 					   name:NSWorkspaceDidTerminateApplicationNotification
 					 object:nil];
 		
-		int psWorkspace = [self getPokerStarsWorkspace];
+		int pcWorkspace = [self getPokerClientWorkspace];
 		CGSWorkspace workspaceID;
 		CGSGetWorkspace(_CGSDefaultConnection(), &workspaceID);
-		if (workspaceID != psWorkspace && psWorkspace != -1) {
-			[logger critical:@"Could not find PokerStars in this space! BS: %d PS: %d",workspaceID,psWorkspace];
+		if (workspaceID != pcWorkspace && pcWorkspace != -1) {
+			[logger critical:@"Could not find %@ in this space! BS: %d PS: %d",appName,workspaceID,pcWorkspace];
 			NSAlert *alert = [[[NSAlert alloc] init] autorelease];
 			[alert addButtonWithTitle:@"OK"];
-			[alert setMessageText:@"PokerStars client not found in this Space!"];
-			[alert setInformativeText:@"BlazingStars must be started in the same Space (virtual desktop) as PokerStars.  Please re-open BlazingStars in the correct Space."];
+			[alert setMessageText:[NSString stringWithFormat:@"%@ client not found in this Space!",appName]];
+			[alert setInformativeText:[NSString stringWithFormat:@"BlazingStars must be started in the same Space (virtual desktop) as %@.  Please re-open BlazingStars in the correct Space.",appName]];
 			[NSApp activateIgnoringOtherApps:YES];
 			[alert runModal];
 			[[NSApplication sharedApplication] terminate: nil];			
@@ -180,7 +183,7 @@ void WindowListApplierFunction(const void *inputDictionary, void *context)
 	return self;
 }
 
--(BOOL)pokerStarsClientIsActive
+-(BOOL)pokerClientIsActive
 {
 	NSWorkspace * ws = [NSWorkspace sharedWorkspace];
 	NSArray * apps = [ws valueForKeyPath:@"launchedApplications.NSApplicationName"];
@@ -347,13 +350,13 @@ void WindowListApplierFunction(const void *inputDictionary, void *context)
 
 -(void)appTerminated:(NSNotification *)note
 {
-	if ([[[note userInfo] objectForKey:@"NSApplicationProcessIdentifier"] isEqual:[NSNumber numberWithInt:pokerstarsPID]]) {
-		[logger notice:@"PokerStars terminated - quitting BlazingStars."];
+	if ([[[note userInfo] objectForKey:@"NSApplicationProcessIdentifier"] isEqual:[NSNumber numberWithInt:appPID]]) {
+		[logger notice:@"%@ terminated - quitting BlazingStars.",appName];
 		[[NSApplication sharedApplication] terminate: nil];
 	}
 }
 
--(NSArray *)getCGPokerStarsWindowList
+-(NSArray *)getCGPokerClientWindowList
 {
 	CFArrayRef windowList = CGWindowListCopyWindowInfo(kCGWindowListOptionAll, kCGNullWindowID);
 	NSMutableArray * prunedWindowList = [NSMutableArray array];
@@ -369,7 +372,7 @@ void WindowListApplierFunction(const void *inputDictionary, void *context)
 	NSString *title;
 	AXUIElementCopyAttributeValue(tableRef, kAXTitleAttribute, (CFTypeRef *)&title);		
 	
-	NSArray *windowList = [self getCGPokerStarsWindowList];
+	NSArray *windowList = [self getCGPokerClientWindowList];
 	
 	for (id window in windowList) {
 		[logger debug:@"Window name: %@ Window ID: %@",
@@ -383,9 +386,9 @@ void WindowListApplierFunction(const void *inputDictionary, void *context)
 	return -1;
 }
 
--(int)getPokerStarsWorkspace
+-(int)getPokerClientWorkspace
 {
-	NSArray *windowList = [self getCGPokerStarsWindowList];
+	NSArray *windowList = [self getCGPokerClientWindowList];
 	
 	for (id window in windowList) {
 		NSNumber *workspace = [window objectForKey:kWindowWorkspaceKey];

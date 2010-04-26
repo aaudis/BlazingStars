@@ -181,29 +181,60 @@
 }
 
 -(void)detectTheme {
-    PokerStarsTheme *currentTheme = [PokerStarsInfo determineTheme];
-	[logger info:@"Detected theme %@", currentTheme];
-    while (![currentTheme supported]) {
-        NSAlert *alert = [[[NSAlert alloc] init] autorelease];
-		[alert addButtonWithTitle:@"Help"];
-		[alert addButtonWithTitle:@"Redetect Theme"];
-		[alert addButtonWithTitle:@"Quit"];
-		[alert setMessageText:[@"BlazingStars does not support your PokerStars table theme: " stringByAppendingString:[currentTheme name]]];
-		[alert setInformativeText:@"Supported themes are Classic, Black, Slick, and Hyper-Simple."];
-        NSInteger result = [alert runModal];
-		if (result == NSAlertThirdButtonReturn) {
-            exit(0);
-            
-		} else if (result == NSAlertFirstButtonReturn) {
-            [[NSApplication sharedApplication] showHelp:self];
-            
-        } else {
-            currentTheme = [PokerStarsInfo determineTheme];
-			[logger info:@"Detected theme %@", currentTheme];
-        }
-    }
-    [themeController setPsTheme:currentTheme];
-    [currentThemeLabel setStringValue:[currentTheme name]];
+	HKLowLevel *lowLevel = [[HKLowLevel alloc] init];
+	
+	if ([[lowLevel appName] isEqualTo: @"Full Tilt Poker"] == YES) {
+		FullTiltTheme *currentTheme = [FullTiltInfo determineTheme];
+		[logger info:@"Detected FT theme %@", currentTheme];
+		while (![currentTheme supported]) {
+			NSAlert *alert = [[[NSAlert alloc] init] autorelease];
+			[alert addButtonWithTitle:@"Help"];
+			[alert addButtonWithTitle:@"Redetect Theme"];
+			[alert addButtonWithTitle:@"Quit"];
+			[alert setMessageText:[@"BlazingStars does not support your FullTilt table theme: " stringByAppendingString:[currentTheme name]]];
+			[alert setInformativeText:@"Supported themes are Racetrack."];
+			NSInteger result = [alert runModal];
+			if (result == NSAlertThirdButtonReturn) {
+				exit(0);
+				
+			} else if (result == NSAlertFirstButtonReturn) {
+				[[NSApplication sharedApplication] showHelp:self];
+				
+			} else {
+				currentTheme = [FullTiltInfo determineTheme];
+				[logger info:@"Detected theme %@", currentTheme];
+			}
+		}
+		[themeController setFTTheme:currentTheme];
+		[currentThemeLabel setStringValue:[currentTheme name]];		
+		
+		
+	} else {
+		PokerStarsTheme *currentTheme = [PokerStarsInfo determineTheme];
+		[logger info:@"Detected theme %@", currentTheme];
+		while (![currentTheme supported]) {
+			NSAlert *alert = [[[NSAlert alloc] init] autorelease];
+			[alert addButtonWithTitle:@"Help"];
+			[alert addButtonWithTitle:@"Redetect Theme"];
+			[alert addButtonWithTitle:@"Quit"];
+			[alert setMessageText:[@"BlazingStars does not support your PokerStars table theme: " stringByAppendingString:[currentTheme name]]];
+			[alert setInformativeText:@"Supported themes are Classic, Black, Slick, and Hyper-Simple."];
+			NSInteger result = [alert runModal];
+			if (result == NSAlertThirdButtonReturn) {
+				exit(0);
+				
+			} else if (result == NSAlertFirstButtonReturn) {
+				[[NSApplication sharedApplication] showHelp:self];
+				
+			} else {
+				currentTheme = [PokerStarsInfo determineTheme];
+				[logger info:@"Detected theme %@", currentTheme];
+			}
+		}
+		[themeController setPsTheme:currentTheme];
+		[currentThemeLabel setStringValue:[currentTheme name]];		
+	}
+
 }
      
 -(IBAction)setPotBetAmount:(id)sender

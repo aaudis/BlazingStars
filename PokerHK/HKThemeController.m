@@ -37,8 +37,22 @@
 	psTheme = thePsTheme;
 }
 
+-(FullTiltTheme *)ftTheme {
+	return ftTheme;
+}
+
+-(void)setFTTheme:(FullTiltTheme *)theFTTheme
+{
+	[logger info:@"Setting theme: %@",theFTTheme];
+	ftTheme = theFTTheme;
+}
+
+
 -(id)param:(NSString *)key
 {
+	if (ftTheme) {
+		return [[ftTheme themeDict] objectForKey:key];
+	}
 	return [[psTheme themeDict] objectForKey:key];
 }
 
