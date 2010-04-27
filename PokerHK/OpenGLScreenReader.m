@@ -449,7 +449,7 @@
     NSAssert( success != 0, @"Image could not be written successfully");
 
     CFRelease(dest);
-    CGImageRelease(imageRef);
+    //CGImageRelease(imageRef);
     CFRelease(url);
 }
 

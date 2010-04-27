@@ -321,6 +321,7 @@ HKWindowManager *wm;
 									 clickPoint.x,
 									 clickPoint.y,
 									 &betBoxRef);
+	CFMakeCollectable(betBoxRef);
 	
 	switch(err) {
 		case kAXErrorNoValue:
@@ -344,6 +345,7 @@ HKWindowManager *wm;
 	
 	NSString *value;
 	err = AXUIElementCopyAttributeValue(betBoxRef, kAXValueAttribute,(CFTypeRef *)&value);
+	CFMakeCollectable(value);
 	
 	if (!value || err != kAXErrorSuccess) {
 		switch(err) {
@@ -387,6 +389,7 @@ HKWindowManager *wm;
 									 clickPoint.x,
 									 clickPoint.y,
 									 &betBoxRef);
+	CFMakeCollectable(betBoxRef);
 	
 	// Set up string to the value to bet, and then strip trailing zeros if the bet is an even amount.
 	NSString *valueToSet = [NSString stringWithFormat:@"%.2f",amount];

@@ -151,10 +151,12 @@ HKWindowManager *wm = NULL;
 	
 	for (id child in [lowLevel getChildrenFrom:[lowLevel appRef]]) {
 		AXUIElementCopyAttributeValue((AXUIElementRef)child,kAXTitleAttribute, (CFTypeRef *)&name);
+		CFMakeCollectable(name);
 		
 		if ([self windowIsTable:(AXUIElementRef) child] == HKHoldemCashTable || [self windowIsTable:(AXUIElementRef)child] == HKTournamentTable) {
 			id *size; CGSize sizeVal;			
 			AXUIElementCopyAttributeValue((AXUIElementRef)child,kAXSizeAttribute,(CFTypeRef *)&size);
+			CFMakeCollectable(size);
 			if (!AXValueGetValue((AXValueRef) size, kAXValueCGSizeType, &sizeVal)) {
 				[logger warning:@"Could not get size from window element in updateWindowDict"];
 				return;
@@ -180,6 +182,7 @@ HKWindowManager *wm = NULL;
 	NSString *title;
 
 	AXError err = AXUIElementCopyAttributeValue(windowRef,kAXTitleAttribute,(CFTypeRef*)&title);		
+	CFMakeCollectable(title);
 	
 	if (err != kAXErrorSuccess) {
 		[logger warning:@"Copy attribute failed in addWindowToWindowDict."];
@@ -188,12 +191,14 @@ HKWindowManager *wm = NULL;
 		
 	id *size; CGSize sizeVal;			
 	AXUIElementCopyAttributeValue(windowRef,kAXSizeAttribute,(CFTypeRef *)&size);
+	CFMakeCollectable(size);
 	if (!AXValueGetValue((AXValueRef) size, kAXValueCGSizeType, &sizeVal)) {
 		[logger warning:@"Could not get size from window element in addWindowToWindowDict"];
 		return;		
 	}
 	
 	AXUIElementRef chatRef = [self findChatBoxForWindow:(AXUIElementRef) windowRef];	
+	CFMakeCollectable(chatRef);
 	
 	if (chatRef) {
 		[windowDict setObject:[NSArray arrayWithObjects:NSStringFromSize(NSSizeFromCGSize(sizeVal)),chatRef,nil] forKey:title];		
@@ -397,6 +402,7 @@ HKWindowManager *wm = NULL;
 {
 	NSString *title;
 	AXUIElementCopyAttributeValue(windowRef, kAXTitleAttribute, (CFTypeRef *)&title);	
+	CFMakeCollectable(title);
 	
 	if ([title length] > 0) {
 		// Poker tables have two hyphens in their name.   Strange trick, but it works (suggested by Steve.McLeod).
@@ -477,12 +483,16 @@ HKWindowManager *wm = NULL;
 
 -(BOOL)pokerWindowIsActive
 {
-	int retVal = [self windowIsTable:[lowLevel getMainWindow]];
+	int retVal;
+	
+	retVal = [self windowIsTable:[lowLevel getMainWindow]];		
+
 	if (retVal == HKTournamentTable || retVal == HKHoldemCashTable || retVal == HKPLOTable) {
 		return YES;
 	} else {
 		return NO;
 	}
+
 }
 
 -(NSArray *)getAllPokerTables
@@ -657,6 +667,7 @@ HKWindowManager *wm = NULL;
 	NSString *text;
 
 	AXUIElementCopyAttributeValue(chatRef, kAXValueAttribute, (CFTypeRef *)&text);
+	CFMakeCollectable(text);
 	text = [text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
 	NSArray* lines = [text componentsSeparatedByCharactersInSet: [NSCharacterSet newlineCharacterSet]];
 

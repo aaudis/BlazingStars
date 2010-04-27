@@ -147,6 +147,7 @@ void WindowListApplierFunction(const void *inputDictionary, void *context)
 		}		
 		
 		appRef = AXUIElementCreateApplication(appPID);
+		CFRetain(appRef);
 		
 		if (!appRef) {
 			[logger critical:@"Could not get accessibility API reference to the %@ application.",appName];
@@ -212,6 +213,7 @@ void WindowListApplierFunction(const void *inputDictionary, void *context)
 		if ([value intValue] == 1) {
 			NSString *title;
 			AXUIElementCopyAttributeValue((AXUIElementRef)child,kAXTitleAttribute,(CFTypeRef *)&title);
+			CFMakeCollectable(title);
 			mainWindow = (AXUIElementRef)child;
 		}
 	}
@@ -223,7 +225,12 @@ void WindowListApplierFunction(const void *inputDictionary, void *context)
 	id *size;
 	CGSize sizeVal;
 	
-	AXUIElementCopyAttributeValue(windowRef,kAXSizeAttribute,(CFTypeRef *)&size);
+	AXError axErr = AXUIElementCopyAttributeValue(windowRef,kAXSizeAttribute,(CFTypeRef *)&size);
+	CFMakeCollectable(size);
+	if (axErr != kAXErrorSuccess) {
+		[logger critical:@"Could not get window size for windowRef: %@.  Error code: %d",windowRef,axErr];
+		return NSMakeRect(0,0,0,0);
+	}
 	
 	if (!AXValueGetValue((AXValueRef) size, kAXValueCGSizeType, &sizeVal)) {
 		[logger warning:@"Could not get window size for windowRef: %@",windowRef];
@@ -231,7 +238,8 @@ void WindowListApplierFunction(const void *inputDictionary, void *context)
 	} 
 	
 	id *position;
-	AXError axErr = AXUIElementCopyAttributeValue(windowRef,kAXPositionAttribute,(CFTypeRef *)&position);
+	axErr = AXUIElementCopyAttributeValue(windowRef,kAXPositionAttribute,(CFTypeRef *)&position);
+	CFMakeCollectable(position);
 	if (axErr != kAXErrorSuccess) {
 		[logger warning:@"\nCould not retrieve window position for windowRef: %@. Error code: %d",windowRef,axErr];
 		return NSMakeRect(0,0,0,0);
@@ -241,7 +249,7 @@ void WindowListApplierFunction(const void *inputDictionary, void *context)
 	if (!AXValueGetValue((AXValueRef)position, kAXValueCGPointType, &corner)) {
 		[logger warning:@"Could not get window corner for windowRef: %@",windowRef];
 		return NSMakeRect(0,0,0,0);
-	}
+	} 
 	
 	NSRect windowRect;
 	windowRect.origin = *(NSPoint *)&corner;
@@ -254,6 +262,7 @@ void WindowListApplierFunction(const void *inputDictionary, void *context)
 {
 	NSArray *children;
 	AXError err = AXUIElementCopyAttributeValues(ref, kAXChildrenAttribute, 0, 100, (CFArrayRef *)&children);
+	CFMakeCollectable(children);
 
 	if (err != kAXErrorSuccess) {
 		[logger warning:@"Retrieving children failed. Error code: %d", err];
