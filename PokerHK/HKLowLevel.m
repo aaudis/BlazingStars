@@ -217,7 +217,12 @@ void WindowListApplierFunction(const void *inputDictionary, void *context)
 			mainWindow = (AXUIElementRef)child;
 		}
 	}
-	return mainWindow;
+	if (mainWindow) {
+		return mainWindow;		
+	} else {
+		return NULL;
+	}
+
 }
 
 -(NSRect)getWindowBounds:(AXUIElementRef)windowRef

@@ -485,7 +485,16 @@ HKWindowManager *wm = NULL;
 {
 	int retVal;
 	
-	retVal = [self windowIsTable:[lowLevel getMainWindow]];		
+	AXUIElementRef mw = [lowLevel getMainWindow];
+	if (mw) {
+		retVal = [self windowIsTable:mw];		
+	} else {
+		[logger info:@"mw was NULL!"];
+		return NO;
+	}
+
+	
+	//retVal = [self windowIsTable:[lowLevel getMainWindow]];		
 
 	if (retVal == HKTournamentTable || retVal == HKHoldemCashTable || retVal == HKPLOTable) {
 		return YES;
