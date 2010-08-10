@@ -87,6 +87,7 @@
 		0EF91D800FDB81DE00FB01E7 /* Setup.png in Resources */ = {isa = PBXBuildFile; fileRef = 0EF91D7F0FDB81DE00FB01E7 /* Setup.png */; };
 		1DDD58160DA1D0A300B32029 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DDD58140DA1D0A300B32029 /* MainMenu.xib */; };
 		32EC1B3310F9ED25000C972F /* Classic.plist in Resources */ = {isa = PBXBuildFile; fileRef = 32EC1B3210F9ED25000C972F /* Classic.plist */; };
+		6699233C1210ED9F008A9EE1 /* icon-menulet-disabled.png in Resources */ = {isa = PBXBuildFile; fileRef = 6699233B1210ED9F008A9EE1 /* icon-menulet-disabled.png */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
@@ -229,6 +230,7 @@
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		32CA4F630368D1EE00C91783 /* PokerHK_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PokerHK_Prefix.pch; sourceTree = "<group>"; };
 		32EC1B3210F9ED25000C972F /* Classic.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Classic.plist; sourceTree = "<group>"; };
+		6699233B1210ED9F008A9EE1 /* icon-menulet-disabled.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-menulet-disabled.png"; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* BlazingStars.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BlazingStars.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA06DB38110CA03500C7A44C /* AboutWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AboutWindow.xib; sourceTree = "<group>"; };
@@ -338,6 +340,7 @@
 				0E2A1BE10FD0670400471032 /* Advanced.png */,
 				0E2A1BE20FD0670400471032 /* Basic Keys.png */,
 				0E2A1AE50FCFC71A00471032 /* icon-menulet.png */,
+				6699233B1210ED9F008A9EE1 /* icon-menulet-disabled.png */,
 				0E5DD4630FDA4595000670D2 /* Open:Close.png */,
 				0E5DD4310FDA25CC000670D2 /* Pot Bets.png */,
 				0EF91D7F0FDB81DE00FB01E7 /* Setup.png */,
@@ -587,6 +590,7 @@
 				0EB4DAA9113C76CE00CE6AE4 /* Shiny.plist in Resources */,
 				0EB4DAAD113C79E300CE6AE4 /* Renaissance.plist in Resources */,
 				0E09148111729BC800F5928A /* Hyper-Simple.plist in Resources */,
+				6699233C1210ED9F008A9EE1 /* icon-menulet-disabled.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -12,9 +12,13 @@
 
 @interface Menulet : NSObject {
 	NSStatusItem *statusItem;
-	NSImage *menuIcon;
 	IBOutlet NSMenu *theMenu;
+    IBOutlet HKDispatchController *dc;	
 	
 }
+
+@property (nonatomic, retain) NSStatusItem *statusItem;
+
+- (void) setMenuImage;
 
 @end

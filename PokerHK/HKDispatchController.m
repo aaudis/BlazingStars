@@ -10,6 +10,7 @@
 #import "PrefsWindowController.h"
 #import "HKScreenScraper.h"
 #import "HKDefines.h"
+#import "Menulet.h"
 #import <Carbon/Carbon.h>
 #import <AppKit/NSAccessibility.h>
 #import <asl.h>
@@ -237,6 +238,9 @@ HKWindowManager *wm;
 			[self registerAllHotKeys];			
 		}
 	}
+
+    Menulet *menulet = (Menulet *) ([NSApplication sharedApplication].delegate);
+    [menulet setMenuImage];
 }
 
 -(void)activateHotKeys
