@@ -90,7 +90,7 @@ void WindowListApplierFunction(const void *inputDictionary, void *context)
 		// Look for PokerStars window:
 //		HKLowLevel *lowLevel = [[HKLowLevel alloc] init];
 		if ([applicationName isEqual:@"PokerStars"] || [applicationName isEqual:@"PokerStarsIT"] || 
-			[applicationName isEqual:@"Full Tilt Poker"]) {
+			[applicationName isEqual:@"Full Tilt Poker"] || [applicationName isEqual:@"PokerStarsFR"]) {
 			data->order++;
 			[data->outputArray addObject:outputEntry];
 		} 
@@ -128,6 +128,9 @@ void WindowListApplierFunction(const void *inputDictionary, void *context)
 		} else if ([apps containsObject:@"Full Tilt Poker"]) {
 			appName = [NSString stringWithFormat:@"Full Tilt Poker"];
 			[logger info:@"Found FullTilt client!"];
+		} else if ([apps containsObject:@"PokerStarsFR"]) {
+			appName = [NSString stringWithFormat:@"PokerStarsFR"];
+			[logger info:@"PokerStarsFR"];
 		} else {
 			NSAlert *alert = [[[NSAlert alloc] init] autorelease];
 			[alert addButtonWithTitle:@"OK"];

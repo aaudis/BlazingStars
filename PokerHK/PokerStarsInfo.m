@@ -101,6 +101,8 @@
 	HKLowLevel *lowLevel = [[HKLowLevel alloc] init];
 	if ([[lowLevel appName] isEqualToString:@"PokerStarsIT"]) {
 		return [@"~/Library/Preferences/com.pokerstars.it.user.ini" stringByExpandingTildeInPath];
+	} else if ([[lowLevel appName] isEqualToString:@"PokerStarsFR"]) {
+		return [@"~/Library/Preferences/com.pokerstars.fr.user.ini" stringByExpandingTildeInPath];
 	}
     return [@"~/Library/Preferences/com.pokerstars.user.ini" stringByExpandingTildeInPath];
 }
