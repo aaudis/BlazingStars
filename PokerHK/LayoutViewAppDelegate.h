@@ -18,6 +18,13 @@
     NSArray *themes, *items;
     
     NSImageView *imageView;
+    
+    NSView *contentView;
+    NSBox *posView;
+    
+    NSSlider *xSlider, *ySlider, *wSlider, *hSlider;
+    
+    NSMutableDictionary *plist;
 }
 
 @property (assign) IBOutlet NSWindow *window;
@@ -25,9 +32,15 @@
 @property (nonatomic, retain) IBOutlet NSButton *commitButton;
 @property (nonatomic, retain) NSArray *themes, *items;
 @property (nonatomic, retain) IBOutlet NSImageView *imageView;
+@property (nonatomic, retain) IBOutlet NSView *contentView;
+@property (nonatomic, retain) IBOutlet NSBox *posView;
+@property (nonatomic, retain) IBOutlet NSSlider *xSlider, *ySlider, *wSlider, *hSlider;
+@property (nonatomic, retain) NSMutableDictionary *plist;
 
 - (IBAction) themeChanged:(id)sender;
 - (IBAction) imageChanged:(id)sender;
 - (IBAction) itemChanged:(id)sender;
 
+- (IBAction) sliderChanged:(id)sender;
+- (IBAction) getPlist:(id)sender;
 @end
