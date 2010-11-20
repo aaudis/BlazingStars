@@ -15,7 +15,7 @@
     NSPopUpButton *themeButton, *imageButton, *itemButton;
     NSButton *commitButton;
     
-    NSArray *themes;
+    NSArray *themes, *items;
     
     NSImageView *imageView;
 }
@@ -23,7 +23,7 @@
 @property (assign) IBOutlet NSWindow *window;
 @property (nonatomic, retain) IBOutlet NSPopUpButton *themeButton, *imageButton, *itemButton;
 @property (nonatomic, retain) IBOutlet NSButton *commitButton;
-@property (nonatomic, retain) NSArray *themes;
+@property (nonatomic, retain) NSArray *themes, *items;
 @property (nonatomic, retain) IBOutlet NSImageView *imageView;
 
 - (IBAction) themeChanged:(id)sender;

@@ -15,7 +15,7 @@
 
 @implementation LayoutViewAppDelegate
 
-@synthesize window, themeButton, imageButton, itemButton, commitButton, themes, imageView;
+@synthesize window, themeButton, imageButton, itemButton, commitButton, themes, imageView, items;
 
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
@@ -29,6 +29,12 @@
     
     for (PokerStarsTheme *theme in self.themes) {
         [self.themeButton addItemWithTitle:[theme name]];
+    }
+    
+    [self.itemButton removeAllItems];
+    
+    for (NSDictionary *row in self.items) {
+        [self.itemButton addItemWithTitle:[row objectForKey:@"t"]];
     }
     
     [self.themeButton selectItemAtIndex:0];
@@ -50,6 +56,9 @@
 
     [self.imageButton selectItemAtIndex:0];
     [self imageChanged:self.imageButton];
+    
+    [self.itemButton selectItemAtIndex:0];
+    [self itemChanged:self.itemButton];
 }
 
 - (IBAction) imageChanged:(id)sender
@@ -65,7 +74,7 @@
 
 - (IBAction) itemChanged:(id)sender
 {
-    
+
 }
 
 - (NSArray *) themes
@@ -78,6 +87,34 @@
     }
     
     return themes;
+}
+
+- (NSArray *) items
+{
+    if (items == nil) {
+        items = [[NSMutableArray arrayWithObjects:
+                  [NSDictionary dictionaryWithObjectsAndKeys:@"Big Button: Bet", @"t", @"bet", @"n", @"b", @"s", nil],
+                  [NSDictionary dictionaryWithObjectsAndKeys:@"Big Button: Call", @"t", @"call", @"n", @"b", @"s", nil],
+                  [NSDictionary dictionaryWithObjectsAndKeys:@"Big Button: Fold", @"t", @"fold", @"n", @"b", @"s", nil],
+                  [NSDictionary dictionaryWithObjectsAndKeys:@"Big Button: Time Bank", @"t", @"timeBank", @"n", @"b", @"s", nil],
+                  
+                  [NSDictionary dictionaryWithObjectsAndKeys:@"Small Button: Check/Fold", @"t", @"checkFold", @"n", @"s", @"s", nil],
+                  [NSDictionary dictionaryWithObjectsAndKeys:@"Small Button: Check/Call", @"t", @"checkCall", @"n", @"s", @"s", nil],
+                  [NSDictionary dictionaryWithObjectsAndKeys:@"Small Button: Fold to Any", @"t", @"foldToAny", @"n", @"s", @"s", nil],
+                  [NSDictionary dictionaryWithObjectsAndKeys:@"Small Button: Bet/Raise", @"t", @"betRaise", @"n", @"s", @"s", nil],
+                  [NSDictionary dictionaryWithObjectsAndKeys:@"Small Button: Bet/Raise Any", @"t", @"betRaiseAny", @"n", @"s", @"s", nil],
+
+                  [NSDictionary dictionaryWithObjectsAndKeys:@"Left Button: Fold to Any", @"t", @"foldToAnyLeft", @"n", @"s", @"s", nil],
+                  [NSDictionary dictionaryWithObjectsAndKeys:@"Left Button: Sit Out Next Hand", @"t", @"sitOutNextHand", @"n", @"s", @"s", nil],
+                  [NSDictionary dictionaryWithObjectsAndKeys:@"Left Button: Auto-Post/Sit Out", @"t", @"autoPostSitOut", @"n", @"s", @"s", nil],
+
+                  [NSDictionary dictionaryWithObjectsAndKeys:@"Other: Leave Table", @"t", @"leaveTable", @"n", @"s", @"s", nil],
+                  [NSDictionary dictionaryWithObjectsAndKeys:@"Other: Pot Box", @"t", @"potBox", @"n", @"p", @"s", nil],
+                  
+                  nil] retain];
+    }
+    
+    return items;
 }
 
 @end
