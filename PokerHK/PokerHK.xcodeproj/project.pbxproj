@@ -88,6 +88,20 @@
 		1DDD58160DA1D0A300B32029 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DDD58140DA1D0A300B32029 /* MainMenu.xib */; };
 		32EC1B3310F9ED25000C972F /* Classic.plist in Resources */ = {isa = PBXBuildFile; fileRef = 32EC1B3210F9ED25000C972F /* Classic.plist */; };
 		6699233C1210ED9F008A9EE1 /* icon-menulet-disabled.png in Resources */ = {isa = PBXBuildFile; fileRef = 6699233B1210ED9F008A9EE1 /* icon-menulet-disabled.png */; };
+		66EE0EC712973E9D00564419 /* LayoutViewer.xib in Resources */ = {isa = PBXBuildFile; fileRef = 66EE0EC612973E9D00564419 /* LayoutViewer.xib */; };
+		66EE0EF61297467700564419 /* LayoutViewAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 66EE0EF51297467700564419 /* LayoutViewAppDelegate.m */; };
+		66EE0F251297480F00564419 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
+		66EE0F3D1297491000564419 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66EE0F3C1297491000564419 /* QuartzCore.framework */; };
+		66EE0FCE1297499200564419 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66EE0FCD1297499200564419 /* Quartz.framework */; };
+		66EE0FEC1297555200564419 /* PokerStarsTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = AA286D1A10E92C3C00D8DBED /* PokerStarsTheme.m */; };
+		66EE0FEE1297555B00564419 /* Black.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0E5526A90FDCBB150071ACC6 /* Black.plist */; };
+		66EE0FEF1297555B00564419 /* Classic.plist in Resources */ = {isa = PBXBuildFile; fileRef = 32EC1B3210F9ED25000C972F /* Classic.plist */; };
+		66EE0FF01297555C00564419 /* Hyper-Simple.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0E09148011729BC800F5928A /* Hyper-Simple.plist */; };
+		66EE0FF11297555D00564419 /* Racetrack.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0E5526A80FDCBB150071ACC6 /* Racetrack.plist */; };
+		66EE0FF21297555D00564419 /* Shiny.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0EB4DAA8113C76CE00CE6AE4 /* Shiny.plist */; };
+		66EE0FF31297555E00564419 /* Renaissance.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0EB4DAAC113C79E300CE6AE4 /* Renaissance.plist */; };
+		66EE0FF41297555F00564419 /* Slick.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0E2D92CF0FEEBA63002836CA /* Slick.plist */; };
+		66EE1040129761D900564419 /* themes in Resources */ = {isa = PBXBuildFile; fileRef = 66EE103A129761D900564419 /* themes */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
@@ -231,6 +245,14 @@
 		32CA4F630368D1EE00C91783 /* PokerHK_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PokerHK_Prefix.pch; sourceTree = "<group>"; };
 		32EC1B3210F9ED25000C972F /* Classic.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Classic.plist; sourceTree = "<group>"; };
 		6699233B1210ED9F008A9EE1 /* icon-menulet-disabled.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-menulet-disabled.png"; sourceTree = "<group>"; };
+		66EE0EBF12973E6200564419 /* LayoutViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LayoutViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		66EE0EC112973E6200564419 /* LayoutViewer-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "LayoutViewer-Info.plist"; sourceTree = "<group>"; };
+		66EE0EC612973E9D00564419 /* LayoutViewer.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LayoutViewer.xib; sourceTree = "<group>"; };
+		66EE0EF41297467700564419 /* LayoutViewAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LayoutViewAppDelegate.h; sourceTree = "<group>"; };
+		66EE0EF51297467700564419 /* LayoutViewAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LayoutViewAppDelegate.m; sourceTree = "<group>"; };
+		66EE0F3C1297491000564419 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		66EE0FCD1297499200564419 /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
+		66EE103A129761D900564419 /* themes */ = {isa = PBXFileReference; lastKnownFileType = folder; name = themes; path = support/themes; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* BlazingStars.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BlazingStars.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA06DB38110CA03500C7A44C /* AboutWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AboutWindow.xib; sourceTree = "<group>"; };
@@ -243,6 +265,15 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		66EE0EBD12973E6200564419 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				66EE0F3D1297491000564419 /* QuartzCore.framework in Frameworks */,
+				66EE0FCE1297499200564419 /* Quartz.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8D11072E0486CEB800E47090 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -445,6 +476,7 @@
 			isa = PBXGroup;
 			children = (
 				8D1107320486CEB800E47090 /* BlazingStars.app */,
+				66EE0EBF12973E6200564419 /* LayoutViewer.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -452,6 +484,7 @@
 		29B97314FDCFA39411CA2CEA /* PokerHK */ = {
 			isa = PBXGroup;
 			children = (
+				66EE0EC512973E7700564419 /* LayoutViewer */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
@@ -509,9 +542,48 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		66EE0EC512973E7700564419 /* LayoutViewer */ = {
+			isa = PBXGroup;
+			children = (
+				66EE103A129761D900564419 /* themes */,
+				66EE0FD3129749AA00564419 /* Frameworks */,
+				66EE0EC112973E6200564419 /* LayoutViewer-Info.plist */,
+				66EE0EC612973E9D00564419 /* LayoutViewer.xib */,
+				66EE0EF41297467700564419 /* LayoutViewAppDelegate.h */,
+				66EE0EF51297467700564419 /* LayoutViewAppDelegate.m */,
+			);
+			name = LayoutViewer;
+			sourceTree = "<group>";
+		};
+		66EE0FD3129749AA00564419 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				66EE0F3C1297491000564419 /* QuartzCore.framework */,
+				66EE0FCD1297499200564419 /* Quartz.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		66EE0EBE12973E6200564419 /* LayoutViewer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 66EE0EC412973E6300564419 /* Build configuration list for PBXNativeTarget "LayoutViewer" */;
+			buildPhases = (
+				66EE0EBB12973E6200564419 /* Resources */,
+				66EE0EBC12973E6200564419 /* Sources */,
+				66EE0EBD12973E6200564419 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LayoutViewer;
+			productName = LayoutViewer;
+			productReference = 66EE0EBF12973E6200564419 /* LayoutViewer.app */;
+			productType = "com.apple.product-type.application";
+		};
 		8D1107260486CEB800E47090 /* PokerHK */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "PokerHK" */;
@@ -541,18 +613,42 @@
 			isa = PBXProject;
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "PokerHK" */;
 			compatibilityVersion = "Xcode 3.1";
+			developmentRegion = English;
 			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* PokerHK */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				8D1107260486CEB800E47090 /* PokerHK */,
 				0EA808711020E77E004F84D0 /* BlazingStars */,
+				66EE0EBE12973E6200564419 /* LayoutViewer */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		66EE0EBB12973E6200564419 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				66EE0EC712973E9D00564419 /* LayoutViewer.xib in Resources */,
+				66EE0FEE1297555B00564419 /* Black.plist in Resources */,
+				66EE0FEF1297555B00564419 /* Classic.plist in Resources */,
+				66EE0FF01297555C00564419 /* Hyper-Simple.plist in Resources */,
+				66EE0FF11297555D00564419 /* Racetrack.plist in Resources */,
+				66EE0FF21297555D00564419 /* Shiny.plist in Resources */,
+				66EE0FF31297555E00564419 /* Renaissance.plist in Resources */,
+				66EE0FF41297555F00564419 /* Slick.plist in Resources */,
+				66EE1040129761D900564419 /* themes in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8D1107290486CEB800E47090 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -640,6 +736,16 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		66EE0EBC12973E6200564419 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				66EE0EF61297467700564419 /* LayoutViewAppDelegate.m in Sources */,
+				66EE0F251297480F00564419 /* main.m in Sources */,
+				66EE0FEC1297555200564419 /* PokerStarsTheme.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8D11072C0486CEB800E47090 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -743,6 +849,55 @@
 			};
 			name = Release;
 		};
+		66EE0EC212973E6300564419 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INFOPLIST_FILE = "LayoutViewer-Info.plist";
+				INSTALL_PATH = "$(HOME)/Applications";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = LayoutViewer;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		66EE0EC312973E6300564419 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INFOPLIST_FILE = "LayoutViewer-Info.plist";
+				INSTALL_PATH = "$(HOME)/Applications";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = LayoutViewer;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
 		C01FCF4B08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -828,6 +983,15 @@
 			buildConfigurations = (
 				0EA808721020E77E004F84D0 /* Debug */,
 				0EA808731020E77E004F84D0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		66EE0EC412973E6300564419 /* Build configuration list for PBXNativeTarget "LayoutViewer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				66EE0EC212973E6300564419 /* Debug */,
+				66EE0EC312973E6300564419 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
