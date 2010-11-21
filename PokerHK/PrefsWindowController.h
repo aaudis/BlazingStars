@@ -47,10 +47,14 @@
 	IBOutlet NSStepper *potStepperTwo;
 	IBOutlet NSStepper *potStepperThree;
 	IBOutlet NSStepper *potStepperFour;
+	IBOutlet NSStepper *potStepperFive;
+	IBOutlet NSStepper *potStepperSix;
 	IBOutlet NSTextField *potStepperOneField;
 	IBOutlet NSTextField *potStepperTwoField;
 	IBOutlet NSTextField *potStepperThreeField;
 	IBOutlet NSTextField *potStepperFourField;
+	IBOutlet NSTextField *potStepperFiveField;
+	IBOutlet NSTextField *potStepperSixField;
 	IBOutlet NSButton *roundPotCheckBox;
 	IBOutlet NSTextField *roundingTextField;
 	IBOutlet NSStepper *roundingStepper;
@@ -60,9 +64,13 @@
 	IBOutlet NSStepper *pfrOneStepper;
 	IBOutlet NSStepper *pfrTwoStepper;
 	IBOutlet NSStepper *pfrThreeStepper;
+	IBOutlet NSStepper *pfrFourStepper;
+	IBOutlet NSStepper *pfrFiveStepper;
 	IBOutlet NSTextField *pfrStepperOneField;
 	IBOutlet NSTextField *pfrStepperTwoField;
 	IBOutlet NSTextField *pfrStepperThreeField;	
+	IBOutlet NSTextField *pfrStepperFourField;	
+	IBOutlet NSTextField *pfrStepperFiveField;	
 	IBOutlet NSButton *autoPFRCheckBox;
 	IBOutlet DSClickableURLTextField *voiceComandsTextField;
 	
@@ -94,13 +102,16 @@
 	IBOutlet SRRecorderControl *potBetTwo;
 	IBOutlet SRRecorderControl *potBetThree;
 	IBOutlet SRRecorderControl *potBetFour;	
+	IBOutlet SRRecorderControl *potBetFive;	
+	IBOutlet SRRecorderControl *potBetSix;	
 	IBOutlet SRRecorderControl *allIn;
 	IBOutlet SRRecorderControl *toggleAllHotkeys;
 	IBOutlet SRRecorderControl *debugHK;
 	IBOutlet SRRecorderControl *pfrOne;
 	IBOutlet SRRecorderControl *pfrTwo;
 	IBOutlet SRRecorderControl *pfrThree;	
-
+	IBOutlet SRRecorderControl *pfrFour;	
+	IBOutlet SRRecorderControl *pfrFive;	
 }
 
 @property AppController *appController;

@@ -16,6 +16,8 @@
 	<string>1.0</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+	<key>CFBundleIconFile</key>
+	<string>pokerhk.icns</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>LSMinimumSystemVersion</key>
@@ -24,5 +26,7 @@
 	<string>LayoutViewer</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
+	<key>CFBundleName</key>
+	<string>BlazingStars LayoutViewer</string>
 </dict>
 </plist>

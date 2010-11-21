@@ -182,7 +182,9 @@
                    [[[PokerStarsTheme alloc] initWithName:@"Classic" supported:YES] autorelease],
                    [[[PokerStarsTheme alloc] initWithName:@"Hyper-Simple" supported:YES] autorelease],
                    [[[PokerStarsTheme alloc] initWithName:@"Black" supported:YES] autorelease],
+                   [[[PokerStarsTheme alloc] initWithName:@"Shiny" supported:YES] autorelease],
                    [[[PokerStarsTheme alloc] initWithName:@"Slick" supported:YES] autorelease],
+                   [[[PokerStarsTheme alloc] initWithName:@"Renaissance" supported:YES] autorelease],
                   nil] retain];
     }
     
@@ -229,6 +231,9 @@
     
     [pb declareTypes:types owner:self];
     [pb setString:s forType:NSStringPboardType];
+    
+    NSAlert *alert = [NSAlert alertWithMessageText:@"Plist data copied to clipboard" defaultButton:@"OK" alternateButton:nil otherButton:nil informativeTextWithFormat:@"Plist data copied to clipboard"];
+    [alert runModal];
 }
 
 - (NSMutableDictionary *) plist

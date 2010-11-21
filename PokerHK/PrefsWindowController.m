@@ -58,10 +58,14 @@
 	[shortcutDefaults setObject:[NSNumber numberWithFloat:50.0] forKey:@"potBetTwoKey"];
 	[shortcutDefaults setObject:[NSNumber numberWithFloat:75.0] forKey:@"potBetThreeKey"];
 	[shortcutDefaults setObject:[NSNumber numberWithFloat:100.0] forKey:@"potBetFourKey"];	
+	[shortcutDefaults setObject:[NSNumber numberWithFloat:125.0] forKey:@"potBetFiveKey"];	
+	[shortcutDefaults setObject:[NSNumber numberWithFloat:150.0] forKey:@"potBetSixKey"];	
 	
 	[shortcutDefaults setObject:[NSNumber numberWithFloat:2.5] forKey:@"pfrOneKey"];	
 	[shortcutDefaults setObject:[NSNumber numberWithFloat:3.0] forKey:@"pfrTwoKey"];	
 	[shortcutDefaults setObject:[NSNumber numberWithFloat:4.0] forKey:@"pfrThreeKey"];	
+	[shortcutDefaults setObject:[NSNumber numberWithFloat:5.0] forKey:@"pfrFourKey"];	
+	[shortcutDefaults setObject:[NSNumber numberWithFloat:6.0] forKey:@"pfrFiveKey"];	
 
 	NSColor *aColor = [NSColor yellowColor];
 	NSData *theData=[NSArchiver archivedDataWithRootObject:aColor];
@@ -128,12 +132,16 @@
 			   [NSArray arrayWithObjects:[NSNumber numberWithInt:18],@"PotBetTwoKey",nil],[NSValue valueWithPointer:potBetTwo], 
 			   [NSArray arrayWithObjects:[NSNumber numberWithInt:19],@"PotBetThreeKey",nil],[NSValue valueWithPointer:potBetThree], 
 			   [NSArray arrayWithObjects:[NSNumber numberWithInt:20],@"PotBetFourKey",nil],[NSValue valueWithPointer:potBetFour],
-			   [NSArray arrayWithObjects:[NSNumber numberWithInt:21],@"AllInKey",nil],[NSValue valueWithPointer:allIn],
-			   [NSArray arrayWithObjects:[NSNumber numberWithInt:22],@"ToggleAllKey",nil],[NSValue valueWithPointer:toggleAllHotkeys],
-			   [NSArray arrayWithObjects:[NSNumber numberWithInt:23],@"PFROneKey",nil],[NSValue valueWithPointer:pfrOne],
-			   [NSArray arrayWithObjects:[NSNumber numberWithInt:24],@"PFRTwoKey",nil],[NSValue valueWithPointer:pfrTwo],
-			   [NSArray arrayWithObjects:[NSNumber numberWithInt:25],@"PFRThreeKey",nil],[NSValue valueWithPointer:pfrThree],
-			   [NSArray arrayWithObjects:[NSNumber numberWithInt:26],@"FoldToAnyLeftKey",nil],[NSValue valueWithPointer:foldToAnyLeft], 
+			   [NSArray arrayWithObjects:[NSNumber numberWithInt:21],@"PotBetFiveKey",nil],[NSValue valueWithPointer:potBetFive],
+			   [NSArray arrayWithObjects:[NSNumber numberWithInt:22],@"PotBetSixKey",nil],[NSValue valueWithPointer:potBetSix],
+			   [NSArray arrayWithObjects:[NSNumber numberWithInt:23],@"AllInKey",nil],[NSValue valueWithPointer:allIn],
+			   [NSArray arrayWithObjects:[NSNumber numberWithInt:24],@"ToggleAllKey",nil],[NSValue valueWithPointer:toggleAllHotkeys],
+			   [NSArray arrayWithObjects:[NSNumber numberWithInt:25],@"PFROneKey",nil],[NSValue valueWithPointer:pfrOne],
+			   [NSArray arrayWithObjects:[NSNumber numberWithInt:26],@"PFRTwoKey",nil],[NSValue valueWithPointer:pfrTwo],
+			   [NSArray arrayWithObjects:[NSNumber numberWithInt:27],@"PFRThreeKey",nil],[NSValue valueWithPointer:pfrThree],
+			   [NSArray arrayWithObjects:[NSNumber numberWithInt:28],@"PFRFourKey",nil],[NSValue valueWithPointer:pfrFour],
+			   [NSArray arrayWithObjects:[NSNumber numberWithInt:29],@"PFRFiveKey",nil],[NSValue valueWithPointer:pfrFive],
+			   [NSArray arrayWithObjects:[NSNumber numberWithInt:30],@"FoldToAnyLeftKey",nil],[NSValue valueWithPointer:foldToAnyLeft], 
 			   [NSArray arrayWithObjects:[NSNumber numberWithInt:99],@"DebugKey",nil],[NSValue valueWithPointer:debugHK],	
 			   nil];
 	
@@ -155,11 +163,11 @@
 	}	
 	
 	// Set up the pot bet fields.
-	for (int i = 17; i < 21; i++) {
+	for (int i = 17; i < 23; i++) {
 		[self setPotBetAmount:[potBetPrefsView viewWithTag:i]];
 	}
 	
-	for (int i = 23; i < 26; i++) {
+	for (int i = 25; i < 30; i++) {
 		[self setPFRAmount:[potBetPrefsView viewWithTag:i]];
 	}
 	
@@ -260,6 +268,16 @@
 			[potStepperFour setFloatValue:[sender floatValue]];			
 			[appController setPotBetAmount:[sender floatValue] forTag:[sender tag]];
 			break;
+		case 21:
+			[potStepperFiveField setFloatValue:[sender floatValue]];
+			[potStepperFive setFloatValue:[sender floatValue]];			
+			[appController setPotBetAmount:[sender floatValue] forTag:[sender tag]];
+			break;
+		case 22:
+			[potStepperSixField setFloatValue:[sender floatValue]];
+			[potStepperSix setFloatValue:[sender floatValue]];			
+			[appController setPotBetAmount:[sender floatValue] forTag:[sender tag]];
+			break;
 		default:
 			break;
 	}
@@ -268,19 +286,29 @@
 -(IBAction)setPFRAmount:(id)sender
 {
 	switch ([sender tag]) {
-		case 23:
+		case 25:
 			[pfrStepperOneField setFloatValue:[sender floatValue]];
 			[pfrOneStepper setFloatValue:[sender floatValue]];
 			[appController setPFRAmount:[sender floatValue] forTag:[sender tag]];	
 			break;
-		case 24:
+		case 26:
 			[pfrStepperTwoField setFloatValue:[sender floatValue]];
 			[pfrTwoStepper setFloatValue:[sender floatValue]];
 			[appController setPFRAmount:[sender floatValue] forTag:[sender tag]];	
 			break;
-		case 25:
+		case 27:
 			[pfrStepperThreeField setFloatValue:[sender floatValue]];
 			[pfrThreeStepper setFloatValue:[sender floatValue]];
+			[appController setPFRAmount:[sender floatValue] forTag:[sender tag]];	
+			break;
+		case 28:
+			[pfrStepperFourField setFloatValue:[sender floatValue]];
+			[pfrFourStepper setFloatValue:[sender floatValue]];
+			[appController setPFRAmount:[sender floatValue] forTag:[sender tag]];	
+			break;
+		case 29:
+			[pfrStepperFiveField setFloatValue:[sender floatValue]];
+			[pfrFiveStepper setFloatValue:[sender floatValue]];
 			[appController setPFRAmount:[sender floatValue] forTag:[sender tag]];	
 			break;
 		default:
@@ -383,11 +411,15 @@
 	[shortcutDefaults setObject:[NSNumber numberWithFloat:50.0] forKey:@"potBetTwoKey"];
 	[shortcutDefaults setObject:[NSNumber numberWithFloat:75.0] forKey:@"potBetThreeKey"];
 	[shortcutDefaults setObject:[NSNumber numberWithFloat:100.0] forKey:@"potBetFourKey"];	
+	[shortcutDefaults setObject:[NSNumber numberWithFloat:125.0] forKey:@"potBetFiveKey"];	
+	[shortcutDefaults setObject:[NSNumber numberWithFloat:150.0] forKey:@"potBetSixKey"];	
 	
 	[shortcutDefaults setObject:[NSNumber numberWithFloat:2.5] forKey:@"pfrOneKey"];	
 	[shortcutDefaults setObject:[NSNumber numberWithFloat:3.0] forKey:@"pfrTwoKey"];	
 	[shortcutDefaults setObject:[NSNumber numberWithFloat:4.0] forKey:@"pfrThreeKey"];	
-	
+	[shortcutDefaults setObject:[NSNumber numberWithFloat:5.0] forKey:@"pfrFourKey"];	
+	[shortcutDefaults setObject:[NSNumber numberWithFloat:6.0] forKey:@"pfrFiveKey"];	
+
 	NSColor *aColor = [NSColor yellowColor];
 	NSData *theData=[NSArchiver archivedDataWithRootObject:aColor];
 	[shortcutDefaults setObject:theData forKey:@"windowFrameColourKey"];

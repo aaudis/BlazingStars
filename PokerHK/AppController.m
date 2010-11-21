@@ -126,7 +126,6 @@ extern pid_t appPID;
 
 -(void)setPFRAmount:(float)amount forTag:(int)tag
 {
-	NSLog(@"Setting PFR amount to :%f",amount);
 	[dispatchController setPFRAmount:amount forTag:tag];
 }
 

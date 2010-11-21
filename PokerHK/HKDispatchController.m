@@ -594,18 +594,18 @@ HKWindowManager *wm;
 			case 18:
 			case 19:
 			case 20:
+			case 21:
+			case 22:
 				[self potBet:tag];
 				break;
-			case 21:
+			case 23:
 				[self allIn];
 				break;
-			case 23:
-				[self pfr:tag];
-				break;
-			case 24:
-				[self pfr:tag];
-				break;
 			case 25:
+			case 26:
+			case 27:
+			case 28:
+			case 29:
 				[self pfr:tag];
 				break;				
 			case 99:
@@ -666,18 +666,18 @@ pascal OSStatus hotKeyHandler(EventHandlerCallRef nextHandler,EventRef theEvent,
 			case 18:
 			case 19:
 			case 20:
+			case 21:
+			case 22:
 				[(id)userData potBet:l];
 				break;
-			case 21:
+			case 23:
 				[(id)userData allIn];
 				break;
-			case 23:
-				[(id)userData pfr:l];
-				break;
-			case 24:
-				[(id)userData pfr:l];
-				break;
 			case 25:
+			case 26:
+			case 27:
+			case 28:
+			case 29:
 				[(id)userData pfr:l];
 				break;				
 			case 99:

@@ -102,6 +102,7 @@
 		66EE0FF31297555E00564419 /* Renaissance.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0EB4DAAC113C79E300CE6AE4 /* Renaissance.plist */; };
 		66EE0FF41297555F00564419 /* Slick.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0E2D92CF0FEEBA63002836CA /* Slick.plist */; };
 		66EE1040129761D900564419 /* themes in Resources */ = {isa = PBXBuildFile; fileRef = 66EE103A129761D900564419 /* themes */; };
+		66EE12551299302800564419 /* pokerhk.icns in Resources */ = {isa = PBXBuildFile; fileRef = 0E2A1AA90FCFBC4400471032 /* pokerhk.icns */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
@@ -646,6 +647,7 @@
 				66EE0FF31297555E00564419 /* Renaissance.plist in Resources */,
 				66EE0FF41297555F00564419 /* Slick.plist in Resources */,
 				66EE1040129761D900564419 /* themes in Resources */,
+				66EE12551299302800564419 /* pokerhk.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

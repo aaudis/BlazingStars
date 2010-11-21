@@ -30,7 +30,7 @@
     else {
         path = [bundle pathForResource:@"icon-menulet-disabled" ofType:@"png"];
     }
-    
+
     NSImage *image = [[NSImage alloc] initWithContentsOfFile:path];
     
     [self.statusItem setImage:image];

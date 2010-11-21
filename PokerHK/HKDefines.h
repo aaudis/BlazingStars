@@ -9,7 +9,7 @@
 
 //#define HKDEBUG 1
 
-#define TOGGLETAG 22
+#define TOGGLETAG 24
 
 static NSRect FlippedScreenBounds(NSRect bounds)
 {

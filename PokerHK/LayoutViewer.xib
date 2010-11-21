@@ -38,7 +38,7 @@
 				<int key="NSWindowBacking">2</int>
 				<string key="NSWindowRect">{{196, -68}, {828, 578}}</string>
 				<int key="NSWTFlags">544735232</int>
-				<string key="NSWindowTitle">LayoutViewer</string>
+				<string key="NSWindowTitle">BlazingStars LayoutViewer</string>
 				<string key="NSWindowClass">NSWindow</string>
 				<nil key="NSViewClass"/>
 				<string key="NSWindowContentMaxSize">{1.79769e+308, 1.79769e+308}</string>
@@ -607,7 +607,7 @@
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<object class="NSMenuItem" id="371700561">
 						<reference key="NSMenu" ref="1021962686"/>
-						<string key="NSTitle">LayoutViewer</string>
+						<string key="NSTitle">BlazingStars LayoutViewer</string>
 						<string key="NSKeyEquiv"/>
 						<int key="NSKeyEquivModMask">1048576</int>
 						<int key="NSMnemonicLoc">2147483647</int>
