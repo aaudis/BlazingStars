@@ -179,7 +179,10 @@
     if (themes == nil) {
         // @todo should be able to auto-fetch all of these from theme manager
         themes = [[NSArray arrayWithObjects:
-                  [[[PokerStarsTheme alloc] initWithName:@"Slick" supported:YES] autorelease],
+                   [[[PokerStarsTheme alloc] initWithName:@"Classic" supported:YES] autorelease],
+                   [[[PokerStarsTheme alloc] initWithName:@"Hyper-Simple" supported:YES] autorelease],
+                   [[[PokerStarsTheme alloc] initWithName:@"Black" supported:YES] autorelease],
+                   [[[PokerStarsTheme alloc] initWithName:@"Slick" supported:YES] autorelease],
                   nil] retain];
     }
     
