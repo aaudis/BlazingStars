@@ -19,7 +19,7 @@
 	<key>CFBundleIconFile</key>
 	<string>pokerhk.icns</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>32</string>
 	<key>LSMinimumSystemVersion</key>
 	<string>${MACOSX_DEPLOYMENT_TARGET}</string>
 	<key>NSMainNibFile</key>
