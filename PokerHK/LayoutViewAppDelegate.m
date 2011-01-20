@@ -240,7 +240,7 @@
 {
     if (plist == nil) {
         PokerStarsTheme *theme = [self.themes objectAtIndex:[self.themeButton indexOfSelectedItem]];
-        plist = [[theme.themeDict mutableCopy] retain];
+        plist = [theme.themeDict mutableCopy];
     }
     
     return plist;
