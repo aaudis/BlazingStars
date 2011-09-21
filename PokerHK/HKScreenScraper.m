@@ -9,7 +9,6 @@
 #import <Carbon/Carbon.h>
 #import "HKScreenScraper.h"
 #import "TFTesseractWrapper.h"
-#import "OpenGLScreenReader.h"
 #import "HKDefines.h"
 
 @implementation HKScreenScraper
@@ -63,28 +62,64 @@
 	return output;
 }
 
+
+// Based on Son of grab Developper example
+-(NSImage*)imageWithWindow:(int)wid {
+    
+    // snag the image
+	CGImageRef windowImage = CGWindowListCreateImage(CGRectNull, kCGWindowListOptionIncludingWindow, wid, kCGWindowImageBoundsIgnoreFraming);
+    
+    // little bit of error checking
+    if(CGImageGetWidth(windowImage) <= 1) {
+        CGImageRelease(windowImage);
+        return nil;
+    }
+    
+    // Create a bitmap rep from the window and convert to NSImage...
+    NSBitmapImageRep *bitmapRep = [[NSBitmapImageRep alloc] initWithCGImage: windowImage];
+    NSImage *image = [[NSImage alloc] init];
+    [image addRepresentation: bitmapRep];
+    [bitmapRep release];
+    CGImageRelease(windowImage);
+    
+    return [image autorelease];   
+}
+
+
+
 -(float)getPotSize
 {
 	AXUIElementRef mainWindow = [lowLevel getMainWindow];
-	NSRect windowRect = [windowManager getPotBounds:mainWindow];
-	
-#ifdef HKDEBUG
-	[windowManager debugWindow:windowRect];
-#endif
+	NSRect potRect = [windowManager getPotBounds:mainWindow];
 
-	CGImageRef screenCap;
-    OpenGLScreenReader *mOpenGLScreenReader = [[OpenGLScreenReader alloc] init];
-	[mOpenGLScreenReader readFullScreenToBuffer];
-	screenCap = [mOpenGLScreenReader createImage];
-	
-	CGImageRef subImage = CGImageCreateWithImageInRect(screenCap, NSRectToCGRect(windowRect));
-	
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"debugOverlayWindowKey"]) {
+        NSRect window = [lowLevel getWindowBounds:[lowLevel getMainWindow]];
+        NSRect r = NSMakeRect(potRect.origin.x+window.origin.x, potRect.origin.y+window.origin.y, potRect.size.width, potRect.size.height);
+        [windowManager debugWindow:r];
+    }
+		
+
+/*	
+New revision doesnt use opengl to grab a screenshot (faster ?) in all cases, it works fine under Lion
+*/	
+    NSImage *temp = [self imageWithWindow:[lowLevel getWindowIDForTable:mainWindow]];
+    
+
+	CGImageRef temp2 = [temp CGImageForProposedRect:NULL context:NULL hints:NULL];
+    
+    // DEBUG : 
+    NSBitmapImageRep *tmp3 = [[NSBitmapImageRep alloc] initWithCGImage:temp2];
+    NSData *data  = [tmp3 representationUsingType: NSPNGFileType properties: nil];
+    [data writeToFile: @"/Users/simon/test.png" atomically: NO];
+    // END DEBUG
+    
+    CGImageRef subImage = CGImageCreateWithImageInRect(temp2, NSRectToCGRect(potRect));
 	NSBitmapImageRep *bitmapRep = [[NSBitmapImageRep alloc] initWithCGImage:subImage];
 	// Create an NSImage and add the bitmap rep to it...
-	NSImage *imageConvert = [[NSImage alloc] init];
+	NSImage *imageConvert = [[NSImage alloc] initWithSize:NSMakeSize(potRect.size.width, potRect.size.height)];
 	[imageConvert addRepresentation:bitmapRep];
 	[bitmapRep release];
-	
+    [temp release];
 	NSData *tiffData = [imageConvert TIFFRepresentation];
 	[tiffData writeToFile:@"/tmp/testimage.tif" atomically:NO];
 	
@@ -97,7 +132,8 @@
 	
 	NSString *inputPath = [NSString stringWithString:@"/tmp/testimage.tif"];
 	NSString *outputfilename = [NSString stringWithString:@"/tmp/processed.tif"];
-	NSArray *arguments = [NSArray arrayWithObjects:inputPath,@"-resample",@"600x600",@"-depth",@"8",@"-threshold",@"31%",outputfilename, nil];	
+    // SIMON / Needed to change the bit depth to 4 otherwise the tesseract was complaining about bit depth even if the processed.tif file was 8bit... strange
+	NSArray *arguments = [NSArray arrayWithObjects:inputPath,@"-resample",@"600x600",@"-depth",@"4",@"-threshold",@"31%",outputfilename, nil];	
 	
 	[task setArguments: arguments];
 	[task launch];	

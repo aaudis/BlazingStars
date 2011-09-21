@@ -73,6 +73,7 @@ HKWindowManager *wm = NULL;
 
 -(void)debugWindow:(NSRect)windowRect
 {
+
 	NSWindow *window = [[NSWindow alloc] initWithContentRect:FlippedScreenBounds(windowRect) styleMask:NSBorderlessWindowMask backing:NSBackingStoreNonretained defer:YES];
 	[window setOpaque:NO];
 	[window setAlphaValue:0.20];
@@ -81,7 +82,7 @@ HKWindowManager *wm = NULL;
 	[window setReleasedWhenClosed:YES];
 	[window orderFront:nil];
 	
-	[NSThread sleepForTimeInterval:0.5];
+	[NSThread sleepForTimeInterval:0.75];
 	[window close];	
 }
 
@@ -103,9 +104,9 @@ HKWindowManager *wm = NULL;
 	NSRect windowRect = [lowLevel getWindowBounds:mainWindow];
 	
 	windowRect.origin.x = windowRect.size.width * xsize + windowRect.origin.x;
-	windowRect.origin.y = windowRect.size.height * ysize + windowRect.origin.y;	
+	windowRect.origin.y = (windowRect.size.height-HKTitleBarHeight) * ysize + windowRect.origin.y + HKTitleBarHeight;	
 	windowRect.size.width = windowRect.size.width * width;
-	windowRect.size.height = windowRect.size.height * height;		
+	windowRect.size.height = (windowRect.size.height-HKTitleBarHeight) * height;		
 	
 	CGPoint eventCenter = {
 		.x = (windowRect.origin.x + (windowRect.size.width / 2)),
@@ -127,10 +128,10 @@ HKWindowManager *wm = NULL;
 	NSRect windowRect = [lowLevel getWindowBounds:mainWindow];
 	
 	windowRect.origin.x = windowRect.size.width * xsize + windowRect.origin.x;
-	windowRect.origin.y = windowRect.size.height * ysize + windowRect.origin.y;
+	windowRect.origin.y = (windowRect.size.height-HKTitleBarHeight) * ysize + windowRect.origin.y+HKTitleBarHeight;
 	
 	windowRect.size.width = windowRect.size.width * width;
-	windowRect.size.height = windowRect.size.height * height;		
+	windowRect.size.height = (windowRect.size.height-HKTitleBarHeight) * height;		
 	
 	CGPoint eventCenter = {
 		.x = (windowRect.origin.x + (windowRect.size.width / 2)),
@@ -522,25 +523,19 @@ HKWindowManager *wm = NULL;
 -(NSRect)getPotBounds:(AXUIElementRef)windowRef
 {
 	NSRect windowRect = [lowLevel getWindowBounds:windowRef];
-	
+	 NSLog(@"WINDOWRECT : x:%f y:%f Width:%f Height:%f",windowRect.origin.x,windowRect.origin.y,windowRect.size.width,windowRect.size.height);
 	NSRect boundBox = NSMakeRect([[themeController param:@"potBoxOriginX"] floatValue],
 								 [[themeController param:@"potBoxOriginY"] floatValue],
 								 [[themeController param:@"potBoxWidth"] floatValue],
 								 [[themeController param:@"potBoxHeight"] floatValue]);
+    float defaultWindowHeight = [[themeController param:@"defaultWindowHeight"] floatValue];
 	
-	NSAffineTransform *transform = [NSAffineTransform transform];
-	[transform scaleXBy:(windowRect.size.width / [[themeController param:@"defaultWindowWidth"] floatValue]) 
-					yBy: ((windowRect.size.height) / [[themeController param:@"defaultWindowHeight"] floatValue])];
-	[transform concat];
+    boundBox.size.width *= windowRect.size.width;
+    boundBox.size.height *= (windowRect.size.height-HKTitleBarHeight);
+    boundBox.origin.y = boundBox.origin.y*(windowRect.size.height-HKTitleBarHeight)+HKTitleBarHeight;
+    // Don't use the value in the plist, center the Rect on X (Pot box are centered in every theme)
+    boundBox.origin.x = windowRect.size.width/2-boundBox.size.width/2;
 	
-	boundBox.size = [transform transformSize:boundBox.size];
-	boundBox.origin = [transform transformPoint:boundBox.origin];
-
-	NSSize tempSize = windowRect.size;
-	
-	// Have to set the origin by hand.  
-	boundBox.origin.y = [[themeController param:@"intercept"] floatValue] + ([[themeController param:@"coefficient"] floatValue] * tempSize.height) + windowRect.origin.y;
-	boundBox.origin.x += windowRect.origin.x;
 	return boundBox;
 }
 

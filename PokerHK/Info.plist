@@ -4,14 +4,14 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>English</string>
-	<key>CMSubmitURL</key>
-	<string>http://fullyfunctionalsoftware.com/crashreporter.php</string>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
+	<key>CFBundleHelpBookFolder</key>
+	<string>BlazingStars Help</string>
+	<key>CFBundleHelpBookName</key>
+	<string>BlazingStars Help</string>
 	<key>CFBundleIconFile</key>
 	<string>pokerhk.icns</string>
-	<key>LSUIElement</key>
-	<true/>
 	<key>CFBundleIdentifier</key>
 	<string>com.fullyfunctional.blazingstars</string>
 	<key>CFBundleInfoDictionaryVersion</key>
@@ -20,25 +20,25 @@
 	<string>${PRODUCT_NAME}</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>1.0.8</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>32</string>
-	<key>CFBundleShortVersionString</key>
-	<string>1.0.7</string>
+	<key>CMSubmitURL</key>
+	<string>http://fullyfunctionalsoftware.com/crashreporter.php</string>
+	<key>LSUIElement</key>
+	<true/>
 	<key>NSHumanReadableCopyright</key>
 	<string>Copyright Fully Functional Software, 2009, 2010</string>
 	<key>NSMainNibFile</key>
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
-	<key>CFBundleHelpBookFolder</key>
-	<string>BlazingStars Help</string>
-	<key>CFBundleHelpBookName</key>
-	<string>BlazingStars Help</string>
-	<key>SUPublicDSAKeyFile</key>
-	<string>dsa_pub.pem</string>
 	<key>SUFeedURL</key>
 	<string>http://fullyfunctionalsoftware.com/blazingstars/BlazingStars.xml</string>
+	<key>SUPublicDSAKeyFile</key>
+	<string>dsa_pub.pem</string>
 </dict>
 </plist>

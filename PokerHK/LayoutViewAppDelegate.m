@@ -18,6 +18,7 @@
 
 @synthesize window, themeButton, imageButton, itemButton, commitButton, themes, imageView, items, posView, contentView, plist;
 @synthesize xSlider, ySlider, wSlider, hSlider;
+@synthesize xTxt, yTxt, wTxt, hTxt;
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
 	// Insert code here to initialize your application 
@@ -93,54 +94,71 @@
         wPct = [[self.plist objectForKey:@"smallButtonWidth"] floatValue];
         hPct = [[self.plist objectForKey:@"smallButtonHeight"] floatValue];
     }
-    /*
-        pot box is handled different, using absolute pixels
     else if ([[item objectForKey:@"s"] isEqualToString:@"p"]) {
         wPct = [[self.plist objectForKey:@"potBoxWidth"] floatValue];
         hPct = [[self.plist objectForKey:@"potBoxHeight"] floatValue];
     }
-     */
+
     else if ([[item objectForKey:@"s"] isEqualToString:@"b"]) {
         wPct = [[self.plist objectForKey:@"betBoxWidth"] floatValue];
         hPct = [[self.plist objectForKey:@"betBoxHeight"] floatValue];
     }    
     
     self.xSlider.doubleValue = xPct;
+    self.xTxt.doubleValue = xPct;
     self.ySlider.doubleValue = 1 - yPct;
+    self.yTxt.doubleValue = 1 - yPct;    
     self.wSlider.doubleValue = wPct;
+    self.wTxt.doubleValue = wPct;
     self.hSlider.doubleValue = hPct;
-    
+    self.hTxt.doubleValue = hPct;
     [self redrawPosBox];
 }
 
 - (void) redrawPosBox
 {
     NSSize imgSize = self.imageView.image.size;
-    CGFloat imgRatio = imgSize.width / imgSize.height;
-    CGFloat viewRatio = self.imageView.frame.size.width / self.imageView.frame.size.height;
+    
+//    CGFloat imgRatio = imgSize.width / imgSize.height;
+//    CGFloat viewRatio = self.imageView.frame.size.width / self.imageView.frame.size.height;
     
     CGFloat imgH, imgW;
-    
-    if (imgRatio > viewRatio) {
-        // use view height
-        imgH = self.imageView.frame.size.height;
-        imgW = imgH * imgRatio;
-    }
-    else {
-        // use view width
-        imgW = self.imageView.frame.size.width;
-        imgH = imgW / imgRatio;
-    }
-    
-    CGFloat x = imgW * self.xSlider.doubleValue;
-    CGFloat y = imgH * self.ySlider.doubleValue;
-    CGFloat w = imgW * self.wSlider.doubleValue;
+    imgH = imgSize.height;
+    imgW = imgSize.width;
+
+//    if (imgRatio > viewRatio) {
+//        // use view height
+//        imgH = self.imageView.frame.size.height;
+//        imgW = imgH * imgRatio;
+//    }
+//    else {
+//        // use view width
+//        imgW = self.imageView.frame.size.width;
+//        imgH = imgW / imgRatio;
+//    }
+
     CGFloat h = imgH * self.hSlider.doubleValue;
+    CGFloat x = imgW * self.xSlider.doubleValue;
+    CGFloat y = (imgH * self.ySlider.doubleValue)-h;
+    CGFloat w = imgW * self.wSlider.doubleValue;
+
     
-    self.posView.frame = NSMakeRect(self.imageView.frame.origin.x + x, self.imageView.frame.origin.y + y - h, w, h);
+    self.posView.frame = NSMakeRect(self.imageView.frame.origin.x + x, self.imageView.frame.size.height-imgH+self.imageView.frame.origin.y+y, w, h);
+    NSLog(@"Size=%f x %f",imgSize.width,imgSize.height);
+    NSLog(@"Pos=(x=%f,y=%f)",x,y);
     [self.posView needsDisplay];
+    
 }
 
+- (IBAction) txtChanged:(id)sender
+{
+    
+    
+    //if [[send stringValue] doubleValue]
+    //self.hSlider. [[send stringValue] doubleValue]
+
+    
+}
 - (IBAction) sliderChanged:(id)sender
 {
     NSDictionary *item = [self.items objectAtIndex:[self.itemButton indexOfSelectedItem]];
@@ -161,16 +179,27 @@
     else if ([[item objectForKey:@"s"] isEqualToString:@"b"]) {
         wKey = @"betBoxWidth";
         hKey = @"betBoxHeight";
-    }    
-    
+    }else if ([[item objectForKey:@"s"] isEqualToString:@"p"]) {
+        wKey = @"potBoxWidth";
+        hKey = @"potBoxHeight";
+    }       
+    NSNumber * tmp;
     if ([wKey length] > 0) {
-        [self.plist setObject:[NSNumber numberWithDouble:self.wSlider.doubleValue] forKey:wKey];
+        tmp = [NSNumber numberWithDouble:self.wSlider.doubleValue];
+        [self.plist setObject:tmp forKey:wKey];
+        [self.wTxt setStringValue:[tmp stringValue]];
     }
     
     if ([hKey length] > 0) {
-        [self.plist setObject:[NSNumber numberWithDouble:self.hSlider.doubleValue] forKey:hKey];
+        tmp = [NSNumber numberWithDouble:self.hSlider.doubleValue];
+        [self.plist setObject:tmp forKey:hKey];
+        [self.hTxt setStringValue:[tmp stringValue]];
     }
-
+    ;
+    self.xTxt.doubleValue = self.xSlider.doubleValue;
+    self.yTxt.doubleValue = self.ySlider.doubleValue;
+    self.wTxt.doubleValue = self.wSlider.doubleValue;
+    self.hTxt.doubleValue = self.hSlider.doubleValue;
     [self redrawPosBox];
 }
 
@@ -180,11 +209,12 @@
         // @todo should be able to auto-fetch all of these from theme manager
         themes = [[NSArray arrayWithObjects:
                    [[[PokerStarsTheme alloc] initWithName:@"Classic" supported:YES] autorelease],
-                   [[[PokerStarsTheme alloc] initWithName:@"Hyper-Simple" supported:YES] autorelease],
+                   [[[PokerStarsTheme alloc] initWithName:@"Simple" supported:YES] autorelease],
                    [[[PokerStarsTheme alloc] initWithName:@"Black" supported:YES] autorelease],
                    [[[PokerStarsTheme alloc] initWithName:@"Shiny" supported:YES] autorelease],
                    [[[PokerStarsTheme alloc] initWithName:@"Slick" supported:YES] autorelease],
-                   [[[PokerStarsTheme alloc] initWithName:@"Renaissance" supported:YES] autorelease],
+                   [[[PokerStarsTheme alloc] initWithName:@"Nova" supported:YES] autorelease],
+                   [[[PokerStarsTheme alloc] initWithName:@"Techno" supported:YES] autorelease],
                   nil] retain];
     }
     
@@ -212,7 +242,7 @@
                   [NSDictionary dictionaryWithObjectsAndKeys:@"Left Button: Auto-Post/Sit Out", @"t", @"autoPostSitOut", @"n", @"s", @"s", nil],
 
                   [NSDictionary dictionaryWithObjectsAndKeys:@"Other: Leave Table", @"t", @"leaveTable", @"n", @"s", @"s", nil],
-                  //[NSDictionary dictionaryWithObjectsAndKeys:@"Other: Pot Box", @"t", @"potBox", @"n", @"p", @"s", nil],
+                  [NSDictionary dictionaryWithObjectsAndKeys:@"Other: Pot Box", @"t", @"potBox", @"n", @"p", @"s", nil],
                   [NSDictionary dictionaryWithObjectsAndKeys:@"Other: Bet Box", @"t", @"betBox", @"n", @"b", @"s", nil],
                   
                   nil] retain];

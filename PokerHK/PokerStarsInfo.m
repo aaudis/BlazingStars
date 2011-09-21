@@ -38,9 +38,6 @@
     
     NSString *s = [preference substringToIndex:range.location];
 	
-    if ([s hasPrefix:@"renaissance"]) {
-        return [[PokerStarsTheme alloc] initWithName:@"Renaissance" supported:YES];
-    }
     if ([s hasPrefix:@"slick"]) {
         return [[PokerStarsTheme alloc] initWithName:@"Slick" supported:YES];
     }
@@ -52,28 +49,25 @@
         return [[PokerStarsTheme alloc] initWithName:@"Black" supported:YES];
     }
     if ([s isEqualToString:@"simple"]) {
-        return [[PokerStarsTheme alloc] initWithName:@"No Images" supported:NO];
+        return [[PokerStarsTheme alloc] initWithName:@"Simple" supported:YES];
     }
     if ([s isEqualToString:@"shiny"]) {
         return [[PokerStarsTheme alloc] initWithName:@"Shiny" supported:YES];
     }
-    if ([s isEqualToString:@"marine"]) {
-        return [[PokerStarsTheme alloc] initWithName:@"Marine" supported:NO];
-    }
-    if ([s isEqualToString:@"stars"]) {
-        return [[PokerStarsTheme alloc] initWithName:@"Stars" supported:NO];
+    if ([s isEqualToString:@"nova"]) {
+        return [[PokerStarsTheme alloc] initWithName:@"Nova" supported:YES];
     }
     if ([s isEqualToString:@"ordinary"]) {
-        return [[PokerStarsTheme alloc] initWithName:@"Hyper-Simple" supported:YES];
+        return [[PokerStarsTheme alloc] initWithName:@"Simple" supported:YES];
     }
-    if ([s isEqualToString:@"saloon"]) {
-        return [[PokerStarsTheme alloc] initWithName:@"Saloon" supported:NO];
+    if ([s isEqualToString:@"simple"]) {
+        return [[PokerStarsTheme alloc] initWithName:@"Simple" supported:YES];
     }
     if ([s isEqualToString:@"techno"]) {
-        return [[PokerStarsTheme alloc] initWithName:@"Techno" supported:NO];
+        return [[PokerStarsTheme alloc] initWithName:@"Techno" supported:YES];
     }
-    if ([s isEqualToString:@"azure"]) {
-        return [[PokerStarsTheme alloc] initWithName:@"Azure" supported:NO];
+    if ([s isEqualToString:@"classic"]) {
+        return [[PokerStarsTheme alloc] initWithName:@"Classic" supported:YES];
     }
 
     return [[PokerStarsTheme alloc] initWithName:[@"Unknown PokerStars theme: " stringByAppendingString: s] supported:NO];

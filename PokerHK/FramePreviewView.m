@@ -16,7 +16,7 @@
 - (id)initWithFrame:(NSRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-		lowLevel = [[HKLowLevel init] alloc];
+		lowLevel = [[HKLowLevel alloc] init];
         // Initialization code here.
     }
     return self;

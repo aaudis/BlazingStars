@@ -5,13 +5,13 @@
 	<key>autoPostSitOutOriginX</key>
 	<real>0.011574073694646358</real>
 	<key>autoPostSitOutOriginY</key>
-	<real>0.76093751192092896</real>
+	<real>0.71625703573226929</real>
 	<key>betBoxHeight</key>
 	<real>0.026000000536441803</real>
 	<key>betBoxOriginX</key>
 	<real>0.73379629850387573</real>
 	<key>betBoxOriginY</key>
-	<real>0.84053719043731689</real>
+	<real>0.84101122617721558</real>
 	<key>betBoxWidth</key>
 	<real>0.061000000685453415</real>
 	<key>betOriginX</key>
@@ -21,13 +21,13 @@
 	<key>betRaiseAnyOriginX</key>
 	<real>0.84200000762939453</real>
 	<key>betRaiseAnyOriginY</key>
-	<real>0.91261059045791626</real>
+	<real>0.9087522029876709</real>
 	<key>betRaiseOriginX</key>
 	<real>0.84200000762939453</real>
 	<key>betRaiseOriginY</key>
-	<real>0.87278759479522705</real>
+	<real>0.86991715431213379</real>
 	<key>bigButtonHeight</key>
-	<real>0.040986895561218262</real>
+	<real>0.06690138578414917</real>
 	<key>bigButtonWidth</key>
 	<real>0.071596264839172363</real>
 	<key>callOriginX</key>
@@ -35,17 +35,17 @@
 	<key>callOriginY</key>
 	<real>0.91261059045791626</real>
 	<key>checkCallAnyOriginX</key>
-	<real>0.68132716417312622</real>
+	<real>0.67168837785720825</real>
 	<key>checkCallAnyOriginY</key>
 	<real>0.91039824485778809</real>
 	<key>checkCallOriginX</key>
-	<real>0.68287038803100586</real>
+	<real>0.66874629259109497</real>
 	<key>checkCallOriginY</key>
-	<real>0.82918715476989746</real>
+	<real>0.86697679758071899</real>
 	<key>checkFoldOriginX</key>
-	<real>0.52100002765655518</real>
+	<real>0.49622437357902527</real>
 	<key>checkFoldOriginY</key>
-	<real>0.87057524919509888</real>
+	<real>0.90680301189422607</real>
 	<key>coefficient</key>
 	<real>0.030030000000000001</real>
 	<key>defaultWindowHeight</key>
@@ -59,11 +59,11 @@
 	<key>foldToAnyLeftOriginX</key>
 	<real>0.0099999997764825821</real>
 	<key>foldToAnyLeftOriginY</key>
-	<real>0.70426613092422485</real>
+	<real>0.65988415479660034</real>
 	<key>foldToAnyOriginX</key>
-	<real>0.52100000000000002</real>
+	<real>0.004873642697930336</real>
 	<key>foldToAnyOriginY</key>
-	<real>0.91000000000000003</real>
+	<real>0.6594424843788147</real>
 	<key>intercept</key>
 	<real>21.940000000000001</real>
 	<key>leaveTableOriginX</key>
@@ -71,23 +71,23 @@
 	<key>leaveTableOriginY</key>
 	<real>0.019373243674635887</real>
 	<key>potBoxHeight</key>
-	<real>0.039196550846099854</real>
+	<real>0.035098791122436523</real>
 	<key>potBoxOriginX</key>
-	<real>0.44998383522033691</real>
+	<real>0.44041591882705688</real>
 	<key>potBoxOriginY</key>
-	<real>0.076325491070747375</real>
+	<real>0.11691540479660034</real>
 	<key>potBoxWidth</key>
 	<real>0.11436313390731812</real>
 	<key>sitOutNextHandOriginX</key>
-	<real>0.011693869717419147</real>
+	<real>0.0099999997764825821</real>
 	<key>sitOutNextHandOriginY</key>
-	<real>0.73174154758453369</real>
+	<real>0.68882548809051514</real>
 	<key>smallButtonHeight</key>
 	<real>0.015258193016052246</real>
 	<key>smallButtonWidth</key>
 	<real>0.010563373565673828</real>
 	<key>timeBankOriginX</key>
-	<real>0.52914136648178101</real>
+	<real>0.50540125370025635</real>
 	<key>timeBankOriginY</key>
 	<real>0.80862832069396973</real>
 </dict>

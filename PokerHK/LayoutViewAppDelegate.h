@@ -24,6 +24,8 @@
     
     NSSlider *xSlider, *ySlider, *wSlider, *hSlider;
     
+        NSTextField *xTxt, *yTxt, *wTxt, *hTxt;
+    
     NSMutableDictionary *plist;
 }
 
@@ -35,6 +37,7 @@
 @property (nonatomic, retain) IBOutlet NSView *contentView;
 @property (nonatomic, retain) IBOutlet NSBox *posView;
 @property (nonatomic, retain) IBOutlet NSSlider *xSlider, *ySlider, *wSlider, *hSlider;
+@property (nonatomic, retain) IBOutlet NSTextField *xTxt, *yTxt, *wTxt, *hTxt;
 @property (nonatomic, retain) NSMutableDictionary *plist;
 
 - (IBAction) themeChanged:(id)sender;
@@ -42,5 +45,6 @@
 - (IBAction) itemChanged:(id)sender;
 
 - (IBAction) sliderChanged:(id)sender;
+- (IBAction) txtChanged:(id)sender;
 - (IBAction) getPlist:(id)sender;
 @end

@@ -27,5 +27,6 @@
 @property (nonatomic, retain) NSArray *currencyCharacters;
 
 -(float)getPotSize;
+-(NSImage*)imageWithWindow:(int)wid;
 
 @end

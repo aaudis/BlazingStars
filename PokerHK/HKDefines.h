@@ -10,6 +10,8 @@
 //#define HKDEBUG 1
 
 #define TOGGLETAG 24
+// Height in pixels of the title bar
+#define HKTitleBarHeight 22
 
 static NSRect FlippedScreenBounds(NSRect bounds)
 {
