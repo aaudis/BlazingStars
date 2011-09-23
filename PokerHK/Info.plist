@@ -11,7 +11,7 @@
 	<key>CFBundleHelpBookName</key>
 	<string>BlazingStars Help</string>
 	<key>CFBundleIconFile</key>
-	<string>pokerhk.icns</string>
+	<string>Blazing-Stars.icns</string>
 	<key>CFBundleIdentifier</key>
 	<string>com.fullyfunctional.blazingstars</string>
 	<key>CFBundleInfoDictionaryVersion</key>
@@ -21,13 +21,15 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0.8</string>
+	<string>1.0.9</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>32</string>
 	<key>CMSubmitURL</key>
 	<string>http://fullyfunctionalsoftware.com/crashreporter.php</string>
+	<key>LSApplicationCategoryType</key>
+	<string>public.app-category.utilities</string>
 	<key>LSUIElement</key>
 	<true/>
 	<key>NSHumanReadableCopyright</key>

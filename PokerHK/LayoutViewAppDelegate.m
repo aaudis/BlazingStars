@@ -144,8 +144,6 @@
 
     
     self.posView.frame = NSMakeRect(self.imageView.frame.origin.x + x, self.imageView.frame.size.height-imgH+self.imageView.frame.origin.y+y, w, h);
-    NSLog(@"Size=%f x %f",imgSize.width,imgSize.height);
-    NSLog(@"Pos=(x=%f,y=%f)",x,y);
     [self.posView needsDisplay];
     
 }

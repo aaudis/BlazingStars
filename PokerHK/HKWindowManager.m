@@ -142,6 +142,9 @@ HKWindowManager *wm = NULL;
 	return NSPointFromCGPoint(eventCenter);
 }
 
+
+
+
 #pragma mark Window dictionary
 
 -(void)updateWindowDict
@@ -412,7 +415,9 @@ HKWindowManager *wm = NULL;
 				[logger info:@"Found tournament table."];
 				return HKTournamentTable;
 			} else if ([title rangeOfString:@"Hold'em"].location != NSNotFound) {
-				[logger info:@"Found hold'em table."];				
+				[logger info:@"Found hold'em table."];
+                [self logCurrentFrontWindow];
+
 				return HKHoldemCashTable;
 			} else if ([title rangeOfString:@"Omaha"].location != NSNotFound) {
 				[logger info:@"Found omaha table."];				
@@ -523,7 +528,6 @@ HKWindowManager *wm = NULL;
 -(NSRect)getPotBounds:(AXUIElementRef)windowRef
 {
 	NSRect windowRect = [lowLevel getWindowBounds:windowRef];
-	 NSLog(@"WINDOWRECT : x:%f y:%f Width:%f Height:%f",windowRect.origin.x,windowRect.origin.y,windowRect.size.width,windowRect.size.height);
 	NSRect boundBox = NSMakeRect([[themeController param:@"potBoxOriginX"] floatValue],
 								 [[themeController param:@"potBoxOriginY"] floatValue],
 								 [[themeController param:@"potBoxWidth"] floatValue],

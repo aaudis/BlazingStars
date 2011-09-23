@@ -262,8 +262,6 @@ void WindowListApplierFunction(const void *inputDictionary, void *context)
 	NSRect windowRect;
 	windowRect.origin = *(NSPoint *)&corner;
 	windowRect.size = *(NSSize *)&sizeVal;
-    NSLog(@"Position: (%f, %f)", windowRect.origin.x, windowRect.origin.y);
-    NSLog(@"Size: %f x %f", windowRect.size.width, windowRect.size.height);
 	return windowRect;
 }
 
