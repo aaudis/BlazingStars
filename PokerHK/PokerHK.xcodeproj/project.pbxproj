@@ -109,6 +109,8 @@
 		F4054B2C1427FD3800ADE511 /* Simple.plist in Resources */ = {isa = PBXBuildFile; fileRef = F4054B271427FD3700ADE511 /* Simple.plist */; };
 		F4054B2D1427FD3800ADE511 /* Techno.plist in Resources */ = {isa = PBXBuildFile; fileRef = F4054B281427FD3800ADE511 /* Techno.plist */; };
 		F4054B2E1427FD3800ADE511 /* Techno.plist in Resources */ = {isa = PBXBuildFile; fileRef = F4054B281427FD3800ADE511 /* Techno.plist */; };
+		F461D094142B65FD00E6E7A7 /* Blazing.ico in Resources */ = {isa = PBXBuildFile; fileRef = F461D093142B65FD00E6E7A7 /* Blazing.ico */; };
+		F4A5CA1B142B8B7F0051566A /* Blazing-Stars.icns in Resources */ = {isa = PBXBuildFile; fileRef = F4A5CA1A142B8B7F0051566A /* Blazing-Stars.icns */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -260,6 +262,8 @@
 		F4054B261427FD3700ADE511 /* Nova.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Nova.plist; sourceTree = "<group>"; };
 		F4054B271427FD3700ADE511 /* Simple.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Simple.plist; sourceTree = "<group>"; };
 		F4054B281427FD3800ADE511 /* Techno.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Techno.plist; sourceTree = "<group>"; };
+		F461D093142B65FD00E6E7A7 /* Blazing.ico */ = {isa = PBXFileReference; lastKnownFileType = image.ico; path = Blazing.ico; sourceTree = "<group>"; };
+		F4A5CA1A142B8B7F0051566A /* Blazing-Stars.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = "Blazing-Stars.icns"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -480,6 +484,8 @@
 		29B97314FDCFA39411CA2CEA /* PokerHK */ = {
 			isa = PBXGroup;
 			children = (
+				F4A5CA1A142B8B7F0051566A /* Blazing-Stars.icns */,
+				F461D093142B65FD00E6E7A7 /* Blazing.ico */,
 				66EE0EC512973E7700564419 /* LayoutViewer */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
@@ -687,6 +693,8 @@
 				F4054B291427FD3800ADE511 /* Nova.plist in Resources */,
 				F4054B2B1427FD3800ADE511 /* Simple.plist in Resources */,
 				F4054B2D1427FD3800ADE511 /* Techno.plist in Resources */,
+				F461D094142B65FD00E6E7A7 /* Blazing.ico in Resources */,
+				F4A5CA1B142B8B7F0051566A /* Blazing-Stars.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -716,7 +724,7 @@
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/bash;
+			shellPath = /bin/echo;
 			shellScript = "set -o errexit\n\n#[ $BUILD_STYLE = Release ] || { echo Distribution target requires \"'Release'\" build style; false; }\n\nVERSION=$(defaults read \"$BUILT_PRODUCTS_DIR/$PRODUCT_NAME.app/Contents/Info\" CFBundleVersion)\nSHORTVERSION=$(defaults read \"$BUILT_PRODUCTS_DIR/$PRODUCT_NAME.app/Contents/Info\" CFBundleShortVersionString)\nDOWNLOAD_BASE_URL=\"http://fullyfunctionalsoftware.com/blazingstars\"\nRELEASENOTES_URL=\"http://fullyfunctionalsoftware.com/blazingstars/release-notes.html#version-$SHORTVERSION-$VERSION\"\n\nARCHIVE_FILENAME=\"$PRODUCT_NAME-$SHORTVERSION.zip\"\nDOWNLOAD_URL=\"$DOWNLOAD_BASE_URL/$ARCHIVE_FILENAME\"\nKEYCHAIN_PRIVKEY_NAME=\"Sparkle Private Key 1\"\n\nWD=$PWD\ncd \"$BUILT_PRODUCTS_DIR\"\nrm -f \"$PROJECT_NAME\"*.zip\nditto -ck --keepParent \"$PRODUCT_NAME.app\" \"$ARCHIVE_FILENAME\"\n\nSIZE=$(stat -f %z \"$ARCHIVE_FILENAME\")\nPUBDATE=$(date +\"%a, %d %b %G %T %z\")\nSIGNATURE=$(\n\topenssl dgst -sha1 -binary < \"$ARCHIVE_FILENAME\" \\\n\t| openssl dgst -dss1 -sign <(security find-generic-password -g -s \"$KEYCHAIN_PRIVKEY_NAME\" 2>&1 1>/dev/null | perl -pe '($_) = /\"(.+)\"/; s/\\\\012/\\n/g') \\\n\t| openssl enc -base64\n)\n\n#[ $SIGNATURE ] || { echo Unable to load signing private key with name \"'$KEYCHAIN_PRIVKEY_NAME'\" from keychain; false; }\n\ncat <<EOF\n\t\t<item>\n\t\t\t<title>Version $SHORTVERSION (Build $VERSION)</title>\n\t\t\t<sparkle:releaseNotesLink>$RELEASENOTES_URL</sparkle:releaseNotesLink>\n\t\t\t<pubDate>$PUBDATE</pubDate>\n\t\t\t<enclosure\n\t\t\t\turl=\"$DOWNLOAD_URL\"\n\t\t\t\tsparkle:version=\"$VERSION\"\n\t\t\t\tsparkle:shortVersionString=\"$SHORTVERSION\"\n\t\t\t\ttype=\"application/octet-stream\"\n\t\t\t\tlength=\"$SIZE\"\n\t\t\t\tsparkle:dsaSignature=\"$SIGNATURE\"\n\t\t\t/>\n\t\t</item>\nEOF\n\necho scp \"'$HOME/Desktop/PokerHK/build/Release/$ARCHIVE_FILENAME'\" fullyfunctionalsoftware.com:public_html/blazingstars/\necho scp \"'$WD/appcast.xml'\" www.example.com:web/software/my-cool-app/appcast.xml\n\n\nif [[ ! -d \"dmg-build\" ]];\nthen\n\tmkdir BlazingStars\nrm -f BlazingStars/*\nfi\nln -s /Applications BlazingStars/Applications\U0013\ncp -R $PRODUCT_NAME.app BlazingStars\ncp $PRODUCT_NAME.app/Contents/Resources/readme.rtf BlazingStars\ncp $SRCROOT/license.rtf BlazingStars\n#cp $SRCROOT/dmg_background.jpg BlazingStars\n\n$SRCROOT/create-dmg --window-size 500 450 --background $SRCROOT/dmg_background.jpg --icon-size 96 --volname \"BlazingStars\" --icon \"Applications\" 380 180 --icon \"BlazingStars\" 110 180 --icon \"readme.rtf\" 200 335 --icon \"license.rtf\" 300 335 BlazingStars.dmg ./BlazingStars\n\n\n#dropdmg -i -l BlazingStarsBeta BlazingStars \nrm -rf BlazingStars\nmv BlazingStars.dmg \"$PRODUCT_NAME-$SHORTVERSION.dmg\"\n";
 		};
 		0EB20CC3100291B2008A5D14 /* Index Help */ = {
