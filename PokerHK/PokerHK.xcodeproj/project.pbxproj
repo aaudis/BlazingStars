@@ -40,7 +40,6 @@
 		0E33E25610F6E87B004C9847 /* SOLogger.framework in Copy Sparkle */ = {isa = PBXBuildFile; fileRef = 0E33E23C10F6E3BE004C9847 /* SOLogger.framework */; };
 		0E46AF5C116E951F000980A7 /* CMCrashReporter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E46AF5B116E951F000980A7 /* CMCrashReporter.framework */; };
 		0E46AF63116E9523000980A7 /* CMCrashReporter.framework in Copy CrashReporter */ = {isa = PBXBuildFile; fileRef = 0E46AF5B116E951F000980A7 /* CMCrashReporter.framework */; };
-		0E46F1281044726E00EC807B /* convert in Resources */ = {isa = PBXBuildFile; fileRef = 0E46F1271044726E00EC807B /* convert */; };
 		0E4D73AE10DF35C80058D4FA /* speechCommands.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0E4D73AD10DF35C80058D4FA /* speechCommands.plist */; };
 		0E5526AB0FDCBB150071ACC6 /* Black.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0E5526A90FDCBB150071ACC6 /* Black.plist */; };
 		0E5528230FDCD9BA0071ACC6 /* keyMap.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0E5528220FDCD9BA0071ACC6 /* keyMap.plist */; };
@@ -75,9 +74,6 @@
 		0ED0FBF610E21352000DF720 /* AdiumApplescriptRunner in Resources */ = {isa = PBXBuildFile; fileRef = 0ED0FBF410E21351000DF720 /* AdiumApplescriptRunner */; };
 		0ED0FBF710E21352000DF720 /* template.applescript in Sources */ = {isa = PBXBuildFile; fileRef = 0ED0FBF510E21351000DF720 /* template.applescript */; };
 		0EE7BD980FE7718500F1429A /* HKScreenScraper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EE7BD970FE7718500F1429A /* HKScreenScraper.m */; };
-		0EE7BDCE0FE7736500F1429A /* tesseract in Resources */ = {isa = PBXBuildFile; fileRef = 0EE7BDC40FE7736500F1429A /* tesseract */; };
-		0EE7BDEE0FE7748F00F1429A /* tessdata in Resources */ = {isa = PBXBuildFile; fileRef = 0EE7BDE40FE7748F00F1429A /* tessdata */; };
-		0EE7BE0F0FE775BA00F1429A /* TFTesseractWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EE7BE0B0FE775BA00F1429A /* TFTesseractWrapper.m */; };
 		0EE7BE1D0FE7765000F1429A /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EE7BE1C0FE7765000F1429A /* OpenGL.framework */; };
 		0EF91D700FDB805F00FB01E7 /* HKThemeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EF91D6F0FDB805F00FB01E7 /* HKThemeController.m */; };
 		0EF91D800FDB81DE00FB01E7 /* Setup.png in Resources */ = {isa = PBXBuildFile; fileRef = 0EF91D7F0FDB81DE00FB01E7 /* Setup.png */; };
@@ -110,6 +106,16 @@
 		F4054B2D1427FD3800ADE511 /* Techno.plist in Resources */ = {isa = PBXBuildFile; fileRef = F4054B281427FD3800ADE511 /* Techno.plist */; };
 		F4054B2E1427FD3800ADE511 /* Techno.plist in Resources */ = {isa = PBXBuildFile; fileRef = F4054B281427FD3800ADE511 /* Techno.plist */; };
 		F461D094142B65FD00E6E7A7 /* Blazing.ico in Resources */ = {isa = PBXBuildFile; fileRef = F461D093142B65FD00E6E7A7 /* Blazing.ico */; };
+		F46C7C621430B1B1003A8A98 /* Leptonica.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F46C7C5E1430B1B1003A8A98 /* Leptonica.framework */; };
+		F46C7C631430B1B1003A8A98 /* libjpeg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F46C7C5F1430B1B1003A8A98 /* libjpeg.framework */; };
+		F46C7C641430B1B1003A8A98 /* libtiff.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F46C7C601430B1B1003A8A98 /* libtiff.framework */; };
+		F46C7C651430B1B1003A8A98 /* Tesseract.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F46C7C611430B1B1003A8A98 /* Tesseract.framework */; };
+		F46C7C781430C2A0003A8A98 /* HKTesseract.mm in Sources */ = {isa = PBXBuildFile; fileRef = F46C7C771430C2A0003A8A98 /* HKTesseract.mm */; };
+		F46C7CA814311F35003A8A98 /* Leptonica.framework in Copy Sparkle */ = {isa = PBXBuildFile; fileRef = F46C7C5E1430B1B1003A8A98 /* Leptonica.framework */; };
+		F46C7CA914311F38003A8A98 /* libjpeg.framework in Copy Sparkle */ = {isa = PBXBuildFile; fileRef = F46C7C5F1430B1B1003A8A98 /* libjpeg.framework */; };
+		F46C7CAA14311F3A003A8A98 /* libtiff.framework in Copy Sparkle */ = {isa = PBXBuildFile; fileRef = F46C7C601430B1B1003A8A98 /* libtiff.framework */; };
+		F46C7CAB14311F9E003A8A98 /* Tesseract.framework in Copy Sparkle */ = {isa = PBXBuildFile; fileRef = F46C7C611430B1B1003A8A98 /* Tesseract.framework */; };
+		F46C7CAE1431207E003A8A98 /* eng.traineddata in CopyFiles */ = {isa = PBXBuildFile; fileRef = F46C7CA61430D235003A8A98 /* eng.traineddata */; };
 		F4A5CA1B142B8B7F0051566A /* Blazing-Stars.icns in Resources */ = {isa = PBXBuildFile; fileRef = F4A5CA1A142B8B7F0051566A /* Blazing-Stars.icns */; };
 /* End PBXBuildFile section */
 
@@ -142,9 +148,23 @@
 			dstSubfolderSpec = 10;
 			files = (
 				0E33E25610F6E87B004C9847 /* SOLogger.framework in Copy Sparkle */,
+				F46C7CAB14311F9E003A8A98 /* Tesseract.framework in Copy Sparkle */,
 				0EA807DA1020D5E5004F84D0 /* Sparkle.framework in Copy Sparkle */,
+				F46C7CAA14311F3A003A8A98 /* libtiff.framework in Copy Sparkle */,
+				F46C7CA914311F38003A8A98 /* libjpeg.framework in Copy Sparkle */,
+				F46C7CA814311F35003A8A98 /* Leptonica.framework in Copy Sparkle */,
 			);
 			name = "Copy Sparkle";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F46C7CAD1431206D003A8A98 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = tessdata;
+			dstSubfolderSpec = 7;
+			files = (
+				F46C7CAE1431207E003A8A98 /* eng.traineddata in CopyFiles */,
+			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -175,7 +195,6 @@
 		0E33E22B10F6DFEA004C9847 /* HKLowLevel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKLowLevel.m; sourceTree = "<group>"; };
 		0E33E23C10F6E3BE004C9847 /* SOLogger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SOLogger.framework; sourceTree = "<group>"; };
 		0E46AF5B116E951F000980A7 /* CMCrashReporter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CMCrashReporter.framework; sourceTree = "<group>"; };
-		0E46F1271044726E00EC807B /* convert */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = convert; sourceTree = "<group>"; };
 		0E4D73AD10DF35C80058D4FA /* speechCommands.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = speechCommands.plist; sourceTree = "<group>"; };
 		0E5526A90FDCBB150071ACC6 /* Black.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Black.plist; sourceTree = "<group>"; };
 		0E5528220FDCD9BA0071ACC6 /* keyMap.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = keyMap.plist; sourceTree = "<group>"; };
@@ -223,12 +242,8 @@
 		0ED0FBE610E212AC000DF720 /* dmg_background.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = dmg_background.psd; sourceTree = "<group>"; };
 		0ED0FBF410E21351000DF720 /* AdiumApplescriptRunner */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o"; path = AdiumApplescriptRunner; sourceTree = "<group>"; };
 		0ED0FBF510E21351000DF720 /* template.applescript */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.applescript; path = template.applescript; sourceTree = "<group>"; };
-		0EE7BD960FE7718500F1429A /* HKScreenScraper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKScreenScraper.h; sourceTree = "<group>"; };
+		0EE7BD960FE7718500F1429A /* HKScreenScraper.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; path = HKScreenScraper.h; sourceTree = "<group>"; };
 		0EE7BD970FE7718500F1429A /* HKScreenScraper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKScreenScraper.m; sourceTree = "<group>"; };
-		0EE7BDC40FE7736500F1429A /* tesseract */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = tesseract; sourceTree = "<group>"; };
-		0EE7BDE40FE7748F00F1429A /* tessdata */ = {isa = PBXFileReference; lastKnownFileType = folder; path = tessdata; sourceTree = "<group>"; };
-		0EE7BE0A0FE775BA00F1429A /* TFTesseractWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFTesseractWrapper.h; sourceTree = "<group>"; };
-		0EE7BE0B0FE775BA00F1429A /* TFTesseractWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFTesseractWrapper.m; sourceTree = "<group>"; };
 		0EE7BE1C0FE7765000F1429A /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
 		0EF91D6E0FDB805F00FB01E7 /* HKThemeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKThemeController.h; sourceTree = "<group>"; };
 		0EF91D6F0FDB805F00FB01E7 /* HKThemeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKThemeController.m; sourceTree = "<group>"; };
@@ -263,6 +278,13 @@
 		F4054B271427FD3700ADE511 /* Simple.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Simple.plist; sourceTree = "<group>"; };
 		F4054B281427FD3800ADE511 /* Techno.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Techno.plist; sourceTree = "<group>"; };
 		F461D093142B65FD00E6E7A7 /* Blazing.ico */ = {isa = PBXFileReference; lastKnownFileType = image.ico; path = Blazing.ico; sourceTree = "<group>"; };
+		F46C7C5E1430B1B1003A8A98 /* Leptonica.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Leptonica.framework; sourceTree = "<group>"; };
+		F46C7C5F1430B1B1003A8A98 /* libjpeg.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = libjpeg.framework; sourceTree = "<group>"; };
+		F46C7C601430B1B1003A8A98 /* libtiff.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = libtiff.framework; sourceTree = "<group>"; };
+		F46C7C611430B1B1003A8A98 /* Tesseract.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Tesseract.framework; sourceTree = "<group>"; };
+		F46C7C761430C2A0003A8A98 /* HKTesseract.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; path = HKTesseract.h; sourceTree = "<group>"; };
+		F46C7C771430C2A0003A8A98 /* HKTesseract.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = HKTesseract.mm; sourceTree = "<group>"; };
+		F46C7CA61430D235003A8A98 /* eng.traineddata */ = {isa = PBXFileReference; lastKnownFileType = file; path = eng.traineddata; sourceTree = "<group>"; };
 		F4A5CA1A142B8B7F0051566A /* Blazing-Stars.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = "Blazing-Stars.icns"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -287,6 +309,10 @@
 				0EA4581010F31EF600CE056C /* Quartz.framework in Frameworks */,
 				0E33E23D10F6E3BE004C9847 /* SOLogger.framework in Frameworks */,
 				0E46AF5C116E951F000980A7 /* CMCrashReporter.framework in Frameworks */,
+				F46C7C621430B1B1003A8A98 /* Leptonica.framework in Frameworks */,
+				F46C7C631430B1B1003A8A98 /* libjpeg.framework in Frameworks */,
+				F46C7C641430B1B1003A8A98 /* libtiff.framework in Frameworks */,
+				F46C7C651430B1B1003A8A98 /* Tesseract.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -297,7 +323,6 @@
 			isa = PBXGroup;
 			children = (
 				0E09148611729C0800F5928A /* ThemeManagement */,
-				0EE7BDEF0FE7759A00F1429A /* PotGrab */,
 				0E2A1CBF0FD07D8700471032 /* Prefs */,
 				0EA4FC000FE174CC00CEE1BE /* ShortcutRecorder */,
 				0E8A319E10F55E0800C26293 /* TransparentFrame */,
@@ -313,6 +338,8 @@
 				0E85D1C00FDE43EE00E8E225 /* HKWindowManager.m */,
 				0EE7BD960FE7718500F1429A /* HKScreenScraper.h */,
 				0EE7BD970FE7718500F1429A /* HKScreenScraper.m */,
+				F46C7C761430C2A0003A8A98 /* HKTesseract.h */,
+				F46C7C771430C2A0003A8A98 /* HKTesseract.mm */,
 				0E2D945A0FEED7CA002836CA /* HKDefines.h */,
 				0E33E22A10F6DFEA004C9847 /* HKLowLevel.h */,
 				0E33E22B10F6DFEA004C9847 /* HKLowLevel.m */,
@@ -443,15 +470,6 @@
 			path = support;
 			sourceTree = "<group>";
 		};
-		0EE7BDEF0FE7759A00F1429A /* PotGrab */ = {
-			isa = PBXGroup;
-			children = (
-				0EE7BE0A0FE775BA00F1429A /* TFTesseractWrapper.h */,
-				0EE7BE0B0FE775BA00F1429A /* TFTesseractWrapper.m */,
-			);
-			name = PotGrab;
-			sourceTree = "<group>";
-		};
 		1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -514,10 +532,8 @@
 				0E4D73AD10DF35C80058D4FA /* speechCommands.plist */,
 				0E460AF410E3129A007D647C /* TextFiles */,
 				0EA807E71020D92C004F84D0 /* dsa_pub.pem */,
+				F46C7CA51430D235003A8A98 /* tessdata */,
 				0EB20C9710028679008A5D14 /* BlazingStars Help */,
-				0EE7BDE40FE7748F00F1429A /* tessdata */,
-				0EE7BDC40FE7736500F1429A /* tesseract */,
-				0E46F1271044726E00EC807B /* convert */,
 				0E5528E20FDCE2E80071ACC6 /* Icons */,
 				0E5528E10FDCE2D50071ACC6 /* Themes */,
 				0E5528D40FDCE2B80071ACC6 /* Images */,
@@ -534,6 +550,10 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F46C7C5E1430B1B1003A8A98 /* Leptonica.framework */,
+				F46C7C5F1430B1B1003A8A98 /* libjpeg.framework */,
+				F46C7C601430B1B1003A8A98 /* libtiff.framework */,
+				F46C7C611430B1B1003A8A98 /* Tesseract.framework */,
 				0E33E23C10F6E3BE004C9847 /* SOLogger.framework */,
 				0EE7BE1C0FE7765000F1429A /* OpenGL.framework */,
 				0EC67AFB0FD0AB73000A33AA /* Carbon.framework */,
@@ -564,6 +584,14 @@
 				66EE0FCD1297499200564419 /* Quartz.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F46C7CA51430D235003A8A98 /* tessdata */ = {
+			isa = PBXGroup;
+			children = (
+				F46C7CA61430D235003A8A98 /* eng.traineddata */,
+			);
+			path = tessdata;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -597,6 +625,7 @@
 				8D11072C0486CEB800E47090 /* Sources */,
 				8D11072E0486CEB800E47090 /* Frameworks */,
 				0E46ADCE116D3643000980A7 /* Copy CrashReporter */,
+				F46C7CAD1431206D003A8A98 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -672,13 +701,10 @@
 				0EF91D800FDB81DE00FB01E7 /* Setup.png in Resources */,
 				0E5526AB0FDCBB150071ACC6 /* Black.plist in Resources */,
 				0E5528230FDCD9BA0071ACC6 /* keyMap.plist in Resources */,
-				0EE7BDCE0FE7736500F1429A /* tesseract in Resources */,
-				0EE7BDEE0FE7748F00F1429A /* tessdata in Resources */,
 				0E2D92D00FEEBA64002836CA /* Slick.plist in Resources */,
 				0EB20C9B10028679008A5D14 /* BlazingStars Help in Resources */,
 				0EA807E81020D92C004F84D0 /* dsa_pub.pem in Resources */,
 				0EB8C2AF10433AC60023522F /* readme.rtf in Resources */,
-				0E46F1281044726E00EC807B /* convert in Resources */,
 				0E4D73AE10DF35C80058D4FA /* speechCommands.plist in Resources */,
 				0ED0FBDF10E20A1E000DF720 /* license.rtf in Resources */,
 				0ED0FBE710E212AC000DF720 /* create-dmg in Resources */,
@@ -773,7 +799,6 @@
 				0EA4FC120FE174CC00CEE1BE /* SRRecorderControl.m in Sources */,
 				0EA4FC130FE174CC00CEE1BE /* SRValidator.m in Sources */,
 				0EE7BD980FE7718500F1429A /* HKScreenScraper.m in Sources */,
-				0EE7BE0F0FE775BA00F1429A /* TFTesseractWrapper.m in Sources */,
 				0E63778610E194D500A3DF98 /* PrefsView.m in Sources */,
 				0ED0FBF710E21352000DF720 /* template.applescript in Sources */,
 				AA286D1B10E92C3C00D8DBED /* PokerStarsInfo.m in Sources */,
@@ -786,6 +811,7 @@
 				0EAD6628111A60A800FCE08C /* DSClickableURLTextField.m in Sources */,
 				0E09148511729C0200F5928A /* FullTiltTheme.m in Sources */,
 				0E0914891172BB7400F5928A /* FullTiltInfo.m in Sources */,
+				F46C7C781430C2A0003A8A98 /* HKTesseract.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -926,7 +952,7 @@
 				GCC_PREFIX_HEADER = PokerHK_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MACOSX_DEPLOYMENT_TARGET = 10.5;
 				PRODUCT_NAME = BlazingStars;
 				VERSIONING_SYSTEM = "";
 			};
@@ -947,7 +973,7 @@
 				GCC_PREFIX_HEADER = PokerHK_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MACOSX_DEPLOYMENT_TARGET = 10.5;
 				PRODUCT_NAME = BlazingStars;
 				VERSIONING_SYSTEM = "";
 			};
