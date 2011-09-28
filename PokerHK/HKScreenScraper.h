@@ -10,14 +10,17 @@
 #import <SOLogger/SOLogger.h>
 #import "HKDefines.h"
 #import "HKDispatchController.h"
+#import "HKTesseract.h"
 #import "HKWindowManager.h"
+#import "Foundation/Foundation.h"
+
 
 @class HKDispatchController;
 @class HKWindowManager;
 
 @interface HKScreenScraper : NSObject {
 	SOLogger *logger;
-	
+    HKTesseract *tesseract;
 	IBOutlet HKDispatchController *dc;
 	IBOutlet HKWindowManager *windowManager;
 	IBOutlet HKLowLevel *lowLevel;
@@ -28,5 +31,6 @@
 
 -(float)getPotSize;
 -(NSImage*)imageWithWindow:(int)wid;
+-(void)dealloc;
 
 @end

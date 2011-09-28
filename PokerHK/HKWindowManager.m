@@ -416,7 +416,7 @@ HKWindowManager *wm = NULL;
 				return HKTournamentTable;
 			} else if ([title rangeOfString:@"Hold'em"].location != NSNotFound) {
 				[logger info:@"Found hold'em table."];
-                [self logCurrentFrontWindow];
+                //[self logCurrentFrontWindow];
 
 				return HKHoldemCashTable;
 			} else if ([title rangeOfString:@"Omaha"].location != NSNotFound) {

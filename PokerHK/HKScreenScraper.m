@@ -5,11 +5,10 @@
 //  Created by Steven Hamblin on 16/06/09.
 //  Copyright 2009 Steven Hamblin. All rights reserved.
 //
-
-#import <Carbon/Carbon.h>
 #import "HKScreenScraper.h"
-#import "TFTesseractWrapper.h"
+#import <Carbon/Carbon.h>
 #import "HKDefines.h"
+#import "HKTesseract.h"
 
 @implementation HKScreenScraper
 @synthesize currencyCharacters;
@@ -20,6 +19,8 @@
 	[logger info:@"Initializing screenScraper."];
 
 	self.currencyCharacters = [[NSArray alloc] initWithObjects:@"$", @"€", @"£", nil];
+    tesseract = [[HKTesseract alloc] init]; 
+
 }
 
 -(NSString *)runTesseract:(NSString *)inFilePath
@@ -85,69 +86,76 @@
     return [image autorelease];   
 }
 
-
-
 -(float)getPotSize
 {
-	AXUIElementRef mainWindow = [lowLevel getMainWindow];
+    AXUIElementRef mainWindow = [lowLevel getMainWindow];
 	NSRect potRect = [windowManager getPotBounds:mainWindow];
-
+    
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"debugOverlayWindowKey"]) {
         NSRect window = [lowLevel getWindowBounds:[lowLevel getMainWindow]];
         NSRect r = NSMakeRect(potRect.origin.x+window.origin.x, potRect.origin.y+window.origin.y, potRect.size.width, potRect.size.height);
         [windowManager debugWindow:r];
     }
-		
-
-/*	
-New revision doesnt use opengl to grab a screenshot (faster ?) in all cases, it works fine under Lion
-*/	
+    
+    
+    /*	
+     New revision doesnt use opengl to grab a screenshot (faster ?) in all cases, it works fine under Lion
+     */	
     NSImage *temp = [self imageWithWindow:[lowLevel getWindowIDForTable:mainWindow]];
-    
-
 	CGImageRef temp2 = [temp CGImageForProposedRect:NULL context:NULL hints:NULL];
-    
-    // DEBUG : 
-    NSBitmapImageRep *tmp3 = [[NSBitmapImageRep alloc] initWithCGImage:temp2];
-    NSData *data  = [tmp3 representationUsingType: NSPNGFileType properties: nil];
-    [data writeToFile: @"/Users/simon/test.png" atomically: NO];
-    // END DEBUG
-    
     CGImageRef subImage = CGImageCreateWithImageInRect(temp2, NSRectToCGRect(potRect));
 	NSBitmapImageRep *bitmapRep = [[NSBitmapImageRep alloc] initWithCGImage:subImage];
 	// Create an NSImage and add the bitmap rep to it...
 	NSImage *imageConvert = [[NSImage alloc] initWithSize:NSMakeSize(potRect.size.width, potRect.size.height)];
 	[imageConvert addRepresentation:bitmapRep];
+    [[NSGraphicsContext currentContext] setImageInterpolation:NSImageInterpolationHigh];
+    
+    int minWidth =400;
+    if(potRect.size.width<minWidth){
+        NSImage* sourceImage = imageConvert;
+        NSImage* newImage = nil;
+        NSPoint thumbnailPoint = NSZeroPoint;
+        
+        float scaleFactor  = minWidth / potRect.size.width;                    
+        float scaledWidth  = potRect.size.width  * scaleFactor;
+        float scaledHeight = potRect.size.height * scaleFactor;
+        thumbnailPoint.x = (minWidth - scaledWidth) * 0.5;
+        
+        newImage = [[NSImage alloc] initWithSize:NSMakeSize(scaledWidth,scaledHeight)];
+        
+        [newImage lockFocus];
+        
+        NSRect thumbnailRect;
+        thumbnailRect.origin = thumbnailPoint;
+        thumbnailRect.size.width = scaledWidth;
+        thumbnailRect.size.height = scaledHeight;
+        
+        [sourceImage drawInRect: thumbnailRect
+                       fromRect: NSZeroRect
+                      operation: NSCompositeSourceOver
+                       fraction: 1.0];
+        
+        [newImage unlockFocus];
+        
+        [imageConvert release];
+        imageConvert = newImage;
+    }
 	[bitmapRep release];
     [temp release];
-	NSData *tiffData = [imageConvert TIFFRepresentation];
-	[tiffData writeToFile:@"/tmp/testimage.tif" atomically:NO];
+    
+    bitmapRep = [NSBitmapImageRep imageRepWithData:[imageConvert TIFFRepresentation]];
+    
+    //NSLog(@"%@",[imageRep description]); 
 	
-	NSBundle * thisBundle = [NSBundle bundleForClass:[self class]];
-	NSString * absolutePath = [thisBundle pathForResource:@"convert" ofType:@""];
-	
-	NSTask *task;
-	task = [[NSTask alloc] init];
-	[task setLaunchPath: absolutePath];
-	
-	NSString *inputPath = [NSString stringWithString:@"/tmp/testimage.tif"];
-	NSString *outputfilename = [NSString stringWithString:@"/tmp/processed.tif"];
-    // SIMON / Needed to change the bit depth to 4 otherwise the tesseract was complaining about bit depth even if the processed.tif file was 8bit... strange
-	NSArray *arguments = [NSArray arrayWithObjects:inputPath,@"-resample",@"600x600",@"-depth",@"4",@"-threshold",@"31%",outputfilename, nil];	
-	
-	[task setArguments: arguments];
-	[task launch];	
-	[task waitUntilExit];
-	
-	NSString *result = [self runTesseract:@"/tmp/processed.tif"];
-	
-	// Need to do some string processing on this thing.
+   	
+	NSString * result = [tesseract recognise:bitmapRep];
+    [bitmapRep release];
 	[logger info:@"Pot size is: %@",result];
 	float returnVal;
 	
 	result = [result stringByReplacingOccurrencesOfString:@" " withString:@""];
 	[logger info:@"Pot after stripping spaces: %@",result];
-
+    
  	NSMutableCharacterSet *excludeSet = [[[NSCharacterSet characterSetWithCharactersInString:@"0123456789,."] invertedSet] mutableCopy];
 	[excludeSet formUnionWithCharacterSet:[NSCharacterSet symbolCharacterSet]];
 	
@@ -168,7 +176,7 @@ New revision doesnt use opengl to grab a screenshot (faster ?) in all cases, it 
 			[logger info:@"Result is now: %@",result];
 		}
 	}
-	
+    
 	// At small sizes, tesseract will sometimes confuse the O in POT for a 0.  This will in turn
 	// confuse the number formatter, which will drop everything after the 0 and report that the
 	// potsize is zero.  Until I can come up with a more elegant way to fix this, I'm just going to 
@@ -196,7 +204,7 @@ New revision doesnt use opengl to grab a screenshot (faster ?) in all cases, it 
 		[logger info:@"Position of decimal: %d",position.location];
 	}
 	
-	return returnVal;
+	return returnVal;    
 }
 
 @end
